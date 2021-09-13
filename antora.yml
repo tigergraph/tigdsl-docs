@@ -4,7 +4,7 @@ version: 3.2
 start_page: intro:overview.adoc
 
 nav:
-- modules/intro/overview.adoc
+- modules/intro/nav.adoc
 - modules/centrality-algorithms/nav.adoc
 - modules/classification-algorithms/nav.adoc
 - modules/community-algorithms/nav.adoc
