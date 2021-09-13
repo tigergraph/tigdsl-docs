@@ -1,0 +1,3 @@
+.Node Embeddings
+* xref:fast-random-projection.adoc[]
+* xref:node2vec:[]

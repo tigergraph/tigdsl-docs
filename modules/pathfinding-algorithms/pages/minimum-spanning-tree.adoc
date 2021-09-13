@@ -1,0 +1,91 @@
+= Minimum Spanning Tree
+
+Given an undirected and connected graph, a minimum spanning tree is a set of edges that can connect all the vertices in the graph with the minimal sum of edge weights. The library implements a parallel version of https://en.wikipedia.org/wiki/Prim%27s_algorithm[Prim's algorithm]:
+
+. Start with a set A = { a single vertex _seed_ }
+. For all vertices in A, select a vertex y such that
+ .. y is not in A, and
+ .. There is an edge from y to a vertex x in A, and
+ .. The weight of the edge e(x,y) is the smallest among all eligible pairs (x,y).
+. Add y to A, and add the edge (x,y) to MST.
+. Repeat steps 2 and 3 until A has all vertices in the graph.
+
+If the user specifies a source vertex, this will be used as the _seed_. Otherwise, the algorithm will select a random _seed_ vertex.
+
+{% hint style="warning" %}
+If the graph contains multiple components (i.e., some vertices are disconnected from the rest of the graph, then the algorithm will span only the component of the seed vertex.
+
+If you do not have a preferred vertex, and the graph might have more than one component, then you should use the Minimum Spanning Forest (MDF) algorithm instead.
+{% endhint %}
+
+== Specifications
+
+[source,erlang]
+----
+tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
+  STRIN wt_attr, STRING wt_type, INT max_iter = -1,
+  BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++Computes a minimum spanning tree. If the JSON or file output selected,
+        the output is the set of edges that form the MST. If the result_attr option
+        is selected, the edges which are part of the MST are tagged True; other
+        edges are tagged False.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++VERTEX opt_source+++</code>+++:+++</b>+++ ID of a source vertex (optional)+++</li>+++
+          +++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
+            use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING wt_attr+++</code>++++++</b>+++: Name of edge weight attribute+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING wt_type+++</code>++++++</b>+++: Data type of edge weight attribute:
+            &quot;INT&quot;, &quot;FLOAT&quot;, or &quot;DOUBLE&quot;+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT max_iter+++</code>++++++</b>+++: Maximum of edges to include. If less
+            than (V-1), then the result is not a true spanning tree.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
+            output+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store result values
+            (BOOL) to this attribute+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
+            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V - 1 = number of vertices - 1+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(V{caret}2)+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected edges and connected+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== *Example*
+
+In the graph `social10`, we consider only the undirected Coworker edges.
+
+image::../../.gitbook/assets/screen-shot-2019-04-24-at-4.21.08-pm.png[Visualized results of example graph social10 graph with Coworker edges]
+
+This graph has 3 components. Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point. If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left. You can start from any vertex in the component and get the same or an equivalent MST result.
+
+The figure below shows the result of
+
+[source,sql]
+----
+# Use _ for default values
+RUN QUERY mst(("Ivy", "Person"), ["Person"], ["Coworker"] "weight", "INT",
+_, _, _, _)
+----
+
+Note that the value for the one vertex is `("Ivy", "Person")`. In GSQL, this 2-tuple format which explicitly gives the vertex type is used when the query is written to accept a vertex of any type.
+
+image::../../.gitbook/assets/screen-shot-2019-04-24-at-4.20.22-pm.png[Visualized results of example query on social10 graph]
+
+File output:
+
+[source,text]
+----
+From,To,Weight
+Ivy,Fiona,6
+Ivy,Howard,4
+Ivy,George,4
+----
+
+The attribute version requires a boolean attribute on the edge, and it will assign the attribute to "true" if that edge is selected in the MST:
+
+image::../../.gitbook/assets/screen-shot-2019-04-25-at-2.04.22-pm.png[Visualized results of example query on social10 graph, with Coworker edges &amp; edge attribute &quot;flag&quot;]

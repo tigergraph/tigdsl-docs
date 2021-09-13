@@ -1,0 +1,93 @@
+= Cycle Detection
+
+The Cycle Detection problem seeks to find all the cycles (loops) in a graph. We apply the usual restriction that the cycles must be "simple cycles", that is, they are paths that start and end at the same vertex but otherwise never visit any vertex twice.
+
+There are two versions of the task: for directed graphs and undirected graphs. The GSQL algorithm library currently supports only directed cycle detection. The https://en.wikipedia.org/wiki/Rocha%E2%80%93Thatte_cycle_detection_algorithm[Rocha--Thatte algorithm] is an efficient distributed algorithm, which detects all the cycles in a directed graph. The algorithm will self-terminate, but it is also possible to stop at k iterations, which finds all the cycles having lengths up to k edges.
+
+The basic idea of the algorithm is to (potentially) traverse every edge in parallel, again and again, forming all possible paths. At each step, if a path forms a cycle, it records it and stops extending it. More specifically:
+
+*Initialization* +
+For each vertex, record one path consisting of its own id. Mark the vertex as Active.
+
+*Iteration steps:* +
+For each Active vertex v:
+
+. Send its list of paths to each of its out-neighbors.
+. Inspect each path P in the list of the paths received:
+ ** If the first id in P is also id(v), a cycle has been found:
+  *** Remove P from its list.
+  *** If id(v) is the least id of any id in P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
+ ** Else, if id(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
+ ** Else, append id(v) to the end of each of the remaining paths in its list.
+
+== Specifications
+
+[source,erlang]
+----
+tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
+  BOOL print_accum = TRUE, STRING file_path = "")
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++Computes a list of vertex id lists, each of which is a cycle. The result
+          is available in 2 forms:+++</p>+++
+        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
+          +++<li>+++written to a file in tabular format+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
+            use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT depth+++</code>++++++</b>+++: Maximum cycle length to search for = maximum
+            number of iterations+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
+            output+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
+            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++Number of cycles * average cycle length+++</p>+++
+        +++<p>+++Both of these measures are not known in advance.+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++O(E *k), E = number of edges.+++</p>+++
+        +++<p>+++k = min(max. cycle length, depth parameter)+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Directed+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== *Example*
+
+In the social10 graph, there are 5 cycles, all with the Fiona-George-Howard-Ivy cluster.
+
+image::../../.gitbook/assets/screen-shot-2019-04-09-at-10.33.42-am.png[Visualized results of cycle_detection(&quot;Person&quot;, &quot;Friend&quot;, 10) on social10 graph]
+
+[source,text]
+----
+[
+  {
+    "@@cycles": [
+      [
+        "Fiona",
+        "Ivy"
+      ],
+      [
+        "George",
+        "Ivy"
+      ],
+      [
+        "Fiona",
+        "George",
+        "Ivy"
+      ],
+      [
+        "George",
+        "Howard",
+        "Ivy"
+      ],
+      [
+        "Fiona",
+        "George",
+        "Howard",
+        "Ivy"
+      ]
+    ]
+  }
+]
+----

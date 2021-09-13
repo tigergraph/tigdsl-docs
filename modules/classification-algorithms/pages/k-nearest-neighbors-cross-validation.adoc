@@ -1,0 +1,54 @@
+= k-Nearest Neighbors (Cross-Validation Version)
+
+k-Nearest Neighbors (kNN) is often used for machine learning. You can choose the value for `topK` based on your experience, or using cross-validation to optimize the hyperparameters. In our library, Leave-one-out cross-validation for selecting optimal _k_ is provided. Given a _k_ value, we run the algorithm repeatedly using every vertex with a known label as the source vertex and predict its label. We assess the accuracy of the predictions for each value of _k_, and then repeat for different values of k in the given range. The goal is to find the value of k with highest predicting accuracy in the given range, for that dataset.
+
+== Specifications
+
+[source,erlang]
+----
+tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
+STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++A list of prediction accuracy for every k value in the given range, and+++</p>+++
+        +++<p>+++the value of k with the highest predicting accuracy in the given range.+++</p>+++
+        +++<p>+++The result is available in JSON format+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Vertex types to calculate distance
+            to source vertex for+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++STRING weight+++</code>+++: Edge attribute to use as the weight of the
+            edge+++</li>+++
+          +++<li>++++++<code>+++STRING label+++</code>+++: Vertex attribute to recognize as the label
+            of the vertex+++</li>+++
+          +++<li>++++++<code>+++INT min_k+++</code>+++: lower bound of k (inclusive)+++</li>+++
+          +++<li>++++++<code>+++INT max_k+++</code>+++: upper bound of k (inclusive)+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++max_k-min_k+1+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(max_k*E{caret}2 / V), V = number of vertices, E = number of edges+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected or directed edges, weighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+Run knn_cosine_cv with min_k=2, max_k = 5. The JOSN result:
+
+[source,text]
+----
+[
+  {
+    "@@correct_rate_list": [
+      0.33333,
+      0.33333,
+      0.33333,
+      0.33333
+    ]
+  },
+  {
+    "best_k": 2
+  }
+]
+----

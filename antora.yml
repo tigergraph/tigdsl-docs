@@ -1,0 +1,13 @@
+name: tigergraph-data-science
+title: TigerGraph Data Science Library
+version: 3.2
+start_page: intro:overview.adoc
+
+nav:
+- modules/intro/overview.adoc
+- modules/centrality-algorithms/nav.adoc
+- modules/classification-algorithms/nav.adoc
+- modules/community-algorithms/nav.adoc
+- modules/node-embeddings/nav.adoc
+- modules/pathfinding-algorithms/nav.adoc
+- modules/similarity-algorithms/nav.adoc

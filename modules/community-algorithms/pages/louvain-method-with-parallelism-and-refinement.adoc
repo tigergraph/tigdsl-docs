@@ -1,0 +1,94 @@
+= Louvain Method with Parallelism and Refinement
+
+The Louvain Method for community detection [1] partitions the vertices in a graph by approximately maximizing the graph's modularity score. The modularity score for a partitioned graph assesses the difference in density of links within a partition vs. the density of links crossing from one partition to another. The assumption is that if a partitioning is good (that is, dividing up the graph into communities or clusters), then the within-density should be high and the inter-density should be low.
+
+The most efficient and empirically effective method for calculating modularity was published by a team of researchers at the University of Louvain. The Louvain method uses agglomeration and hierarchical optimization:
+
+. Optimize modularity for small local communities.
+. Treat each optimized local group as one unit, and repeat the modularity operation for groups of these condensed units.
+
+The original Louvain Method contains two phases. The first phase incrementally calculates the modularity change of moving a vertex into every other community and moves the vertex to the community with the highest modularity change. The second phase coarsens the graph by aggregating the vertices which are assigned in the same community into one vertex. The first phase and second phase make up a pass. The Louvain Method performs the passes iteratively. In other words, the algorithm assigns an initial community label to every vertex, then performs the first phase, during which the community labels are changed until there is no modularity gain. Then it aggregates the vertices with the same labels into one vertex and calculates the aggregated edge weights between new vertices. For the coarsened graph, the algorithm conducts the first phase again to move the vertices into new communities. The algorithm continues until the modularity is not increasing, or runs to the preset iteration limits.
+
+However, phase one is sequential, and thus slow for large graphs. An improved Parallel Louvain Method Louvain Method (PLM) calculates the best community to move to for each vertex in parallel [2]. In Parallel Louvain Method(PLM), the positive modularity gain is not guaranteed, and it may also swap two vertices to each other's community. After finishing the passes, there is an additional refinement phase, which is running the first phase again on each vertex to do some small adjustments for the resulting communities. [3].
+
+[1] Blondel, Vincent D., et al. "Fast unfolding of communities in large networks." Journal of statistical mechanics: theory and experiment 2008.10 (2008): P10008.
+
+[2] Staudt, Christian L., and Henning Meyerhenke. "Engineering parallel algorithms for community detection in massive networks." IEEE Transactions on Parallel and Distributed Systems 27.1 (2016): 171-184.
+
+[3] Lu, Hao, Mahantesh Halappanavar, and Ananth Kalyanaraman. "Parallel heuristics for scalable community detection." Parallel Computing 47 (2015): 19-37.
+
+== Specifications
+
+[source,erlang]
+----
+tg_louvain_parallel (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
+  INT iter1=10, INT iter2=10, INT iter3=10, INT split=10, BOOL print_accum = TRUE,
+  STRING result_attr = "", STRING file_path = "", BOOL comm_by_size = TRUE)
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++Assigns a component id (INT) to each vertex, such that members of the
+        same component have the same id value. The JSON output lists every vertex
+        with its community ID value. It also lists community id values, sorted
+        by community size.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
+            use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING wt_attr+++</code>++++++</b>+++: Name of edge weight attribute (must
+            be FLOAT)+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT iter1+++</code>++++++</b>+++: Max number of iterations for the first
+            phase. Default value is 10+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT iter2+++</code>++++++</b>+++: Max number of iterations for the second
+            phase. Default value is 10+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT iter3+++</code>++++++</b>+++: Max number of iterations for the refinement
+            phase. Default value is 10+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT split+++</code>++++++</b>+++: Number of splits in phase 1. Increase the
+            number to save memory, at the expense of having a longer running time.
+            Default value is 10.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
+            output+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store community
+            id values (INT) to this attribute+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
+            file.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL comm_by_size+++</code>++++++</b>+++: If True, and if +++<code>+++print_accum+++</code>+++ is
+            True, output the membership of each community, with communities arranged
+            by size.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(V{caret}2*L), V = number of vertices, L = (iter1 * iter2 + iter3) = total
+        number of iterations+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++Undirected, weighted edges+++</p>+++
+        +++<p>+++An edge weight attribute is required.+++</p>++++++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+If we use `louvain_parallel` for social10 graph, it will give the same result as the connected components algorithm. The social26 graph is a densely connected graph. The connected components algorithm groups all the vertices into the same community and label propagation does not consider the edge weight. On the contrary, `louvain_parallel` detects 7 communities in total, and the cluster distribution is shown below (`csize` is cluster size):
+
+[source,text]
+----
+{
+    "@@clusterDist": [
+      {
+        "csize": 2,
+        "number": 1
+      },
+      {
+        "csize": 3,
+        "number": 2
+      },
+      {
+        "csize": 4,
+        "number": 2
+      },
+      {
+        "csize": 5,
+        "number": 2
+      }
+    ]
+----
+
+###

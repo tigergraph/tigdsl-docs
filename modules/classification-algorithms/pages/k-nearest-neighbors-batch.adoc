@@ -1,0 +1,84 @@
+= k-Nearest Neighbors (Batch Version)
+
+This algorithm is a batch version of the https://app.gitbook.com/@tigergraph/s/document/~/edit/drafts/-Ll49vrTnAN15ff3rsHW/v/2.5/graph-algorithm-library#k-nearest-neighbors-cosine-neighbor-similarity-single-vertex[k-Nearest Neighbors, Cosine Neighbor Similarity, single vertex]. It makes a prediction for every vertex whose label is not known (i.e., the attribute for the known label is empty), based on its k nearest neighbors' labels.
+
+== Specifications
+
+[source,erlang]
+----
+tg_knn_cosine_all(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
+  STRING weight, STRING label, INT top_k, BOOL print_accum = TRUE,
+  STRING file_path = "", STRING attr = "")
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++The predicted label for the vertices whose label attribute is empty.+++</p>+++
+        +++<p>+++The result is available in three forms:+++</p>+++
+        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
+          +++<li>+++written to a file in tabular format, or+++</li>+++
+          +++<li>+++stored as a vertex attribute value.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Vertex types to calculate distance
+            to source vertex for+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++STRING weight+++</code>+++: Edge attribute to use as the weight of the
+            edge+++</li>+++
+          +++<li>++++++<code>+++STRING label+++</code>+++: Vertex attribute to recognize as the label
+            of the vertex+++</li>+++
+          +++<li>++++++<code>+++INT top_k+++</code>+++: number of nearest neighbors to consider+++</li>+++
+          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: Boolean value that indicates whether to
+            output to console in JSON+++</li>+++
+          +++<li>++++++<code>+++STRING filepath+++</code>+++: If provided, the algorithm will output to
+            this file path in CSV format+++</li>+++
+          +++<li>++++++<code>+++STRING attr+++</code>+++: Vertex attribute to save the predicted label
+            as.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(E{caret}2 / V), V = number of vertices, E = number of edges+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected or directed edges, weighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+For the movie graph shown in the single vertex version, run knn_cosine_all, using topK=3. Then you get the following result:
+
+[source,text]
+----
+  {
+    "Source": [
+      {
+        "v_id": "Jing",
+        "v_type": "Person",
+        "attributes": {
+          "name": "Jing",
+          "known_label": "",
+          "predicted_label": "",
+          "@predicted_label": "a"
+        }
+      },
+      {
+        "v_id": "Neil",
+        "v_type": "Person",
+        "attributes": {
+          "name": "Neil",
+          "known_label": "",
+          "predicted_label": "",
+          "@predicted_label": "b"
+        }
+      },
+      {
+        "v_id": "Elena",
+        "v_type": "Person",
+        "attributes": {
+          "name": "Elena",
+          "known_label": "",
+          "predicted_label": "",
+          "@predicted_label": ""
+        }
+      }
+    ]
+  }
+]
+----

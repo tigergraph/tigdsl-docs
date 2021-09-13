@@ -1,0 +1,118 @@
+= k-Nearest Neighbors
+
+The k-Nearest Neighbors (kNN) algorithm is one of the simplest classification algorithms. It assumes that some or all the vertices in the graph have already been classified. The classification is stored as an attribute called the label. The goal is to predict the label of a given vertex, by seeing what are the labels of the nearest vertices.
+
+Given a source vertex in the dataset and a positive integer _k_, the algorithm calculates the distance between this vertex and all other vertices and selects the _k_ vertices that are nearest. The prediction of the label of this node is the majority label among its k-nearest neighbors.
+
+The distance can be physical distance as well as the reciprocal of similarity score, in which case "nearest" means "most similar". In our algorithm, the distance is the reciprocal of cosine neighbor similarity. The similarity calculation used here is the same as the calculation in https://app.gitbook.com/@tigergraph/s/document/~/edit/drafts/-LhrD9J_UpLvgqsxbKx9/v/2.4/graph-algorithm-library#cosine-similarity-of-neighborhoods-single-source[Cosine Similarity of Neighborhoods, Single Source]. Note that in this algorithm, vertices with zero similarity to the source node are not considered in prediction. For example, if there are 5 vertices with non-zero similarity to the source vertex, and 5 vertices with zero similarity, when we pick the top 7 neighbors, only the label of the 5 vertices with non-zero similarity score will be used in prediction.
+
+== Specifications
+
+[source,erlang]
+----
+tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STRING>
+  re_type, STRING weight, STRING label, INT top_k,
+  BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
+  RETURNS (STRING)
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++The predicted label for the source vertex.+++</p>+++
+        +++<p>+++The result is available in three forms:+++</p>+++
+        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
+          +++<li>+++written to a file in tabular format, or+++</li>+++
+          +++<li>+++stored as a vertex attribute value.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++VERTEX source+++</code>+++: The vertex which you want to predict the label+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Vertex types to calculate distance
+            to source vertex for+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++STRING weight+++</code>+++: Edge attribute to use as the weight of the
+            edge+++</li>+++
+          +++<li>++++++<code>+++STRING label+++</code>+++: Vertex attribute to recognize as the label
+            of the vertex+++</li>+++
+          +++<li>++++++<code>+++INT top_k+++</code>+++: number of nearest neighbors to consider+++</li>+++
+          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: If true, the algorithm will output the
+            result to the console in JSON format.+++</li>+++
+          +++<li>++++++<code>+++STRING filepath+++</code>+++: If provided, the algorithm will output to
+            this file path in CSV format+++</li>+++
+          +++<li>++++++<code>+++STRING attr+++</code>+++: Vertex attribute to save the predicted label
+            as.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(D{caret}2), D = outdegree of vertex v+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected or directed edges, weighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+The algorithm will not output more than K vertex pairs, so the algorithm may arbitrarily choose to output one vertex pair over another if there are tied similarity scores.
+
+== Example
+
+For the movie graph, we add the following labels to the Person vertices.
+
+image::../../.gitbook/assets/screen-shot-2019-06-24-at-2.50.18-pm.png[Movie graph with labels]
+
+When we install the algorithm, answer the questions like:
+
+[source,text]
+----
+Vertex types: Person
+Edge types: Likes
+Second Hop Edge type: Reverse_Likes
+Edge attribute that stores FLOAT weight, leave blank if no such attribute:weight
+Vertex attribute that stores STRING label:known_label
+----
+
+We then run kNN, using Neil as the source person and k=3. This is the JSON output :
+
+[source,text]
+----
+[
+  {
+    "predicted_label": "a"
+  }
+]
+----
+
+If we run cosine_nbor_ss, using Neil as the source person and k=3, we can see the persons with the top 3 similarity score:
+
+[source,text]
+----
+[
+  {
+    "neighbours": [
+      {
+        "v_id": "Kat",
+        "v_type": "Person",
+        "attributes": {
+          "neighbours.@similarity": 0.67509
+        }
+      },
+      {
+        "v_id": "Jing",
+        "v_type": "Person",
+        "attributes": {
+          "neighbours.@similarity": 0.46377
+        }
+      },
+      {
+        "v_id": "Kevin",
+        "v_type": "Person",
+        "attributes": {
+          "neighbours.@similarity": 0.42436
+        }
+      }
+    ]
+  }
+]
+----
+
+Kat has a label "b", Kevin has a label "a", and Jing does not have a label. Since "a" and "b" are tied, the prediction for Neil is just one of the labels.
+
+If Jing had label "b", then there would be 2 "b"s, so "b" would be the prediction.
+
+If Jing had label "a", then there would be 2 "a"s, so "a" would be the prediction.
+
+###

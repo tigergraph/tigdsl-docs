@@ -1,0 +1,61 @@
+= PageRank
+
+The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it. A vertex's influence tends to increase if (1) it has more referring vertices or if (2) its referring vertices have higher influence. The analogy to social influence is clear.
+
+A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is *proportional to the probability that a random network surfer will be at that vertex at any given time.* *A vertex with a high PageRank score is a vertex that is frequently visited*, assuming that vertices are visited according to the following Random Surfer scheme:
+
+* Assume a person travels or surfs across a network's structure, moving from vertex to vertex in a long series of rounds.
+* The surfer can start anywhere. This start-anywhere property is part of the magic of PageRank, meaning the score is a truly fundamental property of the graph structure itself.
+* Each round, the surfer randomly picks one of the outward connections from the surfer's current location. The surfer repeats this random walk for a long time.
+* But wait. The surfer doesn't always follow the network's connection structure. There is a probability (_1-damping_, to be precise), that the surfer will ignore the structure and will magically teleport to a random vertex.
+
+== Specifications
+
+[source,text]
+----
+tg_pageRank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++Computes a PageRank value (FLOAT type) for each vertex.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++STRING v_type+++</code>++++++</b>+++: Names of vertex type to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING e_type+++</code>++++++</b>+++: Names of edge type to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++FLOAT max_change+++</code>++++++</b>+++: PageRank will stop iterating when
+            the largest difference between any vertex&apos;s current score and its
+            previous score &#x2264; +++<code>+++max_change.+++</code>+++ That is, the scores have
+            become very stable and are changing by less than +++<code>+++max_change+++</code>+++ from
+            one iteration to the next.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT max_iter+++</code>++++++</b>+++: Maximum number of iterations.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++FLOAT damping+++</code>++++++</b>+++: Fraction of score that is due to the
+            score of neighbors. The balance (1 - damping) is a minimum baseline score
+            that every vertex receives.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT top_k+++</code>++++++</b>+++: Sort the scores highest first and output
+            only this many scores+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
+            output+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store PageRank values
+            (FLOAT) to this attribute+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
+            file.+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL display_edges+++</code>++++++</b>+++: If true, include the graph&apos;s
+            edges in the JSON output, so that the full graph can be displayed.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++O(E*k), E = number of edges, k = number of iterations.+++</p>+++
+        +++<p>+++The number of iterations is data-dependent, but the user can set a maximum.
+          Parallel processing reduces the time needed for computation.+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Directed edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+[source,text]
+----
+ # Use _ for default values RUN QUERY tg_pageRank("Person", "Friend", 0.001, 25, 0.85, 100 _, _, _, _)
+----
+
+We ran pageRank on our test10 graph (using Friend edges) with the following parameter values: damping=0.85, max_change=0.001, and max_iter=25. We see that Ivy (center bottom) has the highest pageRank score (1.12). This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person. Eddie and Justin have scores of exactly 1 because they do not have any out-edges. This is an artifact of our particular version pageRank. Likewise, Alex has a score of 0.15, which is (1-damping), because Alex has no in-edges.
+
+image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-LPHpImvh7Bprm_iF0cO%2F-LPI7RlT9vrlhXD3mCAE%2Fpagerank_result.png?alt=media&token=569f2b12-546b-4cd9-b5b4-e1d6b80fca25[Visualized results of example query on social10 graph, with Friend edges]

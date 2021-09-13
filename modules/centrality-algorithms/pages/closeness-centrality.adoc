@@ -1,0 +1,75 @@
+= Closeness Centrality
+:stem: latexmath
+
+We all have an intuitive understanding when we say a home, an office, or a store is "centrally located." Closeness Centrality provides a precise measure of how "centrally located" a vertex is. The steps below show the steps for one vertex `v`:
+
+|===
+| Step | Mathematical Formula
+
+| 1. Compute the average distance from vertex v to every other vertex:
+| stem:[d_{avg}(v) = \sum_{u \ne v} dist(v,u)/(n-1)]
+
+| 2. Invert the average distance, so we have average closeness of v:
+| stem:[CC(v) = 1/d_{avg}(v)]
+|===
+
+TigerGraph's closeness centrality algorithm uses multi-source breadth-first search (MS-BFS) to traverse the graph and calculate the sum of a vertex's distance to every other vertex in the graph, which vastly improves the performance of the algorithm. The algorithm's implementation of MS-BFS is based on the paper https://db.in.tum.de/~kaufmann/papers/msbfs.pdf[The More the Merrier: Efficient Multi-source Graph Traversal by Then et al].
+
+{% hint style="warning" %}
+This algorithm query employs a subquery called `cc_subquery`. Both queries are needed to run the algorithm.
+{% endhint %}
+
+== Specifications
+
+[,erlang]
+----
+tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
+  INT top_k=100, BOOL wf = TRUE, BOOL print_accum = True, STRING result_attr = "",
+  STRING file_path = "", BOOL display_edges = FALSE)
+----
+
+== *Parameters*+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++Computes a Closeness Centrality value (FLOAT type) for each vertex.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Required Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Names of vertex types to use+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Names of edge types to use+++</li>+++
+          +++<li>++++++<code>+++SET<STRING>+++</code>+++  +++<code>+++re_type+++</code>+++: Names of reverse edge
+            types to use+++</li>+++
+          +++<li>++++++<code>+++INT max_hops+++</code>+++: If >=0, look only this far from each vertex+++</li>+++
+          +++<li>++++++<code>+++INT top_k+++</code>++++++<b>+++:+++</b>+++ Sort the scores highest first and output
+            only this many scores+++</li>+++
+          +++<li>++++++<code>+++BOOL wf+++</code>+++: If True, use Wasserman-Faust normalization for multi-component
+            graphs+++</li>+++
+          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: If true, output JSON to standard output+++</li>+++
+          +++<li>++++++<code>+++STRING result_attr+++</code>+++: If not empty, store centrality values
+            (FLOAT) to this attribute+++</li>+++
+          +++<li>++++++<code>+++STRING file_path+++</code>++++++<b>+++:+++</b>+++ If not empty, write output to this
+            file in CSV.+++</li>+++
+          +++<li>++++++<code>+++BOOL display_edges+++</code>+++: If true, include the graph&apos;s edges
+            in the JSON output, so that the full graph can be displayed.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++O(E), E = number of edges.+++</p>+++
+        +++<p>+++Parallel processing reduces the time needed for computation.+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Directed or Undirected edges, Unweighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+Closeness centrality can be measured for either directed edges (from `v` to others) or for undirected edges. Directed graphs may seem less intuitive, however, because if the distance from Alex to Bob is 1, it does not mean the distance from Bob to Alex is also 1.
+
+For our example, we wanted to use the topology of the Likes graph, but to have undirected edges. We emulated an undirected graph by using both `Friend` and `Also_Friend` (reverse-direction) edges.
+
+[,sql]
+----
+# Use _ for default values
+RUN QUERY tg_closeness_cent(["Person"], ["Friend", "Also_Friend"], _, _,
+_, _, _, _, _)
+----
+
+image::../../.gitbook/assets/closeness_result.png[Visualized results of example query on social10 graph, with Friend and Also_Friend edges]
+
+###

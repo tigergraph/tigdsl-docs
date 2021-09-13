@@ -1,0 +1,11 @@
+.Pathfinding Algorithms
+* xref:all-pairs-shortest-path.adoc[]
+* xref:cycle-detection.adoc[]
+* xref:estimated-diameter.adoc[]
+* xref:maximum-independent-set.adoc[]
+* xref:minimum-spanning-forest.adoc[]
+* xref:minimum-spanning-tree.adoc[]
+* xref:random-walk.adoc[]
+* xref:single-pair-shortest-path.adoc[]
+* xref:single-source-shortest-path-unweighted.adoc[]
+* xref:single-source-shortest-path-weighted.adoc[]

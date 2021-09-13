@@ -1,0 +1,184 @@
+= Jaccard Similarity of Neighborhoods (Batch)
+
+This algorithm computes the same similarity scores as the link:../#jaccard-similarity-of-neighborhoods-all-pairs[Jaccard similarity of neighborhoods, all pairs]link:../#jaccard-similarity-of-neighborhoods-single-source[,] except that it starts from all of the vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel. Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into. Compared with the link:../#jaccard-similarity-of-neighborhoods-all-pairs[Jaccard similarity of neighborhoods, all pairs], this algorithm allows you to split the workload into multiple batches and reduces the burden on memory.
+
+This algorithm has a time complexity of _O(E)_, where E is the number of edges, and runs on graphs with unweighted edges (directed or undirected).
+
+== Specifications
+
+[source,sql]
+----
+tg_jaccard_batch (STRING v_type, STRING e_type, STRING re_type, INT topK,
+BOOL print_accum = true, STRING similarity_edge, STRING file_path,
+INT num_of_batches = 1)
+----
+
+== Parameters
+
+|===
+| Name | Description
+
+| `v_type`
+| Vertex type to calculate similarity for
+
+| `e_type`
+| Directed edge type to traverse
+
+| `re_type`
+| Reverse edge type to traverse
+
+| `topK`
+| Number of top scores to report for each vertex
+
+| `print_accum`
+| If `true`, output JSON to standard output.
+
+| `similarity_edge`
+| If provided, the similarity scores will be saved to this edge type.
+
+| `file_path`
+| If a file path is provided, the algorithm will output to a file specified by the file path in CSV format
+
+| `num_of_batches`
+| Number of batches to divide the query into
+|===
+
+== Result
+
+The result contains the top _k_ Jaccard *similarity* scores for each vertex and its corresponding pair. A pair is only included if its similarity is greater than 0, meaning there is at least one common neighbor between the pair. The result is available in JSON format, or can be output to a file in CSV, or it can be saved as an edge on the graph itself. A JSON formatted result could look like this:
+
+[source,javascript]
+----
+// Run jaccard_batch on social10 graph traversing through Friend edges
+[
+  {
+    "Start": [
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.33333,
+              "ver": "Howard"
+            },
+            {
+              "val": 0.25,
+              "ver": "Ivy"
+            },
+            {
+              "val": 0.25,
+              "ver": "George"
+            }
+          ]
+        },
+        "v_id": "Fiona",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": []
+        },
+        "v_id": "Justin",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": []
+        },
+        "v_id": "Bob",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.5,
+              "ver": "Damon"
+            }
+          ]
+        },
+        "v_id": "Chase",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.5,
+              "ver": "Chase"
+            }
+          ]
+        },
+        "v_id": "Damon",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.33333,
+              "ver": "Ivy"
+            }
+          ]
+        },
+        "v_id": "Alex",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.5,
+              "ver": "Howard"
+            },
+            {
+              "val": 0.25,
+              "ver": "Fiona"
+            }
+          ]
+        },
+        "v_id": "George",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": []
+        },
+        "v_id": "Eddie",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.33333,
+              "ver": "Alex"
+            },
+            {
+              "val": 0.25,
+              "ver": "Fiona"
+            }
+          ]
+        },
+        "v_id": "Ivy",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "Start.@heap": [
+            {
+              "val": 0.5,
+              "ver": "George"
+            },
+            {
+              "val": 0.33333,
+              "ver": "Fiona"
+            }
+          ]
+        },
+        "v_id": "Howard",
+        "v_type": "Person"
+      }
+    ]
+  }
+]
+----

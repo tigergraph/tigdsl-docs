@@ -1,0 +1,131 @@
+= Greedy Graph Coloring
+
+This algorithm assigns a unique integer value known as its color to the vertices of a graph such that no neighboring vertices share the same color. The reason why this is called color is that this task is equivalent to assigning a color to each nation on a map so that no neighboring nations share the same color.
+
+Given a set of _k_ vertices, the algorithm first colors all vertices with the same color - the first color. It then starts from all the vertices and has each vertex send its own colors to its neighbors. If there are two neighboring vertices with the same color, the algorithm will reassign colors where there is a conflict. The same process is repeated until all conflicts are resolved.
+
+The algorithm has a worst-case time complexity of _O(V{caret}2 + E),_ where _V_ is the number of vertices and _E_ is the number of edges.
+
+== Specifications
+
+[source,text]
+----
+CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UINT max_colors = 999999,BOOL print_color_count = TRUE, BOOL display = TRUE, STRING file_path = "")
+----
+
+== Parameters
+
+|===
+| Name | Description
+
+| `v_type`
+| A set of all vertex types to color.
+
+| `e_type`
+| A set of all edge types to traverse.
+
+| `max_colors`
+| The Maximum number of colors that can be used. Use a large number like 999999 unless there is a strict limit.
+
+| `print_color_count`
+| If set to true, the total number of colors used will be displayed
+
+| `display`
+| If set to true, the output will display all vertices and their associated color
+
+| `file_path`
+| If a file path is provided, the output will be saved to the file indicated by the file path in CSV format.
+|===
+
+== Example
+
+On the https://github.com/tigergraph/gsql-graph-algorithms/blob/master/tests/social/data/social10.csv[social10] graph, say we want to color the `Person` vertices in such a way that any two vertices that are either connected by a `Friend` edge or a `Coworker` edge do not have the same color. By running the `greedy_graph_color` algorithm, we get the following result:
+
+[source,text]
+----
+GSQL > RUN QUERY greedy_graph_coloring(["Person"], ["Friend", "Coworker"],
+ 999999, true, true, "")
+
+ [
+  {
+    // Total number of colors used
+    "color_count": 4
+  },
+  {
+    "start": [
+      {
+        "attributes": {
+          "start.@colorvertex": 4
+        },
+        "v_id": "Fiona",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 3
+        },
+        "v_id": "Justin",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 2
+        },
+        "v_id": "Bob",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 3
+        },
+        "v_id": "Chase",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 2
+        },
+        "v_id": "Damon",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 1
+        },
+        "v_id": "Alex",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 3
+        },
+        "v_id": "George",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 1
+        },
+        "v_id": "Eddie",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 2
+        },
+        "v_id": "Ivy",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@colorvertex": 1
+        },
+        "v_id": "Howard",
+        "v_type": "Person"
+      }
+    ]
+  }
+]
+----
+
+image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-MTIVaC7IrVUxaa6b0wB%2F-MTIboMHDZfHMiJfFS-d%2Fimage.png?alt=media&token=434b94b8-702f-447a-9a91-8d91a6d341ab[Visualized result - no neighboring vertices share the same color]

@@ -1,0 +1,31 @@
+= All-Pairs Shortest Path
+
+{% hint style="warning" %}
+The All-Pairs Shortest Path algorithm is costly for large graphs because the computation time is O(V{caret}3) and the output size is O(V{caret}2). Be cautious about running this on very large graphs.
+{% endhint %}
+
+The All-Pairs Shortest Path (APSP) task seeks to find the shortest paths between every pair of vertices in the entire graph. In principle, this task can be handled by running the Single-Source Shortest Path (SSSP) algorithm for each input vertex, e.g.,
+
+[source,erlang]
+----
+CREATE QUERY tg_all_pairs_shortest(SET<STRING> v_type, SET<STRING> e_type,
+ STRING wt_attr, STRING wt_type, STRING result_attr = "", STRING file_path = "")
+{
+  Start = {v_type};
+  Result = SELECT s FROM Start:s
+        POST-ACCUM
+          shortest_ss_any_wt(s, v_type, e_type, wt_attr, wt_type,
+          result_attr, file_path+s);
+}
+----
+
+This example highlights one of the strengths of GSQL: treating queries as stored procedures that can be called from within other queries. We only show the result_attr and file_path options, because subqueries cannot send their JSON output.
+
+For large graphs (with millions of vertices or more), however, this is an enormous task. While the massively parallel processing of the TigerGraph platform can speed up the computation by 10x or 100x, consider what it takes just to store or report the results. If there are 1 million vertices, then there are nearly 1 trillion output values.
+
+There are more efficient methods than calling the single-source shortest path algorithm n times, such as the Floyd-Warshall algorithm, which computes APSP in O(V{caret}3) time.
+
+Our recommendation:
+
+* If you have a smaller graph (perhaps thousands or tens of thousands of vertices), the APSP task may be tractable.
+* If you have a large graph, avoid using APSP.

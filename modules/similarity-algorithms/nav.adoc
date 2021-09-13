@@ -1,0 +1,7 @@
+.Similarity Algorithms
+* xref:cosine-similarity-of-neighborhoods-all-pairs.adoc[]
+* xref:cosine-similarity-of-neighborhoods-batch.adoc[]
+* xref:cosine-similarity-of-neighborhoods-single-source.adoc[]
+* xref:jaccard-similarity-of-neighborhoods-all-pairs.adoc[]
+* xref:jaccard-similarity-of-neighborhoods-batch.adoc[]
+* xref:jaccard-similarity-of-neighborhoods-single-source.adoc[]

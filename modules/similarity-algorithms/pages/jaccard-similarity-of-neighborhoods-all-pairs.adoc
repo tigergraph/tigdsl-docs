@@ -1,0 +1,79 @@
+= Jaccard Similarity of Neighborhoods (All Pairs)
+
+This algorithm computes the same similarity scores as the link:../#jaccard-similarity-of-neighborhoods-single-source-1[Jaccard similarity of neighborhoods, single-source algorithm], except that it considers ALL pairs of vertices in the graph (for the vertex and edge types selected by the user). Naturally, this algorithm will take longer to run. For very large and very dense graphs, this algorithm may not be a practical choice.
+
+== Specifications
+
+[source,erlang]
+----
+tg_jaccard_nbor_ap(STRING v_type, STRING e_type, STRING re_type, INT top_k,
+  BOOL print_accum = TRUE, STRING similarity_edge = "", STRING file_path = "")
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">++++++<p>+++The top +++<em>+++k+++</em>+++ vertex pairs in the graph that have the highest similarity
+          scores, along with their scores.+++</p>+++
+        +++<p>+++The result is available in three forms:+++</p>+++
+        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
+          +++<li>+++written to a file in tabular format, or+++</li>+++
+          +++<li>+++stored as a vertex attribute value.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Vertex types to calculate similarity
+            score for+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge types to traverse+++</li>+++
+          +++<li>++++++<code>+++INT top_k+++</code>+++: the number of vertex pairs with the highest similarity
+            scores to return+++</li>+++
+          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: Boolean value that decides whether to output
+            to console+++</li>+++
+          +++<li>++++++<code>+++STRING similarity_edge+++</code>+++: If provided, the similarity score
+            will be saved to this edge+++</li>+++
+          +++<li>++++++<code>+++STRING file_path+++</code>+++: If provided, the algorithm will output
+            to the file path in CSV format+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">++++++<code>+++top_k+++</code>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(E{caret}2 / V), V = number of vertices, E = number of edges+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected or directed edges, unweighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+The algorithm will not output more than K vertex pairs, so the algorithm may arbitrarily chose to output one vertex pair over another, if there are tied similarity scores.
+
+== Example
+
+For the movie graph, calculate the Jaccard similarity between all pairs and show the 5 most similar pairs: jaccard_nbor_ap(5). This is the JSON output :
+
+[source,text]
+----
+[
+  {
+    "@@total_result": [
+      {
+        "vertex1": "Kat",
+        "vertex2": "Neil",
+        "score": 0.5
+      },
+      {
+        "vertex1": "Kevin",
+        "vertex2": "Neil",
+        "score": 0.4
+      },
+      {
+        "vertex1": "Jing",
+        "vertex2": "Alex",
+        "score": 0.25
+      },
+      {
+        "vertex1": "Kat",
+        "vertex2": "Kevin",
+        "score": 0.25
+      },
+      {
+        "vertex1": "Jing",
+        "vertex2": "Neil",
+        "score": 0.2
+      }
+    ]
+  }
+]
+----

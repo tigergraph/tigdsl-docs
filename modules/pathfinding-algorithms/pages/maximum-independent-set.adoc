@@ -1,0 +1,42 @@
+= Maximum Independent Set
+
+An *independent set of vertices* does not contain any pair of vertices that are neighbors, i.e., ones which have an edge between them. A https://en.wikipedia.org/wiki/Maximal_independent_set[*maximal independent set*] is the largest independent set that contains those vertices; you cannot improve upon it unless you start over with a different independent set. However, the search for the largest possible independent set (the *maximum independent set*, as opposed to the maximal independent set) is an NP-hard problem: there is no known algorithm that can find that answer in polynomial time. So we settle for the maximal independent set.
+
+This algorithm finds use in applications wanting to find the most efficient configuration which "covers" all the necessary cases. For example, it has been used to optimize delivery or transit routes, where each vertex is one transit segment and each edge connects two segments that can NOT be covered by the same vehicle.
+
+== Specifications
+
+[source,erlang]
+----
+tg_maximal_indep_set(STRING v_type, STRING e_type,
+INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++A set of vertices that form a maximal independent set.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++STRING v_type+++</code>++++++</b>+++: Name of vertex type to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING e_type+++</code>++++++</b>+++: Name of edge type to use+++</li>+++
+          +++<li>++++++<b>++++++<code>+++INT max_iter+++</code>+++:+++</b>+++ maximum number of iterations for the
+            search+++</li>+++
+          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
+            output+++</li>+++
+          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
+            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++Size of the MIS: unknown. Worst case: If the graph is a set of N unconnected
+        vertices, then the MIS is all N vertices.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(E), E = number of edges+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== *Example*
+
+Consider our social10 graph, with three components.
+
+image::../../.gitbook/assets/image%20%2814%29.png[]
+
+It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS. For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen. If the algorithm selects either George or Ivy, then no other independent vertices remain in the component. However, the algorithm could select both Fiona and Howard; they are independent of one another.
+
+This demonstrates the uncertainty of the Maximal Independent Set algorithm and how it differs from Maximum Independent Set. A _maximum_ independent set algorithm would _always_ select Fiona and Howard, plus 2 others, for a total of 4 vertices. The _maximal_ independent set algorithm relies on chance. It could return either 3 or 4 vertices.

@@ -1,0 +1,65 @@
+= Harmonic Centrality
+:stem: latexmath
+
+The Harmonic Centrality algorithm calculates the harmonic centrality of each vertex in the graph. Harmonic Centrality is a variant of Closeness Centrality. In a (not necessarily connected) graph, the *harmonic centrality* reverses the sum and reciprocal operations in the definition of closeness centrality:
+
+[stem]
+++++
+H(x)=\sum _{y\neq x}{\frac {1}{d(x,y)}}
+++++
+
+== Specifications
+
+[,text]
+----
+CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
+SET<STRING> re_type,INT max_hops=10, INT top_k=100, BOOL wf = TRUE,
+BOOL print_accum = True, STRING result_attr = "", STRING file_path = "",
+BOOL display_edges = FALSE)
+----
+
+== Parameters
+
+|===
+| Name | Description | Data type
+
+| `v_type`
+| Vertex types to calculate harmonic centrality for
+| `SET<STRING>`
+
+| `e_type`
+| Edge types to traverse
+| `SET<STRING>`
+
+| `re_type`
+| Reverse edge types
+| `SET<STRING>`
+
+| `max_hops`
+| The maximum number of hops the algorithm would consider for each vertex. If set to a non-positive value, the limit is ignored.
+| `INT`
+
+| `top_k`
+| Sort the scores high to low and output the highest `k`  scores
+| `INT`
+
+| `wf`
+| If `true`, use the Wasserman-Faust normalization for multi-component graphs
+| `BOOL`
+
+| `print_accum`
+| If `true`, output JSON to standard output
+| `BOOL`
+
+| `result_attr`
+| If not empty, store centrality values (FLOAT) to this attribute
+| `STRING`
+
+| `file_path`
+| If not empty, write output to this file in CSV.
+| `STRING`
+
+| `display_edges`
+| If `true`, include the graph's edges in the JSON output, so that the full graph can be displayed.
+| `BOOL`
+|===

@@ -1,0 +1,85 @@
+= Fast Random Projection
+
+Fast Random Projection (FastRP) is a scalable and performant node-embedding algorithm. It generates node embeddings (vectors) of low dimensionality through random projections from the graph's adjacency matrix (a high-dimensional matrix) to a low-dimensional matrix, significantly reducing the computing power required to process the data. The algorithm is theoretically backed by the https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma[the Johnsson-Lindenstrauss lemma], which states that a set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are https://en.wikipedia.org/wiki/Stretch_factor[nearly preserved].
+
+This algorithm is especially useful in the following situations:
+
+* Your data is in such high dimension that it is too expensive to perform calculations.
+* The dimensionality is very high and the number of samples are too sparse to calculate covariances.
+* You don't have access to the entire dataset, such as when working with real-time data.
+
+== Specifications
+
+[source,text]
+----
+CREATE QUERY tg_fastRP_query(
+INT num_edges, INT num_nodes, INT k, INT sampling_constant,
+INT reduced_dimension, DOUBLE normalization_strength, STRING input_weights,
+STRING index_attr)
+----
+
+This algorithm requires an index attribute on the schema. Before running the algorithm, create an attribute on all vertex types to hold the index. You can use our provided schema change job script in the algorithm library.
+
+After the attribute has been created, run the https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/GraphML/Embeddings/FastRP/tg_fastRP_preprocessing.gsql[tg_fastRP_preprocessing.gsql] query to index all vertices on the graph.
+
+== Parameters
+
+|===
+| Parameter | Description | Data type
+
+| `num_edges`
+| The total number of edges in the graph.
+| `INT`
+
+| `num_nodes`
+| The total number of vertices in the graph.
+| `INT`
+
+| `sampling_constant`
+| The sampling constant. A high `sampling_constant` increases the speed of the algorithm. See more details in Parameter Tuning.
+| `INT`
+
+| `reduced_dimension`
+| The length of the produced vectors. A greater dimension offers a greater precision, but is more costly to operate over.
+| `INT`
+
+| `k`
+| The number of times the algorithm iteratively constructs intermediate embeddings. A
+| `INT`
+
+| `normalization_strength`
+| The normalization strength determines how node degrees influence the embedding. Using a negative value will downplay the importance of high degree neighbors, while a positive value will instead increase their importance.
+| `DOUBLE`
+
+| `input_weights`
+| A list of floats that determines the weight of the intermediate embeddings constructed in each iteration.
+| `STRING`
+
+| `index_attr`
+| The name of the index attribute created during preprocessing.
+| `STRING`
+|===
+
+=== Parameter tuning
+
+The optimal values for the following parameters depend on your dataset. In order to obtain the best quality embeddings for your graph, it is a good idea to tune these parameters.
+
+==== `reduced_dimension`
+
+The reduced dimension (`reduced_dimension`) is the length of the produced vectors. A greater dimension offers a greater precision, but is more costly to operate over.
+
+==== `input_weights`
+
+The algorithm interactively constructs intermediate embeddings by averaging either neighboring intermediate embeddings from the previous iteration, or the generated random vectors during the first iteration. The final embeddings is a weighted sum of the intermediate embeddings from each iteration, and the `input_weights` parameter determine how much each set of intermediate embeddings weigh.
+
+==== `normalization_strength`
+
+The normalization strength determines how node degrees influence the embedding. Using a negative value will downplay the importance of high degree neighbors, while a positive value will instead increase their importance.
+
+==== `sampling_constant`
+
+FastRP uses _very_ _sparse random projection_ to reduce the dimensionality of the data from an n*m matrix to an n*d matrix where d <= m by multiplying the original matrix with a m*d matrix. The m*d matrix is made up of independently and identically distributed data sampled from:
+
+image::../../.gitbook/assets/image%20%2838%29.png[]
+
+Where _s_ is the sampling constant (`sampling_constant`). The higher the constant, the higher the number of zeros in the resulting matrix, which speeds up the algorithm.

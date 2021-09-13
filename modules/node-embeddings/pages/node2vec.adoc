@@ -1,0 +1,48 @@
+= Node2Vec
+
+Node2Vec is a node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
+
+A random walk starts with a node, and the algorithm iteratively selects neighboring nodes to visit, and each neighboring node has an assigned probability. This transforms graph structure into a collection of linear sequences of nodes. For each node we will be left with a list of other nodes from their local or extended neighborhoods.
+
+Once the above step is complete, the algorithm uses a variation of the word2vec model from the language modeling community to turn each node into a vector of probabilities. The probabilities represent the likelihood of visiting a given node in a random walk from each starting node.
+
+== Specification
+
+[source,text]
+----
+tg_random_walk(INT step = 8, INT path_size = 4,
+    STRING filepath = "/home/tigergraph/path.csv", SET<STRING> edge_types,
+    INT sample_num)
+
+tg_node2vec_query(STRING filepath = "/home/tigergraph/path.csv",
+    STRING output_file = "/home/tigergraph/embedding.csv",
+    INT dimension)
+----
+
+Installing this query requires link:../../dev/gsql-ref/querying/operators-and-expressions.md#query-user-defined-functions[installing a UDF], which can be found in the https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/examples/Graph%2BML[Github repository of the query]. If you are running the query on a cluster, you need to manually install the UDF on every node of the cluster.
+
+== Parameters
+
+|===
+| Parameter | Description | Data type
+
+| `step`
+| Number of random walks per node
+| `INT`
+
+| `path_size`
+| Number of hops per walk
+| `INT`
+
+| `filepath`
+| File path to output results to
+| `STRING`
+
+| `edge_types`
+| Edge types to traverse
+| `SET<STRING>`
+
+| `sample_num`
+| Number of nodes to be used in the random sample
+| `INT`
+|===

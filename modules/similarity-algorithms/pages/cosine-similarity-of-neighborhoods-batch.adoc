@@ -1,0 +1,220 @@
+= Cosine Similarity of Neighborhoods (Batch)
+
+This algorithm computes the same similarity scores as the link:../#cosine-similarity-of-neighborhoods-all-pairs[Cosine similarity of neighborhoods, all pairs algorithm]link:../#cosine-similarity-of-neighborhoods-single-source[,] except that it starts from all of the vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel. Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into. Compared with the link:../#cosine-similarity-of-neighborhoods-all-pairs[Cosine similarity of neighborhoods, all pairs algorithm], this algorithm allows you to split the workload into multiple batches and reduces the burden on memory.
+
+This algorithm has a time complexity of _O(E)_, where E is the number of edges, and runs on graphs with weighted edges (directed or undirected).
+
+== Specifications
+
+[source,sql]
+----
+tg_cosine_batch(STRING vertex_type, STRING edge_type, STRING edge_attribute,
+INT topK, BOOL print_accum = true, STRING file_path,
+STRING similarity_edge, INT num_of_batches=1)
+----
+
+== Parameters
+
+|===
+| Name | Description
+
+| `v_type`
+| Vertex type to calculate similarity for
+
+| `e_type`
+| Directed edge type to traverse
+
+| `edge_attribute`
+| Name of the attribute on the edge type to use as the weight
+
+| `topK`
+| Number of top scores to report for each vertex
+
+| `print_accum`
+| If `true`, output JSON to standard output.
+
+| `similarity_edge`
+| If provided, the similarity score will be saved to this edge.
+
+| `file_path`
+| If not empty, write output to this file in CSV.
+
+| `num_of_batches`
+| Number of batches to divide the query into
+|===
+
+== Result
+
+The result of this algorithm is the top _k_ cosine similarity scores and their corresponding pair for each vertex. The score is only included if it is greater than 0.
+
+The result can be output in JSON format, in CSV to a file, or saved as a similarity edge in the graph itself.
+
+== Example
+
+Using the `social10` graph, we can calculate the cosine similarity of every person to every other person connected by the `Friend` edge, and print out the top _k_ most similar pairs for each vertex.
+
+[source,sql]
+----
+GSQL > RUN QUERY tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)
+
+// Every vertex and their most similar pairs ranked by their Cosine
+// Similarity score.
+[
+  {
+    "start": [
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 0.49903,
+              "ver": "Howard"
+            },
+            {
+              "val": 0.43938,
+              "ver": "George"
+            },
+            {
+              "val": 0.05918,
+              "ver": "Alex"
+            },
+            {
+              "val": 0.05579,
+              "ver": "Ivy"
+            }
+          ]
+        },
+        "v_id": "Fiona",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": []
+        },
+        "v_id": "Justin",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": []
+        },
+        "v_id": "Bob",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 0.22361,
+              "ver": "Bob"
+            },
+            {
+              "val": 0.21213,
+              "ver": "Alex"
+            }
+          ]
+        },
+        "v_id": "Chase",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 0.57143,
+              "ver": "Bob"
+            },
+            {
+              "val": 0.12778,
+              "ver": "Chase"
+            }
+          ]
+        },
+        "v_id": "Damon",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": []
+        },
+        "v_id": "Alex",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 0.64253,
+              "ver": "Alex"
+            },
+            {
+              "val": 0.63607,
+              "ver": "Ivy"
+            },
+            {
+              "val": 0.27091,
+              "ver": "Howard"
+            },
+            {
+              "val": 0.14364,
+              "ver": "Fiona"
+            }
+          ]
+        },
+        "v_id": "George",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": []
+        },
+        "v_id": "Eddie",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 0.94848,
+              "ver": "Fiona"
+            },
+            {
+              "val": 0.6364,
+              "ver": "Alex"
+            },
+            {
+              "val": 0.31046,
+              "ver": "George"
+            },
+            {
+              "val": 0.1118,
+              "ver": "Howard"
+            }
+          ]
+        },
+        "v_id": "Ivy",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "start.@heap": [
+            {
+              "val": 1.09162,
+              "ver": "Fiona"
+            },
+            {
+              "val": 0.78262,
+              "ver": "Ivy"
+            },
+            {
+              "val": 0.11852,
+              "ver": "George"
+            }
+          ]
+        },
+        "v_id": "Howard",
+        "v_type": "Person"
+      }
+    ]
+  }
+]
+----

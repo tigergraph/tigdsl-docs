@@ -1,0 +1,69 @@
+= Triangle Counting
+
+Why triangles? Think of it in terms of a social network:
+
+* If A knows B, and A also knows C, then we complete the triangle if B knows C. If this situation is common, it indicates a community with a lot of interaction.
+* The triangle is in fact the smallest multi-edge "complete subgraph," where every vertex connects to every other vertex.
+
+Triangle count (or density) is a measure of community and connectedness. In particular, it addresses the question of transitive relationships: If A--> B and B-->C, then what is the likelihood of A--> C?
+
+Note that it is computing a single number: How many triangles are in this graph? It is not finding communities within a graph.
+
+It is not common to count triangles in directed graphs, though it is certainly possible. If you choose to do so, you need to be very specific about the direction of interest: In a directed graph, If A--> B and B--> C, then
+
+* if A-->C, we have a "shortcut".
+* if C-->A, then we have a feedback loop.
+
+This algorithm can only be run on TigerGraph V3.1 or higher.
+
+== Specifications
+
+We present two different algorithms for counting triangles. The first, tri_count(), is the classic edge-iterator algorithm. For each edge and its two endpoint vertices S and T, count the overlap between S's neighbors and T's neighbors.
+
+[source,text]
+----
+tg_tri_count(STRING v_type, STRING e_type)
+----
+
+One side effect of the simple edge-iterator algorithm is that it ends up considering each of the three sides of a triangle. The count needs to be divided by 3, meaning we did 3 times more work than a smaller algorithm would have.
+
+tri_count_fast() is a smarter algorithm which does two passes over the edges. In the first pass we mark which of the two endpoint vertices has fewer neighbors. In the second pass, we count the overlap only between marked vertices. The result is that we eliminate 1/3 of the neighborhood matching, the slowest 1/3, but at the cost of some additional memory.
+
+[source,text]
+----
+tg_tri_count_fast(STRING v_type, STRING e_type)
+----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
+  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
+      +++<td style="text-align:left">+++Returns the number of triangles in the graph.+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
+      +++<td style="text-align:left">++++++<p>++++++<code>+++v_type+++</code>+++: Vertex type to count+++</p>+++
+        +++<p>++++++<code>+++e_type+++</code>+++: Edge type to traverse+++</p>++++++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
+      +++<td style="text-align:left">+++1 integer+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
+      +++<td style="text-align:left">+++O(V * E), V = number of vertices, E = number of edges+++</td>++++++</tr>+++
+    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
+      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+
+== Example
+
+In the social10 graph with Coworker edges, there are clearly 4 triangles.
+
+image::../../.gitbook/assets/gr_social10_coworker.png[]
+
+[source,text]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "edition": "developer",
+    "schema": 0,
+    "api": "v2"
+  },
+  "results": [
+    {"num_triangles": 4}
+  ]
+}
+----

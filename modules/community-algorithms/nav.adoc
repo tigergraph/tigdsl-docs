@@ -1,0 +1,9 @@
+.Community Algorithms
+* xref:connected-components.adoc[]
+* xref:k-core-decomposition.adoc[]
+* xref:label-propogation.adoc[]
+* xref:local-clustering-coefficient.adoc[]
+* xref:louvain-method-with-parallelism-and-refinement.adoc[]
+* xref:README.adoc[]
+* xref:strongly-connected-components.adoc[]
+* xref:triangle-counting.adoc[]

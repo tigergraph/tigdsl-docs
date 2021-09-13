@@ -1,0 +1,95 @@
+= Local Clustering Coefficient
+
+The Local Clustering Coefficient algorithm computes the local clustering coefficient of every vertex in a graph. The _local clustering coefficient_ of a vertex (node) in a graph quantifies how close its neighbors are to being a complete graph, where every two distinct vertices are connected by an edge. It is obtained by dividing the number edges between a vertex's neighbors by the number of edges that could possibly exist.
+
+The algorithm does not report the local clustering coefficient for vertices that have only one neighbor.
+
+== Time complexity
+
+`O(n)`, where `n` is the number of vertices in the graph.
+
+== Specifications
+
+[source,erlang]
+----
+tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
+  BOOL print_accum = True, STRING result_attr = "",
+  STRING file_path = "", BOOL display_edges = FALSE)
+----
+
+== Parameters
+
+|===
+| Parameter | Description | Data type
+
+| `v_type`
+| Vertex type to calculate local clustering coefficient for
+| `STRING`
+
+| `e_type`
+| Edge type to traverse. Only vertices that are connected by edges of this type are treated as connected in this algorithm.
+| `STRING`
+
+| `top_k`
+| Number of the highest local clustering coefficients to report.
+| `INT`
+
+| `print_accum`
+| If `true`, output JSON to standard output.
+| `BOOL`
+
+| `result_attr`
+| If provided, the local clustering coefficient of a vertex will be saved to this attribute.
+| `STRING`
+
+| `file_path`
+| If provided, write output to this file in CSV.
+| `STRING`
+
+| `display_edges`
+| If `display_edges` is set to true, the algorithm will also return edges, which help produce better visualized results in GraphStudio.
+| `BOOL`
+|===
+
+== Example
+
+Using the `social` graph below as an example, Jenny has three neighbors - Tom, Dan and Amily, but only Tom and Dan are connected. Between the three neighbors, the maximum number of edges that could exist is 3. Therefore, the local clustering coefficient for Jenny is 1/3.
+
+On the other hand, Tom has two neighbors that are connected by one edge. Since the maximum number of edges that could exist between two vertices is 1, Tom has a local clustering coefficient of 1/1 = 1.
+
+image::../../.gitbook/assets/image%20%2878%29.png[]
+
+By running the algorithm in GSQL, we can confirm that Tom has the highest local clustering coefficient with a score of 1 and Jenny has a score of 1/3.
+
+[source,bash]
+----
+RUN QUERY tg_lcc("person", "friendship", _, _, _, _, _)
+
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 0,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"top_scores": [
+    {
+      "score": 1,
+      "Vertex_ID": "Tom"
+    },
+    {
+      "score": 0.33333,
+      "Vertex_ID": "Jenny"
+    },
+    {
+      "score": 0.16667,
+      "Vertex_ID": "Dan"
+    },
+    {
+      "score": 0,
+      "Vertex_ID": "Nancy"
+    }
+  ]}]
+}
+----
