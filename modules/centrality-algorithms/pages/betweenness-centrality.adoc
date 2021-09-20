@@ -34,9 +34,10 @@ P_s(w) = \{u \in V: \{u, w\} \in E, dist(s,w) = dist(s,u)+dist(u,w) \} .
 
 For every vertex, the algorithm works in two phases. The first phase calculates the number of shortest paths passing through each vertex. Then starting from the vertex on the most outside layer in a non-incremental order with pair dependency initial value of 0, traverse back to the starting vertex
 
-{% hint style="warning" %}
+[CAUTION]
+====
 This algorithm query employs a subquery called *bc_subquery*. Both queries are needed to run the algorithm.
-{% endhint %}
+====
 
 == *Specifications*
 

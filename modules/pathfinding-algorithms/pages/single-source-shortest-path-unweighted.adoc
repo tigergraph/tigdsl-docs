@@ -4,11 +4,12 @@ If a graph has unweighted edges, then finding the shortest path from one vertex 
 
 When the graph is unweighted, we can use a "greedy" approach to find the shortest path. In computer science, a greedy algorithm makes intermediate choices based on the data being considered at the moment, and then does not revisit those choices later on. In this case, once the algorithm finds any path to a vertex T, it is certain that that is a shortest path.
 
-{% hint style="info" %}
+[NOTE]
+====
 This algorithm finds an unweighted shortest path from one source vertex to each possible destination vertex in the graph. That is, it finds n paths.
 
 If your graph has weighted edges, see the next algorithm. With weighted edges, it is necessary to search the whole graph, whether you want the path for just one destination or for all destinations.
-{% endhint %}
+====
 
 == Specifications
 

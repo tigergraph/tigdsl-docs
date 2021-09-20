@@ -1,8 +1,9 @@
 = All-Pairs Shortest Path
 
-{% hint style="warning" %}
+[CAUTION]
+====
 The All-Pairs Shortest Path algorithm is costly for large graphs because the computation time is O(V{caret}3) and the output size is O(V{caret}2). Be cautious about running this on very large graphs.
-{% endhint %}
+====
 
 The All-Pairs Shortest Path (APSP) task seeks to find the shortest paths between every pair of vertices in the entire graph. In principle, this task can be handled by running the Single-Source Shortest Path (SSSP) algorithm for each input vertex, e.g.,
 

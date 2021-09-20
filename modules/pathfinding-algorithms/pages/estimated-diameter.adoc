@@ -6,9 +6,10 @@ This algorithm uses a simple heuristic to estimate the diameter. rather than cal
 
 The current version only computes unweighted distances.
 
-{% hint style="warning" %}
+[CAUTION]
+====
 This algorithm query employs a subquery called *max_BFS_depth*. Both queries are needed to run the algorithm.
-{% endhint %}
+====
 
 [discrete]
 ==== Specifications

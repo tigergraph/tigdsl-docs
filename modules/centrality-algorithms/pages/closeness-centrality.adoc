@@ -15,9 +15,10 @@ We all have an intuitive understanding when we say a home, an office, or a store
 
 TigerGraph's closeness centrality algorithm uses multi-source breadth-first search (MS-BFS) to traverse the graph and calculate the sum of a vertex's distance to every other vertex in the graph, which vastly improves the performance of the algorithm. The algorithm's implementation of MS-BFS is based on the paper https://db.in.tum.de/~kaufmann/papers/msbfs.pdf[The More the Merrier: Efficient Multi-source Graph Traversal by Then et al].
 
-{% hint style="warning" %}
+[CAUTION]
+====
 This algorithm query employs a subquery called `cc_subquery`. Both queries are needed to run the algorithm.
-{% endhint %}
+====
 
 == Specifications
 

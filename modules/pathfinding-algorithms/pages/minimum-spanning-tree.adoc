@@ -12,11 +12,12 @@ Given an undirected and connected graph, a minimum spanning tree is a set of edg
 
 If the user specifies a source vertex, this will be used as the _seed_. Otherwise, the algorithm will select a random _seed_ vertex.
 
-{% hint style="warning" %}
+[CAUTION]
+====
 If the graph contains multiple components (i.e., some vertices are disconnected from the rest of the graph, then the algorithm will span only the component of the seed vertex.
 
 If you do not have a preferred vertex, and the graph might have more than one component, then you should use the Minimum Spanning Forest (MDF) algorithm instead.
-{% endhint %}
+====
 
 == Specifications
 
