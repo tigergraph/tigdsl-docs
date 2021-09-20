@@ -14,7 +14,7 @@ The implementation of this algorithm requires reverse edges for all directed edg
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
   INT top_k_dist, INT output_limit, INT max_iter = 500, INT iter_wcc = 5,

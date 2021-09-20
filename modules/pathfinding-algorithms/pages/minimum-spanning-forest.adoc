@@ -4,7 +4,7 @@ Given an undirected graph with one or more connected components, a minimum spann
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")

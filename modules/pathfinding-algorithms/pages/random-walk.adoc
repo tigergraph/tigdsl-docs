@@ -4,7 +4,7 @@ Random Walk is an algorithm that generate random paths in a graph. A random walk
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 CREATE QUERY tg_random_walk(
 INT step = 8, INT path_size = 4, STRING filepath = "/home/tigergraph/path.csv",
@@ -45,7 +45,7 @@ image::../../.gitbook/assets/image%20%2842%29.png[Example social graph]
 
 If we run the random walk algorithm on the graph and supply a path size of 3 and a step of 2, and a sample number of 1. Then from each vertex there is a two-step random walk, and a total of 6 three-vertex paths:
 
-{% code title="path.csv" %}
+.path.csv
 
 [source,text]
 ----

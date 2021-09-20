@@ -12,7 +12,7 @@ If your graph has weighted edges, see the next algorithm. With weighted edges, i
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
   SET<STRING> e_type, INT output_limit = -1, BOOL print_accum =TRUE,

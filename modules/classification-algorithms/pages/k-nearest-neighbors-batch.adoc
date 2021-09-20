@@ -4,7 +4,7 @@ This algorithm is a batch version of the https://app.gitbook.com/@tigergraph/s/d
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_knn_cosine_all(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
   STRING weight, STRING label, INT top_k, BOOL print_accum = TRUE,

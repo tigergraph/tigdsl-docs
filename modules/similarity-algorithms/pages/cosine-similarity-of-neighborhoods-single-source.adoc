@@ -20,7 +20,7 @@ image::../../.gitbook/assets/screen-shot-2018-12-21-at-10.51.01-am.png[movie gra
 
 == Specifications
 
-[,erlang]
+[,gsql]
 ----
 tg_cosine_nbor_ss (VERTEX source, SET<STRING> e_type, SET<STRING> re_type,
   STRING weight, INT top_k, INT output_limit, BOOL print_accum = TRUE,

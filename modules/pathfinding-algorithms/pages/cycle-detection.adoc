@@ -22,7 +22,7 @@ For each Active vertex v:
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
   BOOL print_accum = TRUE, STRING file_path = "")

@@ -8,7 +8,7 @@ The distance can be physical distance as well as the reciprocal of similarity sc
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STRING>
   re_type, STRING weight, STRING label, INT top_k,

@@ -8,14 +8,14 @@ A classic application for weighted shortest path is finding the shortest travel 
 
 The shortest path algorithm can be optimized if we know all the weights are nonnegative. If there can be negative weights, then sometimes a longer path will have a lower cumulative weight. Therefore, we have two versions of this algorithm
 
-[source,erlang]
+[source,gsql]
 ----
 tg_shortest_ss_pos_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
  STRING wt_attr, STRING wt_type, INT output_limit = -1, BOOL print_accum = TRUE,
  STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-[source,erlang]
+[source,gsql]
 ----
 tg_shortest_ss_any_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
  STRING wt_attr, STRING wt_type, INT output_limit = -1, BOOL print_accum = TRUE,

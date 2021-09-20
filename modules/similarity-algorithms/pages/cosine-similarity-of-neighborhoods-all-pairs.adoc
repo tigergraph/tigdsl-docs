@@ -4,7 +4,7 @@ This algorithm computes the same similarity scores as the cosine similarity of n
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_cosine_nbor_ap (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
   STRING weight, INT top_k, INT output_limit, BOOL print_accum = TRUE,

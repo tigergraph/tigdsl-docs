@@ -4,7 +4,7 @@ The only difference between weighted PageRank and standard PageRank is that edge
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_pageRank_wt (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
   FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k=100,

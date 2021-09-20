@@ -6,7 +6,7 @@ This algorithm finds use in applications wanting to find the most efficient conf
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_maximal_indep_set(STRING v_type, STRING e_type,
 INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")

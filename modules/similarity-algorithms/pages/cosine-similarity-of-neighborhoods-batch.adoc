@@ -6,7 +6,7 @@ This algorithm has a time complexity of _O(E)_, where E is the number of edges, 
 
 == Specifications
 
-[source,sql]
+[source,gsql]
 ----
 tg_cosine_batch(STRING vertex_type, STRING edge_type, STRING edge_attribute,
 INT topK, BOOL print_accum = true, STRING file_path,
@@ -53,7 +53,7 @@ The result can be output in JSON format, in CSV to a file, or saved as a similar
 
 Using the `social10` graph, we can calculate the cosine similarity of every person to every other person connected by the `Friend` edge, and print out the top _k_ most similar pairs for each vertex.
 
-[source,sql]
+[source,gsql]
 ----
 GSQL > RUN QUERY tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)
 

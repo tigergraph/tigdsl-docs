@@ -4,7 +4,7 @@ k-Nearest Neighbors (kNN) is often used for machine learning. You can choose the
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)

@@ -6,7 +6,7 @@ In a variant version, some vertices could initially be known to belong to the sa
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_label_prop (SET<STRING> v_type, SET<STRING> e_type, INT max_iter, INT output_limit,
 BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
@@ -46,7 +46,7 @@ Label Propagation tries to find natural clusters and separations within connecte
 
 We set `max_iter` to 10, but the algorithm reaches a steady state after 3 iterations:
 
-[source,sql]
+[source,gsql]
 ----
 # Use _ for default/empty values
 RUN QUERY tg_label_prop(["Person"], ["Coworker"], 10, -1, _, _, _)

@@ -10,7 +10,7 @@ The algorithm does not report the local clustering coefficient for vertices that
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
   BOOL print_accum = True, STRING result_attr = "",

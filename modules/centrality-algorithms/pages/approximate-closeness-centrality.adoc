@@ -10,7 +10,7 @@ This query uses another subqueryhttps://github.com/tigergraph/gsql-graph-algorit
 
 == Specifications
 
-[source,sql]
+[source,gsql]
 ----
 tg_closeness_approx (
     SET<STRING> v_type,

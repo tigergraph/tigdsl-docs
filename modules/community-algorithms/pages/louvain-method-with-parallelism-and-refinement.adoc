@@ -19,7 +19,7 @@ However, phase one is sequential, and thus slow for large graphs. An improved Pa
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_louvain_parallel (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
   INT iter1=10, INT iter2=10, INT iter3=10, INT split=10, BOOL print_accum = TRUE,

@@ -6,7 +6,7 @@ This particular algorithm deals with undirected edges. If the same definition (e
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_conn_comp (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
   BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
@@ -44,7 +44,7 @@ It is easy to see in this small graph that the algorithm correctly groups the ve
 
 Our algorithm uses the TigerGraph engine's internal vertex ID numbers; they cannot be predicted.
 
-[source,erlang]
+[source,gsql]
 ----
 RUN QUERY tg_conn_comp(["Person"], ["Coworker"], _, _, _, _)
 ----

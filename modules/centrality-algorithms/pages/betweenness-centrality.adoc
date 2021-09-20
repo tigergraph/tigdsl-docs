@@ -40,7 +40,7 @@ This algorithm query employs a subquery called *bc_subquery*. Both queries are n
 
 == *Specifications*
 
-[,erlang]
+[,gsql]
 ----
 CREATE QUERY tg_betweenness_cent(SET<STRING> v_type, SET<STRING> e_type,
 STRING re_type,INT max_hops=10, INT top_k=100, BOOL print_accum = True,
@@ -83,7 +83,7 @@ STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 
 In the example below, Claire is in the very center of the graph and has the highest betweenness centrality. Six shortest paths pass through Sam (i.e. paths from Victor to all other 6 people except for Sam and Victor), so the score of Sam is 6. David also has a score of 6, since Brian has 6 paths to other people that pass through David.
 
-[,sql]
+[,gsql]
 ----
 # Use _ for default values
 RUN QUERY tg_betweenness_cent(["Person"], ["Friend"], _, _, _, _, _, _)

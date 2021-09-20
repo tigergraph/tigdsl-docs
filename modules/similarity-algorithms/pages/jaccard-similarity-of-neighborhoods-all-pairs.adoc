@@ -4,7 +4,7 @@ This algorithm computes the same similarity scores as the link:../#jaccard-simil
 
 == Specifications
 
-[source,erlang]
+[source,gsql]
 ----
 tg_jaccard_nbor_ap(STRING v_type, STRING e_type, STRING re_type, INT top_k,
   BOOL print_accum = TRUE, STRING similarity_edge = "", STRING file_path = "")
