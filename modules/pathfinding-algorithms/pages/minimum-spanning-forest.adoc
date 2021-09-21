@@ -8,7 +8,9 @@ Given an undirected graph with one or more connected components, a minimum spann
 ----
 tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Computes a minimum spanning forest. If the JSON or file output selected,

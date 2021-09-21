@@ -11,14 +11,15 @@ The current version only computes unweighted distances.
 This algorithm query employs a subquery called *max_BFS_depth*. Both queries are needed to run the algorithm.
 ====
 
-[discrete]
-==== Specifications
+== Specifications
 
 [source,gsql]
 ----
 tg_estimate_diameter (SET<STRING> v_type, SET<STRING> e_type, INT seed_set_length,
   BOOL print_accum = TRUE, STRING file_path = "", BOOL display = FALSE)
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Returns the estimated value for the diameter of the graph+++</td>++++++</tr>+++

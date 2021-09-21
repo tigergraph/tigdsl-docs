@@ -24,7 +24,9 @@ However, phase one is sequential, and thus slow for large graphs. An improved Pa
 tg_louvain_parallel (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
   INT iter1=10, INT iter2=10, INT iter3=10, INT split=10, BOOL print_accum = TRUE,
   STRING result_attr = "", STRING file_path = "", BOOL comm_by_size = TRUE)
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Assigns a component id (INT) to each vertex, such that members of the

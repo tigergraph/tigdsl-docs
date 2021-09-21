@@ -1,6 +1,6 @@
 = Approximate Closeness Centrality
 
-In the link:../#closeness-centrality[Closeness Centrality algorithm], to obtain the closeness centrality score for a vertex, we measure the distance from the source vertex to every single vertex in the graph. In large graphs, running this calculation for every vertex can be highly time-consuming.
+In the xref:centrality-algorithms:closeness-centrality.adoc[Closeness Centrality algorithm], to obtain the closeness centrality score for a vertex, we measure the distance from the source vertex to every single vertex in the graph. In large graphs, running this calculation for every vertex can be highly time-consuming.
 
 The Approximate Closeness Centrality algorithm (based on https://arxiv.org/pdf/1409.0035.pdf[Cohen et al. 2014]) calculates the approximate closeness centrality score for each vertex by combining two estimation approaches - sampling and pivoting. This hybrid estimation approach offers near-linear time processing and linear space overhead within a small relative error. It runs on graphs with unweighted edges (directed or undirected).
 

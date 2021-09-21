@@ -26,7 +26,9 @@ If you do not have a preferred vertex, and the graph might have more than one co
 tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
   STRIN wt_attr, STRING wt_type, INT max_iter = -1,
   BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Computes a minimum spanning tree. If the JSON or file output selected,

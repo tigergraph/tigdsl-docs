@@ -32,7 +32,9 @@ tri_count_fast() is a smarter algorithm which does two passes over the edges. In
 [source,text]
 ----
 tg_tri_count_fast(STRING v_type, STRING e_type)
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Returns the number of triangles in the graph.+++</td>++++++</tr>+++

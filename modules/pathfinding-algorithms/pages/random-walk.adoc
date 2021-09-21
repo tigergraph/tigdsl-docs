@@ -57,11 +57,11 @@ Yelena Howard Yelena
 Owen George Owen
 ----
 
-{% endcode %}
+
 
 We can also perform a 3 step walk and still ask for three-vertex paths, in which case the number of paths would double, because in each 3 step walk, there are two possible three-vertex paths:
 
-{% code title="path.csv" %}
+.path.csv
 
 [source,text]
 ----
@@ -79,4 +79,4 @@ Yelena Noah Howard
 Owen Noah Howard
 ----
 
-{% endcode %}
+

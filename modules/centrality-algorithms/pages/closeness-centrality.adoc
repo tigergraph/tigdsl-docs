@@ -29,7 +29,9 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-== *Parameters*+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+== *Parameters*
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Computes a Closeness Centrality value (FLOAT type) for each vertex.+++</td>++++++</tr>+++
@@ -73,4 +75,3 @@ _, _, _, _, _)
 
 image::../../.gitbook/assets/closeness_result.png[Visualized results of example query on social10 graph, with Friend and Also_Friend edges]
 
-###

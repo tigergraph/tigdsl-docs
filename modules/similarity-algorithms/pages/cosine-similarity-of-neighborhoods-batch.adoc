@@ -1,6 +1,8 @@
 = Cosine Similarity of Neighborhoods (Batch)
 
-This algorithm computes the same similarity scores as the link:../#cosine-similarity-of-neighborhoods-all-pairs[Cosine similarity of neighborhoods, all pairs algorithm]link:../#cosine-similarity-of-neighborhoods-single-source[,] except that it starts from all of the vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel. Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into. Compared with the link:../#cosine-similarity-of-neighborhoods-all-pairs[Cosine similarity of neighborhoods, all pairs algorithm], this algorithm allows you to split the workload into multiple batches and reduces the burden on memory.
+This algorithm computes the same similarity scores as the xref:cosine-similarity-of-neighborhoods-all-pairs.adoc[Cosine similarity of neighborhoods, all pairs algorithm] except that it starts from all of the vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
+
+Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into. Compared with the xref:cosine-similarity-of-neighborhoods-all-pairs.adoc[Cosine similarity of neighborhoods, all pairs algorithm], this algorithm allows you to split the workload into multiple batches and reduces the burden on memory.
 
 This algorithm has a time complexity of _O(E)_, where E is the number of edges, and runs on graphs with weighted edges (directed or undirected).
 

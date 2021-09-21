@@ -10,7 +10,8 @@ In a variant version, some vertices could initially be known to belong to the sa
 ----
 tg_label_prop (SET<STRING> v_type, SET<STRING> e_type, INT max_iter, INT output_limit,
 BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Assigns a component id (INT) to each vertex, such that members of the

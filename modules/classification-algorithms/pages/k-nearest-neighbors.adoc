@@ -14,7 +14,9 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
   re_type, STRING weight, STRING label, INT top_k,
   BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
   RETURNS (STRING)
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">++++++<p>+++The predicted label for the source vertex.+++</p>+++

@@ -1,6 +1,5 @@
 .Centrality Algorithms
 * xref:approximate-closeness-centrality.adoc[]
-* xref:approximate-closeness-centrality.adoc[]
 * xref:betweenness-centrality.adoc[]
 * xref:closeness-centrality.adoc[]
 * xref:harmonic-centrality.adoc[]

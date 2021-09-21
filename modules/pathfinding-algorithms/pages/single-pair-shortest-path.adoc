@@ -1,5 +1,8 @@
 = Single-Pair Shortest Path
 
-The Single-Pair Shortest Path task seeks the shortest path between a source vertex S and a target vertex T. If the edges are unweighted, then use the query in our tutorial documentlink:../../start/gsql-examples/classic-graph-algorithms.md#example-8-single-pair-shortest-path-unweighted[GSQL Demo Examples.]
+The Single-Pair Shortest Path task seeks the shortest path between a source vertex S and a target vertex T. If the edges are unweighted, then use the query in our tutorial document link:../../start/gsql-examples/classic-graph-algorithms.md#example-8-single-pair-shortest-path-unweighted[GSQL Demo Examples.]
 
-If the edges are weighted, then use the link:../#single-source-shortest-path-weighted[Single-Source Shortest Path] algorithm. In the worst case, it takes the same computational effort to find the shortest path for one pair as to find the shortest paths for all pairs from the same source S. The reason is that you cannot know whether you have found the shortest (least weight) path until you have explored the full graph. If the weights are always positive, however, then a more efficient algorithm is possible. You can stop searching when you have found paths that use each of the in-edges to T.
+If the edges are weighted, then use the xref:single-source-shortest-path-weighted.adoc[Single-Source Shortest Path] algorithm.
+In the worst case, it takes the same computational effort to find the shortest path for one pair as to find the shortest paths for all pairs from the same source S.
+The reason is that you cannot know whether you have found the shortest (least weight) path until you have explored the full graph.
+If the weights are always positive, however, then a more efficient algorithm is possible. You can stop searching when you have found paths that use each of the in-edges to T.

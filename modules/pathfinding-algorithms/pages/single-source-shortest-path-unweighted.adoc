@@ -18,7 +18,9 @@ If your graph has weighted edges, see the next algorithm. With weighted edges, i
 CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
   SET<STRING> e_type, INT output_limit = -1, BOOL print_accum =TRUE,
   STRING result_attr ="", STRING file_path ="", BOOL display_edges =FALSE)
-----+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
+----
+
++++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
       +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
   +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
       +++<td style="text-align:left">+++Computes a shortest distance (INT) and shortest path (STRING) from vertex +++<em>+++source+++</em>+++ to
