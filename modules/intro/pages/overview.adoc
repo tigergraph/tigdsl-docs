@@ -45,7 +45,7 @@ It is possible to run newer algorithms on an older product version, as long as t
 
 All GSQL graph algorithms are schema-free, which means they are ready to use with any graph, regardless of the graph's data model or schema. The algorithms have run-time input parameters for the vertex type(s), edge type(s), and attributes which the user wishes to use.
 
-To use an  algorithm, the algorithm (GSQL query) must first be xref:gsql-ref:querying:query-operations.adoc#_install_query[installed]. If your database is on a distributed cluster, you should use the `DISTRIBUTED` option when installing the query to install it in xref:../dev/gsql-ref/querying/distributed-query-mode.adoc[Distributed Query Mode].
+To use an  algorithm, the algorithm (GSQL query) must first be xref:gsql-ref:querying:query-operations.adoc#_install_query[installed]. If your database is on a distributed cluster, you should use the `DISTRIBUTED` option when installing the query to install it in xref:gsql-ref:querying:distributed-query-mode.adoc[Distributed Query Mode].
 
 Running an algorithm is the same as running a GSQL query. For example, if you selected the JSON option for xref:centrality-algorithms:pagerank.adoc[], you could run it from GSQL as below:
 
