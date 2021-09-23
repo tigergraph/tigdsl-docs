@@ -79,7 +79,7 @@ GSQL command::
 RUN QUERY harmonic_cent(["Person"], ["Coworker"], ["Coworker"], 4, 5,
 true, true, _, _, _)
 ----
-__
+--
 Result::
 +
 --
