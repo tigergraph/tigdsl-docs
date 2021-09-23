@@ -10,33 +10,34 @@ tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Computes a minimum spanning forest. If the JSON or file output selected,
-        the output is the set of edges that form the MSF. If the result_attr option
-        is selected, the edges which are part of the MSF are tagged True; other
-        edges are tagged False.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
-            use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING wt_attr+++</code>++++++</b>+++: Name of edge weight attribute+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING wt_type+++</code>++++++</b>+++: Data type of edge weight attribute:
-            &quot;INT&quot;, &quot;FLOAT&quot;, or &quot;DOUBLE&quot;+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store result values
-            (BOOL) to this attribute+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++V - c,+++</p>+++
-        +++<p>+++V = number of vertices, c = number of components+++</p>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O((V+E) * logV)+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Computes a minimum spanning forest. If the JSON or file output
+selected, the output is the set of edges that form the MSF. If the
+result_attr option is selected, the edges which are part of the MSF are
+tagged True; other edges are tagged False.
+
+|Input Parameters a|
+* *`+SET<STRING> v_type+`*: Names of vertex types to use
+* *`+SET<STRING> e_type+`*: Names of edge types to use
+* *`+STRING wt_attr+`*: Name of edge weight attribute
+* *`+STRING wt_type+`*: Data type of edge weight attribute: "INT",
+"FLOAT", or "DOUBLE"
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING result_attr+`*: If not empty, store result values (BOOL) to
+this attribute
+* *`+STRING file_path+`:* If not empty, write output to this file.
+
+|Result Size a|
+V - c,
+
+V = number of vertices, c = number of components
+
+|Time Complexity |O((V+E) * logV)
+
+|Graph Types |Undirected edges
+|===
 
 == *Example*
 

@@ -12,26 +12,25 @@ tg_maximal_indep_set(STRING v_type, STRING e_type,
 INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++A set of vertices that form a maximal independent set.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++STRING v_type+++</code>++++++</b>+++: Name of vertex type to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING e_type+++</code>++++++</b>+++: Name of edge type to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT max_iter+++</code>+++:+++</b>+++ maximum number of iterations for the
-            search+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++Size of the MIS: unknown. Worst case: If the graph is a set of N unconnected
-        vertices, then the MIS is all N vertices.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(E), E = number of edges+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<50%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |A set of vertices that form a maximal independent set.
+
+|Input Parameters a|
+* *`+STRING v_type+`*: Name of vertex type to use
+* *`+STRING e_type+`*: Name of edge type to use
+* *`+INT max_iter+`:* maximum number of iterations for the search
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING file_path+`:* If not empty, write output to this file.
+
+|Result Size |Size of the MIS: unknown. Worst case: If the graph is a
+set of N unconnected vertices, then the MIS is all N vertices.
+
+|Time Complexity |O(E), E = number of edges
+
+|Graph Types |Undirected edges
+|===
 
 == *Example*
 

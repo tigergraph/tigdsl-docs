@@ -34,19 +34,19 @@ tri_count_fast() is a smarter algorithm which does two passes over the edges. In
 tg_tri_count_fast(STRING v_type, STRING e_type)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Returns the number of triangles in the graph.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<p>++++++<code>+++v_type+++</code>+++: Vertex type to count+++</p>+++
-        +++<p>++++++<code>+++e_type+++</code>+++: Edge type to traverse+++</p>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++1 integer+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(V * E), V = number of vertices, E = number of edges+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Returns the number of triangles in the graph.
+|Input Parameters a|
+`+v_type+`: Vertex type to count
+
+`+e_type+`: Edge type to traverse
+
+|Result Size |1 integer
+|Time Complexity |O(V * E), V = number of vertices, E = number of edges
+|Graph Types |Undirected edges
+|===
 
 == Example
 

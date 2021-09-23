@@ -12,29 +12,29 @@ tg_conn_comp (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
   BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Assigns a component id (INT) to each vertex, such that members of the
-        same component have the same id value.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
-            use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT output_limit+++</code>++++++</b>+++: If >=0, max number of vertices
-            to output to JSON.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store community
-            ID values (INT) to this attribute+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(E*d), E = number of edges, d = max(diameter of components)+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Assigns a component id (INT) to each vertex, such that members
+of the same component have the same id value.
+
+|Input Parameters a|
+* *`+SET<STRING> v_type+`*: Names of vertex types to use
+* *`+SET<STRING> e_type+`*: Names of edge types to use
+* *`+INT output_limit+`*: If >=0, max number of vertices to output to
+JSON.
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING result_attr+`*: If not empty, store community ID values
+(INT) to this attribute
+* *`+STRING file_path+`:* If not empty, write output to this file.
+
+|Result Size |V = number of vertices
+
+|Time Complexity |O(E*d), E = number of edges, d = max(diameter of
+components)
+
+|Graph Types |Undirected edges
+|===
 
 == Example
 

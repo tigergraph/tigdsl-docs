@@ -16,37 +16,40 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
   RETURNS (STRING)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++The predicted label for the source vertex.+++</p>+++
-        +++<p>+++The result is available in three forms:+++</p>+++
-        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
-          +++<li>+++written to a file in tabular format, or+++</li>+++
-          +++<li>+++stored as a vertex attribute value.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++VERTEX source+++</code>+++: The vertex which you want to predict the label+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Vertex types to calculate distance
-            to source vertex for+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge types to traverse+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge types to traverse+++</li>+++
-          +++<li>++++++<code>+++STRING weight+++</code>+++: Edge attribute to use as the weight of the
-            edge+++</li>+++
-          +++<li>++++++<code>+++STRING label+++</code>+++: Vertex attribute to recognize as the label
-            of the vertex+++</li>+++
-          +++<li>++++++<code>+++INT top_k+++</code>+++: number of nearest neighbors to consider+++</li>+++
-          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: If true, the algorithm will output the
-            result to the console in JSON format.+++</li>+++
-          +++<li>++++++<code>+++STRING filepath+++</code>+++: If provided, the algorithm will output to
-            this file path in CSV format+++</li>+++
-          +++<li>++++++<code>+++STRING attr+++</code>+++: Vertex attribute to save the predicted label
-            as.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(D{caret}2), D = outdegree of vertex v+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected or directed edges, weighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols=",<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result a|
+The predicted label for the source vertex.
+
+The result is available in three forms:
+
+* streamed out in JSON format
+* written to a file in tabular format, or
+* stored as a vertex attribute value.
+
+|Input Parameters a|
+* `+VERTEX source+`: The vertex which you want to predict the label
+* `+SET<STRING> v_type+`: Vertex types to calculate distance to source
+vertex for
+* `+SET<STRING> e_type+`: Edge types to traverse
+* `+SET<STRING> re_type+`: Reverse edge types to traverse
+* `+STRING weight+`: Edge attribute to use as the weight of the edge
+* `+STRING label+`: Vertex attribute to recognize as the label of the
+vertex
+* `+INT top_k+`: number of nearest neighbors to consider
+* `+BOOL print_accum+`: If true, the algorithm will output the result to
+the console in JSON format.
+* `+STRING filepath+`: If provided, the algorithm will output to this
+file path in CSV format
+* `+STRING attr+`: Vertex attribute to save the predicted label as.
+
+|Result Size |V = number of vertices
+
+|Time Complexity |O(D^2), D = outdegree of vertex v
+
+|Graph Types |Undirected or directed edges, weighted edges
+|===
 
 The algorithm will not output more than K vertex pairs, so the algorithm may arbitrarily choose to output one vertex pair over another if there are tied similarity scores.
 

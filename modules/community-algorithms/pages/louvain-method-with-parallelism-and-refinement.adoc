@@ -26,45 +26,46 @@ tg_louvain_parallel (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
   STRING result_attr = "", STRING file_path = "", BOOL comm_by_size = TRUE)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Assigns a component id (INT) to each vertex, such that members of the
-        same component have the same id value. The JSON output lists every vertex
-        with its community ID value. It also lists community id values, sorted
-        by community size.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
-            use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING wt_attr+++</code>++++++</b>+++: Name of edge weight attribute (must
-            be FLOAT)+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT iter1+++</code>++++++</b>+++: Max number of iterations for the first
-            phase. Default value is 10+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT iter2+++</code>++++++</b>+++: Max number of iterations for the second
-            phase. Default value is 10+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT iter3+++</code>++++++</b>+++: Max number of iterations for the refinement
-            phase. Default value is 10+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT split+++</code>++++++</b>+++: Number of splits in phase 1. Increase the
-            number to save memory, at the expense of having a longer running time.
-            Default value is 10.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store community
-            id values (INT) to this attribute+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL comm_by_size+++</code>++++++</b>+++: If True, and if +++<code>+++print_accum+++</code>+++ is
-            True, output the membership of each community, with communities arranged
-            by size.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(V{caret}2*L), V = number of vertices, L = (iter1 * iter2 + iter3) = total
-        number of iterations+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++Undirected, weighted edges+++</p>+++
-        +++<p>+++An edge weight attribute is required.+++</p>++++++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Assigns a component id (INT) to each vertex, such that members
+of the same component have the same id value. The JSON output lists
+every vertex with its community ID value. It also lists community id
+values, sorted by community size.
+
+|Input Parameters a|
+* *`+SET<STRING> v_type+`*: Names of vertex types to use
+* *`+SET<STRING> e_type+`*: Names of edge types to use
+* *`+STRING wt_attr+`*: Name of edge weight attribute (must be FLOAT)
+* *`+INT iter1+`*: Max number of iterations for the first phase. Default
+value is 10
+* *`+INT iter2+`*: Max number of iterations for the second phase.
+Default value is 10
+* *`+INT iter3+`*: Max number of iterations for the refinement phase.
+Default value is 10
+* *`+INT split+`*: Number of splits in phase 1. Increase the number to
+save memory, at the expense of having a longer running time. Default
+value is 10.
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING result_attr+`*: If not empty, store community id values
+(INT) to this attribute
+* *`+STRING file_path+`:* If not empty, write output to this file.
+* *`+BOOL comm_by_size+`*: If True, and if `+print_accum+` is True,
+output the membership of each community, with communities arranged by
+size.
+
+|Result Size |V = number of vertices
+
+|Time Complexity |O(V^2*L), V = number of vertices, L = (iter1 * iter2 +
+iter3) = total number of iterations
+
+|Graph Types a|
+Undirected, weighted edges
+
+An edge weight attribute is required.
+
+|===
 
 == Example
 

@@ -19,23 +19,23 @@ tg_estimate_diameter (SET<STRING> v_type, SET<STRING> e_type, INT seed_set_lengt
   BOOL print_accum = TRUE, STRING file_path = "", BOOL display = FALSE)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Returns the estimated value for the diameter of the graph+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++SET<STRING> v_type+++</code>++++++</b>+++: Names of vertex types to
-            use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++SET<STRING> e_type+++</code>++++++</b>+++: Names of edge types to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT seed_set_length+++</code>++++++</b>+++: The number (K) of random seed
-            vertices to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++one integer+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(k*E), E = number of edges, k = number of seed vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Directed+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Returns the estimated value for the diameter of the graph
+
+|Input Parameters a|
+* *`+SET<STRING> v_type+`*: Names of vertex types to use
+* *`+SET<STRING> e_type+`*: Names of edge types to use
+* *`+INT seed_set_length+`*: The number (K) of random seed vertices to
+use
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING file_path+`:* If not empty, write output to this file.
+
+|Result Size |one integer
+
+|Time Complexity |O(k*E), E = number of edges, k = number of seed
+vertices
+
+|Graph Types |Directed
+|===

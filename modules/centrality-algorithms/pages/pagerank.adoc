@@ -16,40 +16,41 @@ A common way of interpreting PageRank value is through the Random Network Surfer
 tg_pageRank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Computes a PageRank value (FLOAT type) for each vertex.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<b>++++++<code>+++STRING v_type+++</code>++++++</b>+++: Names of vertex type to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING e_type+++</code>++++++</b>+++: Names of edge type to use+++</li>+++
-          +++<li>++++++<b>++++++<code>+++FLOAT max_change+++</code>++++++</b>+++: PageRank will stop iterating when
-            the largest difference between any vertex&apos;s current score and its
-            previous score &#x2264; +++<code>+++max_change.+++</code>+++ That is, the scores have
-            become very stable and are changing by less than +++<code>+++max_change+++</code>+++ from
-            one iteration to the next.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT max_iter+++</code>++++++</b>+++: Maximum number of iterations.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++FLOAT damping+++</code>++++++</b>+++: Fraction of score that is due to the
-            score of neighbors. The balance (1 - damping) is a minimum baseline score
-            that every vertex receives.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++INT top_k+++</code>++++++</b>+++: Sort the scores highest first and output
-            only this many scores+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL print_accum+++</code>++++++</b>+++: If True, output JSON to standard
-            output+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING result_attr+++</code>++++++</b>+++: If not empty, store PageRank values
-            (FLOAT) to this attribute+++</li>+++
-          +++<li>++++++<b>++++++<code>+++STRING file_path+++</code>+++:+++</b>+++ If not empty, write output to this
-            file.+++</li>+++
-          +++<li>++++++<b>++++++<code>+++BOOL display_edges+++</code>++++++</b>+++: If true, include the graph&apos;s
-            edges in the JSON output, so that the full graph can be displayed.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++O(E*k), E = number of edges, k = number of iterations.+++</p>+++
-        +++<p>+++The number of iterations is data-dependent, but the user can set a maximum.
-          Parallel processing reduces the time needed for computation.+++</p>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Directed edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols=",<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Computes a PageRank value (FLOAT type) for each vertex.
+
+|Input Parameters a|
+* *`+STRING v_type+`*: Names of vertex type to use
+* *`+STRING e_type+`*: Names of edge type to use
+* *`+FLOAT max_change+`*: PageRank will stop iterating when the largest
+difference between any vertex's current score and its previous score ≤
+`+max_change.+` That is, the scores have become very stable and are
+changing by less than `+max_change+` from one iteration to the next.
+* *`+INT max_iter+`*: Maximum number of iterations.
+* *`+FLOAT damping+`*: Fraction of score that is due to the score of
+neighbors. The balance (1 - damping) is a minimum baseline score that
+every vertex receives.
+* *`+INT top_k+`*: Sort the scores highest first and output only this
+many scores
+* *`+BOOL print_accum+`*: If True, output JSON to standard output
+* *`+STRING result_attr+`*: If not empty, store PageRank values (FLOAT)
+to this attribute
+* *`+STRING file_path+`:* If not empty, write output to this file.
+* *`+BOOL display_edges+`*: If true, include the graph's edges in the
+JSON output, so that the full graph can be displayed.
+
+|Result Size |V = number of vertices
+
+|Time Complexity a|
+O(E*k), E = number of edges, k = number of iterations.
+
+The number of iterations is data-dependent, but the user can set a
+maximum. Parallel processing reduces the time needed for computation.
+
+|Graph Types |Directed edges
+|===
 
 == Example
 

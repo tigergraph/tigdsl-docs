@@ -28,35 +28,38 @@ tg_cosine_nbor_ss (VERTEX source, SET<STRING> e_type, SET<STRING> re_type,
 RETURNS (MapAccum<VERTEX, FLOAT>)
 ----
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++The top K vertices in the graph that have the highest similarity scores,
-          along with their scores.+++</p>+++
-        +++<p>+++The result is available in three forms:+++</p>+++
-        +++<ul>++++++<li>+++streamed out in JSON format+++</li>+++
-          +++<li>+++written to a file in tabular format+++</li>+++
-          +++<li>+++stored as a vertex attribute value+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++VERTEX source+++</code>++++++<b>+++:+++</b>+++ Source vertex+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Edge type to traverse+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> re_type+++</code>+++: Reverse edge type to traverse+++</li>+++
-          +++<li>++++++<code>+++STRING weight:+++</code>+++The edge attribute to use as the weight of
-            the edge+++</li>+++
-          +++<li>++++++<code>+++INT top_k+++</code>+++: Number of vertices+++</li>+++
-          +++<li>++++++<code>+++INT output_limit:+++</code>++++++</li>+++
-          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: If +++<code>+++true+++</code>+++, output JSON to standard
-            output.+++</li>+++
-          +++<li>++++++<code>+++STRING filepath+++</code>+++: If provided, the output will be written
-            to this file path in CSV format.+++</li>+++
-          +++<li>++++++<code>+++STRING similarity_edge+++</code>+++: If provided, the similarity score
-            will be saved to this edge.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">++++++<code>+++top_k+++</code>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">+++O(D{caret}2), D = outdegree of vertex v+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Undirected or directed edges, weighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result a|
+The top K vertices in the graph that have the highest similarity scores,
+along with their scores.
+
+The result is available in three forms:
+
+* streamed out in JSON format
+* written to a file in tabular format
+* stored as a vertex attribute value
+
+|Input Parameters a|
+* `+VERTEX source+`**:** Source vertex
+* `+SET<STRING> e_type+`: Edge type to traverse
+* `+SET<STRING> re_type+`: Reverse edge type to traverse
+* `+STRING weight:+`The edge attribute to use as the weight of the edge
+* `+INT top_k+`: Number of vertices
+* `+INT output_limit:+`
+* `+BOOL print_accum+`: If `+true+`, output JSON to standard output.
+* `+STRING filepath+`: If provided, the output will be written to this
+file path in CSV format.
+* `+STRING similarity_edge+`: If provided, the similarity score will be
+saved to this edge.
+
+|Result Size |`+top_k+`
+
+|Time Complexity |O(D^2), D = outdegree of vertex v
+
+|Graph Types |Undirected or directed edges, weighted edges
+|===
 
 The output size is always K (if K <= N), so the algorithm may arbitrarily choose to output one vertex over another if there are tied similarity scores.
 
