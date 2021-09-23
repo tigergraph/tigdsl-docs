@@ -63,3 +63,59 @@ BOOL display_edges = FALSE)
 | If `true`, include the graph's edges in the JSON output, so that the full graph can be displayed.
 | `BOOL`
 |===
+
+== Example
+If we have the following graph, we can see that Ivy is the most central of the five vertices. Running the algorithm on the graph shows that Ivy has the highest centrality score:
+
+image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-MjV3bZEHcUwHHMYo7gT%2F-MjVDzTrVXazrel4EdU7%2Fimage.png?alt=media&token=1611630a-1bf9-4097-b432-0a0c1c388f22[]
+
+[tabs]
+====
+GSQL command::
++
+--
+[,gsql]
+----
+RUN QUERY harmonic_cent(["Person"], ["Coworker"], ["Coworker"], 4, 5,
+true, true, _, _, _)
+----
+__
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 0,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"top_scores": [
+    {
+      "score": 0.04167,
+      "Vertex_ID": "Ivy"
+    },
+    {
+      "score": 0.03571,
+      "Vertex_ID": "Damon"
+    },
+    {
+      "score": 0.03571,
+      "Vertex_ID": "George"
+    },
+    {
+      "score": 0.025,
+      "Vertex_ID": "Steven"
+    },
+    {
+      "score": 0.025,
+      "Vertex_ID": "Glinda"
+    }
+  ]}]
+}
+----
+--
+====

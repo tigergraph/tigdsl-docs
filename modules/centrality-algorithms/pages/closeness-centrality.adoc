@@ -31,34 +31,38 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
 
 == *Parameters*
 
-+++<table>++++++<thead>++++++<tr>++++++<th style="text-align:left">++++++<b>+++Characteristic+++</b>++++++</th>+++
-      +++<th style="text-align:left">+++Value+++</th>++++++</tr>++++++</thead>+++
-  +++<tbody>++++++<tr>++++++<td style="text-align:left">+++Result+++</td>+++
-      +++<td style="text-align:left">+++Computes a Closeness Centrality value (FLOAT type) for each vertex.+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Required Input Parameters+++</td>+++
-      +++<td style="text-align:left">++++++<ul>++++++<li>++++++<code>+++SET<STRING> v_type+++</code>+++: Names of vertex types to use+++</li>+++
-          +++<li>++++++<code>+++SET<STRING> e_type+++</code>+++: Names of edge types to use+++</li>+++
-          +++<li>++++++<code>+++SET<STRING>+++</code>+++  +++<code>+++re_type+++</code>+++: Names of reverse edge
-            types to use+++</li>+++
-          +++<li>++++++<code>+++INT max_hops+++</code>+++: If >=0, look only this far from each vertex+++</li>+++
-          +++<li>++++++<code>+++INT top_k+++</code>++++++<b>+++:+++</b>+++ Sort the scores highest first and output
-            only this many scores+++</li>+++
-          +++<li>++++++<code>+++BOOL wf+++</code>+++: If True, use Wasserman-Faust normalization for multi-component
-            graphs+++</li>+++
-          +++<li>++++++<code>+++BOOL print_accum+++</code>+++: If true, output JSON to standard output+++</li>+++
-          +++<li>++++++<code>+++STRING result_attr+++</code>+++: If not empty, store centrality values
-            (FLOAT) to this attribute+++</li>+++
-          +++<li>++++++<code>+++STRING file_path+++</code>++++++<b>+++:+++</b>+++ If not empty, write output to this
-            file in CSV.+++</li>+++
-          +++<li>++++++<code>+++BOOL display_edges+++</code>+++: If true, include the graph&apos;s edges
-            in the JSON output, so that the full graph can be displayed.+++</li>++++++</ul>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Result Size+++</td>+++
-      +++<td style="text-align:left">+++V = number of vertices+++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Time Complexity+++</td>+++
-      +++<td style="text-align:left">++++++<p>+++O(E), E = number of edges.+++</p>+++
-        +++<p>+++Parallel processing reduces the time needed for computation.+++</p>++++++</td>++++++</tr>+++
-    +++<tr>++++++<td style="text-align:left">+++Graph Types+++</td>+++
-      +++<td style="text-align:left">+++Directed or Undirected edges, Unweighted edges+++</td>++++++</tr>++++++</tbody>++++++</table>+++
+[width="100%",cols="<,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result |Computes a Closeness Centrality value (FLOAT type) for each
+vertex.
+
+|Required Input Parameters a|
+* `+SET<STRING> v_type+`: Names of vertex types to use
+* `+SET<STRING> e_type+`: Names of edge types to use
+* `+SET<STRING>+` `+re_type+`: Names of reverse edge types to use
+* `+INT max_hops+`: If >=0, look only this far from each vertex
+* `+INT top_k+`**:** Sort the scores highest first and output only this
+many scores
+* `+BOOL wf+`: If True, use Wasserman-Faust normalization for
+multi-component graphs
+* `+BOOL print_accum+`: If true, output JSON to standard output
+* `+STRING result_attr+`: If not empty, store centrality values (FLOAT)
+to this attribute
+* `+STRING file_path+`**:** If not empty, write output to this file in
+CSV.
+* `+BOOL display_edges+`: If true, include the graph's edges in the JSON
+output, so that the full graph can be displayed.
+
+|Result Size |V = number of vertices
+
+|Time Complexity a|
+O(E), E = number of edges.
+
+Parallel processing reduces the time needed for computation.
+
+|Graph Types |Directed or Undirected edges, Unweighted edges
+|===
 
 == Example
 
