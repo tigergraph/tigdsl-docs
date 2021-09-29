@@ -1,6 +1,10 @@
 = Overview
 
-The GSQL Graph Algorithm Library is a collection of expertly written GSQL queries, each of which implements a standard graph algorithm. Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
+TigerGraph In-Database Graph Data Science Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
+Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
+
+We renamed our library (formerly known as GSQL Graph Algorithm Library) to emphasize our focus on machine learning and AI.
+As the world's only scalable graph analytics platform, TigerGraph is committed to providing the best graph analytics framework for data scientists.
 
 GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:
 
@@ -11,14 +15,14 @@ GSQL running on the TigerGraph platform is particularly well-suited for graph al
 
 == Library Structure
 
-You can download the library from Github: +
+You can download the library from GitHub: +
 https://github.com/tigergraph/gsql-graph-algorithms[https://github.com/tigergraph/gsql-graph-algorithm]
 
 The library contains two folders: `algorithms` and `graphs`.
 
 === `algorithms`
 
-The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library. Within the algorithms folder are six subfolders that group the algorithms into six classes:
+The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library. Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
 
 * *Centrality*
 * *Classification*

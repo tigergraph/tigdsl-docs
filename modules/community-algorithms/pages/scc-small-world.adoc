@@ -1,0 +1,97 @@
+= SCC (Small-World Optimized)
+
+In addition to the regular strongly connected component algorithm, we also provide a version that is optimized for small-world graphs.
+A small world graph in this context means the graph has a hub community, where a vast majority of the vertices of the graph are weakly connected.
+
+This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several different methods used to find connected components in a multi-step process proposed by Slota et al. in _BFS and Coloring-based Parallel Algorithms
+for Strongly Connected Components and Related Problems_.
+
+The algorithm starts by trimming the graph, which removes all vertices whose indegree or outdegree is 0.
+Then in the second phase, the algorithm selects an initial pivot vertex _v_ with a high product of indegree and outdegree.
+From the initial pivot vertex , the algorithm uses one iteration of the Forward-Backward method to identify all vertices reachable by _v_ (descendants) and all vertices that can reach
+_v_ (predecessors)_._
+The intersection of the descendants and the predecessors form a strongly connected component (SCC). The vertices that are not included in this SCC are passed off to the next step.
+
+After identifying the first SCC, the algorithm uses the coloring method and Tarjan's serial algorithm to identify the SCCs in the remaining vertices.
+
+For more details, see https://www.osti.gov/servlets/purl/1115145[ Slota et al., _BFS and Coloring-based Parallel Algorithms for Strongly
+Connected Components and Related Problems._]
+
+== Specifications
+....
+CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING re_type,
+ UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
+....
+
+=== Time complexity
+
+The algorithm has a time complexity of O(V + E), where V is the number
+of vertices and E is the number of edges in the graph.
+
+== Parameters
+
+[cols=",,",options="header",]
+|===
+|Name |Description |Data type
+|`+v_type+` |The vertex type to count as part of a strongly connected
+component |`+STRING+`
+
+|`+e_type+` |The edge type to traverse |`+STRING+`
+
+|`+re_type+` |The reverse edge type to traverse. If the graph is
+undirected, fill in the name of the undirected edge here as well as for
+`+e_type.+` |`+STRING+`
+
+|`+threshold+` |The threshold used to choose initial pivot vertices.
+Only vertices whose product of indegree and outdegree exceed this
+threshold will be considered candidates for the pivot vertex. This is an
+attempt to increase the chances that the initial pivot is contained
+within the largest SCC. The default value for this parameter is 100000.
+It is suggested that you keep this default value when running the
+algorithm. |`+UINT+`
+
+|`+to_show_cc_count+` |If set to `+TRUE+`, the algorithm will return the
+number of vertices in each strongly connected component. |`+BOOL+`
+|===
+
+== Result
+
+When `+to_show_cc_count+` is set to true, the algorithm will return the
+number of strongly connected components in the graph.
+
+== Example
+
+Suppose we have the following graph. We can see there are 7 strongly
+connected components. With two of them containing more than 1 vertices.
+The five vertices on the left are each a strongly connected component
+individually.
+
+image:https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-Mk3Pff2F7OS_W8kqjSb%2F-Mk3Ql21xX2XbJZjjoHG%2Fimage.png?alt=media&token=d657aae4-4b1e-464f-91b3-1bc380b99c68[Graph with 7 SCCs]
+
+Running the algorithm on the graph will return a result of 7:
+[tabs]
+====
+GSQL Command::
++
+--
+----
+RUN QUERY tg_scc_small_world("Person", "Friend", "Friend", _, TRUE)
+----
+--
+Result::
++
+--
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 0,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"@@CC_count.size()": 7}]
+}
+----
+--
+====
