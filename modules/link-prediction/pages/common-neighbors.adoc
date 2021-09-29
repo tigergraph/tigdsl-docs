@@ -1,0 +1,66 @@
+= Common Neighbors
+
+The common neighbors algorithm calculates the number of common neighbors between two vertices.
+
+== Specification
+[,gsql]
+----
+CREATE QUERY tg_common_neighbors(VERTEX a, VERTEX b, SET<STRING> e_type)
+----
+
+== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Data type
+
+| `a`
+|  A vertex.
+|  `VERTEX`
+
+| `b`
+| A vertex.
+| `VERTEX`
+
+| `e_type`
+| Edge types to traverse.
+| `SET<STRING>`
+|===
+
+== Return value
+The number of common neighbors between two vertices.
+
+== Example
+Suppose to have the following graph:
+
+image::adamic-adar-ex.png[]
+
+Running the algorithm between Dan and Jenny will show that they have 1 common neighbor.
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+ RUN QUERY common_neighbors (("Jenny", "person"), ("Dan", "person"), ["friendship"])
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"closeness": 1}]
+}
+----
+--
+====

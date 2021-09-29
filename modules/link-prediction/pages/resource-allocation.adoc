@@ -1,0 +1,72 @@
+= Resource Allocation
+:stem: latex
+
+Resource Allocation is used to compute the closeness of nodes based on their shared neighbors. It is computed by the following formula:
+
+[stem]
+++++
+{RA(x,y)=\sum _{u\in N(x)\cap N(y)}{\frac {1} {|N(u)|}}}
+++++
+Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
+
+== Specification
+[,gsql]
+----
+CREATE QUERY tg_resource_allocation(VERTEX a, VERTEX b, SET<STRING> e_type)
+----
+
+== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Data type
+
+| `a`
+|  A vertex.
+|  `VERTEX`
+
+| `b`
+| A vertex.
+| `VERTEX`
+
+| `e_type`
+| Edge types to traverse.
+| `SET<STRING>`
+|===
+
+== Example
+Suppose we have the following graph:
+
+image::preferential-attachment-ex.png[]
+
+Since Dan and Jenny has one shared neighbor `Tom`, who has two neighbors, running the algorithm between Dan and Jenny with friendship edges would give us a result of 0.5.
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+RUN QUERY resource_allocation (("Jenny", "person"), ("Dan", "person"), ["friendship"])
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{
+    "@@closeness": 0.5
+  }]
+}
+----
+--
+====

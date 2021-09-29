@@ -1,0 +1,68 @@
+= Preferential Attachment
+:stem: latex
+
+Preferential Attachment is a measure to compute the closeness of vertices, based on the number of their neighbors.
+
+== Specification
+[,gsql]
+----
+CREATE QUERY tg_preferential_attachment(VERTEX a, VERTEX b,
+    SET<STRING> e_type)
+----
+
+== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Data type
+
+| `a`
+|  A vertex.
+|  `VERTEX`
+
+| `b`
+| A vertex.
+| `VERTEX`
+
+| `e_type`
+| Edge types to traverse.
+| `SET<STRING>`
+|===
+
+== Return value
+The product of the number of neighbors of the two vertices.
+
+== Example
+Suppose we have the following graph:
+
+image::preferential-attachment-ex.png[]
+
+Since Dan has four neighbors, while Jenny has three, the return value of the algorithm is stem:[3*4=12].
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+RUN QUERY preferential_attachment (("Jenny", "person"), ("Dan", "person"), ["friendship"])
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"closeness": 12}]
+}
+----
+--
+====

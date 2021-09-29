@@ -1,0 +1,75 @@
+= Adamic Adair
+:stem: latexmath
+
+The Adamic/Adar index is a measure introduced in 2003 by Lada Adamic and Eytan Adar to predict links in a social network, according to the number of shared links between two nodes.
+It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two nodes.
+
+[stem]
+++++
+{A(x,y)=\sum _{u\in N(x)\cap N(y)}{\frac {1}{\log {|N(u)|}}}}
+++++
+Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
+
+== Specification
+[,gsql]
+----
+CREATE QUERY tg_adamic_adair(VERTEX a, VERTEX b, SET<STRING> e_type)
+----
+
+== Parameters
+
+[cols="1,1,1"]
+|===
+|Name | Description | Data type
+
+| `a`
+|  A vertex.
+|  `VERTEX`
+
+| `b`
+| A vertex.
+| `VERTEX`
+
+| `e_type`
+| Edge types to traverse.
+| `SET<STRING>`
+|===
+
+== Return value
+The Adamic Adar index between two vertices. If the two vertices do not have common neighbors, the algorithm will return a division by 0 error.
+
+== Example
+Suppose we have the graph below:
+
+image::adamic-adar-ex.png[]
+
+Running the algorithm between Jenny and Dan will give us a result of stem:[1/\log(2) = 3.32193].
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+RUN QUERY adamic_adar (("Jenny", "person"), ("Dan", "person"), ["friendship"])
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+    "error": false,
+    "message": "",
+    "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+    },
+    "results": [{"@@closeness": 3.32193}]
+}
+----
+--
+====

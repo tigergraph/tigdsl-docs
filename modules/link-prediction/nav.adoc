@@ -1,0 +1,6 @@
+.Link Prediction Algorithms
+* xref:adamic-adar.adoc[]
+* xref:common-neighbors.adoc[]
+* xref:preferential-attachment.adoc[]
+* xref:resource-allocation.adoc[]
+* xref:same-community.adoc[]
