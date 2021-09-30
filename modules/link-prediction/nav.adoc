@@ -1,4 +1,4 @@
-.Link Prediction Algorithms
+.Topological Link Prediction
 * xref:adamic-adar.adoc[]
 * xref:common-neighbors.adoc[]
 * xref:preferential-attachment.adoc[]

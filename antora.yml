@@ -11,3 +11,4 @@ nav:
 - modules/node-embeddings/nav.adoc
 - modules/pathfinding-algorithms/nav.adoc
 - modules/similarity-algorithms/nav.adoc
+- modules/link-prediction/nav.adoc
