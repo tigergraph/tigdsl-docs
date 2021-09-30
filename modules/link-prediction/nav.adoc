@@ -4,3 +4,4 @@
 * xref:preferential-attachment.adoc[]
 * xref:resource-allocation.adoc[]
 * xref:same-community.adoc[]
+* xref:total-neighbors.adoc[]

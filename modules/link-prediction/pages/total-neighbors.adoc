@@ -1,0 +1,67 @@
+= Total Neighbors
+
+The algorithm calculates the total number of neighbors of two vertices.
+
+== Specifications
+[,gsql]
+----
+CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
+    SET<STRING> e_type)
+----
+
+== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Data type
+
+| `a`
+|  A vertex.
+|  `VERTEX`
+
+| `b`
+| A vertex.
+| `VERTEX`
+
+| `e_type`
+| Edge types to traverse.
+| `SET<STRING>`
+|===
+
+== Return value
+The total number of neighbors of two vertices.
+
+== Example
+Suppose we have the following graph.
+
+image::preferential-attachment-ex.png[]
+
+Dan and Jenny together have 6 neighbors in total. Running the algorithm between Dan and Jenny would give us a result of 6. Note that since Jenny and Dan are neighbors themselves, the union of their neighbors includes both Jenny and Dan:
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+RUN QUERY tg_total_neighbors (("Jenny", "person"), ("Dan", "person"), ["friendship"])
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 2,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"closeness": 6}]
+}
+----
+--
+====
