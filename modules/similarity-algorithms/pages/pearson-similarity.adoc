@@ -1,0 +1,68 @@
+= Pearson Similarity
+:stem: latex
+
+The Pearson correlation coefficient is a measure of linear correlation between two sets of data. It is the ratio between the covariance of two variables and the product of their standard deviations.
+The formula for calculating the Pearson correlation coefficient is as follows:
+
+[stem]
+++++
+\rho _{X,Y}={\frac {\operatorname {cov} (X,Y)}{\sigma _{X}\sigma _{Y}}}
+++++
+
+The algorithm takes two vectors denoted by `+ListAccum+` and returns the
+overlap coefficient between them.
+
+NOTE: This algorithm is implemented as a user-defined function. You need to
+follow the steps in link:[Add a User-Defined Function] to add the
+function to GSQL. After adding the function, you can call it in any GSQL
+query in the same way as a built-in GSQL function.
+
+== Specification
+
+....
+pearson_similarity_accum(A, B)
+....
+
+== Parameters
+
+[cols=",,",options="header",]
+|===
+|Name |Description |Data type
+|`+A+` |An n-dimensional vector denoted by a `+ListAccum+` of length
+`+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
+
+|`+B+` |An n-dimensional vector denoted by a `+ListAccum+` of length
+`+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
+|===
+
+== Return value
+
+The Pearson correlation coefficient between the two vectors.
+
+== Example
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+CREATE QUERY pearson_example() FOR GRAPH social {
+  ListAccum<INT> @@a = [1, 2, 3];
+  ListAccum<INT> @@b = [2, 2, 3];
+  double pearson_similarity = tg_pearson_similarity_accum(@@a, @@b);
+  PRINT pearson_similarity;
+}
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+    "pearson_similarity": 0.86603
+}
+----
+--
+====

@@ -1,0 +1,57 @@
+= Influence Maximization
+
+Influence maximization is the problem of finding a small subset of vertices in a social network that could maximize the spread of influence.
+There are two versions of the Influence Maximization algorithm. B
+oth versions find k  vertices that maximize the expected spread of influence in the network.
+The CELF version improves upon the efficiency of the greedy version and should be preferred in analyzing large networks.
+
+== Specifications
+[tabs]
+====
+CELF::
++
+--
+[,gsql]
+----
+CREATE QUERY tg_influence_maximization_CELF(STRING v_type,STRING e_type,
+  STRING weight, INT top_k, BOOL print_accum = True, STRING file_path = "")
+----
+--
+Greedy::
++
+--
+[,gsql]
+----
+CREATE QUERY tg_influence_maximization_greedy(STRING v_type,
+  STRING e_type,STRING weight,INT top_k,
+  BOOL print_accum = True, STRING file_path = "")
+----
+--
+====
+
+== Parameters
+The CELF version and the greedy version of the algorithms share the same set of parameters.
+
+[cols=",,",options="header",]
+|===
+|Name |Description |Data type
+|`+v_type+` |A vertex type |`+STRING+`
+
+|`+e_type+` |An edge type |`+STRING+`
+
+|`+weight+` |The name of the weight attribute on the edge type
+|`+STRING+`
+
+|`+top_k+` |The number of vertices with the highest influence score to
+return |`+INT+`
+
+|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
+
+|`+file_path+` |If not empty, save results in CSV to this file.
+|`+STRING+`
+|===
+
+== Return value
+
+The ID of the vertices with the highest influence scores along with
+their scores.

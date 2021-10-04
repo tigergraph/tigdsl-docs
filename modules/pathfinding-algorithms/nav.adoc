@@ -1,5 +1,7 @@
 .Pathfinding Algorithms
+* xref:a-star.adoc[]
 * xref:all-pairs-shortest-path.adoc[]
+* xref:bfs.adoc[]
 * xref:cycle-detection.adoc[]
 * xref:estimated-diameter.adoc[]
 * xref:maximum-independent-set.adoc[]

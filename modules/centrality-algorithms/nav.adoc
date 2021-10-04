@@ -1,8 +1,12 @@
 .Centrality Algorithms
 * xref:approximate-closeness-centrality.adoc[]
+* xref:article-rank.adoc[]
 * xref:betweenness-centrality.adoc[]
 * xref:closeness-centrality.adoc[]
+* xref:degree-centrality.adoc[]
+* xref:eigenvector-centrality.adoc[]
 * xref:harmonic-centrality.adoc[]
+* xref:influence-maximization.adoc[]
 * xref:pagerank.adoc[]
 * xref:personalized-pagerank.adoc[]
 * xref:weighted-pagerank.adoc[]

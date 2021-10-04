@@ -1,0 +1,70 @@
+= Overlap Similarity
+:stem: latex
+
+The *overlap coefficient*, or *Szymkiewicz–Simpson coefficient*, is a https://en.wikipedia.org/wiki/Similarity_measure[similarity measure]
+that measures the overlap between two finite sets.
+
+[stem]
+++++
+{overlap} (X,Y)={\frac {|X\cap Y|}{\min(|X|,|Y|)}}
+++++
+
+The algorithm takes two vectors denoted by `+ListAccum+` and returns the
+overlap coefficient between them.
+
+NOTE: This algorithm is implemented as a user-defined function. You need to
+follow the steps in link:[Add a User-Defined Function] to add the
+function to GSQL. After adding the function, you can call it in any GSQL
+query in the same way as a built-in GSQL function.
+
+== Specification
+
+....
+tg_overlap_similarity_accum( A, B )
+....
+
+== Parameters
+
+[cols=",,",options="header",]
+|===
+|Name |Description |Data type
+|`+A+` |An n-dimensional vector denoted by a `+ListAccum+` of length
+`+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
+
+|`+B+` |An n-dimensional vector denoted by a `+ListAccum+` of length
+`+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
+|===
+
+== Return value
+
+The overlap coefficient between the two vectors.
+
+== Example
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+CREATE QUERY overlap_example(/* Parameters here */) FOR GRAPH social {
+  ListAccum<INT> @@a = [1, 2, 3];
+  ListAccum<INT> @@b = [2, 2, 3];
+  double overlap_similarity = tg_overlap_similarity_accum(@@a, @@b);
+  PRINT overlap_similarity;
+}
+----
+--
+Result::
++
+--
+[,json]
+----
+[
+  {
+    "overlap_similarity": 0.66667
+  }
+]
+----
+--
+====

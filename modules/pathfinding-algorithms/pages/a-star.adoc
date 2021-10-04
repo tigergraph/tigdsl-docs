@@ -1,0 +1,62 @@
+= A*
+
+A* (pronounced "A-star") is a graph traversal and path search algorithm,
+which achieves better performance by using heuristics to guide its
+search.
+
+The algorithm starts from a source node, and at each iteration of its
+main loop, it selects the path that minimizes stem:[f(n)=g(n)+h(n)] where n is the next node on the path, g(n) is the
+cost of the path from the source node to n, and h(n) is a heuristic
+function that estimates the cost of the cheapest path from n to the
+target node.
+
+The algorithm terminates when the path it chooses to extend is a path
+from start to goal or if there are no paths eligible to be extended. The
+heuristic function is problem-specific. If the heuristic function is
+admissible, meaning that it never overestimates the actual cost to get
+to the target, the algorithm is guaranteed to return a least-cost path
+from source to target.
+
+== Specifications
+
+....
+CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex, SET<STRING> e_type, STRING wt_type,
+STRING wt_attr, BOOL display = False)
+....
+
+[cols=",",options="header",]
+|===
+|Characteristic |Value
+|Result |Computes a shortest distance (INT) and shortest path (STRING)
+from vertex source to target vertex.
+
+|Required Input Parameters
+a|* *source_vertex*: start vertex
+* *target_vertex*: target vertex
+* *e_type*: edge types to traverse
+* *wt_type*: weight data type (`INT`, `FLOAT`, `DOUBLE`)
+* *wt_attr*: attribute for edge weights
+* *display*: output edges for visualization
+
+|Result Size |1
+
+|Time Complexity |O(V^2), V = number of vertices.
+
+|Graph Types |Directed or Undirected edges, Weighted edges
+|===
+
+== Example
+
+In the example below, we run the `+tg_astar+` algorithm to find the shortest path between the source vertex "Kings Cross" and the target vertex "Kentish Town" on a graph which is a transport network of stations. Each station has its geometric attibutes(i.e.latitude and longitude) and the edge weight represents the distance between stations in kilometers.
+
+The heuristic function used to guide the search is the
+https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes
+
+....
+# Use _ for default values
+RUN QUERY astar(("Kings Cross","Station"), ("Kentish Town","Station"),["CONNECTION"], "FLOAT", "distance", _)
+....
+
+Below is the visualized result of the query:
+
+image::a-star.png[]
