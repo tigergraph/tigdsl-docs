@@ -1,4 +1,5 @@
 = A*
+:stem: latex
 
 A* (pronounced "A-star") is a graph traversal and path search algorithm,
 which achieves better performance by using heuristics to guide its

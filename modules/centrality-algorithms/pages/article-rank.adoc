@@ -1,4 +1,5 @@
 = Article Rank
+:stem: latex
 
 ArticleRank is an algorithm that has been derived from the PageRank algorithm to measure the influence of journal articles.
 Page Rank assumes that relationships originating from low-degree nodes have a higher influence than relationships from high-degree nodes. Article Rank modifies the formula in such a way that it retains the basic PageRank methodology but lowers the influence of low-degree nodes.
@@ -8,7 +9,7 @@ image::article-rank.png[]
 
 Within the formula:
 
-* stem:[N_{i\n}(v)] are the incoming neighbors and stem:[N_{out}(v)] are the outgoing neighbors of node _v_.
+* stem:[N_{in}(v)] are the incoming neighbors and stem:[N_{out}(v)] are the outgoing neighbors of node _v_.
 * _d_ is a damping factor in [0, 1], usually set to 0.85.
 * stem:[N_{out}] is the average outdegree
 

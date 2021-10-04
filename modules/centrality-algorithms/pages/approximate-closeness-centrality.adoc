@@ -6,7 +6,7 @@ The Approximate Closeness Centrality algorithm (based on https://arxiv.org/pdf/1
 
 [NOTE]
 ====
-This query uses another subqueryhttps://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/schema-free/closeness_cent_approx_sub.gsql[`closeness_cent_approx_sub`], which needs to be installed before `closeness_approx` can be installed.
+This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/schema-free/closeness_cent_approx_sub.gsql[`closeness_cent_approx_sub`], which needs to be installed before `closeness_approx` can be installed.
 ====
 
 == Specifications
