@@ -52,7 +52,7 @@ tg_tri_count_fast(STRING v_type, STRING e_type)
 
 In the social10 graph with Coworker edges, there are clearly 4 triangles.
 
-image::../../.gitbook/assets/gr_social10_coworker.png[]
+image::gr_social10_coworker.png[]
 
 [source,text]
 ----

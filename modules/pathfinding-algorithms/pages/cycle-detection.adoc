@@ -63,7 +63,7 @@ k = min(max. cycle length, depth parameter)
 
 In the social10 graph, there are 5 cycles, all with the Fiona-George-Howard-Ivy cluster.
 
-image::../../.gitbook/assets/screen-shot-2019-04-09-at-10.33.42-am.png[Visualized results of cycle_detection(&quot;Person&quot;, &quot;Friend&quot;, 10) on social10 graph]
+image::screen-shot-2019-04-09-at-10.33.42-am.png[Visualized results of cycle_detection(&quot;Person&quot;, &quot;Friend&quot;, 10) on social10 graph]
 
 [source,text]
 ----

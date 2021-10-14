@@ -24,6 +24,6 @@ _)
 
 In this case, the random walker can only start or restart walking from Fiona. In the figure below, we see that Fiona has the highest PageRank score in the result. Ivy and George have the next highest scores because they are direct out-neighbors of Ivy and there are looping paths that lead back to them again. Half of the vertices have a score of 0 since they can not be reached from Fiona.
 
-image::../../.gitbook/assets/screen-shot-2019-04-25-at-4.09.01-pm%20%281%29.png[ Visualized results of example query on social10 graph, with Friend edges]
+image::screen-shot-2019-04-25-at-4.09.01-pm (1).png[ Visualized results of example query on social10 graph, with Friend edges]
 
 ###

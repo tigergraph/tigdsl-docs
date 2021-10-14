@@ -80,6 +80,6 @@ The normalization strength determines how node degrees influence the embedding. 
 
 FastRP uses _very_ _sparse random projection_ to reduce the dimensionality of the data from an n*m matrix to an n*d matrix where d <= m by multiplying the original matrix with a m*d matrix. The m*d matrix is made up of independently and identically distributed data sampled from:
 
-image::../../.gitbook/assets/image%20%2838%29.png[]
+image::image (38).png[]
 
 Where _s_ is the sampling constant (`sampling_constant`). The higher the constant, the higher the number of zeros in the resulting matrix, which speeds up the algorithm.

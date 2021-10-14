@@ -92,7 +92,7 @@ In the example below, Claire is in the very center of the graph and has the high
 RUN QUERY tg_betweenness_cent(["Person"], ["Friend"], _, _, _, _, _, _)
 ----
 
-image::../../.gitbook/assets/screen-shot-2019-12-03-at-1.03.07-pm.png[Visualized results of example query on a social graph with undirected edges Friend]
+image::screen-shot-2019-12-03-at-1.03.07-pm.png[Visualized results of example query on a social graph with undirected edges Friend]
 
 [,text]
 ----
@@ -114,7 +114,7 @@ image::../../.gitbook/assets/screen-shot-2019-12-03-at-1.03.07-pm.png[Visualized
 
 In the following example, both Charles and David have 9 shortest paths passing through them. Ellen is in a similar position as Charles, but her centrality is weakened due to the path between Frank and Jack.
 
-image::../../.gitbook/assets/screen-shot-2019-12-13-at-4.04.01-pm.png[Visualized results of example query on a social graph with undirected edges Friend]
+image::screen-shot-2019-12-13-at-4.04.01-pm.png[Visualized results of example query on a social graph with undirected edges Friend]
 
 [,text]
 ----

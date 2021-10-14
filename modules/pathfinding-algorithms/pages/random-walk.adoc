@@ -41,7 +41,7 @@ SET<STRING> edge_types, INT sample_num)
 
 Suppose we have the following social graph:
 
-image::../../.gitbook/assets/image%20%2842%29.png[Example social graph]
+image::image (42).png[Example social graph]
 
 If we run the random walk algorithm on the graph and supply a path size of 3 and a step of 2, and a sample number of 1. Then from each vertex there is a two-step random walk, and a total of 6 three-vertex paths:
 

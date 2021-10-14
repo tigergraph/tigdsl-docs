@@ -57,7 +57,7 @@ The algorithm will not output more than K vertex pairs, so the algorithm may arb
 
 For the movie graph, we add the following labels to the Person vertices.
 
-image::../../.gitbook/assets/screen-shot-2019-06-24-at-2.50.18-pm.png[Movie graph with labels]
+image::screen-shot-2019-06-24-at-2.50.18-pm.png[Movie graph with labels]
 
 When we install the algorithm, answer the questions like:
 

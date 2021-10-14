@@ -16,7 +16,7 @@ For this library function, the feature vector is the set of edge weights between
 
 In the movie graph shown in the figure below, there are Person vertices and Movie vertices. Every person may give a rating to some of the movies. The rating score is stored on the Likes edge using the weight attribute. For example, in the graph below, Alex gives a rating of 10 to the movie "Free Solo".
 
-image::../../.gitbook/assets/screen-shot-2018-12-21-at-10.51.01-am.png[movie graph]
+image::screen-shot-2018-12-21-at-10.51.01-am.png[movie graph]
 
 == Specifications
 
@@ -100,4 +100,4 @@ Alex,Jing,0.421731
 
 The ATTR version inserts an edge into the graph with the similarity score as an edge attribute whenever the score is larger than zero. The result looks like this:
 
-image::../../.gitbook/assets/screen-shot-2019-02-13-at-5.18.03-pm.png[]
+image::screen-shot-2019-02-13-at-5.18.03-pm.png[]

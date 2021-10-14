@@ -62,7 +62,7 @@ Currently, shortest_path_pos_wt also uses Bellman-Ford. The well-known Dijsktra'
 
 The graph below has only positive edge weights. Using vertex A as the source vertex, the algorithm discovers that the shortest weighted path from A to B is A-D-B, with distance 8. The shortest weighted path from A to C is A-D-B-C with distance 9.
 
-image::../../.gitbook/assets/screen-shot-2019-01-09-at-6.01.28-pm.png[Generic graph with only positive weights]
+image::screen-shot-2019-01-09-at-6.01.28-pm.png[Generic graph with only positive weights]
 
 [source,text]
 ----
@@ -128,4 +128,4 @@ image::../../.gitbook/assets/screen-shot-2019-01-09-at-6.01.28-pm.png[Generic gr
 
 The graph below has both positive and negative edge weights. Using vertex A as the source vertex, the algorithm discovers that the shortest weighted path from A to E is A-D-C-B-E, with a cumulative score of 7 - 3 - 2 - 4 = -2.
 
-image::../../.gitbook/assets/shortest_neg_result.png[Example results on a graph with negative weights on edges]
+image::shortest_neg_result.png[Example results on a graph with negative weights on edges]

@@ -51,4 +51,4 @@ Our algorithm uses the TigerGraph engine's internal vertex ID numbers; they cann
 RUN QUERY tg_conn_comp(["Person"], ["Coworker"], _, _, _, _)
 ----
 
-image::../../.gitbook/assets/conn_comp_result.png[Visualized results of example query on social10 graph with Coworker edges]
+image::conn_comp_result.png[Visualized results of example query on social10 graph with Coworker edges]

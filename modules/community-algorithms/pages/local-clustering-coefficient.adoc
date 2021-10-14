@@ -57,7 +57,7 @@ Using the `social` graph below as an example, Jenny has three neighbors - Tom, D
 
 On the other hand, Tom has two neighbors that are connected by one edge. Since the maximum number of edges that could exist between two vertices is 1, Tom has a local clustering coefficient of 1/1 = 1.
 
-image::../../.gitbook/assets/image%20%2878%29.png[]
+image::image (78).png[]
 
 By running the algorithm in GSQL, we can confirm that Tom has the highest local clustering coefficient with a score of 1 and Jenny has a score of 1/3.
 

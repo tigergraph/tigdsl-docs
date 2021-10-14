@@ -36,7 +36,7 @@ set of N unconnected vertices, then the MIS is all N vertices.
 
 Consider our social10 graph, with three components.
 
-image::../../.gitbook/assets/image%20%2814%29.png[]
+image::image (14).png[]
 
 It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS. For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen. If the algorithm selects either George or Ivy, then no other independent vertices remain in the component. However, the algorithm could select both Fiona and Howard; they are independent of one another.
 

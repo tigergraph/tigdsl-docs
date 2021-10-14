@@ -89,4 +89,4 @@ The FILE output is similar to the output of cosine_nbor_file.
 
 The ATTR version will create _k_ edges:
 
-image::../../.gitbook/assets/screen-shot-2018-12-21-at-10.56.21-am.png[]
+image::screen-shot-2018-12-21-at-10.56.21-am.png[]

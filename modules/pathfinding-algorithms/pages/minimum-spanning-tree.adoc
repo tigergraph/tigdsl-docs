@@ -61,7 +61,7 @@ this attribute
 
 In the graph `social10`, we consider only the undirected Coworker edges.
 
-image::../../.gitbook/assets/screen-shot-2019-04-24-at-4.21.08-pm.png[Visualized results of example graph social10 graph with Coworker edges]
+image::screen-shot-2019-04-24-at-4.21.08-pm.png[Visualized results of example graph social10 graph with Coworker edges]
 
 This graph has 3 components. Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point. If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left. You can start from any vertex in the component and get the same or an equivalent MST result.
 
@@ -76,7 +76,7 @@ _, _, _, _)
 
 Note that the value for the one vertex is `("Ivy", "Person")`. In GSQL, this 2-tuple format which explicitly gives the vertex type is used when the query is written to accept a vertex of any type.
 
-image::../../.gitbook/assets/screen-shot-2019-04-24-at-4.20.22-pm.png[Visualized results of example query on social10 graph]
+image::screen-shot-2019-04-24-at-4.20.22-pm.png[Visualized results of example query on social10 graph]
 
 File output:
 
@@ -90,4 +90,4 @@ Ivy,George,4
 
 The attribute version requires a boolean attribute on the edge, and it will assign the attribute to "true" if that edge is selected in the MST:
 
-image::../../.gitbook/assets/screen-shot-2019-04-25-at-2.04.22-pm.png[Visualized results of example query on social10 graph, with Coworker edges &amp; edge attribute &quot;flag&quot;]
+image::screen-shot-2019-04-25-at-2.04.22-pm.png[Visualized results of example query on social10 graph, with Coworker edges &amp; edge attribute &quot;flag&quot;]

@@ -52,4 +52,4 @@ We set `max_iter` to 10, but the algorithm reaches a steady state after 3 iterat
 RUN QUERY tg_label_prop(["Person"], ["Coworker"], 10, -1, _, _, _)
 ----
 
-image::../../.gitbook/assets/label_prop_result.png[Visualized results of example query on social10 graph with Coworker edges]
+image::label_prop_result.png[Visualized results of example query on social10 graph with Coworker edges]

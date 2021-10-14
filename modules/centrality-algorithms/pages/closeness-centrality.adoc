@@ -77,5 +77,5 @@ RUN QUERY tg_closeness_cent(["Person"], ["Friend", "Also_Friend"], _, _,
 _, _, _, _, _)
 ----
 
-image::../../.gitbook/assets/closeness_result.png[Visualized results of example query on social10 graph, with Friend and Also_Friend edges]
+image::closeness_result.png[Visualized results of example query on social10 graph, with Friend and Also_Friend edges]
 

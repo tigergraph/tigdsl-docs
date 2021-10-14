@@ -52,7 +52,7 @@ so that the full graph can be displayed.
 
 In the below graph, we do not consider the weight on edges. Using vertex A as the source vertex, the algorithm discovers that the shortest path from A to B is A-B, and the shortest path from A to C is A-D-C, etc.
 
-image::../../.gitbook/assets/screen-shot-2019-01-09-at-6.20.14-pm.png[Generic graph with unweighted edges]
+image::screen-shot-2019-01-09-at-6.20.14-pm.png[Generic graph with unweighted edges]
 
 [source,text]
 ----
