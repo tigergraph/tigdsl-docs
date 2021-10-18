@@ -12,9 +12,9 @@ function that estimates the cost of the cheapest path from n to the
 target node.
 
 The algorithm terminates when the path it chooses to extend is a path
-from start to goal or if there are no paths eligible to be extended. The
-heuristic function is problem-specific. If the heuristic function is
-admissible, meaning that it never overestimates the actual cost to get
+from start to goal or if there are no paths eligible to be extended.
+The heuristic function is problem-specific.
+If the heuristic function is admissible, meaning that it never overestimates the actual cost to get
 to the target, the algorithm is guaranteed to return a least-cost path
 from source to target.
 

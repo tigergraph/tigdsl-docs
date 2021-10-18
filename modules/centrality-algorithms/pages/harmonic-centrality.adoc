@@ -9,6 +9,8 @@ The Harmonic Centrality algorithm calculates the harmonic centrality of each ver
 H(x)=\sum _{y\neq x}{\frac {1}{d(x,y)}}
 ++++
 
+For more information, see https://arxiv.org/pdf/cond-mat/0008357.pdf[Harmonic Centrality].
+
 == Specifications
 
 [,text]

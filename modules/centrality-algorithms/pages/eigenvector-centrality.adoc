@@ -1,12 +1,12 @@
 = Eigenvector Centrality
 
 *Eigenvector centrality* (also called *eigencentrality* or *prestige
-score*) is a measure of the influence of a vertex in a network. Relative
-scores are assigned to all vertices in the network based on the concept
-that connections to high-scoring vertices contribute more to the score
-of the vertex in question than equal connections to low-scoring
-vertices. A high eigenvector score means that a vertex is connected to
-many vertices who themselves have high scores.
+score*) is a measure of the influence of a vertex in a network.
+Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring
+vertices.
+A high eigenvector score means that a vertex is connected to many vertices who themselves have high scores.
+
+For more information, see https://en.wikipedia.org/wiki/Eigenvector_centrality[Eigenvector Centrality].
 
 == Specification
 

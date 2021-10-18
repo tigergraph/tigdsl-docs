@@ -9,6 +9,8 @@ A common way of interpreting PageRank value is through the Random Network Surfer
 * Each round, the surfer randomly picks one of the outward connections from the surfer's current location. The surfer repeats this random walk for a long time.
 * But wait. The surfer doesn't always follow the network's connection structure. There is a probability (_1-damping_, to be precise), that the surfer will ignore the structure and will magically teleport to a random vertex.
 
+For more information, see http://infolab.stanford.edu/~backrub/google.html[the Google paper on PageRank].
+
 == Specifications
 
 [source,text]

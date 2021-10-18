@@ -4,6 +4,8 @@ The Local Clustering Coefficient algorithm computes the local clustering coeffic
 
 The algorithm does not report the local clustering coefficient for vertices that have only one neighbor.
 
+For more information, see https://en.wikipedia.org/wiki/Clustering_coefficient[Clustering Coefficient].
+
 == Time complexity
 
 `O(n)`, where `n` is the number of vertices in the graph.

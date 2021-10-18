@@ -6,6 +6,8 @@ The algorithm begins with each vertex having its own unique label. It then itera
 Then the post-processing of the record labels is applied.
 Finally, the algorithm removes the nested communities and outputs all the communities. Note that it is not guaranteed to produce the same results every time.
 
+For more information, see https://arxiv.org/pdf/1109.5720.pdf[SLPA: Uncovering Overlapping Communities in Social Networks via A Speaker-listener Interaction Dynamic Process].
+
 == Specifications
 
 ....
