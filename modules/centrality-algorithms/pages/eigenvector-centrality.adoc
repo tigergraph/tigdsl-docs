@@ -17,6 +17,11 @@ CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
  )
 ....
 
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E*k)], where _E_ = number of edges, _k_ = number of iterations.
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.
+
 == Parameters
 
 [cols=",,",options="header",]

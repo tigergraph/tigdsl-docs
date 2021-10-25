@@ -10,7 +10,7 @@ the algorithm uses Breadth-First Search to determine the massive weakly connecte
 
 After identifying the first WCC, the algorithm uses the coloring method to idenify the WCCs in the remaining vertices.
 
-For more details, see https://www.osti.gov/servlets/purl/1115145[ Slota
+For more details, see https://www.osti.gov/servlets/purl/1115145[Slota
 et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
 
@@ -20,6 +20,9 @@ Connected Components and Related Problems._]
 CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
 UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
 ....
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E*d)], _E_ = number of edges, _d_ = max(diameter of components).
 
 == Parameters
 

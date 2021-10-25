@@ -1,6 +1,7 @@
 name: graph-ml
 title: TigerGraph Graph Data Science Library
 version: 1.0
+display_version: 1.0
 start_page: intro:overview.adoc
 
 nav:

@@ -2,6 +2,7 @@
 
 The Speaker-listener Label Propagation Algorithm (SLPA) is a variation of the Label Propagation algorithm that is able to detect overlapping communities.
 The main difference between LPA and SLPA is that each node can only hold a single label in LPA while it is allowed to possess multiple labels in SLPA.
+
 The algorithm begins with each vertex having its own unique label. It then iteratively records labels in a local accumulator based on specific speaking and listening rules.
 Then the post-processing of the record labels is applied.
 Finally, the algorithm removes the nested communities and outputs all the communities. Note that it is not guaranteed to produce the same results every time.
