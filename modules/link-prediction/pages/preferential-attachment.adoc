@@ -12,6 +12,9 @@ CREATE QUERY tg_preferential_attachment(VERTEX a, VERTEX b,
     SET<STRING> e_type)
 ----
 
+=== Time complexity
+The algorithm has a time complexity of stem:[O(D1 + D2)], where _D1_ and _D2_ are the degrees of the two vertices.
+
 == Parameters
 [cols="1,1,1"]
 |===
