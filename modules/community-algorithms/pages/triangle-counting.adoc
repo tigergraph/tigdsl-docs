@@ -20,7 +20,7 @@ This algorithm can only be run on TigerGraph V3.1 or higher.
 
 We present two different algorithms for counting triangles. The first, tri_count(), is the classic edge-iterator algorithm. For each edge and its two endpoint vertices S and T, count the overlap between S's neighbors and T's neighbors.
 
-[source,text]
+[source,gsql]
 ----
 tg_tri_count(STRING v_type, STRING e_type)
 ----
@@ -29,7 +29,7 @@ One side effect of the simple edge-iterator algorithm is that it ends up conside
 
 tri_count_fast() is a smarter algorithm which does two passes over the edges. In the first pass we mark which of the two endpoint vertices has fewer neighbors. In the second pass, we count the overlap only between marked vertices. The result is that we eliminate 1/3 of the neighborhood matching, the slowest 1/3, but at the cost of some additional memory.
 
-[source,text]
+[source,gsql]
 ----
 tg_tri_count_fast(STRING v_type, STRING e_type)
 ----

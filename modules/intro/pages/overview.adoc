@@ -53,14 +53,14 @@ To use an  algorithm, the algorithm (GSQL query) must first be xref:gsql-ref:que
 
 Running an algorithm is the same as running a GSQL query. For example, if you selected the JSON option for xref:centrality-algorithms:pagerank.adoc[], you could run it from GSQL as below:
 
-[source,text]
+[source,gsql]
 ----
 GSQL > RUN QUERY tg_pageRank("Page","Links_to",_,30,_,50,_,_,_)
 ----
 
 Installing a query also creates a REST endpoint. The same query could be run thus:
 
-[source,text]
+[source,console]
 ----
 curl -X GET 'http://127.0.0.1:9000/query/alg_graph/pageRank?v_type=Page&e_type=Links_to&max_iter=30&top_k=50'
 ----

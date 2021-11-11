@@ -13,7 +13,7 @@ For more information, see http://infolab.stanford.edu/~backrub/google.html[the G
 
 == Specifications
 
-[source,text]
+[source,gsql]
 ----
 tg_pageRank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
@@ -56,9 +56,10 @@ maximum. Parallel processing reduces the time needed for computation.
 
 == Example
 
-[source,text]
+[source,gsql]
 ----
- # Use _ for default values RUN QUERY tg_pageRank("Person", "Friend", 0.001, 25, 0.85, 100 _, _, _, _)
+ # Use _ for default values
+RUN QUERY tg_pageRank("Person", "Friend", 0.001, 25, 0.85, 100 _, _, _, _)
 ----
 
 We ran pageRank on our test10 graph (using Friend edges) with the following parameter values: damping=0.85, max_change=0.001, and max_iter=25. We see that Ivy (center bottom) has the highest pageRank score (1.12). This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person. Eddie and Justin have scores of exactly 1 because they do not have any out-edges. This is an artifact of our particular version pageRank. Likewise, Alex has a score of 0.15, which is (1-damping), because Alex has no in-edges.

@@ -10,7 +10,7 @@ O(E), where E is the number of edges in the graph.
 
 == Specifications
 
-[source,text]
+[source,gsql]
 ----
 tg_kcore(STRING v_type, STRING e_type, INT k_min = 0, INT k_max = -1,
 BOOL print_accum = TRUE, STRING attr = "", STRING file_path = "",
@@ -58,7 +58,7 @@ image::image.png[]
 
 If we run the `kcore` algorithm on this small graph like so:
 
-[source,text]
+[source,gsql]
 ----
 RUN QUERY tg_kcore("person", "friendship", 0, -1, TRUE, "", "", FALSE, FALSE)
 ----

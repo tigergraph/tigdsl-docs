@@ -10,7 +10,7 @@ This algorithm is especially useful in the following situations:
 
 == Specifications
 
-[source,text]
+[source,gsql]
 ----
 CREATE QUERY tg_fastRP_query(
 INT num_edges, INT num_nodes, INT k, INT sampling_constant,

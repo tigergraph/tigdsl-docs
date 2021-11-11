@@ -8,7 +8,7 @@ Once the above step is complete, the algorithm uses a variation of the word2vec 
 
 == Specification
 
-[source,text]
+[source,gsql]
 ----
 tg_random_walk(INT step = 8, INT path_size = 4,
     STRING filepath = "/home/tigergraph/path.csv", SET<STRING> edge_types,
