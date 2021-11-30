@@ -1,4 +1,4 @@
-= Maximum Independent Set
+= Maximal Independent Set
 
 An *independent set of vertices* does not contain any pair of vertices that are neighbors, i.e., ones which have an edge between them. A https://en.wikipedia.org/wiki/Maximal_independent_set[*maximal independent set*] is the largest independent set that contains those vertices; you cannot improve upon it unless you start over with a different independent set. However, the search for the largest possible independent set (the *maximum independent set*, as opposed to the maximal independent set) is an NP-hard problem: there is no known algorithm that can find that answer in polynomial time. So we settle for the maximal independent set.
 

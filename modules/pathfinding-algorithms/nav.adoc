@@ -4,7 +4,7 @@
 * xref:bfs.adoc[]
 * xref:cycle-detection.adoc[]
 * xref:estimated-diameter.adoc[]
-* xref:maximum-independent-set.adoc[]
+* xref:maximal-independent-set.adoc[]
 * xref:minimum-spanning-forest.adoc[]
 * xref:minimum-spanning-tree.adoc[]
 * xref:random-walk.adoc[]
