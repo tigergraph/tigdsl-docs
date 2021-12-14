@@ -5,7 +5,7 @@
 * xref:label-propogation.adoc[]
 * xref:slpa.adoc[]
 * xref:local-clustering-coefficient.adoc[]
-* xref:louvain-method-with-parallelism-and-refinement.adoc[]
+* xref:louvain.adoc[]
 * xref:strongly-connected-components.adoc[]
 ** xref:scc-small-world.adoc[]
 * xref:triangle-counting.adoc[]
