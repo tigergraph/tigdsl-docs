@@ -22,7 +22,7 @@ The library contains two folders: `algorithms` and `graphs`.
 
 === `algorithms`
 
-The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library. Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
+The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library.Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
 
 * *Centrality*
 * *Classification*
@@ -31,16 +31,17 @@ The `algorithms` folder contains the GSQL implementation of all the graph algori
 * *Path*
 * *Similarity*
 
+[#_graphs]
 === `graphs`
 
-The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms. In this document, we use the test graphs to show you the expected result for each algorithm. The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
+The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms.In this document, we use the test graphs to show you the expected result for each algorithm.The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
 
 === Release Branches
 
 Starting with TigerGraph product version 2.6, the GSQL Graph Algorithm Library has release branches:
 
-* *Product version branches* (2.6, 3.0, etc.) are snapshots created shortly after a product version is released. They contain the best version of the graph algorithm library at the time of that product version's initial release. They will not be updated, except to fix bugs.
-* *Master branch*: the newest released version.  This should be at least as new as the newest. It may contain new or improved algorithms.
+* *Product version branches* (2.6, 3.0, etc.) are snapshots created shortly after a product version is released.They contain the best version of the graph algorithm library at the time of that product version's initial release.They will not be updated, except to fix bugs.
+* *Master branch*: the newest released version.This should be at least as new as the newest.It may contain new or improved algorithms.
 * Other branches are development branches.
 
 It is possible to run newer algorithms on an older product version, as long as the algorithm does not rely on features available only in newer product versions.

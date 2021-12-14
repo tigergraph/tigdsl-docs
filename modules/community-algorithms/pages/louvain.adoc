@@ -3,6 +3,8 @@
 :fn-blondel: footnote:[Blondel, Vincent D., et al. "Fast unfolding of communities in large networks." Journal of statistical mechanics: theory and experiment 2008.10 (2008): P10008.]
 :fn-staudt: footnote:[Staudt, Christian L., and Henning Meyerhenke. "Engineering parallel algorithms for community detection in massive networks." IEEE Transactions on Parallel and Distributed Systems 27.1 (2016): 171-184.]
 :fn-lu: footnote:[Lu, Hao, Mahantesh Halappanavar, and Ananth Kalyanaraman. "Parallel heuristics for scalable community detection." Parallel Computing 47 (2015): 19-37.]
+:page-aliases: graph-ml:community-algorithms:louvain-method-with-parallelism-and-refinement.adoc
+:stem: latexmath
 
 
 The Louvain Method for community detection {fn-blondel} partitions the vertices in a graph by approximately maximizing the graph's modularity score.
@@ -27,18 +29,26 @@ The algorithm continues until the modularity is not increasing, or runs to the p
 
 However, phase one is sequential, and thus slow for large graphs.
 An improved Parallel Louvain Method (PLM) calculates the best community to move to for each vertex in parallel{fn-staudt}.
-In Parallel Louvain Method(PLM), the positive modularity gain is not guaranteed, and it may also swap two vertices to each other's community. After finishing the passes, there is an additional refinement phase, which is running the first phase again on each vertex to do some small adjustments for the resulting communities{fn-lu}.
+In Parallel Louvain Method(PLM), the positive modularity gain is not guaranteed, and it may also swap two vertices to each other's community.
 
 
 == Specifications
 
 [source.wrap,gsql]
 ----
-CREATE DISTRIBUTED QUERY tg_louvain_distributed(SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr = "weight",
-    INT max_iter = 10, STRING result_attr = "cid", STRING file_path = "", BOOL print_info = FALSE)
+CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
+    STRING wt_attr = "weight", INT max_iter = 10,
+    STRING result_attr = "cid", STRING file_path = "",
+    BOOL print_info = FALSE)
 ----
 
 === Time complexity
+This algorithm has a time complexity of stem:[O(V^2*L)], where _V_ is the number of vertices and L is total number of iterations.
+
+=== Graph type
+Runs on graph with undirected, weighted edges
+
+An edge weight attribute is required.
 
 == Parameters
 
@@ -69,9 +79,9 @@ CREATE DISTRIBUTED QUERY tg_louvain_distributed(SET<STRING> v_type, SET<STRING> 
 | If not empty, write output to this file.
 |`STRING`
 
-|`print_accum`
-|Column 2, row 7
-|Column 3, row 7
+|`print_info`
+|If true, print results to JSON output.
+|`BOOL`
 |===
 
 
@@ -80,69 +90,65 @@ CREATE DISTRIBUTED QUERY tg_louvain_distributed(SET<STRING> v_type, SET<STRING> 
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
-|Result |Assigns a component id (INT) to each vertex, such that members
-of the same component have the same id value. The JSON output lists
-every vertex with its community ID value. It also lists community id
-values, sorted by community size.
+|Result a|Assigns a component ID (`INT`) to each vertex, such that members
+of the same component have the same ID value.
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute (must be FLOAT)
-* *`+INT iter1+`*: Max number of iterations for the first phase. Default
-value is 10
-* *`+INT iter2+`*: Max number of iterations for the second phase.
-Default value is 10
-* *`+INT iter3+`*: Max number of iterations for the refinement phase.
-Default value is 10
-* *`+INT split+`*: Number of splits in phase 1. Increase the number to
-save memory, at the expense of having a longer running time. Default
-value is 10.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store community id values
-(INT) to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL comm_by_size+`*: If True, and if `+print_accum+` is True,
-output the membership of each community, with communities arranged by
-size.
+The JSON contains the following information:
+
+* The number of vertices and communities in the graph.
+* The heuristics statistics used during the algorithm.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(V^2*L), V = number of vertices, L = (iter1 * iter2 +
-iter3) = total number of iterations
-
-|Graph Types a|
-Undirected, weighted edges
-
-An edge weight attribute is required.
 
 |===
 
 == Example
 
-If we use `louvain_parallel` for social10 graph, it will give the same result as the connected components algorithm. The social26 graph is a densely connected graph. The connected components algorithm groups all the vertices into the same community and label propagation does not consider the edge weight. On the contrary, `louvain_parallel` detects 7 communities in total, and the cluster distribution is shown below (`csize` is cluster size):
+You can run the algorithm on the xref:intro:overview.adoc#_graphs[ `social10` graph] by slightly modifying the schema.
+Since the algorithm requires weighted edges, we can add an attribute to all edges and set edge weight to `1`.
 
-[source,text]
+By running the algorithm on `social10`, we can see that the vertices that are in the same community have more intra-community edges than
+
+[tabs]
+====
+Run command::
++
+--
+[.wrap,gsql]
+----
+RUN QUERY tg_louvain(["Person"], ["Coworker","Friend"], "weight", _, _, _, TRUE)
+----
+--
+Visualized result::
++
+--
+image::louvain-eample.png[]
+--
+JSON result::
++
+--
+[,javascript]
 ----
 {
-    "@@clusterDist": [
-      {
-        "csize": 2,
-        "number": 1
-      },
-      {
-        "csize": 3,
-        "number": 2
-      },
-      {
-        "csize": 4,
-        "number": 2
-      },
-      {
-        "csize": 5,
-        "number": 2
-      }
-    ]
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [
+    {"AllVertexCount": 10},
+    {"InitChangeCount": 7},
+    {"IterChangeCount": 0},
+    {"VertexFollowedToCommunity": 0}, <1>
+    {"VertexFollowedToVertex": 0}, <1>
+    {"VertexAssignedToItself": 0},
+    {"FinalCommunityCount": 4}
+  ]
+}
 ----
-
-###
+<1> Number of vertices followed to community assigned by Louvain.
+<2> Num of vertex followed to its only neighbor. For example, if we have (A)---(B), A and B will become a community with only vertex A and B.
+--
+====
