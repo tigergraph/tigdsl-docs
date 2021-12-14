@@ -87,20 +87,13 @@ An edge weight attribute is required.
 
 == Result
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|Assigns a component ID (`INT`) to each vertex, such that members
-of the same component have the same ID value.
+If `result_attr` is provided, the algorithm assigns a component ID (`INT`) to each vertex, such that members of the same component have the same ID value.
 
-The JSON contains the following information:
+if `print_info` is set to true or `file_path` is provided, the JSON or .csv output contains the following information:
 
 * The number of vertices and communities in the graph.
-* The heuristics statistics used during the algorithm.
+* The heuristic statistics used by Louvain.
 
-|Result Size |V = number of vertices
-
-|===
 
 == Example
 
@@ -142,7 +135,7 @@ JSON result::
     {"InitChangeCount": 7},
     {"IterChangeCount": 0},
     {"VertexFollowedToCommunity": 0}, <1>
-    {"VertexFollowedToVertex": 0}, <1>
+    {"VertexFollowedToVertex": 0}, <2>
     {"VertexAssignedToItself": 0},
     {"FinalCommunityCount": 4}
   ]
