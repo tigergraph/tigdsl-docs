@@ -2,7 +2,7 @@
 * xref:connected-components.adoc[]
 ** xref:wcc-small-world.adoc[]
 * xref:k-core-decomposition.adoc[]
-* xref:label-propogation.adoc[]
+* xref:label-propagation.adoc[]
 * xref:slpa.adoc[]
 * xref:local-clustering-coefficient.adoc[]
 * xref:louvain-method-with-parallelism-and-refinement.adoc[]
