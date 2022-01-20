@@ -1,0 +1,147 @@
+= Louvain
+:description: Specification and use cases for the Louvain community detection algorithm.
+:fn-blondel: footnote:[Blondel, Vincent D., et al. "Fast unfolding of communities in large networks." Journal of statistical mechanics: theory and experiment 2008.10 (2008): P10008.]
+:fn-staudt: footnote:[Staudt, Christian L., and Henning Meyerhenke. "Engineering parallel algorithms for community detection in massive networks." IEEE Transactions on Parallel and Distributed Systems 27.1 (2016): 171-184.]
+:fn-lu: footnote:[Lu, Hao, Mahantesh Halappanavar, and Ananth Kalyanaraman. "Parallel heuristics for scalable community detection." Parallel Computing 47 (2015): 19-37.]
+:page-aliases: graph-ml:community-algorithms:louvain-method-with-parallelism-and-refinement.adoc
+:stem: latexmath
+
+
+The Louvain Method for community detection {fn-blondel} partitions the vertices in a graph by approximately maximizing the graph's modularity score.
+The modularity score for a partitioned graph assesses the difference in density of links within a partition vs. the density of links crossing from one partition to another. If a partitioning is good, then the within-density should be high and the inter-density should be low.
+
+The most efficient and empirically effective method for calculating modularity was published by a team of researchers at the University of Louvain.
+The Louvain method uses agglomeration and hierarchical optimization:
+
+. Optimize modularity for small local communities.
+. Treat each optimized local group as one unit, and repeat the modularity operation for groups of these condensed units.
+
+The Louvain Method contains two phases.
+
+. The first phase incrementally calculates the modularity change of moving a vertex into every other community and moves the vertex to the community with the highest modularity change.
+. The second phase coarsens the graph by aggregating the vertices which are assigned in the same community into one vertex.
+
+The first phase and second phase make up a pass. The Louvain Method performs the passes iteratively.
+In other words, the algorithm assigns an initial community label to every vertex, then performs the first phase, during which the community labels are changed until there is no modularity gain.
+Then it aggregates the vertices with the same labels into one vertex and calculates the aggregated edge weights between new vertices.
+For the coarsened graph, the algorithm conducts the first phase again to move the vertices into new communities.
+The algorithm continues until the modularity is not increasing, or runs to the preset iteration limits.
+
+However, phase one is sequential, and thus slow for large graphs.
+An improved Parallel Louvain Method (PLM) calculates the best community to move to for each vertex in parallel{fn-staudt}.
+In Parallel Louvain Method(PLM), the positive modularity gain is not guaranteed, and it may also swap two vertices to each other's community.
+
+
+== Specifications
+
+[source.wrap,gsql]
+----
+CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
+    STRING wt_attr = "weight", INT max_iter = 10,
+    STRING result_attr = "cid", STRING file_path = "",
+    BOOL print_info = FALSE)
+----
+
+=== Time complexity
+This algorithm has a time complexity of stem:[O(V^2*L)], where _V_ is the number of vertices and L is total number of iterations.
+
+=== Graph type
+Runs on graph with undirected, weighted edges
+
+An edge weight attribute is required.
+
+== Parameters
+
+|===
+|Name |Description |Data type
+
+|`v_type`
+|Names of vertex types to use
+|`STRING`
+
+|`e_type`
+|Names of edge types to use
+|`STRING`
+
+|`wt_attr`
+|Name of edge weight attribute (must be type `FLOAT`)
+|`STRING`
+
+|`max_iter`
+|Maximum number of iterations
+|`INT`
+
+|`result_attr`
+|If not empty, store community id values (`INT`) to this attribute
+|`STRING`
+
+|`file_path`
+| If not empty, write output to this file.
+|`STRING`
+
+|`print_info`
+|If true, print results to JSON output.
+|`BOOL`
+|===
+
+
+== Result
+
+If `result_attr` is provided, the algorithm assigns a component ID (`INT`) to each vertex, such that members of the same component have the same ID value.
+
+if `print_info` is set to true or `file_path` is provided, the JSON or .csv output contains the following information:
+
+* The number of vertices and communities in the graph.
+* The heuristic statistics used by Louvain.
+
+
+== Example
+
+You can run the algorithm on the xref:intro:overview.adoc#_graphs[ `social10` graph] by slightly modifying the schema.
+Since the algorithm requires weighted edges, we can add an attribute to all edges and set edge weight to `1`.
+
+By running the algorithm on `social10`, we can see that the vertices that are in the same community have more intra-community edges than
+
+[tabs]
+====
+Run command::
++
+--
+[.wrap,gsql]
+----
+RUN QUERY tg_louvain(["Person"], ["Coworker","Friend"], "weight", _, _, _, TRUE)
+----
+--
+Visualized result::
++
+--
+image::louvain-eample.png[]
+--
+JSON result::
++
+--
+[,javascript]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 1,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [
+    {"AllVertexCount": 10},
+    {"InitChangeCount": 7},
+    {"IterChangeCount": 0},
+    {"VertexFollowedToCommunity": 0}, <1>
+    {"VertexFollowedToVertex": 0}, <2>
+    {"VertexAssignedToItself": 0},
+    {"FinalCommunityCount": 4}
+  ]
+}
+----
+<1> Number of vertices followed to community assigned by Louvain.
+<2> Num of vertex followed to its only neighbor. For example, if we have (A)---(B), A and B will become a community with only vertex A and B.
+--
+====

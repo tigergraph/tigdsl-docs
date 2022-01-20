@@ -1,6 +1,9 @@
 = Label Propagation
+<<<<<<< HEAD:modules/community-algorithms/pages/label-propagation.adoc
 :description: The Label Propagation algorithm in the TigerGraph Graph Data Science Library.
 :page-aliases: label-propogation.adoc
+=======
+>>>>>>> 7d213f6ee19e9036ff1cc334abff3f21c4b528e2:modules/community-algorithms/pages/label-propogation.adoc
 
 Label Propagation is a heuristic method for determining communities. The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X. The algorithm begins with each vertex having its own unique label. Then we iteratively update labels based on the neighbor influence described above. It is important that the order for updating the vertices be random. The algorithm is favored for its efficiency and simplicity, but it is not guaranteed to produce the same results every time.
 
