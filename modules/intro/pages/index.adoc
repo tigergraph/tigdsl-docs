@@ -1,4 +1,5 @@
-= Overview
+= TigerGraph Graph Data Science Library
+:page-aliases: intro:overview.adoc
 
 TigerGraph In-Database Graph Data Science Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
 Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
