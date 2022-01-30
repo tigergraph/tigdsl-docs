@@ -1,0 +1,26 @@
+= Similarity Algorithms
+:description: Overview of similarity algorithms.
+
+Similarity algorithms assign a score to a pair of vertices based on how similar they are.
+This usually involves seeing if they have the same or similar neighborhoods.
+This section also includes distance algorithms, as distance is the inverse of similarity.
+
+GSQL includes the following similarity algorithms:
+
+* xref:euclidean.adoc[]
+* xref:overlap-similarity.adoc[]
+* xref:pearson-similarity.adoc[]
+* *Cosine Similarity of Neighborhoods*
+** xref:cosine-similarity-of-neighborhoods-all-pairs.adoc[]
+** xref:cosine-similarity-of-neighborhoods-batch.adoc[]
+** xref:cosine-similarity-of-neighborhoods-single-source.adoc[]
+* *Jaccard Similarity of Neighborhoods*
+** xref:jaccard-similarity-of-neighborhoods-all-pairs.adoc[]
+** xref:jaccard-similarity-of-neighborhoods-batch.adoc[]
+** xref:jaccard-similarity-of-neighborhoods-single-source.adoc[]
+
+
+
+
+
+

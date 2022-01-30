@@ -1,0 +1,22 @@
+= Centrality Algorithms
+:description: Overview of centrality algorithms.
+
+Centrality algorithms are one way to determine the importance of a vertex to a graph, based on the importance of a vertex to other vertices.
+These algorithms assign a score to a vertex or edge based on some concept of being close to the center of connection-based activity.
+
+GSQL includes the following centrality algorithms:
+
+* xref:approximate-closeness-centrality.adoc[]
+* xref:article-rank.adoc[]
+* xref:betweenness-centrality.adoc[]
+* xref:closeness-centrality.adoc[]
+* xref:degree-centrality.adoc[]
+* xref:eigenvector-centrality.adoc[]
+* xref:harmonic-centrality.adoc[]
+* xref:influence-maximization.adoc[]
+* xref:pagerank.adoc[]
+* xref:personalized-pagerank.adoc[]
+* xref:weighted-pagerank.adoc[]
+
+
+

@@ -1,0 +1,16 @@
+= Classification Algorithms
+:description: Overview of classification algorithms.
+
+Classification algorithms assign a label (class name) to a vertex based on it satisfying the established conditions for membership in that class.
+This differs from clustering or partitioning in which there are no pre-established conditions for membership.
+
+GSQL includes the following classification algorithms:
+
+* xref:greedy-graph-coloring.adoc[]
+* xref:k-nearest-neighbors.adoc[]
+* xref:k-nearest-neighbors-batch.adoc[]
+* xref:k-nearest-neighbors-cross-validation.adoc[]
+
+
+
+

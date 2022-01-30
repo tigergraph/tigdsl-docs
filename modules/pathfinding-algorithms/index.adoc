@@ -1,0 +1,24 @@
+= Pathfinding Algorithms
+:description: Overview of pathfinding algorithms.
+
+Pathfinding algorithms find the best path(s) between two vertices or among a set of vertices according to a particular rule (shortest unweighted, shortest weighted, lowest cost tree).
+
+GSQL includes the following pathfinding algorithms:
+
+* xref:a-star.adoc[]
+* xref:all-pairs-shortest-path.adoc[]
+* xref:bfs.adoc[]
+* xref:cycle-detection.adoc[]
+* xref:estimated-diameter.adoc[]
+* xref:maximal-independent-set.adoc[]
+* xref:minimum-spanning-forest.adoc[]
+* xref:minimum-spanning-tree.adoc[]
+* xref:random-walk.adoc[]
+* xref:single-source-shortest-path-unweighted.adoc[]
+* xref:single-source-shortest-path-weighted.adoc[]
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+= Community Algorithms
+:description: Overview of community algorithms.
+
+Community algorithms group together vertices or edges that satisfy some rule for being connected to one another. This is different from clustering or xref:classification-algorithms:../index.adoc[classification] in general, because those types of categorization do not necessarily consider connections.
+
+GSQL includes the following community algorithms:
+
+* xref:connected-components.adoc[]
+** xref:wcc-small-world.adoc[]
+* xref:k-core-decomposition.adoc[]
+* xref:label-propagation.adoc[]
+* xref:slpa.adoc[]
+* xref:local-clustering-coefficient.adoc[]
+* xref:louvain.adoc[]
+* xref:strongly-connected-components.adoc[]
+** xref:scc-small-world.adoc[]
+* xref:triangle-counting.adoc[]
+
+
+
+
+
+
