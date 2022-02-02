@@ -5,7 +5,7 @@ Similarity algorithms assign a score to a pair of vertices based on how similar 
 This usually involves seeing if they have the same or similar neighborhoods.
 This section also includes distance algorithms, as distance is the inverse of similarity.
 
-GSQL includes the following similarity algorithms:
+The TigerGraph Graph Data Science Library provides the following similarity algorithms:
 
 * xref:euclidean.adoc[]
 * xref:overlap-similarity.adoc[]

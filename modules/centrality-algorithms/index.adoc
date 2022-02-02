@@ -1,10 +1,11 @@
 = Centrality Algorithms
 :description: Overview of centrality algorithms.
 
-Centrality algorithms are one way to determine the importance of a vertex to a graph, based on the importance of a vertex to other vertices.
-These algorithms assign a score to a vertex or edge based on some concept of being close to the center of connection-based activity.
+Centrality algorithms find the important vertices in a graph based on their connections with other vertices.
+A centrality algorithm usually assigns scores to vertices or edges based on how close they are to the center of connection-based activity.
+The definition of closeness and what constitutes the center of connection-based activity depend on the algorithm.
 
-GSQL includes the following centrality algorithms:
+The TigerGraph Graph Data Science Library provides the following centrality algorithms:
 
 * xref:approximate-closeness-centrality.adoc[]
 * xref:article-rank.adoc[]
