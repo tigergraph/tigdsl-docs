@@ -12,7 +12,7 @@ For example, it has been used to optimize delivery or transit routes, where each
 Since there could be multiple maximal independent sets, there are two versions of the Maximal Independent Set algorithm:
 
 * Deterministic.
-The deterministic version makes sure that you get the same results everytime.
+The deterministic version makes sure that you get the same results every time.
 * Randomized.
 The randomized version can produce different results every time you run it.
 The random version requires link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set/random[a user-defined function (UDF)].
