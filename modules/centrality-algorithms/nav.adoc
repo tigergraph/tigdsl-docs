@@ -1,4 +1,5 @@
 .Centrality Algorithms
+* xref:index.adoc[]
 * xref:approximate-closeness-centrality.adoc[]
 * xref:article-rank.adoc[]
 * xref:betweenness-centrality.adoc[]
