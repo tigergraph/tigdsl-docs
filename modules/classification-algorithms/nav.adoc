@@ -1,5 +1,5 @@
-.Classification Algorithms
-* xref:greedy-graph-coloring.adoc[]
-* xref:k-nearest-neighbors.adoc[]
-* xref:k-nearest-neighbors-batch.adoc[]
-* xref:k-nearest-neighbors-cross-validation.adoc[]
+* xref:index.adoc[]
+** xref:greedy-graph-coloring.adoc[]
+** xref:k-nearest-neighbors.adoc[]
+** xref:k-nearest-neighbors-batch.adoc[]
+** xref:k-nearest-neighbors-cross-validation.adoc[]
