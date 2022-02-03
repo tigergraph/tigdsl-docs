@@ -1,8 +1,9 @@
 = Influence Maximization
+:description: Overview of TigerGraph's Influence Maximization algorithm.
 
 Influence maximization is the problem of finding a small subset of vertices in a social network that could maximize the spread of influence.
-There are two versions of the Influence Maximization algorithm. B
-oth versions find k  vertices that maximize the expected spread of influence in the network.
+There are two versions of the Influence Maximization algorithm.
+Both versions find k vertices that maximize the expected spread of influence in the network.
 The CELF version improves upon the efficiency of the greedy version and should be preferred in analyzing large networks.
 
 The algorithm is implemented based on the following research papers:
@@ -11,27 +12,21 @@ The algorithm is implemented based on the following research papers:
 * Greedy: https://www.cs.cornell.edu/home/kleinber/kdd03-inf.pdf[Maximizing the Spread of Influence through a Social Network]
 
 == Specifications
-[tabs]
-====
-CELF::
-+
---
+
+.CELF
 [,gsql]
 ----
 CREATE QUERY tg_influence_maximization_CELF(STRING v_type,STRING e_type, STRING weight, INT top_k, BOOL print_accum = True, STRING file_path = "")
 ----
---
-Greedy::
-+
---
+
+.Greedy
 [,gsql]
 ----
 CREATE QUERY tg_influence_maximization_greedy(STRING v_type,
   STRING e_type,STRING weight,INT top_k,
   BOOL print_accum = True, STRING file_path = "")
 ----
---
-====
+
 
 === Time complexity
 The greedy version has a complexity of stem:[O(E * k)], where _E_ is the number of edges and _k_ is the number of top scores to report.

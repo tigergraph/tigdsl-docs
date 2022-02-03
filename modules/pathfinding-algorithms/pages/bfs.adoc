@@ -1,25 +1,28 @@
 = Breadth-First Search
+:description: Overview of TigerGraph's Breadth-First Search algorithm.
 
 Breadth-first Search (BFS) is an algorithm used to explore the vertexes
-of a graph layer by layer. It starts at the given vertex and explores
+of a graph layer by layer.
+It starts at the given vertex and explores
 all vertices at the present depth prior to moving on to the vertices at
 the next depth level.
 
 == Specifications
 
-....
+[.wrap,gsql]
+----
 CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
     VERTEX v_start, BOOL print_accum = True, STRING result_attr = "",
     STRING file_path = "", BOOL display_edges = True)
-....
+----
 
 [cols=",",options="header",]
 |===
 |Characteristic |Value
-|Result |Returns all the nodes that are accessible from the source
+|Result |Returns all the vertices that are accessible from the source
 vertex
 
-|Required Input Parameters
+|Required input parameters
 a|* `+v_type+`: vertex types to
 traverse
 * `+e_type+`: edge types to traverse
@@ -32,13 +35,12 @@ attr to store results to
 to
 * `+display_edges+`:output edges for visualization
 
-|Result Size |V = number of vertices
+|Result size |V = number of vertices
 
-|Time Complexity |O(E+V), E = number of edges, V = number of
-vertices.since every vertex and every edge will be explored in the worst
-case.
+|Time complexity |O(E+V), E = number of edges, V = number of
+vertices.
 
-|Graph Types |Directed or Undirected edges, Weighted or Unweighted edges
+|Graph types |Directed or undirected edges, weighted or unweighted edges
 |===
 
 == Example
@@ -48,8 +50,9 @@ In the example below, we run `+tg_bfs+` algorithm from the source vertex
 
 ....
 # Use _ for default values
-RUN QUERY tg_bfs(["Person"], ["Friend"], _, ("Alex","Person"), _, _, _, _)
+RUN QUERY tg_bfs(["Person"], ["Friend"], _, ("Alex","Person"), _, _, _, _) <1>
 ....
+<1> Putting `_` in the position of a parameter will use the default value for that parameter.
 
 Below is the visualized result of the query:
 

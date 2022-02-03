@@ -1,4 +1,5 @@
 = Speaker-Listener Label Propagation
+:description: Overview of TigerGraph's Speaker-Listener Label Propagation.
 
 The Speaker-listener Label Propagation Algorithm (SLPA) is a variation of the Label Propagation algorithm that is able to detect overlapping communities.
 The main difference between LPA and SLPA is that each node can only hold a single label in LPA while it is allowed to possess multiple labels in SLPA.
@@ -11,6 +12,7 @@ For more information, see https://arxiv.org/pdf/1109.5720.pdf[SLPA: Uncovering O
 
 == Specifications
 
+[.wrap,gsql]
 ....
 CREATE QUERY tg_slpa (SET<STRING> v_type, SET<STRING> e_type, FLOAT threshold, INT max_iter, INT output_limit,
 BOOL print_accum = TRUE, STRING file_path = "")
@@ -22,18 +24,20 @@ BOOL print_accum = TRUE, STRING file_path = "")
 |Result |Assigns a list of component id (INT) to each vertex, such that
 members of the same component have the same id value.
 
-|Required Input Parameters |`+**v_type**+`: vertex types to
-traverse`+**e_type**+`: edge types to traverse`+**threshold**+`:
-threshold to drop a label`+**max_iter**+`: number of
-iterations`+**print_accum**+`: print JSON output`+**file_path**+`: file
-to write CSV output to`+**output_limit**+`: max #vertices to output (-1
-= all)
+|Required Input Parameters
+a|* `v_type`: vertex types to traverse
+* `e_type`: edge types to traverse
+* `threshold`: threshold to drop a label
+* `max_iter`: number of iterations
+* `print_accum`: print JSON output
+* `file_path`: file to write CSV output to
+* `output_limit`: max #vertices to output (-1 = all)
 
-|Result Size |V = number of vertices
+|Result size |V = number of vertices
 
-|Time Complexity |O(E*k), E = number of edges, k = number of iterations.
+|Time complexity |O(E*k), E = number of edges, k = number of iterations.
 
-|Graph Types |Undirected edges
+|Graph types |Undirected edges
 |===
 
 == Example
