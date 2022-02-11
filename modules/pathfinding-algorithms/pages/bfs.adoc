@@ -1,7 +1,7 @@
 = Breadth-First Search
 :description: Overview of TigerGraph's Breadth-First Search algorithm.
 
-Breadth-first Search (BFS) is an algorithm used to explore the vertexes
+Breadth-first Search (BFS) is an algorithm used to explore the vertices
 of a graph layer by layer.
 It starts at the given vertex and explores
 all vertices at the present depth prior to moving on to the vertices at
