@@ -1,0 +1,15 @@
+= Node Embedding Algorithms
+:description: Overview of node embedding algorithms.
+
+Node embeddings are vector representations of properties of vertices in a graph. These vectors can be used for machine learning.
+
+The TigerGraph Graph Data Science Library provides the following node embedding algorithms:
+
+* xref:node2vec.adoc[]
+
+
+
+
+
+
+
