@@ -1,7 +1,8 @@
 = Community Algorithms
 :description: Overview of community algorithms.
 
-Community algorithms group together vertices or edges that satisfy some rule for being connected to one another. Community algorithms are different from clustering or xref:classification-algorithms:index.adoc[classification] algorithms because clustering and classification do not necessarily consider connections.
+Community algorithms group together vertices or edges that satisfy some rule for being connected to one another. 
+Community algorithms are different from xref:classification-algorithms:index.adoc[classification] algorithms because classification does not necessarily consider connections.
 
 The TigerGraph Graph Data Science Library provides the following community algorithms:
 
