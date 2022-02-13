@@ -6,11 +6,16 @@ First, _k_ vertices are selected at random to act as centroids, or the center of
 
 The last two steps are repeated many more times until each iteration no longer changes the location of the centroids or the vertices belonging to the clusters.
 
+[NOTE]
+====
+This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Community/k_means/tg_kmeans_sub.gsql[`tg_kmeans_sub`], which needs to be installed before `tg_kmeans` can be installed.
+====
+
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UINT max_colors = 999999,BOOL print_color_count = TRUE, BOOL display = TRUE, STRING file_path = "")
+tg_kmeans(INT k = 2, INT max_k = 5, FLOAT max_change = 1.0, STRING v_type, STRING e_type, BOOL random = FALSE, BOOL print_accum = TRUE, STRING file_path="")
 ----
 
 == Parameters
@@ -41,95 +46,4 @@ CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UIN
 
 |===
 
-== Example
 
-On the https://github.com/tigergraph/gsql-graph-algorithms/blob/master/tests/social/data/social10.csv[social10] graph, say we want to color the `Person` vertices in such a way that any two vertices that are either connected by a `Friend` edge or a `Coworker` edge do not have the same color. By running the `greedy_graph_color` algorithm, we get the following result:
-
-[source,gsql]
-----
-GSQL > RUN QUERY greedy_graph_coloring(["Person"], ["Friend", "Coworker"],
- 999999, true, true, "")
-
- [
-  {
-    // Total number of colors used
-    "color_count": 4
-  },
-  {
-    "start": [
-      {
-        "attributes": {
-          "start.@colorvertex": 4
-        },
-        "v_id": "Fiona",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 3
-        },
-        "v_id": "Justin",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 2
-        },
-        "v_id": "Bob",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 3
-        },
-        "v_id": "Chase",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 2
-        },
-        "v_id": "Damon",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 1
-        },
-        "v_id": "Alex",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 3
-        },
-        "v_id": "George",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 1
-        },
-        "v_id": "Eddie",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 2
-        },
-        "v_id": "Ivy",
-        "v_type": "Person"
-      },
-      {
-        "attributes": {
-          "start.@colorvertex": 1
-        },
-        "v_id": "Howard",
-        "v_type": "Person"
-      }
-    ]
-  }
-]
-----
-
-image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-MTIVaC7IrVUxaa6b0wB%2F-MTIboMHDZfHMiJfFS-d%2Fimage.png?alt=media&token=434b94b8-702f-447a-9a91-8d91a6d341ab[Visualized result - no neighboring vertices share the same color]
