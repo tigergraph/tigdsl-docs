@@ -1,10 +1,14 @@
 = Node2Vec
+:description: TigerGraph's implementation of the Node2Vec algorithm. 
 
 Node2Vec is a node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
 
-A random walk starts with a node, and the algorithm iteratively selects neighboring nodes to visit, and each neighboring node has an assigned probability. This transforms graph structure into a collection of linear sequences of nodes. For each node we will be left with a list of other nodes from their local or extended neighborhoods.
+A random walk starts with a node, and the algorithm iteratively selects neighboring nodes to visit, and each neighboring node has an assigned probability.
+This transforms graph structure into a collection of linear sequences of nodes.
+For each node we will be left with a list of other nodes from their local or extended neighborhoods.
 
-Once the above step is complete, the algorithm uses a variation of the word2vec model from the language modeling community to turn each node into a vector of probabilities. The probabilities represent the likelihood of visiting a given node in a random walk from each starting node.
+Once the above step is complete, the algorithm uses a variation of the word2vec model from the language modeling community to turn each node into a vector of probabilities.
+The probabilities represent the likelihood of visiting a given node in a random walk from each starting node.
 
 == Specification
 
@@ -19,7 +23,8 @@ tg_node2vec_query(STRING filepath = "/home/tigergraph/path.csv",
     INT dimension)
 ----
 
-Installing this query requires xref:gsql-ref:querying:func/query-user-defined-functions.adoc[installing a UDF], which can be found in the https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/examples/Graph%2BML[Github repository of the query]. If you are running the query on a cluster, you need to manually install the UDF on every node of the cluster.
+Installing this query requires xref:gsql-ref:querying:func/query-user-defined-functions.adoc[installing a UDF], which can be found in the https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/FastRP[GitHub repository of the query].
+If you are running the query on a cluster, you need to manually install the UDF on every node of the cluster.
 
 == Parameters
 

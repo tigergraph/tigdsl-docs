@@ -1,6 +1,8 @@
 = Fast Random Projection
 
-Fast Random Projection (FastRP) is a scalable and performant node-embedding algorithm. It generates node embeddings (vectors) of low dimensionality through random projections from the graph's adjacency matrix (a high-dimensional matrix) to a low-dimensional matrix, significantly reducing the computing power required to process the data. The algorithm is theoretically backed by the https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma[Johnsson-Lindenstrauss lemma], which states that a set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are https://en.wikipedia.org/wiki/Stretch_factor[nearly preserved].
+Fast Random Projection (FastRP) is a scalable and performant node-embedding algorithm.
+It generates node embeddings (vectors) of low dimensionality through random projections from the graph's adjacency matrix (a high-dimensional matrix) to a low-dimensional matrix, significantly reducing the computing power required to process the data.
+The algorithm is theoretically backed by the https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma[Johnson-Lindenstrauss lemma], which states that a set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are https://en.wikipedia.org/wiki/Stretch_factor[nearly preserved].
 
 This algorithm is especially useful in the following situations:
 
