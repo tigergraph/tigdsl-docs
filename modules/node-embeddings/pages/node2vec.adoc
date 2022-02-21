@@ -1,5 +1,5 @@
 = Node2Vec
-:description: TigerGraph's implementation of the Node2Vec algorithm. 
+:description: TigerGraph's implementation of the Node2Vec algorithm.
 
 Node2Vec is a node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
 
