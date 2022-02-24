@@ -10,3 +10,4 @@ The TigerGraph Graph Data Science Library provides the following classification 
 * xref:k-nearest-neighbors.adoc[]
 * xref:k-nearest-neighbors-batch.adoc[]
 * xref:k-nearest-neighbors-cross-validation.adoc[]
+* xref:maximal-independent-set.adoc[]
