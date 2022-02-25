@@ -100,7 +100,7 @@ if `print_info` is set to true or `file_path` is provided, the JSON or .csv outp
 You can run the algorithm on the xref:intro:index.adoc#_graphs[ `social10` graph] by slightly modifying the schema.
 Since the algorithm requires weighted edges, we can add an attribute to all edges and set edge weight to `1`.
 
-By running the algorithm on `social10`, we can see that the vertices that are in the same community have more intra-community edges than
+By running the algorithm on `social10`, we can see that the vertices that are in the same community have more intra-community edges than inter-community edges.
 
 [tabs]
 ====
