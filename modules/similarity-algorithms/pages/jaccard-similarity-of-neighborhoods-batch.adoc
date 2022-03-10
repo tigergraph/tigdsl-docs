@@ -1,6 +1,8 @@
 = Jaccard Similarity of Neighborhoods (Batch)
 
-This algorithm computes the same similarity scores as the xref:jaccard-similarity-of-neighborhoods-all-pairs.adoc[Jaccard similarity of neighborhoods, all pairs] except that it starts from all of the vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel. Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into. Compared with the xref:jaccard-similarity-of-neighborhoods-all-pairs.adoc[Jaccard similarity of neighborhoods, all pairs], this algorithm allows you to split the workload into multiple batches and reduces the burden on memory.
+This algorithm computes the same similarity scores as the xref:jaccard-similarity-of-neighborhoods-single-source.adoc[Jaccard similarity of neighborhoods, all pairs] except that it starts from all vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
+
+Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into.
 
 This algorithm has a time complexity of _O(E)_, where E is the number of edges, and runs on graphs with unweighted edges (directed or undirected).
 
@@ -8,9 +10,10 @@ This algorithm has a time complexity of _O(E)_, where E is the number of edges, 
 
 [source,gsql]
 ----
-tg_jaccard_batch (STRING v_type, STRING e_type, STRING re_type, INT topK,
-BOOL print_accum = true, STRING similarity_edge, STRING file_path,
-INT num_of_batches = 1)
+CREATE QUERY tg_jaccard_nbor_ap_batch ( INT top_k = 10, SET<STRING> v_type,
+    SET<STRING> feat_v_type, SET<STRING> e_type, SET<STRING> re_type,
+    STRING similarity_edge, INT src_batch_num = 50, INT nbor_batch_num = 10,
+    BOOL print_accum = true, INT print_limit = 50, STRING file_path = "")
 ----
 
 == Parameters
@@ -18,8 +21,14 @@ INT num_of_batches = 1)
 |===
 | Name | Description
 
+| `top_k`
+| Number of top scores to report for each vertex
+
 | `v_type`
 | Vertex type to calculate similarity for
+
+| `feat_v_type`
+|Feature vertex type
 
 | `e_type`
 | Directed edge type to traverse
@@ -27,20 +36,24 @@ INT num_of_batches = 1)
 | `re_type`
 | Reverse edge type to traverse
 
-| `topK`
-| Number of top scores to report for each vertex
+| `similarity_edge`
+| If provided, the similarity scores will be saved to this edge type
+
+| `src_batch_num`
+| Number of batches to split the source vertices into
+
+| `nbor_batch_num`
+| Number of batches to split the 2-hop neighbor vertices into
 
 | `print_accum`
 | If `true`, output JSON to standard output.
 
-| `similarity_edge`
-| If provided, the similarity scores will be saved to this edge type.
+| `print_limit`
+| Number of source vertices to print, -1 to print all
 
 | `file_path`
 | If a file path is provided, the algorithm will output to a file specified by the file path in CSV format
 
-| `num_of_batches`
-| Number of batches to divide the query into
 |===
 
 == Result
