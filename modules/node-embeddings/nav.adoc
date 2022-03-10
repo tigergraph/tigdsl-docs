@@ -1,3 +1,3 @@
 * xref:index.adoc[]
-//* xref:fast-random-projection.adoc[]
+** xref:fast-random-projection.adoc[]
 ** xref:node2vec.adoc[]
