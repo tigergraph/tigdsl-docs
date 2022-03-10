@@ -49,7 +49,7 @@ A high `sampling_constant` increases the speed of the algorithm. See more detail
 |`random_seed`
 |Seed number of the random number generator used to generate the random vectors.
 It can be set to any positive integer.
-If the seed number is kept the same, the generated random vectors stay the same.
+If the seed number is kept the same, the numbers used to generate random vectors stay the same.
 |`INT`
 
 | `reduced_dim`
@@ -58,7 +58,7 @@ A greater dimension offers a greater precision, but is more costly to operate ov
 | `INT`
 
 | `beta`
-| Hyperparameter that is typically between -1 and 0
+| Hyperparameter that is typically between -1 and 0.
 | `DOUBLE`
 
 | `weights`
