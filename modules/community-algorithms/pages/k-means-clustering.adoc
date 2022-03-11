@@ -12,7 +12,7 @@ Vertices in the graph need to have an attribute in their schemas that is a list 
 ====
 This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Community/k_means/tg_kmeans_sub.gsql[`tg_kmeans_sub`], which needs to be installed before `tg_kmeans` can be installed.
 
-Before using this query, it is necessary to change the placeholder word `embeddings` in the code to the name of the attribute where the vertex embeddings are stored.
+Before using this query, it is necessary to change the placeholder attribute `embeddings` on line 42, 93, and 107 in the code to the name of the attribute where the vertex embeddings are stored.
 ====
 
 == Specifications
