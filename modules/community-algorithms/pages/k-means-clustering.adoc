@@ -2,15 +2,17 @@
 
 In the k-Means Clustering algorithm, vertices are gradually sorted into an arbitrary number _k_ of clusters based on averaging their properties.
 
-First, _k_ vertices are selected at random to act as centroids, or the center of their clusters. The first clusters are defined as consisting of the vertices closest to those centroids. These clusters are refined by calculating the mean position of their points, then redrawing the boundaries of the clusters by finding the closest vertices to those mean position points.
+First, _k_ vertices are selected at random to act as centroids, or the center of their clusters. The first clusters are defined as consisting of the vertices closest to those centroids. The borders of these clusters are refined iteratively by calculating the mean position of all points in the clusters, then by finding the closest vertices to those mean position points to act as the new centroids.
 
 The last two steps are repeated many more times until each iteration no longer changes the location of the centroids or the vertices belonging to the clusters.
 
-Vertices in the graph need to have embeddings for this algorithm to work, because the distances are calculated based on the embeddings rather than any other factor.
+Vertices in the graph need to have an attribute in their schemas that is a list of doubles or floats (an embedding) for this algorithm to work. This is because the distances are calculated based on the vertex embeddings rather than any other factor.
 
 [NOTE]
 ====
 This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Community/k_means/tg_kmeans_sub.gsql[`tg_kmeans_sub`], which needs to be installed before `tg_kmeans` can be installed.
+
+Before using this query, it is necessary to change the placeholder word `embeddings` in the code to the name of the attribute where the vertex embeddings are stored.
 ====
 
 == Specifications
