@@ -6,6 +6,7 @@ Node embeddings are vector representations of properties of vertices in a graph.
 The TigerGraph Graph Data Science Library provides the following node embedding algorithms:
 
 * xref:node2vec.adoc[]
+* xref:fast-random-projection.adoc[]
 
 
 

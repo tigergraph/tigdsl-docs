@@ -12,7 +12,6 @@ The TigerGraph Graph Data Science Library provides the following pathfinding alg
 * xref:estimated-diameter.adoc[]
 * xref:minimum-spanning-forest.adoc[]
 * xref:minimum-spanning-tree.adoc[]
-* xref:random-walk.adoc[]
 * xref:single-source-shortest-path-unweighted.adoc[]
 * xref:single-source-shortest-path-weighted.adoc[]
 

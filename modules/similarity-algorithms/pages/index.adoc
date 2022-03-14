@@ -11,11 +11,9 @@ The TigerGraph Graph Data Science Library provides the following similarity algo
 * xref:overlap-similarity.adoc[]
 * xref:pearson-similarity.adoc[]
 * *Cosine Similarity of Neighborhoods*
-** xref:cosine-similarity-of-neighborhoods-all-pairs.adoc[]
 ** xref:cosine-similarity-of-neighborhoods-batch.adoc[]
 ** xref:cosine-similarity-of-neighborhoods-single-source.adoc[]
 * *Jaccard Similarity of Neighborhoods*
-** xref:jaccard-similarity-of-neighborhoods-all-pairs.adoc[]
 ** xref:jaccard-similarity-of-neighborhoods-batch.adoc[]
 ** xref:jaccard-similarity-of-neighborhoods-single-source.adoc[]
 
