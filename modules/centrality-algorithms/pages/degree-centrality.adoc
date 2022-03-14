@@ -1,7 +1,10 @@
 = Degree Centrality
+:stem: latexmath
+:description: Overview of TigerGraph's implementation of an algorithm that calculates the degree centrality of vertices.
 
 *Degree centrality* is defined as the number of edges incident upon a
-node (i.e., the number of ties that a node has). The degree can be
+vertex (i.e., the number of ties that a node has).
+The degree can be
 interpreted in terms of the immediate risk of a node for catching
 whatever is flowing through the network (such as a virus, or some
 information).
