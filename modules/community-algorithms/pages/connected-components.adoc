@@ -1,22 +1,30 @@
 = Weakly Connected Components
+:description: TigerGraph's implementation of an algorithm to find weakly connected components in a graph.
 
-A component is the maximal set of vertices, plus their connecting edges, which are interconnected. That is, you can reach each vertex from each other vertex. In the example figure below, there are three components.
+A connected component is the maximal set of connected vertices, plus their connecting edges.
+In a connected component, you can reach each vertex from each other vertex.
+This algorithm runs on graphs with undirected edges, and finds connected components in the graph.
+It assigns a component ID to each vertex, and members of the same component
 
-This particular algorithm deals with undirected edges. If the same definition (each vertex can reach each other vertex) is applied to directed edges, then the components are called Strongly Connected Components. If you have directed edges but ignore the direction (permitting traversal in either direction), then the algorithm finds Weakly Connected Components.
+For example, there are three components in the figure below.
+
+image::conn_comp_result.png[Visualized results of example query on social10 graph with Coworker edges]
 
 == Specifications
 
 [source,gsql]
 ----
-tg_conn_comp (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
-  BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+CREATE QUERY tg_wcc (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
+    BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
 [width="100%",cols="<5,<50%",options="header",]
 |===
 |*Characteristic* |Value
-|Result |Assigns a component id (INT) to each vertex, such that members
+|Result |Assigns a component ID (`INT`) to each vertex, such that members
 of the same component have the same id value.
+
+The return value in JSON includes all vertices and the component they belong to, as well as a map of the components with their ID and size.
 
 |Input Parameters a|
 * *`+SET<STRING> v_type+`*: Names of vertex types to use
@@ -48,7 +56,8 @@ Our algorithm uses the TigerGraph engine's internal vertex ID numbers; they cann
 
 [source,gsql]
 ----
-RUN QUERY tg_conn_comp(["Person"], ["Coworker"], _, _, _, _)
+RUN QUERY tg_wcc(["Person"], ["Coworker"], _, _, _, _)
 ----
 
 image::conn_comp_result.png[Visualized results of example query on social10 graph with Coworker edges]
+
