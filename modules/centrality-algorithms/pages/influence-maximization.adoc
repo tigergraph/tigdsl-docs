@@ -1,5 +1,6 @@
 = Influence Maximization
 :description: Overview of TigerGraph's Influence Maximization algorithm.
+:stem: latexmath
 
 Influence maximization is the problem of finding a small subset of vertices in a social network that could maximize the spread of influence.
 There are two versions of the Influence Maximization algorithm.
