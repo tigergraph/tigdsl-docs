@@ -10,6 +10,7 @@ The maximum flow problem is to find the maximum possible flow from a source vert
 TigerGraph's implementation of the Maximum Flow algorithm is based on a modified version of link:https://en.wikipedia.org/wiki/Edmonds%E2%80%93Karp_algorithm[the Edmond-Karp algorithm].
 
 == Use cases
+The Maximum Flow algorithm has real world applications such as https://www.researchgate.net/publication/331967163_Airline_Scheduling_with_Max_Flow_algorithm[airline scheduling], and in solving https://www.cs.cmu.edu/~ckingsf/bioinfo-lectures/flowext.pdf[circulation-demand problems].
 
 == Specifications
 
