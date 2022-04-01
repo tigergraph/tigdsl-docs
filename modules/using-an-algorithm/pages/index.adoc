@@ -1,0 +1,107 @@
+= Using an Algorithm
+:description: Instructions on how to use a GDS algorithm.
+:experimental:
+
+
+This page provides information on how to use a TigerGraph Graph Data Science (GDS) Library algorithm.
+
+Once you have decided that an algorithm fits your use case, it's time to run the algorithm on your graph data.
+GDS Library algorithms are implemented in GSQL as GSQL queries.
+The names of the GDS algorithm queries begin with the prefix `tg_` to distinguish them from a user-written query.
+However, the process to run an algorithm query is the same as the process to run any other query.
+
+Some steps documented on this page only apply to a small subset of algorithms.
+
+
+== Check schema/data constraints
+Most algorithm queries in the GDS Library are schema-free, meaning that you are able to run the query on any schema.
+However, some algorithms have certain schema or data constraints by nature.
+Make sure to read the documentation for the algorithm to determine the following:
+
+* Does the algorithm require edges to be directed/undirected?
+* Does the algorithm require edges to be weighted/unweighted?
+* Does the algorithm require any vertex type to have an attribute of a certain data type?
+* Does the algorithm expect your data to have been processed in a certain way before it runs?
+
+For example, xref:classification-algorithms:k-nearest-neighbors.adoc[] runs on graphs with either directed or undirected edges, but the edges must have a weight attribute.
+
+Another example is the xref:node-embeddings:fast-random-projection.adoc[Fast Random Projection algorithm], which expects the vertex type to have an attribute of type `LIST<DOUBLE>` if you want to store the embedding results to your graph data.
+
+== Install necessary UDFs
+
+Some algorithms require the use of user-defined functions (UDF).
+The UDF files are included in the same folder as the algorithm itself.
+
+If your query requires a UDF, ensure that the UDF files are added to the GSQL before creating or installing the query.
+If your query does not require a UDF, you can proceed to create the query.
+
+== Create query
+After making sure your data meets the requirement of the algorithm query, the next step is to create the query in GSQL or save the query in GraphStudio.
+
+
+[tabs]
+====
+GSQL Shell::
++
+--
+. Locate the query in the GDS Library GitHub repository.
+It is a `.gsql` file named after the query.
+. Copy the entire content of the query file.
+This is the command to create the query.
+. Log in to the GSQL shell as a user with query writing privileges for the graph on which you want to create the query.
+. Run `USE GRAPH <graph_name>` to switch to the graph you want to create the query on.
+. Type `BEGIN` to start a multi-line command.
+. Paste the `CREATE QUERY` command into the terminal.
+. Type `END` to end the multi-line command.
+--
+GraphStudio::
++
+--
+WARNING: Saving a query in GraphStudio does not create the query in GSQL.
+
+. Locate the query in the GDS Library GitHub repository.
+It is a `.gsql` file named after the query.
+. Copy the entire content of the query file.
+This is the command to create the query.
+. Log in to GraphStudio as a user with query writing privileges for the graph on which you want to create the query.
+. Click btn:[Global View] in the top-left corner and choose the graph to use.
+. Click btn:[Write Queries] on the left side navigation.
+Click btn:[+] to add a new query and enter the query name.
+This name must be the same as the name in the `CREATE QUERY` command
+. Paste the `CREATE QUERY` command into the query and save the query.
+--
+====
+
+
+== Install query
+
+Installing a query allows the algorithm query to access all features offered by the GSQL Query language.
+It also increases the performance of the query.
+
+To install a query, run `INSTALL QUERY <query_name>` in the GSQL shell.
+Alternatively, you can click btn:[Install] on the btn:[Write Query] page of GraphStudio.
+
+=== Install query in distributed mode
+If you are running the query on a TigerGraph cluster, you may consider installing the query in distributed mode.
+
+In general, distributed mode is likely to improve the performance of a query if the query meets the following:
+
+* The query starts at a very large set of starting point vertices.
+* The query performs many hops.
+
+For example, algorithms that compute a value for every vertex or one value for the entire graph should use distributed mode.
+This includes PageRank, Centrality, and Connected Component algorithms.
+
+To install a query in distributed mode in the GSQL shell, run command `INSTALL QUERY <query_name> -DISTRIBUTED`.
+To install a query in distributed mode from GraphStudio, change the `CREATE QUERY` at the beginning of the command to `CREATE DISTRIBUTED QUERY`, and then click btn:[Install].
+
+== Run query
+Once the query has been installed, you can xref:gsql-ref:querying:query-operations.adoc#_run_query[run the query] on your graph data.
+Installing a query also xref:tigergraph-server:API:built-in-endpoints.adoc#_run_an_installed_query_post[creates a REST endpoint] you can use to call the query.
+
+Most of the algorithm queries provide multiple output formats.
+You usually have the option to output one or more of the following:
+
+* JSON output to console
+* CSV output to a file
+* Results written to an attribute of vertices or edges
