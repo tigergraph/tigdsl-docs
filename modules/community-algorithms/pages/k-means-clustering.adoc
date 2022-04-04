@@ -1,0 +1,53 @@
+= k-Means Clustering
+
+In the k-Means Clustering algorithm, vertices are gradually sorted into an arbitrary number _k_ of clusters based on averaging their properties.
+
+First, _k_ vertices are selected at random to act as centroids, or the center of their clusters. The first clusters are defined as consisting of the vertices closest to those centroids. The borders of these clusters are refined iteratively by calculating the mean position of all points in the clusters, then by finding the closest vertices to those mean position points to act as the new centroids.
+
+The last two steps are repeated many more times until each iteration no longer changes the location of the centroids or the vertices belonging to the clusters.
+
+Vertices in the graph need to have an attribute in their schemas that is a list of doubles or floats (an embedding) for this algorithm to work. This is because the distances are calculated based on the vertex embeddings rather than any other factor.
+
+[NOTE]
+====
+This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Community/k_means/tg_kmeans_sub.gsql[`tg_kmeans_sub`], which needs to be installed before `tg_kmeans` can be installed.
+
+Before using this query, it is necessary to change the placeholder attribute `embeddings` on line 42, 93, and 107 in the code to the name of the attribute where the vertex embeddings are stored.
+====
+
+== Specifications
+
+[source.wrap,gsql]
+----
+tg_kmeans(INT k = 2, INT max_k = 5, FLOAT max_change = 1.0, STRING v_type, STRING e_type, BOOL random = FALSE, BOOL print_accum = TRUE, STRING file_path="")
+----
+
+== Parameters
+
+|===
+| Name | Description
+
+| `k`
+| The starting value of the K range
+
+| `maxK`
+| The ending value of the K range
+
+| `maxChange`
+| The maximum centroid vector change condition
+
+| `v_type`
+| Vertex type to start from
+
+| `random`
+| Boolean to start from either random or non-random centroid positions. Default is `FALSE`.
+
+| `print_accum`
+| Prints JSON output
+
+| `file_path`
+| File to write CSV output to
+
+|===
+
+

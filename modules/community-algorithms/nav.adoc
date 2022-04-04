@@ -2,6 +2,7 @@
 ** xref:connected-components.adoc[]
 *** xref:wcc-small-world.adoc[]
 ** xref:k-core-decomposition.adoc[]
+** xref:k-means-clustering.adoc[]
 ** xref:label-propagation.adoc[]
 ** xref:slpa.adoc[]
 ** xref:local-clustering-coefficient.adoc[]
