@@ -5,12 +5,15 @@
 
 This page provides information on how to use a TigerGraph Graph Data Science (GDS) Library algorithm.
 
+All GDS algorithms can be found at https://github.com/tigergraph/gsql-graph-algorithms[`tigergraph/gsql-graph-algorithms`] on GitHub in the `algorithms` folder.
+The algorithms are divided into several categories.
+Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
+
 Once you have decided that an algorithm fits your use case, it's time to run the algorithm on your graph data.
 GDS Library algorithms are implemented in GSQL as GSQL queries.
-The names of the GDS algorithm queries begin with the prefix `tg_` to distinguish them from a user-written query.
-However, the process to run an algorithm query is the same as the process to run any other query.
-
-Some steps documented on this page only apply to a small subset of algorithms.
+Therefore, the process to run an algorithm query is the same as the process to run any other query.
+The names of GDS algorithm queries as provided by the library begin with the prefix `tg_` only to distinguish them from a user-written query.
+However, since the library is open-source, you can change the name of the queries to any name of your choosing.
 
 
 == Check schema/data constraints
