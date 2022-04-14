@@ -16,7 +16,7 @@ The names of GDS algorithm queries as provided by the library begin with the pre
 However, since the library is open-source, you can change the name of the queries to any name of your choosing.
 
 
-== Check schema/data constraints
+== Check for data or schema constraints
 Most algorithm queries in the GDS Library are schema-free, meaning that you are able to run the query on any schema.
 However, some algorithms have certain schema or data constraints by nature.
 Make sure to read the documentation for the algorithm to determine the following:
@@ -24,7 +24,7 @@ Make sure to read the documentation for the algorithm to determine the following
 * Does the algorithm require edges to be directed/undirected?
 * Does the algorithm require edges to be weighted/unweighted?
 * Does the algorithm require any vertex type to have an attribute of a certain data type?
-* Does the algorithm expect your data to have been processed in a certain way before it runs?
+* Does the algorithm require your data to have been processed in a certain way before it runs?
 
 For example, xref:classification-algorithms:k-nearest-neighbors.adoc[] runs on graphs with either directed or undirected edges, but the edges must have a weight attribute.
 
@@ -35,12 +35,14 @@ Another example is the xref:node-embeddings:fast-random-projection.adoc[Fast Ran
 Some algorithms require the use of user-defined functions (UDF).
 The UDF files are included in the same folder as the algorithm itself.
 
-If your query requires a UDF, ensure that the UDF files are added to the GSQL before creating or installing the query.
-If your query does not require a UDF, you can proceed to create the query.
+If your query requires a UDF, ensure that the xref:gsql-ref:querying:func/query-user-defined-functions.adoc[UDF has been installed into your TigerGraph system] before creating or installing the query.
+
+If your query does not require a UDF, you can proceed to the next step.
 
 == Create query
-After making sure your data meets the requirement of the algorithm query, the next step is to create the query in GSQL or save the query in GraphStudio.
+If the algorithm you wish to use is not yet installed in your TigerGraph instance, you need to xref:gsql-ref:querying:query-operations.adoc#_create_query[create] and xref:gsql-ref:querying:query-operations.adoc#_install_query[install it].
 
+You can create the query in the following ways:
 
 [tabs]
 ====
@@ -49,13 +51,10 @@ GSQL Shell::
 --
 . Locate the query in the GDS Library GitHub repository.
 It is a `.gsql` file named after the query.
-. Copy the entire content of the query file.
-This is the command to create the query.
+. Copy the entire content of the query file, which is the command to create the query, and paste it into a file on the machine running TigerGraph.
 . Log in to the GSQL shell as a user with query writing privileges for the graph on which you want to create the query.
-. Run `USE GRAPH <graph_name>` to switch to the graph you want to create the query on.
-. Type `BEGIN` to start a multi-line command.
-. Paste the `CREATE QUERY` command into the terminal.
-. Type `END` to end the multi-line command.
+. Run `@<filepath>` from the GSQL shell, and replace `<filepath>` with the absolute path to the file where you copied the query.
+For example, if your filepath is `/home/tigergraph/query/pagerank.gsql`, run `@/home/tigergraph/query/pagerank.gsql` from the GSQL shell.
 --
 GraphStudio::
 +
@@ -87,7 +86,7 @@ Alternatively, you can click btn:[Install] on the btn:[Write Query] page of Grap
 === Install query in distributed mode
 If you are running the query on a TigerGraph cluster, you may consider installing the query in distributed mode.
 
-In general, distributed mode is likely to improve the performance of a query if the query meets the following:
+In general, distributed mode is likely to improve the performance of a query if the query meets the following conditions:
 
 * The query starts at a very large set of starting point vertices.
 * The query performs many hops.
