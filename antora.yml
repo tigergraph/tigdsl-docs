@@ -6,7 +6,6 @@ start_page: intro:index.adoc
 
 nav:
 - modules/intro/nav.adoc
-- modules/using-an-algorithm/nav.adoc
 - modules/centrality-algorithms/nav.adoc
 - modules/classification-algorithms/nav.adoc
 - modules/community-algorithms/nav.adoc
