@@ -2,6 +2,8 @@
 :description: Overview of TigerGraph's implementation of the Maximum Flow algorithm.
 :stem: latexmath
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/maxflow[Maximum Flow]
+
 The maximum flow problem is to find the maximum possible flow from a source vertex to the target vertex given a graph which represents a flow network where every edge has a capacity under the following constraints :
 
 * Flow on an edge doesn't exceed the capacity of the edge.

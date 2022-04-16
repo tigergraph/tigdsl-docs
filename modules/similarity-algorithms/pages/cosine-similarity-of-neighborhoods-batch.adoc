@@ -1,5 +1,7 @@
 = Cosine Similarity of Neighborhoods (All Pairs, Batch)
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/cosine/all_pairs[Cosine Similarity of Neighborhoods (All Pairs, Batch)]
+
 This algorithm computes the same similarity scores as the xref:cosine-similarity-of-neighborhoods-single-source.adoc[Cosine similarity of neighborhoods, single source algorithm] except that it starts from all vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
 
 Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage.

@@ -2,6 +2,8 @@
 :stem: latexmath
 :description: Overview of TigerGraph's implementation of an algorithm that calculates the degree centrality of vertices.
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/degree[Degree Centrality]
+
 *Degree centrality* is defined as the number of edges incident upon a
 vertex (i.e., the number of ties that a node has).
 The degree can be

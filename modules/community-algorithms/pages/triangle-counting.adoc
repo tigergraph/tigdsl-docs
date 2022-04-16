@@ -1,5 +1,7 @@
 = Triangle Counting
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/triangle_counting[Triangle Counting]
+
 Why triangles? Think of it in terms of a social network:
 
 * If A knows B, and A also knows C, then we complete the triangle if B knows C. If this situation is common, it indicates a community with a lot of interaction.

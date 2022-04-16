@@ -1,6 +1,8 @@
 = Pearson Similarity
 :stem: latex
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
+
 The Pearson correlation coefficient is a measure of linear correlation between two sets of data. It is the ratio between the covariance of two variables and the product of their standard deviations.
 The formula for calculating the Pearson correlation coefficient is as follows:
 

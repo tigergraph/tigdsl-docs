@@ -1,6 +1,8 @@
 = Overlap Similarity
 :stem: latex
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
+
 The *overlap coefficient*, or *Szymkiewicz–Simpson coefficient*, is a https://en.wikipedia.org/wiki/Similarity_measure[similarity measure]
 that measures the overlap between two finite sets.
 

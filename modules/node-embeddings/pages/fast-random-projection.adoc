@@ -2,6 +2,8 @@
 :description: Overview of TigerGraph's implementation of the FastRP algorithm.
 :experimental:
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/FastRP[Fast Random Projection]
+
 Fast Random Projection (FastRP) is a scalable and performant node-embedding algorithm.
 It generates node embeddings (vectors) of low dimensionality through random projections from the graph's adjacency matrix (a high-dimensional matrix) to a low-dimensional matrix, significantly reducing the computing power required to process the data.
 

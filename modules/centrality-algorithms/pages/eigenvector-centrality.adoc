@@ -1,5 +1,7 @@
 = Eigenvector Centrality
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/eigenvector[Eigenvector Centrality]
+
 *Eigenvector centrality* (also called *eigencentrality* or *prestige
 score*) is a measure of the influence of a vertex in a network.
 Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring

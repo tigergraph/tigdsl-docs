@@ -1,15 +1,16 @@
 = SCC (Small-World Optimized)
 
 In addition to the regular strongly connected component algorithm, we also provide a version that is optimized for small-world graphs.
-A small world graph in this context means the graph has a hub community, where a vast majority of the vertices of the graph are weakly connected.
+A small-world graph in this context means the graph has a hub community, where a vast majority of the vertices of the graph are weakly connected.
 
 This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several different methods used to find connected components in a multi-step process proposed by Slota et al. in _BFS and Coloring-based Parallel Algorithms
 for Strongly Connected Components and Related Problems_.
 
 The algorithm starts by trimming the graph, which removes all vertices whose indegree or outdegree is 0.
-Then in the second phase, the algorithm selects an initial pivot vertex _v_ with a high product of indegree and outdegree.
+In the second phase, the algorithm selects an initial pivot vertex _v_ with a high product of indegree and outdegree.
+
 From the initial pivot vertex , the algorithm uses one iteration of the Forward-Backward method to identify all vertices reachable by _v_ (descendants) and all vertices that can reach
-_v_ (predecessors)_._
+_v_ (predecessors).
 The intersection of the descendants and the predecessors form a strongly connected component (SCC). The vertices that are not included in this SCC are passed off to the next step.
 
 After identifying the first SCC, the algorithm uses the coloring method and Tarjan's serial algorithm to identify the SCCs in the remaining vertices.
@@ -56,13 +57,12 @@ number of vertices in each strongly connected component. |`+BOOL+`
 
 == Result
 
-When `+to_show_cc_count+` is set to true, the algorithm will return the
+When `+to_show_cc_count+` is set to `true`, the algorithm will return the
 number of strongly connected components in the graph.
 
 == Example
 
-Suppose we have the following graph. We can see there are 7 strongly
-connected components. With two of them containing more than 1 vertices.
+Suppose we have the following graph. We can see there are seven strongly connected components, with two of them containing more than 1 vertices.
 The five vertices on the left are each a strongly connected component
 individually.
 

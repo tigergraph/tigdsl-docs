@@ -1,6 +1,8 @@
 = Community Algorithms
 :description: Overview of community algorithms.
 
+Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community[Community Algorithms]
+
 Community algorithms group together vertices or edges that satisfy some rule for being connected to one another. 
 Community algorithms are different from xref:classification-algorithms:index.adoc[classification] algorithms because classification does not necessarily consider connections.
 
