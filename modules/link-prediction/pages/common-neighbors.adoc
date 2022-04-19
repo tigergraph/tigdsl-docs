@@ -1,5 +1,7 @@
 = Common Neighbors
 
+Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/common_neighbors[Common Neighbors]
+
 The common neighbors algorithm calculates the number of common neighbors between two vertices.
 
 == Specification

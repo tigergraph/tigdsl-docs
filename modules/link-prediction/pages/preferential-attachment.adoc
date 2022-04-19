@@ -1,6 +1,8 @@
 = Preferential Attachment
 :stem: latex
 
+Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/preferential_attachment[Preferential Attachment]
+
 Preferential Attachment is a measure to compute the closeness of vertices, based on the number of their neighbors. The algorithm returns the product two vertices' number of neighbors.
 
 For more information, see https://en.wikipedia.org/wiki/Preferential_attachment[Preferential Attachment].

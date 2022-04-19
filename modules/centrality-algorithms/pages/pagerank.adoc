@@ -1,5 +1,7 @@
 = PageRank
 
+Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
+
 The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it. A vertex's influence tends to increase if (1) it has more referring vertices or if (2) its referring vertices have higher influence. The analogy to social influence is clear.
 
 A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is *proportional to the probability that a random network surfer will be at that vertex at any given time.* *A vertex with a high PageRank score is a vertex that is frequently visited*, assuming that vertices are visited according to the following Random Surfer scheme:

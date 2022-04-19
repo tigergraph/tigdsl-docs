@@ -1,6 +1,8 @@
 = Node2Vec
 :description: TigerGraph's implementation of the Node2Vec algorithm.
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/Node2Vec[Node2Vec]
+
 Node2Vec is a node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
 
 A random walk starts with a node, and the algorithm iteratively selects neighboring nodes to visit, and each neighboring node has an assigned probability.

@@ -1,5 +1,7 @@
 = Minimum Spanning Tree
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/minimum_spanning_tree[Minimum Spanning Tree]
+
 Given an undirected and connected graph, a minimum spanning tree is a set of edges that can connect all the vertices in the graph with the minimal sum of edge weights. The library implements a parallel version of https://en.wikipedia.org/wiki/Prim%27s_algorithm[Prim's algorithm]:
 
 . Start with a set A = { a single vertex _seed_ }

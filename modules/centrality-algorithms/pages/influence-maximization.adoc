@@ -2,6 +2,8 @@
 :description: Overview of TigerGraph's Influence Maximization algorithm.
 :stem: latexmath
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/influence_maximization[Influence Maximization]
+
 Influence maximization is the problem of finding a small subset of vertices in a social network that could maximize the spread of influence.
 There are two versions of the Influence Maximization algorithm.
 Both versions find k vertices that maximize the expected spread of influence in the network.

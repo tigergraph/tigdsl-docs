@@ -1,6 +1,8 @@
 = Closeness Centrality
 :stem: latexmath
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/closeness[Closeness Centrality]
+
 We all have an intuitive understanding when we say a home, an office, or a store is "centrally located." Closeness Centrality provides a precise measure of how "centrally located" a vertex is. The steps below show the steps for one vertex `v`:
 
 |===
