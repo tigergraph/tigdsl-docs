@@ -1,6 +1,8 @@
 = Resource Allocation
 :stem: latex
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/resource_allocation[Resource Allocation]
+
 Resource Allocation is used to compute the closeness of nodes based on their shared neighbors. It is computed by the following formula:
 
 [stem]

@@ -1,6 +1,8 @@
 = Speaker-Listener Label Propagation
 :description: Overview of TigerGraph's Speaker-Listener Label Propagation.
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/speaker-listener_label_propagation[Speaker-Listener Label Propagation]
+
 The Speaker-listener Label Propagation Algorithm (SLPA) is a variation of the Label Propagation algorithm that is able to detect overlapping communities.
 The main difference between LPA and SLPA is that each node can only hold a single label in LPA while it is allowed to possess multiple labels in SLPA.
 

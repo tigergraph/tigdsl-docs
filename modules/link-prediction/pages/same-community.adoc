@@ -1,6 +1,8 @@
 = Same Community
 
-This algorithm takes two vertices, and returns 1 if they two vertices are in the same community, and returns 0 if they are not in the same community.
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/same_community[Same Community]
+
+This algorithm takes two vertices as input, returning 1 if the two vertices are in the same community, and returning 0 if they are not in the same community.
 
 NOTE: The algorithm assumes that community detection has already completed and that a community ID is stored in an integer attribute on each vertex.
 

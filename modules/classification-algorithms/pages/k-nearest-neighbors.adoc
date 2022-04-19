@@ -1,5 +1,7 @@
 = k-Nearest Neighbors
 
+Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/k_nearest_neighbors[k-Nearest Neighbors]
+
 The k-Nearest Neighbors (kNN) algorithm is one of the simplest classification algorithms. It assumes that some or all the vertices in the graph have already been classified. The classification is stored as an attribute called the label. The goal is to predict the label of a given vertex, by seeing what are the labels of the nearest vertices.
 
 Given a source vertex in the dataset and a positive integer _k_, the algorithm calculates the distance between this vertex and all other vertices and selects the _k_ vertices that are nearest. The prediction of the label of this node is the majority label among its k-nearest neighbors.

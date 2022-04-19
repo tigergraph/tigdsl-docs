@@ -1,5 +1,7 @@
 = Single-source Shortest Path (Weighted)
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/weighted[Single-source Shortest Path (Weighted)]
+
 Finding shortest paths in a graph with weighted edges is algorithmically harder than in an unweighted graph because even after you find a path to a vertex T, you cannot be certain that it is a shortest path. If edge weights are always positive, then you must keep trying until you have considered every in-edge to T. If edge weights can be negative, then it's even harder. You must consider all possible paths.
 
 A classic application for weighted shortest path is finding the shortest travel route to get from A to B. (Think of route planning "GPS" apps.) In general, any application where you are looking for the cheapest route is a possible fit.

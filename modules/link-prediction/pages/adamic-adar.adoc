@@ -1,5 +1,7 @@
-= Adamic Adair
+= Adamic Adar
 :stem: latexmath
+
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/adamic_adar[Adamic Adar]
 
 The Adamic/Adar index is a measure introduced in 2003 by Lada Adamic and Eytan Adar to predict links in a social network, according to the number of shared links between two nodes.
 It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two nodes.
@@ -13,7 +15,7 @@ Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
 == Specification
 [,gsql]
 ----
-CREATE QUERY tg_adamic_adair(VERTEX a, VERTEX b, SET<STRING> e_type)
+CREATE QUERY tg_adamic_adar(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
 === Time complexity

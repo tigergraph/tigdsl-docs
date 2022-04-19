@@ -2,6 +2,8 @@
 :description: Overview of TigerGraph's implementation of the Maximal Independent Set algorithm.
 :page-aliases: pathfinding-algorithms:maximal-independent-set.adoc
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set[Maximal Independent Set]
+
 An *independent set of vertices* does not contain any pair of vertices that are neighbors, i.e., ones which have an edge between them.
 A https://en.wikipedia.org/wiki/Maximal_independent_set[*maximal independent set* (MIS)] is the largest independent set that contains those vertices; you cannot improve upon it unless you start over with a different independent set.
 However, the search for the largest possible independent set is an NP-hard problem: there is no known algorithm that can find that answer in polynomial time. So we settle for the maximal independent set.

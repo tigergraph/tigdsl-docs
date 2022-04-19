@@ -1,7 +1,7 @@
 = TigerGraph Graph Data Science Library
 :page-aliases: intro:overview.adoc
 
-TigerGraph In-Database Graph Data Science Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
+TigerGraph In-Database Graph Data Science (GDS) Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
 Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
 
 We renamed our library (formerly known as GSQL Graph Algorithm Library) to emphasize our focus on machine learning and AI.
@@ -23,7 +23,8 @@ The library contains two folders: `algorithms` and `graphs`.
 
 === `algorithms`
 
-The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library.Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
+The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library.
+Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
 
 * *Centrality*
 * *Classification*
@@ -31,6 +32,9 @@ The `algorithms` folder contains the GSQL implementation of all the graph algori
 * *Node Embeddings*
 * *Path*
 * *Similarity*
+
+Each algorithm has its own subfolder under the category folder.
+Inside the algorithm folder, there might be further subfolders depending on whether the GDS Library provides different versions of the algorithm.
 
 [#_graphs]
 === `graphs`
@@ -47,24 +51,4 @@ Starting with TigerGraph product version 2.6, the GSQL Graph Algorithm Library h
 
 It is possible to run newer algorithms on an older product version, as long as the algorithm does not rely on features available only in newer product versions.
 
-== Run an algorithm
 
-All GSQL graph algorithms are schema-free, which means they are ready to use with any graph, regardless of the graph's data model or schema. The algorithms have run-time input parameters for the vertex type(s), edge type(s), and attributes which the user wishes to use.
-
-To use an  algorithm, the algorithm (GSQL query) must first be xref:gsql-ref:querying:query-operations.adoc#_install_query[installed]. If your database is on a distributed cluster, you should use the `DISTRIBUTED` option when installing the query to install it in xref:gsql-ref:querying:distributed-query-mode.adoc[Distributed Query Mode].
-
-Running an algorithm is the same as running a GSQL query. For example, if you selected the JSON option for xref:centrality-algorithms:pagerank.adoc[], you could run it from GSQL as below:
-
-[source,gsql]
-----
-GSQL > RUN QUERY tg_pageRank("Page","Links_to",_,30,_,50,_,_,_)
-----
-
-Installing a query also creates a REST endpoint. The same query could be run thus:
-
-[source,console]
-----
-curl -X GET 'http://127.0.0.1:9000/query/alg_graph/pageRank?v_type=Page&e_type=Links_to&max_iter=30&top_k=50'
-----
-
-GSQL lets you run queries from within other queries. This means you can use a library algorithm as a building block for more complex analytics.

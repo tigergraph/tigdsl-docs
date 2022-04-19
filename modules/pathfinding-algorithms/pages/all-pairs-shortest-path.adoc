@@ -1,5 +1,7 @@
 = All-Pairs Shortest Path
 
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path[All-Pairs Shortest Path]
+
 [CAUTION]
 ====
 The All-Pairs Shortest Path algorithm is costly for large graphs because the computation time is O(V{caret}3) and the output size is O(V{caret}2). Be cautious about running this on very large graphs.
@@ -20,7 +22,7 @@ CREATE QUERY tg_all_pairs_shortest(SET<STRING> v_type, SET<STRING> e_type,
 }
 ----
 
-This example highlights one of the strengths of GSQL: treating queries as stored procedures that can be called from within other queries. We only show the result_attr and file_path options, because subqueries cannot send their JSON output.
+This example highlights one of the strengths of GSQL: treating queries as stored procedures that can be called from within other queries. We only show the `result_attr` and `file_path` options, because subqueries cannot send their JSON output.
 
 For large graphs (with millions of vertices or more), however, this is an enormous task. While the massively parallel processing of the TigerGraph platform can speed up the computation by 10x or 100x, consider what it takes just to store or report the results. If there are 1 million vertices, then there are nearly 1 trillion output values.
 
