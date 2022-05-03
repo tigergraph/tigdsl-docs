@@ -1,0 +1,125 @@
+= All Paths (Single-Pair)
+:description: Overview of TigerGraph's implementation of the All Paths algorithm.
+:stem: latexmath
+
+Algorithm link: link:https://github.com/tigergraph/algos/tree/four_algos/algorithms/Path/path_between_two_vertices[All Paths (Single-Pair)]
+
+This algorithm finds and prints all paths between two input vertices.
+This is similar to the all-paths functionality in the standard GraphStudio viewer, except that it supports output of all vertices in all paths to a file or to the console.
+If you are using GraphStudio and only want a fast visual display of all paths, use the GraphStudio implementation instead of this algorithm.
+
+There are directional and bidirectional versions of this algorithm.
+
+== Specifications
+
+.Directional
+[.wrap,gsql]
+----
+CREATE QUERY tg_find_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
+  BOOL print_accum = TRUE, STRING file_path = "")
+----
+
+.Bidirectional
+[.wrap,gsql]
+----
+CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
+  BOOL print_accum = TRUE, STRING file_path = "")
+----
+
+=== Time complexity
+
+stem:[O(1)-O(VE)]
+
+=== Space complexity
+
+stem:[O(1)-O(V^2E)]
+
+== Parameters
+
+|===
+|Parameter |Data type |Description
+
+|`source_v`
+|`VERTEX`
+|Source vertex where the paths start.
+
+|`target_v`
+|`VERTEX`
+|Target vertex where the paths end.
+
+|`maxDepth`
+|`INT`
+|The maximum length of the path returned.
+
+|`print_accum`
+|`BOOL`
+|If `true`, write output to the console in JSON format.
+
+|`file_path`
+|`SET<STRING>`
+|If not empty, write output to this file.
+|===
+
+== Result
+
+In both JSON and CSV outputs, the result is a list of vertices visited on each path.
+
+== Example
+
+Suppose we have a large network of consumers, products, and the contexts in which the products are used.
+We want to find the contexts in which products `P001` and `P002` are both used.
+
+image:single-pair-all-paths.png[]
+
+This image was generated from GraphStudio using the Find Paths option in the Explore Graph window and limiting the maximum depth, or number of vertices in the path, to 3.
+
+The paths can also be output in JSON format to the console or CSV format to a file using the all-paths algorithm.
+
+.Query
+[.wrap,gsql]
+----
+RUN QUERY tg_find_all_path("P001", "P002", 3, TRUE, "/home/tigergraph/output.csv")
+----
+
+.Result
+[tabs]
+====
+JSON::
++
+--
+[.wrap,json]
+----
+[
+  {
+    "path": [
+      [
+        "P001",
+        "GW",
+        "P002"
+      ],
+      [
+        "P001",
+        "T3",
+        "P002"
+      ],
+      [
+        "P001",
+        "T4",
+        "P002"
+      ]
+    ]
+  }
+]
+----
+--
+CSV::
++
+--
+[,csv]
+----
+P001,GW,P002
+P001,T3,P002
+P001,T4,P002
+----
+--
+====
