@@ -22,7 +22,7 @@ CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
 ----
 
 === Time complexity
-The algorithm has a time complexity of stem:[O(E)], where _E_ = number of edges.
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
 Parallel processing reduces the time needed for computation.
 

@@ -16,7 +16,7 @@ It is not common to count triangles in directed graphs, though it is certainly p
 * if A-->C, we have a "shortcut".
 * if C-->A, then we have a feedback loop.
 
-This algorithm can only be run on TigerGraph V3.1 or higher.
+This algorithm can only be run on TigerGraph v3.1 or higher.
 
 == Specifications
 
@@ -36,6 +36,10 @@ tri_count_fast() is a smarter algorithm which does two passes over the edges. In
 tg_tri_count_fast(STRING v_type, STRING e_type)
 ----
 
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
+
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -46,7 +50,6 @@ tg_tri_count_fast(STRING v_type, STRING e_type)
 `+e_type+`: Edge type to traverse
 
 |Result Size |1 integer
-|Time Complexity |O(V * E), V = number of vertices, E = number of edges
 |Graph Types |Undirected edges
 |===
 

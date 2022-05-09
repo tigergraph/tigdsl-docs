@@ -1,5 +1,7 @@
 = k-Nearest Neighbors (Cross-Validation Version)
 
+:stem: latexmath
+
 k-Nearest Neighbors (kNN) is often used for machine learning. You can choose the value for `topK` based on your experience, or using cross-validation to optimize the hyperparameters. In our library, Leave-one-out cross-validation for selecting optimal _k_ is provided. Given a _k_ value, we run the algorithm repeatedly using every vertex with a known label as the source vertex and predict its label. We assess the accuracy of the predictions for each value of _k_, and then repeat for different values of k in the given range. The goal is to find the value of k with highest predicting accuracy in the given range, for that dataset.
 
 == Specifications
@@ -9,6 +11,9 @@ k-Nearest Neighbors (kNN) is often used for machine learning. You can choose the
 tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
 ----
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(max\_k*\frac{E^2}{V})], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
 
 [width="100%",cols="<5%,<50%",options="header",]
 |===
@@ -32,9 +37,6 @@ vertex
 * `+INT max_k+`: upper bound of k (inclusive)
 
 |Result Size |max_k-min_k+1
-
-|Time Complexity |O(max_k*E^2 / V), V = number of vertices, E = number
-of edges
 
 |Graph Types |Undirected or directed edges, weighted edges
 |===

@@ -1,7 +1,7 @@
 = Weakly Connected Components
 :description: TigerGraph's implementation of an algorithm to find weakly connected components in a graph.
 
-Algorithm link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/connected_components/weakly_connected_components[Weakly Connected Components]
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/connected_components/weakly_connected_components[Weakly Connected Components]
 
 A connected component is the maximal set of connected vertices, plus their connecting edges.
 In a connected component, you can reach each vertex from each other vertex.
@@ -19,6 +19,9 @@ image::conn_comp_result.png[Visualized results of example query on social10 grap
 CREATE QUERY tg_wcc (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
     BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
+
+This algorithm has a time complexity of stem:[O(E*d], where stem:[E] is the number of edges and stem:[d] is the maximum component diameter.
+
 
 [width="100%",cols="<5,<50%",options="header",]
 |===
@@ -39,9 +42,6 @@ JSON.
 * *`+STRING file_path+`:* If not empty, write output to this file.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(E*d), E = number of edges, d = max(diameter of
-components)
 
 |Graph Types |Undirected edges
 |===

@@ -23,7 +23,7 @@ UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
 ....
 
 === Time complexity
-The algorithm has a time complexity of stem:[O(E*d)], _E_ = number of edges, _d_ = max(diameter of components).
+The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
 
 == Parameters
 

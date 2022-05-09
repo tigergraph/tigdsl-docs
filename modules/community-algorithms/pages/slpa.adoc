@@ -14,11 +14,14 @@ For more information, see https://arxiv.org/pdf/1109.5720.pdf[SLPA: Uncovering O
 
 == Specifications
 
-[.wrap,gsql]
-....
+[source.wrap,gsql]
+----
 CREATE QUERY tg_slpa (SET<STRING> v_type, SET<STRING> e_type, FLOAT threshold, INT max_iter, INT output_limit,
 BOOL print_accum = TRUE, STRING file_path = "")
-....
+----
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 [cols=",",options="header",]
 |===
@@ -36,8 +39,6 @@ a|* `v_type`: vertex types to traverse
 * `output_limit`: max #vertices to output (-1 = all)
 
 |Result size |V = number of vertices
-
-|Time complexity |O(E*k), E = number of edges, k = number of iterations.
 
 |Graph types |Undirected edges
 |===

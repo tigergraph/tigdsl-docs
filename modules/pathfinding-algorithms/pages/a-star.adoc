@@ -22,10 +22,15 @@ from source to target.
 
 == Specifications
 
-....
+[source.wrap, gsql]
+----
 CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex, SET<STRING> e_type, STRING wt_type,
 STRING wt_attr, BOOL display = False)
-....
+----
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
 
 [cols=",",options="header",]
 |===
@@ -42,8 +47,6 @@ a|* *source_vertex*: start vertex
 * *display*: output edges for visualization
 
 |Result Size |1
-
-|Time Complexity |O(V^2), V = number of vertices.
 
 |Graph Types |Directed or Undirected edges, Weighted edges
 |===

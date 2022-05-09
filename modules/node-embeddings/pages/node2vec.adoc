@@ -1,5 +1,6 @@
 = Node2Vec
 :description: TigerGraph's implementation of the Node2Vec algorithm.
+:experimental:
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/Node2Vec[Node2Vec]
 
@@ -12,7 +13,7 @@ For each node we will be left with a list of other nodes from their local or ext
 Once the above step is complete, the algorithm uses a variation of the word2vec model from the language modeling community to turn each node into a vector of probabilities.
 The probabilities represent the likelihood of visiting a given node in a random walk from each starting node.
 
-== Specification
+== Specifications
 
 [source,gsql]
 ----

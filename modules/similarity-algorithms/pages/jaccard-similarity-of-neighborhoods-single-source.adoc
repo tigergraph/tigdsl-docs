@@ -16,13 +16,16 @@ The value ranges from 0 to 1. If A and B are identical, then Jaccard(A, B) = 1. 
 
 == Specifications
 
-In the current
-
 [,gsql]
 ----
 tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k = 100,
   BOOL print_accum = TRUE, STRING similarity_edge_type = "",STRING file_path = "")
 ----
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
+
 
 [width="100%",cols="<5%,<50%",options="header",]
 |===
@@ -51,8 +54,6 @@ saved to this edge
 path in CSV format
 
 |Result Size |`+top_k+`
-
-|Time Complexity |O(D^2), D = outdegree of vertex v
 
 |Graph Types |Undirected or directed edges, unweighted edges
 |===

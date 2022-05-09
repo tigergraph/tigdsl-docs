@@ -1,4 +1,5 @@
 = SCC (Small-World Optimized)
+:experimental:
 
 In addition to the regular strongly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small-world graph in this context means the graph has a hub community, where a vast majority of the vertices of the graph are weakly connected.
@@ -26,8 +27,7 @@ CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING re_type,
 
 === Time complexity
 
-The algorithm has a time complexity of O(V + E), where V is the number
-of vertices and E is the number of edges in the graph.
+The algorithm has a time complexity of stem:[O(V + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
 == Parameters
 

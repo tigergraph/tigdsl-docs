@@ -7,18 +7,25 @@ The Betweenness Centrality of a vertex is defined as the number of shortest path
 
 [stem]
 ++++
-BC(v) =\sum_{s \ne v \ne t}PD_{st}(v)= \sum_{s \ne v \ne t} SP_{st}(v)/SP_{st} ,
+BC(v) =\sum_{s \ne v \ne t}PD_{st}(v)= \sum_{s \ne v \ne t} SP_{st}(v)/SP_{st}
 ++++
 
-where stem:[PD]is called the pair dependency, stem:[SP_{st}]is the total number of shortest paths from node `s` to node `t` and stem:[SP_{st}(v)]is the number of those paths that pass through `v`.
+where stem:[PD] is the pair dependency, stem:[SP_{st}]is the total number of shortest paths from node `s` to node `t` and stem:[SP_{st}(v)]is the number of those paths that pass through `v`.
 
-The TigerGraph implementation is based on A Faster Algorithm for Betweenness Centrality by Ulrik Brandes, Journal of Mathematical Sociology 25(2):163-177, (2001). For every vertex `s` in the graph, the pair dependency starting from vertex `s` to all other vertices `t` via all other vertices `v` is computed first,
+The TigerGraph implementation is based on _A Faster Algorithm for Betweenness Centrality by Ulrik Brandes, Journal of Mathematical Sociology 25(2):163-177, (2001)._
+For every vertex `s` in the graph, the pair dependency starting from vertex `s` to all other vertices `t` via all other vertices `v` is computed first:
 
-stem:[PD_{s*}(v) = \sum_{t:s \in V} PD_{st}(v)].
+[stem]
+++++
+PD_{s*}(v) = \sum_{t:s \in V} PD_{st}(v)
+++++
 
 Then betweenness centrality is computed as
 
-stem:[BC(v) =\sum_{s:s \in V}PD_{s*}(v)/2].
+[stem]
+++++
+BC(v) =\sum_{s:s \in V}PD_{s*}(v)/2
+++++
 
 According to Brandes, the accumulated pair dependency can be calculated as
 
@@ -27,14 +34,17 @@ According to Brandes, the accumulated pair dependency can be calculated as
 PD_{s*}(v) =\sum_{w:v \in P_s(w)} SP_{sv}(v)/SP_{sw} \cdot (1+PD_{s*}(w)) ,
 ++++
 
-wherestem:[P_s(w)], the set of predecessors of vertex `w` on shortest paths from `s`, is defined as
+where stem:[P_s(w)], the set of predecessors of vertex `w` on shortest paths from `s`, is defined as
 
 [stem]
 ++++
 P_s(w) = \{u \in V: \{u, w\} \in E, dist(s,w) = dist(s,u)+dist(u,w) \} .
 ++++
 
-For every vertex, the algorithm works in two phases. The first phase calculates the number of shortest paths passing through each vertex. Then starting from the vertex on the most outside layer in a non-incremental order with pair dependency initial value of 0, traverse back to the starting vertex
+For every vertex, the algorithm works in two phases.
+The first phase calculates the number of shortest paths passing through each vertex.
+Then starting from the vertex on the most outside layer in a non-incremental order with pair dependency initial value of 0, traverse back to the starting vertex.
+
 
 [CAUTION]
 ====
@@ -49,6 +59,13 @@ CREATE QUERY tg_betweenness_cent(SET<STRING> v_type, SET<STRING> e_type,
 STRING re_type,INT max_hops=10, INT top_k=100, BOOL print_accum = True,
 STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the number of edges and stem:[V] is the number of vertices.
+
+Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
+Parallel processing reduces the time needed for computation.
 
 == *Parameters*
 
@@ -73,13 +90,6 @@ many scores
 JSON output, so that the full graph can be displayed.
 
 |Result Size |V = number of vertices
-
-|Time Complexity a|
-O(E*V), E = number of edges, V = number of vertices.
-
-Considering the high time cost of running this algorithm on a big graph,
-the users can set a maximum number of iterations. Parallel processing
-reduces the time needed for computation.
 
 |Graph Types |Undirected edges, Unweighted edges
 |===
