@@ -19,14 +19,14 @@ follow the steps in link:[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.
 
-== Specification
+== Specifications
 
 ....
 pearson_similarity_accum(A, B)
 ....
 
 === Time complexity
-The algorithm has a complexity of stem:[O(n)], where _n_ is the number of dimensions of the vectors.
+The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
 
 == Parameters
 

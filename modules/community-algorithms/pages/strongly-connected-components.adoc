@@ -27,6 +27,10 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
   BOOL print_accum = TRUE, STRING attr= "", STRING file_path="")
 ----
 
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
+
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -51,8 +55,6 @@ after several iterations; usually a small number(3 to 10)
 * *`+STRING file_path+`:* If not empty, write output to this file.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(iter*d), d = max(diameter of components)
 
 |Graph Types |Directed edges with reverse direction edges as well
 |===

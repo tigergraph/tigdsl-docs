@@ -30,6 +30,10 @@ tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
   BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the lesser of either the maximum cycle length or the depth parameter.
+
+
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -52,11 +56,6 @@ of iterations
 Number of cycles * average cycle length
 
 Both of these measures are not known in advance.
-
-|Time Complexity a|
-O(E *k), E = number of edges.
-
-k = min(max. cycle length, depth parameter)
 
 |Graph Types |Directed
 |===

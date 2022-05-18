@@ -6,7 +6,7 @@ This algorithm computes the same similarity scores as the xref:jaccard-similarit
 
 Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into.
 
-This algorithm has a time complexity of _O(E)_, where E is the number of edges, and runs on graphs with unweighted edges (directed or undirected).
+This algorithm runs on graphs with unweighted edges (directed or undirected).
 
 == Specifications
 
@@ -17,6 +17,11 @@ CREATE QUERY tg_jaccard_nbor_ap_batch ( INT top_k = 10, SET<STRING> v_type,
     STRING similarity_edge, INT src_batch_num = 50, INT nbor_batch_num = 10,
     BOOL print_accum = true, INT print_limit = 50, STRING file_path = "")
 ----
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
 
 == Parameters
 

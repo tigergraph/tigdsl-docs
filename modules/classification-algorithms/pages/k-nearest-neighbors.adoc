@@ -18,6 +18,9 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
   RETURNS (STRING)
 ----
 
+=== Time complexity
+This algorithm has a complexity of stem:[O(D^2)], where stem:[D] is the outdegree of the given vertex.
+
 [width="100%",cols=",<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -47,8 +50,6 @@ file path in CSV format
 * `+STRING attr+`: Vertex attribute to save the predicted label as.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(D^2), D = outdegree of vertex v
 
 |Graph Types |Undirected or directed edges, weighted edges
 |===
@@ -122,4 +123,3 @@ If Jing had label "b", then there would be 2 "b"s, so "b" would be the predictio
 
 If Jing had label "a", then there would be 2 "a"s, so "a" would be the prediction.
 
-###

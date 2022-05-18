@@ -5,6 +5,7 @@
 :fn-lu: footnote:[Lu, Hao, Mahantesh Halappanavar, and Ananth Kalyanaraman. "Parallel heuristics for scalable community detection." Parallel Computing 47 (2015): 19-37.]
 :page-aliases: graph-ml:community-algorithms:louvain-method-with-parallelism-and-refinement.adoc
 :stem: latexmath
+:experimental:
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/louvain[Louvain]
 
@@ -44,7 +45,7 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 ----
 
 === Time complexity
-This algorithm has a time complexity of stem:[O(V^2*L)], where _V_ is the number of vertices and L is total number of iterations.
+This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
 
 === Graph type
 Runs on graph with undirected, weighted edges

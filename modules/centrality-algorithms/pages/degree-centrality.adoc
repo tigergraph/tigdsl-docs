@@ -11,7 +11,7 @@ interpreted in terms of the immediate risk of a node for catching
 whatever is flowing through the network (such as a virus, or some
 information).
 
-== Specification
+== Specifications
 
 ....
 CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
@@ -21,7 +21,7 @@ CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
 ....
 
 === Time complexity
-The algorithm has a time-complexity of stem:[O(E)], where _E_ is the total number of edges in the graph.
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
 
 == Parameters
 

@@ -11,14 +11,14 @@ Resource Allocation is used to compute the closeness of nodes based on their sha
 ++++
 Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
 
-== Specification
+== Specifications
 [,gsql]
 ----
 CREATE QUERY tg_resource_allocation(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
 === Time complexity
-The algorithm has a time complexity of stem:[O(D1 + D2)], where _D1_ and _D2_ are the degrees of the two vertices.
+The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 == Parameters
 [cols="1,1,1"]

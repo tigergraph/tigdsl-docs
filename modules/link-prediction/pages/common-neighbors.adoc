@@ -4,14 +4,14 @@ Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 The common neighbors algorithm calculates the number of common neighbors between two vertices.
 
-== Specification
+== Specifications
 [,gsql]
 ----
 CREATE QUERY tg_common_neighbors(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
 === Time complexity
-The algorithm has a time complexity of stem:[O(D1 + D2)], where _D1_ and _D2_ are the degrees of the two vertices.
+The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 == Parameters
 [cols="1,1,1"]

@@ -11,6 +11,9 @@ tg_knn_cosine_all(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
   STRING file_path = "", STRING attr = "")
 ----
 
+=== Time complexity
+This algorithm has a complexity of stem:[O(E^2 / V)], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
+
 [width="100%",cols="<5,<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -39,9 +42,6 @@ file path in CSV format
 * `+STRING attr+`: Vertex attribute to save the predicted label as.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(E^2 / V), V = number of vertices, E = number of
-edges
 
 |Graph Types |Undirected or directed edges, weighted edges
 |===

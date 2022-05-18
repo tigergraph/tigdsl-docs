@@ -12,14 +12,14 @@ It is defined as the sum of the inverse logarithmic degree centrality of the nei
 ++++
 Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
 
-== Specification
+== Specifications
 [,gsql]
 ----
 CREATE QUERY tg_adamic_adar(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
 === Time complexity
-The algorithm has a time complexity of stem:[O(D1 + D2)], where _D1_ and _D2_ are the degrees of the two vertices.
+The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 == Parameters
 

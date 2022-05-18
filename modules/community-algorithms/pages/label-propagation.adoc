@@ -17,6 +17,11 @@ In a variant version, some vertices could initially be known to belong to the sa
 tg_label_prop (SET<STRING> v_type, SET<STRING> e_type, INT max_iter, INT output_limit,
 BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
 ----
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
@@ -35,8 +40,6 @@ this attribute
 * *`+STRING file_path+`:* If not empty, write output to this file.
 
 |Result Size |V = number of vertices
-
-|Time Complexity |O(E*k), E = number of edges, k = number of iterations.
 
 |Graph Types |Undirected edges
 |===
