@@ -17,7 +17,7 @@ For more information, see http://infolab.stanford.edu/~backrub/google.html[the G
 
 [source,gsql]
 ----
-tg_pageRank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
+tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
 
 === Time complexity
@@ -62,9 +62,19 @@ JSON output, so that the full graph can be displayed.
 [source,gsql]
 ----
  # Use _ for default values
-RUN QUERY tg_pageRank("Person", "Friend", 0.001, 25, 0.85, 100 _, _, _, _)
+RUN QUERY tg_pagerank("Person", "Friend", 0.001, 25, 0.85, 100 _, _, _, _)
 ----
 
-We ran pageRank on our test10 graph (using Friend edges) with the following parameter values: damping=0.85, max_change=0.001, and max_iter=25. We see that Ivy (center bottom) has the highest pageRank score (1.12). This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person. Eddie and Justin have scores of exactly 1 because they do not have any out-edges. This is an artifact of our particular version pageRank. Likewise, Alex has a score of 0.15, which is (1-damping), because Alex has no in-edges.
+We ran PageRank on our `test10` graph (using Friend edges) with the following parameter values:
+
+* damping=0.85
+* max_change=0.001
+* max_iter=25
+
+We see that Ivy (center bottom) has the highest PageRank score (1.12).
+This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person.
+Eddie and Justin have scores of exactly 1 because they do not have any out-edges.
+This is an artifact of our particular version of PageRank.
+Likewise, Alex has a score of 0.15, which is (1-damping), because Alex has no in-edges.
 
 image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-LPHpImvh7Bprm_iF0cO%2F-LPI7RlT9vrlhXD3mCAE%2Fpagerank_result.png?alt=media&token=569f2b12-546b-4cd9-b5b4-e1d6b80fca25[Visualized results of example query on social10 graph, with Friend edges]

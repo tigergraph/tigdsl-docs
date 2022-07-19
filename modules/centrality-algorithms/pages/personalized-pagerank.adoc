@@ -6,7 +6,7 @@ In the original PageRank, the damping factor is the probability of the surfer co
 
 [source,gsql]
 ----
-tg_pageRank_pers(SET<VERTEX> source, STRING e_type,
+tg_pagerank_pers(SET<VERTEX> source, STRING e_type,
 FLOAT max_change=0.001, INT max_iter=25, FLOAT damping = 0.85, INT top_k = 100
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
@@ -18,7 +18,7 @@ We ran Personalized PageRank on the graph `social10` using Friend edges with the
 [source,gsql]
 ----
 # Using "_" to use default values
-RUN QUERY tg_pageRank_pers([("Fiona","Person")], "Friend", _, _, _, _, _, _,
+RUN QUERY tg_pagerank_pers([("Fiona","Person")], "Friend", _, _, _, _, _, _,
 _)
 ----
 
