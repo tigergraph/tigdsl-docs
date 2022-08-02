@@ -7,7 +7,7 @@ The TigerGraph Graph Data Science Library provides the following node embedding 
 
 * xref:node2vec.adoc[]
 * xref:fast-random-projection.adoc[]
-
+* xref:weisfeiler-lehman.adoc[]
 
 
 
