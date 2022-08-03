@@ -1,4 +1,5 @@
 = Weighted Degree Centrality
+:description: Overview of the weighted degree centrality algorithm.
 
 Algorithm: link:https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Centrality/degree/weighted/tg_weighted_degree_cent.gsql[Weighted Degree Centrality]
 
