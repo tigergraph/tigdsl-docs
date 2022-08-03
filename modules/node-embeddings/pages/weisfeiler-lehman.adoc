@@ -1,6 +1,8 @@
 = Weisfeiler-Lehman
-:description: Overview pf the Weisfeiler-Lehman for detecting isomorphic graphs.
+:description: Overview of the Weisfeiler-Lehman for detecting isomorphic graphs.
 :fn-iso-article: footnote:[David Bieber, The Weisfeiler-Lehman Isomorphism Test, https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/]
+
+Algorithm link: https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/weisfeiler_lehman[Weisfeiler-Lehman]
 
 This algorithm identifies isomorphic subgraphs in a graph, and labels the corresponding vertices isomorphic graphs.
 
@@ -24,10 +26,10 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
 ----
 
 === Time complexity
-stem:[O(V*E)]
+This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
 
 === Space complexity
-stem:[O(V)]
+This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
 
 == Parameters
 
@@ -49,7 +51,7 @@ stem:[O(V)]
 
 |`out_put_limit`
 |`INT`
-|If `print_accum` is set to true, print this number of vertices at the maximum.
+|If `print_accum` is set to true, print a maximum of this number of vertices..
 
 |`print_accum`
 |`BOOL`
@@ -68,7 +70,7 @@ stem:[O(V)]
 == Return value
 
 When `print_accum` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
-If two vertices share a label, it means that they are corresponding vertices in two isomorphic graphs.
+If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
 
 == Example
 
