@@ -1,0 +1,180 @@
+= Weisfeiler-Lehman
+:description: Overview of the Weisfeiler-Lehman for detecting isomorphic graphs.
+:fn-iso-article: footnote:[David Bieber, The Weisfeiler-Lehman Isomorphism Test, https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/]
+
+Algorithm link: https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/weisfeiler_lehman[Weisfeiler-Lehman]
+
+This algorithm identifies isomorphic subgraphs in a graph, and labels the corresponding vertices isomorphic graphs.
+
+Two graphs are considered isomorphic if there is a mapping between the nodes of the graphs that preserves node adjacencies.
+That is, a pair of nodes may be connected by an edge in the first graph if and only if the corresponding pair of nodes in the second graph is also connected by an edge in the same way.
+An example of two isomorphic graphs is shown here{fn-iso-article}:
+
+.Graph 1 and Graph 2 are isomorphic. The correspondence between nodes is illustrated by the node colors and numbers.
+image::graph-isomorphism.png[]
+
+This algorithm gives every vertex in the graph a label.
+It finds the isomorphic subgraphs, and gives every vertex in the isomorphic subgraphs the same label.
+
+== Specifications
+
+[,gsql]
+----
+CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
+    INT depth, INT out_put_limit, BOOL print_accum = TRUE,
+    STRING result_attr = "",STRING file_path = "")
+----
+
+=== Time complexity
+This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
+
+=== Space complexity
+This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
+
+== Parameters
+
+
+|===
+|Parameter |Type |Description
+
+|`v_type`
+|`STRING`
+|Vertex type to consider.
+
+|`e_type`
+|`STRING`
+|Edge type to traverse.
+
+|`depth`
+|`INT`
+|Number of hops to consider
+
+|`out_put_limit`
+|`INT`
+|If `print_accum` is set to true, print a maximum of this number of vertices..
+
+|`print_accum`
+|`BOOL`
+|If true, print JSON to standard output.
+
+|`result_attr`
+|`STRING`
+|If not empty, save the label of each vertex to this attribute.
+
+|`file_path`
+|`STRING`
+|If not empty, save the result in CSV format to this filepath.
+|===
+
+
+== Return value
+
+When `print_accum` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
+If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
+
+== Example
+
+Suppose we have the following graph:
+
+image::weisfeiler-lehman-ex.png[]
+
+We can see that there are two distinct subgraphs that are isomorphic.
+Running the algorithm on the graph produces the following results：
+
+[tabs]
+====
+Query::
++
+--
+[,gsql]
+----
+RUN QUERY tg_weisfeiler_lehman ("Person", "Friendship", 3, 8, true, _, _)
+----
+--
+Results::
++
+--
+We can see in the results that corresponding vertex pairs such as Emily and Jose share the same label.
+[,json]
+----
+[
+  {
+    "Start": [
+      {
+        "attributes": {
+          "@current_label": "237612459038074888",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Wyatt",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "13342665574248803982",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Emily",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "13342665574248803982",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Jose",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "6556095808804302272",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Thomas",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "13342665574248803982",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Amy",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "237612459038074888",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Dolores",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "13342665574248803982",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Jack",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@current_label": "6556095808804302272",
+          "@label_list": [],
+          "@previous_label": "1"
+        },
+        "v_id": "Ming",
+        "v_type": "Person"
+      }
+    ]
+  }
+]
+----
+--
+====
