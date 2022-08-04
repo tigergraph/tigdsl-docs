@@ -43,7 +43,7 @@ The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total numbe
 |`weight`
 |`STRING`
 |The name of the attribute that indicates the weight of the edge.
-The attribute itself must be of a numeric type.
+The attribute itself must be of type `INT`.
 
 |`in_degree`
 |`BOOL`

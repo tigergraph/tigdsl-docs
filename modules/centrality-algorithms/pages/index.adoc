@@ -17,6 +17,7 @@ The TigerGraph Graph Data Science Library provides the following centrality algo
 * xref:influence-maximization.adoc[]
 * xref:pagerank.adoc[]
 * xref:personalized-pagerank.adoc[]
+* xref:weighted-degree-centrality.adoc[]
 * xref:weighted-pagerank.adoc[]
 
 
