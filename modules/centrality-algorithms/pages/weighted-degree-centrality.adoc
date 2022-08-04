@@ -1,0 +1,80 @@
+= Weighted Degree Centrality
+:description: Overview of the weighted degree centrality algorithm.
+
+Algorithm: link:https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Centrality/degree/weighted/tg_weighted_degree_cent.gsql[Weighted Degree Centrality]
+
+Degree centrality is defined as the number of edges connected to a vertex.
+The degree can be interpreted in terms of the immediate risk of a vertex for catching whatever is flowing through the network.
+
+Weighted degree centrality allows you to assign weights to the edges connected to a vertex.
+
+== Specifications
+
+[,gsql]
+----
+CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
+    STRING re_type, STRING weight, BOOL in_degree = TRUE,
+    BOOL out_degree = TRUE, INT top_k=100, BOOL print_accum = TRUE,
+    STRING result_attr = "",STRING file_path = "")
+----
+
+=== Time complexity
+The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total number of edges in the graph.
+
+
+== Parameters
+
+
+|===
+|Parameter |Type |Description
+
+|`v_type`
+|`STRING`
+|Vertex type to traverse.
+
+|`e_type`
+|`STRING`
+|Edge type to traverse.
+
+|`re_type`
+|`STRING`
+|Reverse vertex type to traverse and calculate in-degree.
+
+|`weight`
+|`STRING`
+|The name of the attribute that indicates the weight of the edge.
+The attribute itself must be of type `INT`.
+
+|`in_degree`
+|`BOOL`
+|Whether to count incoming edges when calculating degree centrality.
+
+|`out_degree`
+|`BOOL`
+|Whether to count outgoing edges when calculating degree centrality.
+
+|`top_k`
+|`INT`
+|The number of vertices with the highest degree centrality to return.
+
+|`print_accum`
+|`BOOL`
+|If true, return JSON results to standard output.
+
+|`result_attr`
+|`STRING`
+|If not empty, save the degree centrality of each vertex to this attribute.
+
+|`file_path`
+|`STRING`
+|If not empty, output CSV results to this filepath.
+|===
+
+
+== Return value
+The vertices with the highest degree centrality scores along with their scores.
+
+== See also
+
+xref:degree-centrality.adoc[]
+
