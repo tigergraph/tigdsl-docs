@@ -1,68 +1,68 @@
-= Overview
+= はじめに
 
-TigerGraph In-Database Graph Data Science Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
-Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
+TigerGraphの「In-Databaseグラフデータサイエンスライブラリ」には、標準のグラフまたは機械学習のアルゴリズムが実装され、秀逸に作成されたGSQLクエリが多数用意されています。
+提供されている各アルゴリズムは、スタンドアローンのクエリとして、または大規模な分析アプリの構成要素として、そのままインストールして使用できます。
 
-We renamed our library (formerly known as GSQL Graph Algorithm Library) to emphasize our focus on machine learning and AI.
-As the world's only scalable graph analytics platform, TigerGraph is committed to providing the best graph analytics framework for data scientists.
+このライブラリの名前は、TigerGraphが機械学習とAIに注力していることを強調するため改名したもので、以前は「GSQLグラフアルゴリズムライブラリ」と呼ばれていました。
+世界唯一のスケーラブルなグラフ分析プラットフォームとして、TigerGraphは、データサイエンス分野の専門家のために最も優秀なグラフ分析のフレームワークを提供することを使命としています。
 
-GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:
+TigerGraphプラットフォーム上で動作するGSQLには次の特徴があり、グラフアルゴリズムに特に適しています。
 
-* *Turing-complete* with full support for imperative and procedural programming, ideal for algorithmic computation.
-* *Parallel and Distributed Processing,* enabling computations on larger graphs.
-* *User-Extensible*. Because the algorithms are written in standard GSQL and compiled by the user,  they are easy to modify and customize.
-* *Open-Source*. Users can study the GSQL implementations to learn by example, and they can develop and submit additions to the library.
+* *チューリング完全* 命令型プログラミングと手続き型プログラミングに完全に対応しているのでアルゴリズムを使用した計算に理想的
+* *並列分散処理対応* 両方の手法が使えるので大容量のグラフの計算が可能
+* *ユーザーによる拡張が可能* アルゴリズムは標準GSQLを使って作成されているので、ユーザー自身によるコンパイル、変更、カスタマイズが簡単
+* *オープンソース* GSQLの実装例から学んで、ユーザーが開発したアルゴリズムをライブラリに追加することが可能
 
-== Library Structure
+== ライブラリの構造
 
-You can download the library from GitHub: +
+ライブラリはGitHubからダウンロードできます。 +
 https://github.com/tigergraph/gsql-graph-algorithms[https://github.com/tigergraph/gsql-graph-algorithm]
 
-The library contains two folders: `algorithms` and `graphs`.
+ライブラリは2部構成で、`algorithms`(アルゴリズム) と`graphs`(グラフ) のフォルダがあります。
 
-=== `algorithms`
+=== `algorithms`フォルダ
 
-The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library. Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
+`algorithms`フォルダには、 ライブラリ内のすべてのグラフアルゴリズムのGSQL実装が収納されています。アルゴリズムのフォルダの中には、次の6つのアルゴリズムのクラス別にサブフォルダがあります。
 
-* *Centrality*
-* *Classification*
-* *Community*
-* *Node Embeddings*
-* *Path*
-* *Similarity*
+* *Centrality（中心性）*
+* *Classification（区分）*
+* *Community（コミュニティ）*
+* *Node Embeddings（ノード埋め込み）*
+* *Path（パス）*
+* *Similarity（類似度）*
 
-=== `graphs`
+=== `graphs`フォルダ
 
-The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms. In this document, we use the test graphs to show you the expected result for each algorithm. The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
+`graphs`フォルダには、アルゴリズムの試用に使える小さなグラフのサンプルが入っています。このドキュメントでは、テストグラフを使って、各アルゴリズムの結果がどのようなものになるか説明します。テストグラフは小さいので、結果を手計算することができ、直感的に答えがわかるような場合もあります。
 
-=== Release Branches
+=== リリースブランチ
 
-Starting with TigerGraph product version 2.6, the GSQL Graph Algorithm Library has release branches:
+TigerGraphの製品バージョン 2.6以降、GSQLグラフアルゴリズムライブラリはリリースがブランチ分けされています。
 
-* *Product version branches* (2.6, 3.0, etc.) are snapshots created shortly after a product version is released. They contain the best version of the graph algorithm library at the time of that product version's initial release. They will not be updated, except to fix bugs.
-* *Master branch*: the newest released version.  This should be at least as new as the newest. It may contain new or improved algorithms.
-* Other branches are development branches.
+* *製品バージョンのブランチ* （2.6、3.0、など）は、製品のバージョンがリリースされた後に作成されたスナップショットです。各バージョンの初回リリース時のグラフアルゴリズムライブラリのベスト版が収納されています。バグの修正がない限り、変更されません。
+* *マスターブランチ*は直近でリリースされたバージョンです。最新のリリースと同じはずです。新しいアルゴリズムや改善されたアルゴリズムが含まれている可能性があります。
+* その他のブランチは開発用です。
 
-It is possible to run newer algorithms on an older product version, as long as the algorithm does not rely on features available only in newer product versions.
+新バージョンにのみ利用可能な機能に依存しない限り、古い製品バージョンで、その後リリースされた新しいアルゴリズムを実行することは可能です。
 
-== Run an algorithm
+== アルゴリズムの実行
 
-All GSQL graph algorithms are schema-free, which means they are ready to use with any graph, regardless of the graph's data model or schema. The algorithms have run-time input parameters for the vertex type(s), edge type(s), and attributes which the user wishes to use.
+すべてのGSQLのグラフアルゴリズムはスキーマフリーであり、データモデルやスキーマに関係なく、どのようなグラフでも対応して使用できます。アルゴリズムの実行時には、ユーザーが使用したい頂点タイプ、エッジタイプ、属性のパラメータを入力します。
 
-To use an  algorithm, the algorithm (GSQL query) must first be xref:gsql-ref:querying:query-operations.adoc#_install_query[installed]. If your database is on a distributed cluster, you should use the `DISTRIBUTED` option when installing the query to install it in xref:gsql-ref:querying:distributed-query-mode.adoc[Distributed Query Mode].
+アルゴリズムを使うには、まずアルゴリズム（GSQLクエリ）を xref:gsql-ref:querying:query-operations.adoc#_install_query[インストール]する必要があります。お使いのデータベースが分散クラスタ上にある場合には、`DISTRIBUTED`（分散）オプションを使って、クエリをxref:gsql-ref:querying:distributed-query-mode.adoc[Distributed Query Mode（分散クエリモード）]でインストールしてください。
 
-Running an algorithm is the same as running a GSQL query. For example, if you selected the JSON option for xref:centrality-algorithms:pagerank.adoc[], you could run it from GSQL as below:
+アルゴリズムの実行はGSQLクエリの実行と同じです。例えば、 xref:centrality-algorithms:pagerank.adoc[]でJSONオプションを選択した場合、GSQLから次のように実行します。
 
 [source,gsql]
 ----
 GSQL > RUN QUERY tg_pageRank("Page","Links_to",_,30,_,50,_,_,_)
 ----
 
-Installing a query also creates a REST endpoint. The same query could be run thus:
+クエリをインストールすると、RESTエンドポイントが作成されます。同じクエリでも次のように実行できるようになります。
 
 [source,console]
 ----
 curl -X GET 'http://127.0.0.1:9000/query/alg_graph/pageRank?v_type=Page&e_type=Links_to&max_iter=30&top_k=50'
 ----
 
-GSQL lets you run queries from within other queries. This means you can use a library algorithm as a building block for more complex analytics.
+GSQLでは、クエリの中から、別のクエリを実行することもできます。ということは、ライブラリにあるアルゴリズムを構成要素として、より複雑な分析が構築できるということです。
