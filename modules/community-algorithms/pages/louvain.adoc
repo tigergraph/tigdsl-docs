@@ -3,7 +3,6 @@
 :fn-blondel: footnote:[Blondel, Vincent D., et al. "Fast unfolding of communities in large networks." Journal of statistical mechanics: theory and experiment 2008.10 (2008): P10008.]
 :fn-staudt: footnote:[Staudt, Christian L., and Henning Meyerhenke. "Engineering parallel algorithms for community detection in massive networks." IEEE Transactions on Parallel and Distributed Systems 27.1 (2016): 171-184.]
 :fn-lu: footnote:[Lu, Hao, Mahantesh Halappanavar, and Ananth Kalyanaraman. "Parallel heuristics for scalable community detection." Parallel Computing 47 (2015): 19-37.]
-:page-aliases: graph-ml:community-algorithms:louvain-method-with-parallelism-and-refinement.adoc
 :stem: latexmath
 :experimental:
 

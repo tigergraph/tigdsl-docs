@@ -1,11 +1,7 @@
 = TigerGraph Graph Data Science Library
 :page-aliases: intro:overview.adoc
 
-TigerGraph In-Database Graph Data Science (GDS) Library is a collection of expertly written GSQL queries, each of which implements a standard graph or machine learning algorithm.
-Each algorithm is ready to be installed and used, either as a stand-alone query or as a building block of a larger analytics application.
-
-We renamed our library (formerly known as GSQL Graph Algorithm Library) to emphasize our focus on machine learning and AI.
-As the world's only scalable graph analytics platform, TigerGraph is committed to providing the best graph analytics framework for data scientists.
+TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 expertly written, ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
 
 GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:
 
@@ -13,6 +9,104 @@ GSQL running on the TigerGraph platform is particularly well-suited for graph al
 * *Parallel and Distributed Processing,* enabling computations on larger graphs.
 * *User-Extensible*. Because the algorithms are written in standard GSQL and compiled by the user,  they are easy to modify and customize.
 * *Open-Source*. Users can study the GSQL implementations to learn by example, and they can develop and submit additions to the library.
+
+== Quick Links
+
+[cols="3,3,3",grid=none,frame=none]
+
+|===
+a|
+=== xref:centrality-algorithms:index.adoc[Centrality]
+
+Centrality algorithms find the important vertices in a graph based on their connections with other vertices.
+
+* xref:centrality-algorithms:approximate-closeness-centrality.adoc[]
+* xref:centrality-algorithms:article-rank.adoc[]
+* xref:centrality-algorithms:betweenness-centrality.adoc[]
+* xref:centrality-algorithms:closeness-centrality.adoc[]
+* xref:centrality-algorithms:degree-centrality.adoc[]
+* xref:centrality-algorithms:eigenvector-centrality.adoc[]
+* xref:centrality-algorithms:harmonic-centrality.adoc[]
+* xref:centrality-algorithms:influence-maximization.adoc[]
+* xref:centrality-algorithms:pagerank.adoc[]
+* xref:centrality-algorithms:personalized-pagerank.adoc[]
+* xref:centrality-algorithms:weighted-degree-centrality.adoc[]
+* xref:centrality-algorithms:weighted-pagerank.adoc[]
+
+a|
+=== xref:classification-algorithms:index.adoc[Classification]
+
+Classification algorithms label vertices to sort them into various defined classes.
+
+* xref:classification-algorithms:greedy-graph-coloring.adoc[]
+* xref:classification-algorithms:k-nearest-neighbors.adoc[]
+* xref:classification-algorithms:k-nearest-neighbors-batch.adoc[]
+* xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
+* xref:classification-algorithms:maximal-independent-set.adoc[]
+
+
+a|
+=== xref:link-prediction:index.adoc[Link Prediction]
+
+Topological link prediction algorithms determine the closeness of a pair of vertices to make predictions about their relationships.
+
+* xref:link-prediction:adamic-adar.adoc[]
+* xref:link-prediction:common-neighbors.adoc[]
+* xref:link-prediction:preferential-attachment.adoc[]
+* xref:link-prediction:resource-allocation.adoc[]
+* xref:link-prediction:same-community.adoc[]
+* xref:link-prediction:total-neighbors.adoc[]
+
+|===
+
+[cols="3,3,3",grid=none,frame=none]
+|===
+a|
+=== xref:node-embeddings:index.adoc[Node Embedding]
+
+Node embeddings are vector representations of vertex properties in a graph.
+
+
+* xref:node-embeddings:node2vec.adoc[]
+* xref:node-embeddings:fast-random-projection.adoc[]
+* xref:node-embeddings:weisfeiler-lehman.adoc[]
+
+a|
+=== xref:pathfinding-algorithms:index.adoc[Pathfinding]
+
+Pathfinding algorithms find the best path(s) among a set of vertices according to length or cost.
+
+* xref:pathfinding-algorithms:a-star.adoc[]
+* xref:pathfinding-algorithms:all-pairs-shortest-path.adoc[]
+* xref:pathfinding-algorithms:bfs.adoc[]
+* xref:pathfinding-algorithms:cycle-detection.adoc[]
+* xref:pathfinding-algorithms:estimated-diameter.adoc[]
+* xref:pathfinding-algorithms:max-flow.adoc[]
+* xref:pathfinding-algorithms:minimum-spanning-forest.adoc[]
+* xref:pathfinding-algorithms:minimum-spanning-tree.adoc[]
+* xref:pathfinding-algorithms:single-source-shortest-path-unweighted.adoc[]
+* xref:pathfinding-algorithms:single-source-shortest-path-weighted.adoc[]
+
+
+a|
+=== xref:similarity-algorithms:index.adoc[Similarity and Distance]
+
+Similarity algorithms assign a score to a pair of vertices based on how similar they are, usually by referring to their neighborhoods.
+
+* xref:similarity-algorithms:euclidean.adoc[]
+* xref:similarity-algorithms:overlap-similarity.adoc[]
+* xref:similarity-algorithms:pearson-similarity.adoc[]
+* *Cosine Similarity of Neighborhoods*
+** xref:similarity-algorithms:cosine-similarity-of-neighborhoods-batch.adoc[]
+** xref:similarity-algorithms:cosine-similarity-of-neighborhoods-single-source.adoc[]
+* *Jaccard Similarity of Neighborhoods*
+** xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-batch.adoc[]
+** xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-single-source.adoc[]
+a|
+
+|===
+
+
 
 == Library Structure
 
