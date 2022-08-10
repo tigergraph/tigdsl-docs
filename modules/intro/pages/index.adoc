@@ -64,7 +64,7 @@ Topological link prediction algorithms determine the closeness of a pair of vert
 a|
 === xref:node-embeddings:index.adoc[Node Embedding]
 
-Node embeddings are vector representations of properties of vertices in a graph.
+Node embeddings are vector representations of vertex properties in a graph.
 
 
 * xref:node-embeddings:node2vec.adoc[]
@@ -91,8 +91,7 @@ Pathfinding algorithms find the best path(s) among a set of vertices according t
 a|
 === xref:similarity-algorithms:index.adoc[Similarity and Distance]
 
-Similarity algorithms assign a score to a pair of vertices based on how similar they are.
-This usually involves seeing if they have the same or similar neighborhoods.
+Similarity algorithms assign a score to a pair of vertices based on how similar they are, usually by referring to their neighborhoods.
 
 * xref:similarity-algorithms:euclidean.adoc[]
 * xref:similarity-algorithms:overlap-similarity.adoc[]
