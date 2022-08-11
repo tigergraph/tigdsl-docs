@@ -1,4 +1,29 @@
 = Approximate Closeness Centrality
+:table-caption!:
+
+[.text-center]
+====
+.Compatible Graph Types
+[cols="1,1,1,1,1,1"]
+|===
+|Directed Edges |Undirected Edges |Homogeneous Vertex Types |Heterogeneous Vertex Types |Weighted Edges |Unweighted Edges
+
+|Compatible   |Compatible |Compatible   |Compatible |Unsupported   |Compatible
+====
+
+[.text-center]
+====
+.Compatible Graph Types
+[cols="1,1,1,1,1,1"]
+|===
+2+^|Edge Direction  2+^|Edge Weight 2+^|Vertex Type
+
+|Directed |Yes  |Weighted |Yes |Homogeneous |Yes
+|Undirected |Yes |Unweighted |No |Heterogeneous |Yes
+====
+
+
+
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/closeness/approximate[Approximate Closeness Centrality]
 

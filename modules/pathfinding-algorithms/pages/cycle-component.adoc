@@ -6,7 +6,7 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/blob/ma
 
 The Cycle Component algorithm finds vertices that are on a cycle.
 It can be used as a helper algorithm for the xref:cycle-detection.adoc[] algorithm.
-It returns only these vertices, which saves memory compared to finding and returning all cycles.
+It returns a set of only the vertices which are on at least one cycle, which saves memory compared to finding and returning all cycles.
 
 == Specifications
 
@@ -51,7 +51,7 @@ This algorithm has a space complexity of stem:[O(V)], where stem:[V] is the numb
 
 == Result
 
-This query returns the vertices that appear on a cycle in JSON format.
+This query returns the vertices that appear on at least one cycle in JSON format.
 
 == Example
 
