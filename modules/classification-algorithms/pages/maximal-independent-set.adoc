@@ -2,21 +2,33 @@
 :description: Overview of TigerGraph's implementation of the Maximal Independent Set algorithm.
 :page-aliases: pathfinding-algorithms:maximal-independent-set.adoc
 
-[.text-center]
-.Supported Graph Characteristics
-====
-* Undirected edges
-* Homogeneous vertex types
 
-This algorithm ignores edge weights.
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Undirected edges
+^|Homogeneous vertex types
+|===
 
 [NOTE]
 This algorithm ignores edge weights.
 
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set[Maximal Independent Set] (contains links to all algorithm variants)
-====
+****
 
-[.text-center]
+.Supported Graph Characteristics
+****
+Undirected edges
+
+Homogeneous vertex types
+
+[NOTE]
+This algorithm ignores edge weights.
+
+Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set[Maximal Independent Set] (contains links to all algorithm variants)
+****
+
 .Supported Graph Characteristics
 ****
 * Undirected edges
