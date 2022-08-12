@@ -1,6 +1,18 @@
 = k-Core Decomposition
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/k_core[k-Core Decomposition]
+
+****
 
 A *k-core* of a graph is a maximal connected subgraph in which every vertex is connected to at least k vertices in the subgraph. To obtain the k-core of a graph, the algorithm first deletes the vertices whose outdegree is less than _k_. It then updates the outdegree of the neighbors of the deleted vertices, and if that causes a vertex's outdegree to fall below _k_, it will also delete that vertex. The algorithm repeats this operation until every vertex left in the subgraph has an outdegree of at least _k_.
 

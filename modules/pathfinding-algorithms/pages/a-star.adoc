@@ -1,7 +1,20 @@
 = A*
 :stem: latex
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/astar_shortest_path[A*]
+
+****
+
+
 
 A* (pronounced "A-star") is a graph traversal and path search algorithm,
 which achieves better performance by using heuristics to guide its

@@ -2,7 +2,20 @@
 :description: The Label Propagation algorithm in the TigerGraph Graph Data Science Library.
 :page-aliases: label-propogation.adoc
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/label_propagation[Label Propagation]
+
+****
 
 Label Propagation is a heuristic method for determining communities. The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X.
 

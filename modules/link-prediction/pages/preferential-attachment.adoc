@@ -1,7 +1,24 @@
 = Preferential Attachment
 :stem: latex
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+[NOTE]
+This algorithm ignores edge weights.
+
 Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/preferential_attachment[Preferential Attachment]
+
+****
+
 
 Preferential Attachment is a measure to compute the closeness of vertices, based on the number of their neighbors. The algorithm returns the product two vertices' number of neighbors.
 

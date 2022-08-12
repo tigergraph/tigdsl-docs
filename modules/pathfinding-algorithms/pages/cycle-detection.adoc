@@ -1,6 +1,23 @@
 = Cycle Detection
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/cycle_detection[Cycle Detection]
+
+[NOTE]
+On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
+
+****
+
 
 The Cycle Detection problem seeks to find all the cycles (loops) in a graph. We apply the usual restriction that the cycles must be "simple cycles", that is, they are paths that start and end at the same vertex but otherwise never visit any vertex twice.
 

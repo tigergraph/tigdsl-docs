@@ -1,6 +1,20 @@
 = Approximate Closeness Centrality
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/closeness/approximate[Approximate Closeness Centrality]
+
+****
+
 
 In the xref:centrality-algorithms:closeness-centrality.adoc[Closeness Centrality algorithm], to obtain the closeness centrality score for a vertex, we measure the distance from the source vertex to every single vertex in the graph. In large graphs, running this calculation for every vertex can be highly time-consuming.
 

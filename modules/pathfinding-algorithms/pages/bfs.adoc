@@ -1,7 +1,20 @@
 = Breadth-First Search
 :description: Overview of TigerGraph's Breadth-First Search algorithm.
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/bfs[Breadth-First Search]
+
+****
 
 Breadth-first Search (BFS) is an algorithm used to explore the vertices
 of a graph layer by layer.

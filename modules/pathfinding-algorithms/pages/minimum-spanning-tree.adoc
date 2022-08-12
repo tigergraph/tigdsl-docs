@@ -1,6 +1,19 @@
 = Minimum Spanning Tree
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/minimum_spanning_tree[Minimum Spanning Tree]
+
+****
 
 Given an undirected and connected graph, a minimum spanning tree is a set of edges that can connect all the vertices in the graph with the minimal sum of edge weights. The library implements a parallel version of https://en.wikipedia.org/wiki/Prim%27s_algorithm[Prim's algorithm]:
 

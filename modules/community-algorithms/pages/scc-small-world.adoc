@@ -1,6 +1,20 @@
 = SCC (Small-World Optimized)
 :experimental:
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/connected_components/strongly_connected_components[Strongly Connected Components]
+
+****
+
+
 In addition to the regular strongly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small-world graph in this context means the graph has a hub community, where a vast majority of the vertices of the graph are weakly connected.
 

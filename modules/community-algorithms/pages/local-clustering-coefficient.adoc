@@ -1,6 +1,21 @@
 = Local Clustering Coefficient
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Undirected edges
+^|Homogeneous vertex types
+|===
+
+[NOTE]
+Local Clustering Coefficient only works with directed graphs if reverse edges are included.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/local_clustering_coefficient[Local Clustering Coefficient]
+
+
+****
 
 The Local Clustering Coefficient algorithm computes the local clustering coefficient of every vertex in a graph. The _local clustering coefficient_ of a vertex (node) in a graph quantifies how close its neighbors are to being a complete graph, where every two distinct vertices are connected by an edge.
 

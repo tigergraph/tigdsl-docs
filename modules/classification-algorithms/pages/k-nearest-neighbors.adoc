@@ -1,17 +1,19 @@
 = k-Nearest Neighbors
 
-[.text-center]
-*Supported Graph Characteristics*
-====
-* Weighted edges
-* Undirected edges
-* Heterogeneous or homogeneous vertex types
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
 
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/k_nearest_neighbors[k-Nearest Neighbors] (contains links to all algorithm variants)
 
 The All-Pairs variants also support directed edges.
 
-====
+****
 
 
 The k-Nearest Neighbors (kNN) algorithm is one of the simplest classification algorithms. It assumes that some or all the vertices in the graph have already been classified. The classification is stored as an attribute called the label. The goal is to predict the label of a given vertex, by seeing what are the labels of the nearest vertices.
