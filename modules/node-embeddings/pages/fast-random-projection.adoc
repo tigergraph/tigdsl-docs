@@ -13,6 +13,9 @@
 ^|Heterogeneous vertex types
 |===
 
+[NOTE]
+We suggest running Fast Random Projection on reverse edges of a directed graph to avoid the issue of source and sink vertices failing to update correctly.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/FastRP[Fast Random Projection]
 
 ****
