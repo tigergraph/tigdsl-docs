@@ -1,6 +1,19 @@
 =   Greedy Graph Coloring
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+[NOTE]
+This algorithm ignores edge weights.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/greedy_graph_coloring[Greedy Graph Coloring]
+****
 
 This algorithm assigns a unique integer value known as its color to the vertices of a graph such that no neighboring vertices share the same color. The reason why this is called color is that this task is equivalent to assigning a color to each nation on a map so that no neighboring nations share the same color.
 

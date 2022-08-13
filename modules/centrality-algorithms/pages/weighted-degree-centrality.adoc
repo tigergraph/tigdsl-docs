@@ -1,8 +1,19 @@
 = Weighted Degree Centrality
 :description: Overview of the weighted degree centrality algorithm.
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+|===
+
 Algorithm: link:https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Centrality/degree/weighted/tg_weighted_degree_cent.gsql[Weighted Degree Centrality]
 
+****
 Degree centrality is defined as the number of edges connected to a vertex.
 The degree can be interpreted in terms of the immediate risk of a vertex for catching whatever is flowing through the network.
 

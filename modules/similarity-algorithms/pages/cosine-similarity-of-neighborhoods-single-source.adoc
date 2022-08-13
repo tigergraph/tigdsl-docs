@@ -1,7 +1,18 @@
 = Cosine Similarity of Neighborhoods (Single-Source)
 :stem: latexmath
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/cosine/single_source[Cosine Similarity of Neighborhoods (Single-Source)]
+****
+
 
 To compare two vertices by https://en.wikipedia.org/wiki/Cosine_similarity[cosine similarity], the selected properties of each vertex are first represented as a vector. For example, a property vector for a Person vertex could have the elements age, height, and weight. Then the cosine function is applied to the two vectors.
 

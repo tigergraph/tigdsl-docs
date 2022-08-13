@@ -1,6 +1,20 @@
 = WCC (Small-World Optimized)
 :stem: latexmath
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/connected_components/weakly_connected_components/small_world[WCC (Small-World Optimized)]
+
+****
+
+
 In addition to the regular weakly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small world graph means the graph has a hub community, where the vast majority of the vertices in the graph are weakly connected.
 

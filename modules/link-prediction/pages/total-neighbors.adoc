@@ -1,7 +1,23 @@
 = Total Neighbors
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+[NOTE]
+This algorithm ignores edge weights.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/total_neighbors[Total Neighbors]
 
+
+****
 The algorithm calculates the total number of neighbors of two vertices.
 
 == Specifications

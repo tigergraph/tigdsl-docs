@@ -1,6 +1,20 @@
 = Eigenvector Centrality
 
+
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/eigenvector[Eigenvector Centrality]
+
+****
 
 *Eigenvector centrality* (also called *eigencentrality* or *prestige
 score*) is a measure of the influence of a vertex in a network.

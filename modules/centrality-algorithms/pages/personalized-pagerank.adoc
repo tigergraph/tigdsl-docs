@@ -1,5 +1,21 @@
 = Personalized PageRank
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+[NOTE]
+Use the Degree Centrality algorithm on an undirected graph instead of Personalized PageRank.
+
+****
+
+
 In the original PageRank, the damping factor is the probability of the surfer continues browsing at each step. The surfer may also stop browsing and start again from a random vertex. In personalized PageRank, the surfer can only start browsing from a given set of source vertices both at the beginning and after stopping.
 
 == Specifications

@@ -2,7 +2,20 @@
 :description: Overview of TigerGraph's implementation of the All Paths algorithm.
 :stem: latexmath
 
-Algorithm link: link:https://github.com/tigergraph/algos/tree/four_algos/algorithms/Path/path_between_two_vertices[All Paths (Single-Pair)]
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+Algorithm links: link:https://github.com/tigergraph/algos/tree/four_algos/algorithms/Path/path_between_two_vertices[All Paths (Single-Pair)]
+
+****
 
 This algorithm finds and prints all paths between two input vertices.
 This is similar to the all-paths functionality in the standard GraphStudio viewer, except that it supports output of all vertices in all paths to a file or to the console.

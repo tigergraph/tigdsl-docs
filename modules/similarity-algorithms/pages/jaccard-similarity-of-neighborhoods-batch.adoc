@@ -1,6 +1,18 @@
 = Jaccard Similarity of Neighborhoods (Batch)
 
+".Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/jaccard/all_pairs[Jaccard Similarity of Neighborhoods (Batch)]
+
+****
+
 
 This algorithm computes the same similarity scores as the xref:jaccard-similarity-of-neighborhoods-single-source.adoc[Jaccard similarity of neighborhoods, all pairs] except that it starts from all vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
 

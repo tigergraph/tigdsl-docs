@@ -1,7 +1,22 @@
 = ArticleRank
 :stem: latex
 
+
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Homogeneous vertex types
+|===
+
+[NOTE]
+Use the Degree Centrality algorithm on an undirected graph instead of ArticleRank.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/article_rank[Article Rank]
+
+****
 
 ArticleRank is an algorithm that has been derived from the PageRank algorithm to measure the influence of journal articles.
 Page Rank assumes that relationships originating from low-degree nodes have a higher influence than relationships from high-degree nodes. Article Rank modifies the formula in such a way that it retains the basic PageRank methodology but lowers the influence of low-degree nodes.

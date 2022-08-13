@@ -1,6 +1,21 @@
 = Triangle Counting
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Undirected edges
+^|Homogeneous vertex types
+|===
+
+[NOTE]
+Most applications of Triangle Count for a directed graph are better served by Cycle Detection.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/triangle_counting[Triangle Counting]
+
+****
+
 
 Why triangles? Think of it in terms of a social network:
 

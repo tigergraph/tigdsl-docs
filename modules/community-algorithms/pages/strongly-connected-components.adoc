@@ -1,6 +1,19 @@
 = Strongly Connected Components
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/connected_components/strongly_connected_components[Strongly Connected Components]
+****
+
 
 A strongly connected component (SCC) is a subgraph such that there is a path from any vertex to every other vertex. A graph can contain more than one separate SCC. An SCC algorithm finds the maximal SCCs within a graph.
 

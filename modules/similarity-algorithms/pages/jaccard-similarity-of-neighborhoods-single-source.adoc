@@ -1,7 +1,18 @@
 = Jaccard Similarity of Neighborhoods (Single Source)
 :stem: latexmath
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Homogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/jaccard/single_source[Jaccard Similarity of Neighborhoods (Single Source)]
+
+****
+
 
 The Jaccard index measures the relative overlap between two sets. To compare two vertices by Jaccard similarity, first select a set of values for each vertex. For example, a set of values for a Person could be the cities the Person has lived in. Then the Jaccard index is computed for the two vectors.
 

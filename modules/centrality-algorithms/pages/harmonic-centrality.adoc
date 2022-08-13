@@ -2,7 +2,21 @@
 :stem: latexmath
 :page-stem:
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/harmonic[Harmonic Centrality]
+
+
+****
 
 The Harmonic Centrality algorithm calculates the harmonic centrality of each vertex in the graph. Harmonic Centrality is a variant of Closeness Centrality. In a (not necessarily connected) graph, the *harmonic centrality* reverses the sum and reciprocal operations in the definition of closeness centrality:
 

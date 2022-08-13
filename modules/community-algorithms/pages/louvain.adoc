@@ -6,7 +6,23 @@
 :stem: latexmath
 :experimental:
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Weighted edges
+^|Undirected edges
+^|Homogeneous vertex types
+^|Heterogeneous vertex types
+|===
+
+[NOTE]
+Louvain only works with directed graphs if reverse edges are included.
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/louvain[Louvain]
+
+****
+
 
 The Louvain Method for community detection {fn-blondel} partitions the vertices in a graph by approximately maximizing the graph's modularity score.
 The modularity score for a partitioned graph assesses the difference in density of links within a partition vs. the density of links crossing from one partition to another. If a partitioning is good, then the within-density should be high and the inter-density should be low.

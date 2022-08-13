@@ -2,7 +2,19 @@
 :description: Overview of the Weisfeiler-Lehman for detecting isomorphic graphs.
 :fn-iso-article: footnote:[David Bieber, The Weisfeiler-Lehman Isomorphism Test, https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/]
 
+.Supported Graph Characteristics
+****
+[cols='1']
+|===
+^|Unweighted edges
+^|Directed edges
+^|Undirected edges
+^|Homogeneous vertex types
+|===
+
 Algorithm link: https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/weisfeiler_lehman[Weisfeiler-Lehman]
+
+****
 
 This algorithm identifies isomorphic subgraphs in a graph, and labels the corresponding vertices isomorphic graphs.
 
