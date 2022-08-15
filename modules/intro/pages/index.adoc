@@ -15,6 +15,7 @@ GSQL running on the TigerGraph platform is particularly well-suited for graph al
 [cols="3,3,3",grid=none,frame=none]
 
 |===
+
 a|
 === xref:centrality-algorithms:index.adoc[Centrality]
 
@@ -44,7 +45,26 @@ Classification algorithms label vertices to sort them into various defined class
 * xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
 * xref:classification-algorithms:maximal-independent-set.adoc[]
 
+a|
+=== xref:community-algorithms:index.adoc[Community]
 
+Community algorithms group together vertices or edges that satisfy some rule for being connected to one another.
+
+** xref:community-algorithms:connected-components.adoc[]
+*** xref:community-algorithms:wcc-small-world.adoc[]
+** xref:community-algorithms:k-core-decomposition.adoc[]
+** xref:community-algorithms:label-propagation.adoc[]
+** xref:community-algorithms:slpa.adoc[]
+** xref:community-algorithms:local-clustering-coefficient.adoc[]
+** xref:community-algorithms:louvain.adoc[]
+** xref:community-algorithms:strongly-connected-components.adoc[]
+*** xref:community-algorithms:scc-small-world.adoc[]
+** xref:community-algorithms:triangle-counting.adoc[]
+
+|===
+
+[cols="3,3,3",grid=none,frame=none]
+|===
 a|
 === xref:link-prediction:index.adoc[Link Prediction]
 
@@ -57,10 +77,7 @@ Topological link prediction algorithms determine the closeness of a pair of vert
 * xref:link-prediction:same-community.adoc[]
 * xref:link-prediction:total-neighbors.adoc[]
 
-|===
 
-[cols="3,3,3",grid=none,frame=none]
-|===
 a|
 === xref:node-embeddings:index.adoc[Node Embedding]
 
@@ -87,6 +104,10 @@ Pathfinding algorithms find the best path(s) among a set of vertices according t
 * xref:pathfinding-algorithms:single-source-shortest-path-unweighted.adoc[]
 * xref:pathfinding-algorithms:single-source-shortest-path-weighted.adoc[]
 
+|===
+
+[cols="",grid=none,frame=none]
+|===
 
 a|
 === xref:similarity-algorithms:index.adoc[Similarity and Distance]
