@@ -20,7 +20,7 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-Node2Vec is a node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
+Node2Vec is a legacy node embedding algorithm that uses random walks in the graph to create a vector representation of a node.
 
 A random walk starts with a node, and the algorithm iteratively selects neighboring nodes to visit, and each neighboring node has an assigned probability.
 This transforms graph structure into a collection of linear sequences of nodes.
@@ -28,6 +28,12 @@ For each node we will be left with a list of other nodes from their local or ext
 
 Once the above step is complete, the algorithm uses a variation of the word2vec model from the language modeling community to turn each node into a vector of probabilities.
 The probabilities represent the likelihood of visiting a given node in a random walk from each starting node.
+
+[NOTE]
+====
+Node2Vec consumes a lot of memory and is less scalable than xref:fast-random-projection.adoc[].
+It is included in the library for legacy reasons, but in most cases, Fast Random Projection is recommended instead.
+====
 
 == Specifications
 
