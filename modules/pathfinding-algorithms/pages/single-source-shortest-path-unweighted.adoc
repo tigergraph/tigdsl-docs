@@ -10,21 +10,27 @@
 ^|Heterogeneous vertex types
 |===
 
+[NOTE]
+====
+On a graph with weighted edges, use xref:single-source-shortest-path-weighted.adoc[].
+With weighted edges, the algorithm must search the whole graph, whether you want the path for just one destination or for all destinations.
+====
+
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/unweighted[Single-source Shortest Path (Unweighted)]
 
 ****
 
+Unweighted Shortest Path answers a question posed from one vertex to every other vertex in the graph: "How are you two related?"
+This is useful in a host of applications, from estimating influences or knowledge transfer, to criminal investigation.
 
-If a graph has unweighted edges, then finding the shortest path from one vertex to another is the same as finding the path with the fewest hops. Think of Six Degrees of Separation and Friend of a Friend. Unweighted Shortest Path answers the question "How are you two related?" The two entities do not have to be persons. Shortest Path is useful in a host of applications, from estimating influences or knowledge transfer, to criminal investigation.
+This algorithm finds an unweighted shortest path from one source vertex to each possible destination vertex in the graph.
+It finds stem:[n] paths, where stem:[n] is the number of vertices.
 
-When the graph is unweighted, we can use a "greedy" approach to find the shortest path. In computer science, a greedy algorithm makes intermediate choices based on the data being considered at the moment, and then does not revisit those choices later on. In this case, once the algorithm finds any path to a vertex T, it is certain that that is a shortest path.
+If a graph has unweighted edges, then finding the shortest path from one vertex to another is the same as finding the path with the fewest hops.
 
-[NOTE]
-====
-This algorithm finds an unweighted shortest path from one source vertex to each possible destination vertex in the graph. That is, it finds n paths.
+When the graph is unweighted, we can use a "greedy" approach to find the shortest path. In computer science, a greedy algorithm does not re-evaluate choices with further iterations of itself.
+In this algorithm, the first path found to another vertex is considered to be the shortest path.
 
-If your graph has weighted edges, see the next algorithm. With weighted edges, it is necessary to search the whole graph, whether you want the path for just one destination or for all destinations.
-====
 
 == Specifications
 
@@ -39,35 +45,84 @@ CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
 
 This algorithm has a time complexity of stem:[O(E)], where stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<50%,<50%",options="header",]
+
+=== Space complexity
+
+This algorithm has a space complexity of stem:[O(V)], where stem:[V] is equal to the number of vertices.
+
+=== Results
+Computes a shortest distance (INT) and shortest path (STRING) from the given source to every other vertex.
+
+Optionally, writes the distance value from the source to each target vertex on a specified INT attribute.
+
+
+=== Parameters
+
+[width="100%",cols="0,1,0,0",options="header",]
 |===
-|*Characteristic* |Value
-|Result |Computes a shortest distance (INT) and shortest path (STRING)
-from vertex _source_ to each other vertex.
+|*Parameter* |Meaning |Default |Required
 
-|Input Parameters a|
-* *`+VERTEX source+`:* ID of the source vertex
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT output_limit+`*: If >=0, max number of vertices to output to
-JSON.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store distance values (INT) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, +
- +
-so that the full graph can be displayed.
+|`VERTEX source`
+|ID of the source vertex
+|N/A
+|Yes
 
-|Result Size |V = number of vertices
+|`SET<STRING> v_type`
+|Names of vertex types to use
+|N/A
+|Yes
 
-|Graph Types |Directed or Undirected edges, Unweighted edges
+
+|`SET<STRING> e_type`
+|Names of edge types to use
+|N/A
+|Yes
+
+
+|`INT output_limit`
+|If >=0, max number of vertices to output to JSON
+|-1
+|Yes
+
+.
+|`BOOL print_accum`
+|Whether to print results in JSON format to standard output
+|True
+|No
+
+
+|`STRING result_attr`
+|If not empty, store distance values in INT to this vertex attribute
+|(empty string)
+|No
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+|No
+
+
+|`BOOL display_edges`
+|If true, include the graph's edges in the JSON output, so that the full graph can be displayed in the query view window on GraphStudio.
+|False
+|No
+
 |===
 
 == Example
 
-In the below graph, we do not consider the weight on edges. Using vertex A as the source vertex, the algorithm discovers that the shortest path from A to B is A-B, and the shortest path from A to C is A-D-C, etc.
+Consider the following unweighted graph with vertices A, B, C, D, and E.
+Using vertex A as the source vertex, the algorithm discovers that the shortest path from A to B is A -> B, a path with a distance of 1.
+
+The shortest path from A to C is A -> D -> C, with a distance of 2.
+
+The returned JSON output lists, for each vertex on the graph in random order:
+
+* The vertex ID
+* The vertex Type
+* A set of two distance attributes:
+** The distance from the source vertex A
+** The path from the source vertex A
 
 image::screen-shot-2019-01-09-at-6.20.14-pm.png[Generic graph with unweighted edges]
 
@@ -136,5 +191,3 @@ image::screen-shot-2019-01-09-at-6.20.14-pm.png[Generic graph with unweighted ed
   }
 ]
 ----
-
-###
