@@ -20,12 +20,13 @@ Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/m
 
 The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it. A vertex's influence tends to increase if (1) it has more referring vertices or if (2) its referring vertices have higher influence. The analogy to social influence is clear.
 
-A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is *proportional to the probability that a random network surfer will be at that vertex at any given time.* *A vertex with a high PageRank score is a vertex that is frequently visited*, assuming that vertices are visited according to the following Random Surfer scheme:
+A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is proportional to the probability that a random network surfer will be at that vertex at any given time.
+A vertex with a high PageRank score is a vertex that is frequently visited, assuming that vertices are visited according to the following Random Surfer scheme:
 
-* Assume a person travels or surfs across a network's structure, moving from vertex to vertex in a long series of rounds.
+* Assume a person travels or surfs across a network's structure, moving from vertex to vertex.
 * The surfer can start anywhere. This start-anywhere property is part of the magic of PageRank, meaning the score is a truly fundamental property of the graph structure itself.
 * Each round, the surfer randomly picks one of the outward connections from the surfer's current location. The surfer repeats this random walk for a long time.
-* But wait. The surfer doesn't always follow the network's connection structure. There is a probability (_1-damping_, to be precise), that the surfer will ignore the structure and will magically teleport to a random vertex.
+* There is a small probability that the surfer's next step will be a random vertex instead of a connected vertex. This probability is expressed in the algorithm as (1 - damping).
 
 For more information, see http://infolab.stanford.edu/~backrub/google.html[the Google paper on PageRank].
 
@@ -43,34 +44,70 @@ This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-[width="100%",cols=",<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Computes a PageRank value (FLOAT type) for each vertex.
+=== Result
 
-|Input Parameters a|
-* *`+STRING v_type+`*: Names of vertex type to use
-* *`+STRING e_type+`*: Names of edge type to use
-* *`+FLOAT max_change+`*: PageRank will stop iterating when the largest
-difference between any vertex's current score and its previous score ≤
+Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
+
+=== Parameters
+
+[width="100%",cols="0,1,0,0",options="header",]
+|===
+|*Parameter* |Description |Default |Required
+
+|`+STRING v_type+`
+|Names of vertex type to use
+|(empty string)
+|Yes
+
+
+|`+STRING e_type+`
+|Names of edge type to use
+|(empty string)
+|Yes
+
+|`+FLOAT max_change+`
+|PageRank will stop iterating when the largest difference between any vertex's current score and its previous score ≤
 `+max_change.+` That is, the scores have become very stable and are
 changing by less than `+max_change+` from one iteration to the next.
-* *`+INT max_iter+`*: Maximum number of iterations.
-* *`+FLOAT damping+`*: Fraction of score that is due to the score of
-neighbors. The balance (1 - damping) is a minimum baseline score that
-every vertex receives.
-* *`+INT top_k+`*: Sort the scores highest first and output only this
-many scores
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store PageRank values (FLOAT)
-to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+|0.001
+|Yes
 
-|Result Size |V = number of vertices
+|`+INT max_iter+`
+|Maximum number of iterations.
+|25
+|Yes
 
-|Graph Types |Directed edges
+|`+FLOAT damping+`
+|Fraction of score that is due to the score of neighbors. The balance (1 - damping) is a minimum baseline score that every vertex receives.
+|0.85
+|Yes
+
+|`+INT top_k+`
+|Sort the scores highest first and output only this many scores
+|100
+|Yes
+
+|`+BOOL print_accum+`
+|If True, output JSON to standard output
+|True
+|Yes
+
+
+|`+STRING result_attr+`
+|If not empty, store PageRank values in `FLOAT` format to this vertex attribute
+|(empty string)
+|No
+
+|`+STRING file_path+`
+|If not empty, write output to this file.
+|(empty string)
+|No
+
+|`+BOOL display_edges+`
+|If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
+|False
+|No
+
 |===
 
 == Example
@@ -89,8 +126,10 @@ We ran PageRank on our `test10` graph (using Friend edges) with the following pa
 
 We see that Ivy (center bottom) has the highest PageRank score (1.12).
 This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person.
+Ivy's high PageRank score indicates that Ivy is a relatively important person in this social group.
+
 Eddie and Justin have scores of exactly 1 because they do not have any out-edges.
 This is an artifact of our particular version of PageRank.
-Likewise, Alex has a score of 0.15, which is (1-damping), because Alex has no in-edges.
+Likewise, Alex has a score of 0.15. This comes from (1 - damping), because Alex has no in-edges, meaning that Alex could only have been reached by a random visit rather than a directed connection.
 
 image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-LPHpImvh7Bprm_iF0cO%2F-LPI7RlT9vrlhXD3mCAE%2Fpagerank_result.png?alt=media&token=569f2b12-546b-4cd9-b5b4-e1d6b80fca25[Visualized results of example query on social10 graph, with Friend edges]
