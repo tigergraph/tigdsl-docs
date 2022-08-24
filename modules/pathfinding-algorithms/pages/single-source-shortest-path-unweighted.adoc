@@ -60,16 +60,16 @@ Optionally, writes the distance value from the source to each target vertex on a
 
 [width="100%",cols="0,1,0,0",options="header",]
 |===
-|*Parameter* |Meaning |Default |Required
+|*Parameter* |Description |Default |Required
 
 |`VERTEX source`
 |ID of the source vertex
-|N/A
+|(empty string)
 |Yes
 
 |`SET<STRING> v_type`
 |Names of vertex types to use
-|N/A
+|(empty string)
 |Yes
 
 

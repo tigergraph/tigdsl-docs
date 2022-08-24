@@ -23,30 +23,37 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-
 The Louvain Method for community detection {fn-blondel} partitions the vertices in a graph by approximately maximizing the graph's modularity score.
-The modularity score for a partitioned graph assesses the difference in density of links within a partition vs. the density of links crossing from one partition to another. If a partitioning is good, then the within-density should be high and the inter-density should be low.
 
-The most efficient and empirically effective method for calculating modularity was published by a team of researchers at the University of Louvain.
+A graph with high modularity is a graph that has several communities, or modules, where connections inside the communities are dense and connections to other communities are sparse.
+
+.A graph showing three distinct modules, each with dense connections inside and few connections to other modules.
+image::graph-with-modularity.png[]
+
+The most efficient and empirically effective method for calculating modularity was published by a team of researchers at the University of Louvain in Belgium.
 The Louvain method uses agglomeration and hierarchical optimization:
 
 . Optimize modularity for small local communities.
 . Treat each optimized local group as one unit, and repeat the modularity operation for groups of these condensed units.
 
-The Louvain Method contains two phases.
+To create the starting conditions, the algorithm assigns an initial community label to every vertex and calculates the base modularity score for the graph.
 
-. The first phase incrementally calculates the modularity change of moving a vertex into every other community and moves the vertex to the community with the highest modularity change.
-. The second phase coarsens the graph by aggregating the vertices which are assigned in the same community into one vertex.
+Next, the algorithm calculates the modularity score change of moving every vertex into every other community.
+Once a score is calculated for every possible change, the algorithm moves each vertex to the community that results in the highest modularity score change.
 
-The first phase and second phase make up a pass. The Louvain Method performs the passes iteratively.
-In other words, the algorithm assigns an initial community label to every vertex, then performs the first phase, during which the community labels are changed until there is no modularity gain.
-Then it aggregates the vertices with the same labels into one vertex and calculates the aggregated edge weights between new vertices.
-For the coarsened graph, the algorithm conducts the first phase again to move the vertices into new communities.
-The algorithm continues until the modularity is not increasing, or runs to the preset iteration limits.
+The community labels are changed repeatedly until the modularity score no longer increases.
 
-However, phase one is sequential, and thus slow for large graphs.
+The next phase "coarsens" the graph by aggregating the vertices in the same community into one vertex.
+
+The algorithm repeats these steps to move vertices into new communities and coarsen the graph to reduce the total number of vertices until either of these conditions is met:
+
+* The graph modularity score no longer increases with any vertex reassignment into any new community
+* The number of iterations of the reassignment-coarsen-measure cycle meets a pre-defined limit (the default is 10 iterations)
+
+The process of checking the modularity score increase for every possible vertex and community assignment is slow for large graphs.
+
 An improved Parallel Louvain Method (PLM) calculates the best community to move to for each vertex in parallel{fn-staudt}.
-In Parallel Louvain Method(PLM), the positive modularity gain is not guaranteed, and it may also swap two vertices to each other's community.
+In the Parallel Louvain Method (PLM), the positive modularity gain is not guaranteed, which may result in swapping two vertices to each other's community.
 
 
 == Specifications
@@ -62,49 +69,53 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 === Time complexity
 This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
 
-=== Graph type
-Runs on graph with undirected, weighted edges
-
-An edge weight attribute is required.
 
 == Parameters
 
 |===
-|Name |Description |Data type
+|Parameter |Description |Default |Required
 
-|`v_type`
+|`STRING v_type`
 |Names of vertex types to use
-|`STRING`
+|(empty string)
+|Yes
 
-|`e_type`
+|`STRING e_type`
 |Names of edge types to use
-|`STRING`
+|(empty string)
+|Yes
 
-|`wt_attr`
-|Name of edge weight attribute (must be type `FLOAT`)
-|`STRING`
+|`STRING wt_attr`
+|Name of edge weight attribute (the specified attribute must be of type `FLOAT`)
+|(empty string)
+|Yes
 
-|`max_iter`
+|`INT max_iter`
 |Maximum number of iterations
-|`INT`
+|10
+|No
 
-|`result_attr`
-|If not empty, store community id values (`INT`) to this attribute
-|`STRING`
+|`STRING result_attr`
+|If not empty, store community values in `INT` format to this vertex attribute
+|cid
+|No
 
-|`file_path`
-| If not empty, write output to this file.
-|`STRING`
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+|No
 
 |`print_info`
 |If true, print results to JSON output.
 |`BOOL`
+|No
+
 |===
 
 
 == Result
 
-If `result_attr` is provided, the algorithm assigns a component ID (`INT`) to each vertex, such that members of the same component have the same ID value.
+If `result_attr` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
 
 if `print_info` is set to true or `file_path` is provided, the JSON or .csv output contains the following information:
 
@@ -159,6 +170,6 @@ JSON result::
 }
 ----
 <1> Number of vertices followed to community assigned by Louvain.
-<2> Num of vertex followed to its only neighbor. For example, if we have (A)---(B), A and B will become a community with only vertex A and B.
+<2> Number of vertices followed to their only neighbors. For example, if we have (A)---(B), A and B will become a community with only vertex A and B.
 --
 ====
