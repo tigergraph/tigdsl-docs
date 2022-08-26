@@ -20,7 +20,7 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-Unweighted Shortest Path answers a question posed from one vertex to every other vertex in the graph: "How are you two related?"
+Unweighted Shortest Path answers a question posed to one vertex about its relationship with every other vertex in the graph: "How closely are you two related?"
 This is useful in a host of applications, from estimating influences or knowledge transfer, to criminal investigation.
 
 This algorithm finds an unweighted shortest path from one source vertex to each possible destination vertex in the graph.
@@ -57,48 +57,48 @@ Optionally, writes the distance value from the source to each target vertex on a
 
 === Parameters
 
-[width="100%",cols="0,1,0,0",options="header",]
+[width="100%",cols="0,1,0",options="header",]
 |===
-|*Parameter* |Description |Default |Required
+|*Parameter* |Description |Default
 
 |`VERTEX source`
 |ID of the source vertex
 |(empty string)
-|Yes
+
 
 |`SET<STRING> v_type`
 |Names of vertex types to use
 |(empty string)
-|Yes
+
 
 
 |`SET<STRING> e_type`
 |Names of edge types to use
 |N/A
-|Yes
+
 
 
 |`INT output_limit`
 |If >=0, max number of vertices to output to JSON
 |-1
-|Yes
+
 
 .
 |`BOOL print_accum`
 |Whether to print results in JSON format to standard output
 |True
-|No
+
 
 
 |`STRING result_attr`
 |If not empty, store distance values in INT to this vertex attribute
 |(empty string)
-|No
+
 
 |`STRING file_path`
 |If not empty, write output to this file.
 |(empty string)
-|No
+
 
 
 |`BOOL display_edges`

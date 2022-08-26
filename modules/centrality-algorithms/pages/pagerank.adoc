@@ -50,63 +50,62 @@ Computes a PageRank `FLOAT` value for each vertex and stores it in a specified a
 
 === Parameters
 
-[width="100%",cols="0,1,0,0",options="header",]
+[width="100%",cols="0,1,0",options="header",]
 |===
-|*Parameter* |Description |Default |Required
+|*Parameter* |Description |Default
 
 |`+STRING v_type+`
 |Names of vertex type to use
 |(empty string)
-|Yes
+
 
 
 |`+STRING e_type+`
 |Names of edge type to use
 |(empty string)
-|Yes
 
 |`+FLOAT max_change+`
 |PageRank will stop iterating when the largest difference between any vertex's current score and its previous score ≤
 `+max_change.+` That is, the scores have become very stable and are
 changing by less than `+max_change+` from one iteration to the next.
 |0.001
-|Yes
+
 
 |`+INT max_iter+`
 |Maximum number of iterations.
 |25
-|Yes
+
 
 |`+FLOAT damping+`
 |Fraction of score that is due to the score of neighbors. The balance (1 - damping) is a minimum baseline score that every vertex receives.
 |0.85
-|Yes
+
 
 |`+INT top_k+`
 |Sort the scores highest first and output only this many scores
 |100
-|Yes
+
 
 |`+BOOL print_accum+`
 |If True, output JSON to standard output
 |True
-|Yes
+
 
 
 |`+STRING result_attr+`
 |If not empty, store PageRank values in `FLOAT` format to this vertex attribute
 |(empty string)
-|No
+
 
 |`+STRING file_path+`
 |If not empty, write output to this file.
 |(empty string)
-|No
+
 
 |`+BOOL display_edges+`
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
 |False
-|No
+
 
 |===
 
