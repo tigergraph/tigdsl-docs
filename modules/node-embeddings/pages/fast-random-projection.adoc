@@ -56,11 +56,11 @@ If you do not wish to store the embeddings in graph, delete the lines that use t
 | Parameter | Description | Data type
 
 | `v_type`
-| The total number of edges in the graph.
+| Vertex types to consider.
 | `SET<STRING>`
 
 | `e_type`
-| The total number of vertices in the graph.
+| Edge types to consider.
 | `SET<STRING>`
 
 | `k`
