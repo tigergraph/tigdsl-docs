@@ -10,9 +10,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Use the Degree Centrality algorithm on an undirected graph.
-
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
 
 ****
