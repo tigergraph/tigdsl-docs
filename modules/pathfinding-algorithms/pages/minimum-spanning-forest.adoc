@@ -13,46 +13,68 @@
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/minimum_spanning_forest[Minimum Spanning Forest]
 
-
 ****
 
-Given an undirected graph with one or more connected components, a minimum spanning forest is a set of minimum spanning trees, one for each component. The library implements the algorithm in section 6.2 of Qin et al. 2014: http://www-std1.se.cuhk.edu.hk/~hcheng/paper/SIGMOD2014qin.pdf.
+Given an undirected graph with one or more connected components, a minimum spanning forest is a set of minimum spanning trees, one for each component. The library implements the algorithm in section 6.2 of Qin et al. 2014: link:http://www-std1.se.cuhk.edu.hk/~hcheng/paper/SIGMOD2014qin.pdf[Scalable Big Graph Processing in MapReduce]
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
 tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O((V+E) * log(V))], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Computes a minimum spanning forest. If the JSON or file output
+== Result
+
+Computes a minimum spanning forest. If the JSON or file output
 selected, the output is the set of edges that form the MSF. If the
 result_attr option is selected, the edges which are part of the MSF are
 tagged True; other edges are tagged False.
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute
-* *`+STRING wt_type+`*: Data type of edge weight attribute: "INT",
-"FLOAT", or "DOUBLE"
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store result values (BOOL) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
+=== Result size
 
-|Result Size a|
 stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number of components.
 
-|Graph Types |Undirected edges
+== Parameters
+
+[width="100%",cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+|`+SET<STRING> v_type+`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+SET<STRING> e_type+`
+|Names of edge types to use
+|(empty set of strings)
+
+|`+STRING wt_attr+`
+|Name of edge weight attribute
+|(empty string)
+
+|`+STRING wt_type+`
+|Data type of edge weight attribute (must be `INT`, `FLOAT`, or `DOUBLE`)
+|(empty string)
+
+
+|`+BOOL print_accum+`
+|If True, output JSON to standard output
+|True
+
+|`+STRING result_attr+`
+|If not empty, store result values (`BOOL`) to this attribute
+|(empty string)
+
+|`+STRING file_path+`
+|If not empty, write output to this file.
+|(empty string)
+
 |===
 
 == *Example*

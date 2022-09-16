@@ -26,7 +26,7 @@ There are directional and bidirectional versions of this algorithm.
 == Specifications
 
 .Directional
-[.wrap,gsql]
+[source.wrap,gsql]
 ----
 CREATE QUERY tg_find_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
   BOOL print_accum = TRUE, STRING file_path = "")
