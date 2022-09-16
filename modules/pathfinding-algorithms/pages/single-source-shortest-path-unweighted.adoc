@@ -83,7 +83,7 @@ Optionally, writes the distance value from the source to each target vertex on a
 |-1
 
 
-.
+
 |`BOOL print_accum`
 |Whether to print results in JSON format to standard output
 |True

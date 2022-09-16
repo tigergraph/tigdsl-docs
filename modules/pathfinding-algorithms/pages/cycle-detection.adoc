@@ -41,7 +41,7 @@ For each Active vertex v:
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
 tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
   BOOL print_accum = TRUE, STRING file_path = "")
@@ -50,16 +50,26 @@ tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
 === Time complexity
 The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the lesser of either the maximum cycle length or the depth parameter.
 
+=== Result
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
 Computes a list of vertex id lists, each of which is a cycle. The result
 is available in 2 forms:
 
 * streamed out in JSON format
 * written to a file in tabular format
+
+Result Size:
+Number of cycles * average cycle length
+
+Both of these measures are not known in advance.
+
+
+=== Parameters
+
+[width="100%",cols="<5%,<50%",options="header",]
+|===
+|*Characteristic* |Value
+|Result a|
 
 |Input Parameters a|
 * *`+SET<STRING> v_type+`*: Names of vertex types to use
@@ -69,10 +79,6 @@ of iterations
 * *`+BOOL print_accum+`*: If True, output JSON to standard output
 * *`+STRING file_path+`:* If not empty, write output to this file.
 
-|Result Size a|
-Number of cycles * average cycle length
-
-Both of these measures are not known in advance.
 
 |Graph Types |Directed
 |===

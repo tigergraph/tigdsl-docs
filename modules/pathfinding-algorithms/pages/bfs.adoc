@@ -35,28 +35,50 @@ CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
 
 This algorithm has a time complexity of stem:[O(V+E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[cols=",",options="header",]
+=== Result
+
+Returns all the vertices that are accessible from the source vertex.
+
+Result size V = number of vertices
+
+=== Parameters
+
+[width="100%",cols="0,1,0",options="header",]
 |===
-|Characteristic |Value
-|Result |Returns all the vertices that are accessible from the source
-vertex
+|*Parameter* |Description |Default
 
-|Required input parameters
-a|* `+v_type+`: vertex types to
-traverse
-* `+e_type+`: edge types to traverse
-* `+max_hops+`: look only this far from each vertex
-* `+v_start+`: source vertex for traversal
-* `+print_accum+`: print JSON output
-* `+result_attr+`: INT
-attr to store results to
-* `+file_path+`: file to write CSV output
-to
-* `+display_edges+`:output edges for visualization
+|`VERTEX v_type`
+|Vertex types to traverse
+|(empty string)
 
-|Result size |V = number of vertices
+|`EDGE e_type`
+|Edge types to traverse
+|(empty string)
 
-|Graph types |Directed or undirected edges, weighted or unweighted edges
+|`INT max_hops`
+|Maximum hops for the algorithm to look from each vertex
+|
+
+|`VERTEX v_start`
+|Source vertex for traversal
+|(empty string)
+
+|`BOOL print_accum`
+|Whether to print JSON output
+|True
+
+|`STRING result_attr`
+|The vertex attribute to store results to in `INT` format
+|(empty string)
+
+|`STRING file_path`
+|The path for a CSV output file
+|(empty string)
+
+|`BOOL display_edges`
+|Whether to output edges for visualization
+|False
+
 |===
 
 == Example

@@ -15,8 +15,13 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+Flow is the concept of something moving from one vertex to another in a graph, such as money (in a financial graph), data (in a computer network), or even water (in a utility network).
 
-The maximum flow problem is to find the maximum possible flow from a source vertex to the target vertex given a graph which represents a flow network where every edge has a capacity under the following constraints :
+A graph must have weighted edges to represent flow.
+
+The maximum flow problem is to find the maximum possible flow from a source vertex to the target vertex.
+
+Assuming a weighted graph where every edge has a capacity under the following constraints:
 
 * Flow on an edge doesn't exceed the capacity of the edge.
 * Incoming flow is equal to outgoing flow for every vertex except `s` and `t`.
