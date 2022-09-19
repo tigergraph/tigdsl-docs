@@ -11,9 +11,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/same_community[Same Community]
 
 
@@ -21,7 +18,11 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 This algorithm takes two vertices as input, returning 1 if the two vertices are in the same community, and returning 0 if they are not in the same community.
 
-NOTE: The algorithm assumes that community detection has already completed and that a community ID is stored in an integer attribute on each vertex.
+== Notes
+
+The algorithm assumes that community detection has already completed and that a community ID is stored in an integer attribute on each vertex.
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]

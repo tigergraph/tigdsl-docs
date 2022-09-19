@@ -7,7 +7,9 @@ Euclidean distance measures the straight line distance between two
 points in n-dimensional space. The algorithm takes two vectors denoted
 by `+ListAccum+` and return the Euclidean distance between them.
 
-NOTE: This algorithm is implemented as a user-defined function. You need to
+== Notes
+
+This algorithm is implemented as a user-defined function. You need to
 follow the steps in xref:gsql-ref:querying:func/query-user-defined-functions.adoc[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.

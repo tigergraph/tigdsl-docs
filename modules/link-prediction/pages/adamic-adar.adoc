@@ -9,14 +9,9 @@
 ^|Homogeneous vertex types
 ^|Heterogeneous vertex types
 |===
-
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/adamic_adar[Adamic Adar]
 
 ****
-
 
 The Adamic/Adar index is a measure introduced in 2003 by Lada Adamic and Eytan Adar to predict links in a social network, according to the number of shared links between two nodes.
 It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two nodes.
@@ -26,6 +21,10 @@ It is defined as the sum of the inverse logarithmic degree centrality of the nei
 {A(x,y)=\sum _{u\in N(x)\cap N(y)}{\frac {1}{\log {|N(u)|}}}}
 ++++
 Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]

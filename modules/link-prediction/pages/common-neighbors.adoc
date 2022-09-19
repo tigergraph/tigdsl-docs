@@ -11,14 +11,15 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/common_neighbors[Common Neighbors]
 
 ****
 
 The common neighbors algorithm calculates the number of common neighbors between two vertices.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]
@@ -51,7 +52,7 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 The number of common neighbors between two vertices.
 
 == Example
-Suppose to have the following graph:
+Suppose we have the following graph:
 
 image::adamic-adar-ex.png[]
 

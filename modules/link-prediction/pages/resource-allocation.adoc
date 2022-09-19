@@ -10,9 +10,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/resource_allocation[Resource Allocation]
 ****
 
@@ -24,6 +21,10 @@ Resource Allocation is used to compute the closeness of nodes based on their sha
 {RA(x,y)=\sum _{u\in N(x)\cap N(y)}{\frac {1} {|N(u)|}}}
 ++++
 Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]

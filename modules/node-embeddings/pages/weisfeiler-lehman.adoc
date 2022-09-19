@@ -98,7 +98,7 @@ Running the algorithm on the graph produces the following results：
 Query::
 +
 --
-[,gsql]
+[source.wrap,gsql]
 ----
 RUN QUERY tg_weisfeiler_lehman ("Person", "Friendship", 3, 8, true, _, _)
 ----

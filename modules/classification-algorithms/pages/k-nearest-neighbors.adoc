@@ -15,12 +15,16 @@ The All-Pairs variants also support directed edges.
 
 ****
 
-
 The k-Nearest Neighbors (kNN) algorithm is one of the simplest classification algorithms. It assumes that some or all the vertices in the graph have already been classified. The classification is stored as an attribute called the label. The goal is to predict the label of a given vertex, by seeing what are the labels of the nearest vertices.
 
 Given a source vertex in the dataset and a positive integer _k_, the algorithm calculates the distance between this vertex and all other vertices and selects the _k_ vertices that are nearest. The prediction of the label of this node is the majority label among its k-nearest neighbors.
 
 The distance can be physical distance as well as the reciprocal of similarity score, in which case "nearest" means "most similar". In our algorithm, the distance is the reciprocal of cosine neighbor similarity. The similarity calculation used here is the same as the calculation in https://app.gitbook.com/@tigergraph/s/document/~/edit/drafts/-LhrD9J_UpLvgqsxbKx9/v/2.4/graph-algorithm-library#cosine-similarity-of-neighborhoods-single-source[Cosine Similarity of Neighborhoods, Single Source]. Note that in this algorithm, vertices with zero similarity to the source node are not considered in prediction. For example, if there are 5 vertices with non-zero similarity to the source vertex, and 5 vertices with zero similarity, when we pick the top 7 neighbors, only the label of the 5 vertices with non-zero similarity score will be used in prediction.
+
+== Notes
+
+The algorithm will not output more than stem:[k] vertex pairs, so the algorithm may arbitrarily choose to output one vertex pair over another if there are tied similarity scores.
+
 
 == Specifications
 
@@ -67,8 +71,6 @@ file path in CSV format
 
 |Graph Types |Undirected or directed edges, weighted edges
 |===
-
-The algorithm will not output more than K vertex pairs, so the algorithm may arbitrarily choose to output one vertex pair over another if there are tied similarity scores.
 
 == Example
 

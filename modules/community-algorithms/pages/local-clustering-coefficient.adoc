@@ -9,11 +9,7 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Local Clustering Coefficient only works with directed graphs if reverse edges are included.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/local_clustering_coefficient[Local Clustering Coefficient]
-
 
 ****
 
@@ -21,9 +17,14 @@ The Local Clustering Coefficient algorithm computes the local clustering coeffic
 
 It is obtained by dividing the number of edges between a vertex's neighbors by the number of edges that could possibly exist.
 
+For more information, see https://en.wikipedia.org/wiki/Clustering_coefficient[Clustering Coefficient].
+
+== Notes
+
 The algorithm does not report the local clustering coefficient for vertices that have only one neighbor.
 
-For more information, see https://en.wikipedia.org/wiki/Clustering_coefficient[Clustering Coefficient].
+Local Clustering Coefficient only works with directed graphs if reverse edges are included.
+
 
 == Time complexity
 

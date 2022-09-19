@@ -43,7 +43,7 @@ vertex
 
 == Example
 
-Run knn_cosine_cv with min_k=2, max_k = 5. The JOSN result:
+Run knn_cosine_cv with min_k=2, max_k = 5. The JSON result:
 
 [source,text]
 ----
