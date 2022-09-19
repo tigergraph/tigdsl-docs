@@ -73,4 +73,12 @@ Returns the single integer that is the estimated diameter of the graph.
 |(empty string)
 |===
 
+== Example
 
+We can estimate the diameter of the graph included in the Shortest Path Algorithms TGCloud Starter Kit.
+
+This graph contains data for 7,927 `Airport` vertices and 19,257 `flight_route` edges.
+
+With `seed_set_length` set to `10`, the estimated diameter returned is `9`.
+With a larger `seed_set_length` of `100`, the new, more accurate, estimated diameter returned is `12`,
+because the greater number of randomly selected vertices happened to capture a larger worst-case scenario of graph diameter.
