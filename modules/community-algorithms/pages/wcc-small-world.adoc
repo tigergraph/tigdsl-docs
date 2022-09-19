@@ -14,7 +14,6 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-
 In addition to the regular weakly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small world graph means the graph has a hub community, where the vast majority of the vertices in the graph are weakly connected.
 

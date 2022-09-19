@@ -14,16 +14,19 @@ The formula for calculating the Pearson correlation coefficient is as follows:
 The algorithm takes two vectors denoted by `+ListAccum+` and returns the
 overlap coefficient between them.
 
-NOTE: This algorithm is implemented as a user-defined function. You need to
+== Notes
+
+This algorithm is implemented as a user-defined function. You need to
 follow the steps in link:[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.
 
 == Specifications
 
-....
+[source.wrap,gsql]
+----
 pearson_similarity_accum(A, B)
-....
+----
 
 === Time complexity
 The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.

@@ -42,4 +42,3 @@ In this case, the random walker can only start or restart walking from Fiona. In
 
 image::screen-shot-2019-04-25-at-4.09.01-pm (1).png[ Visualized results of example query on social10 graph, with Friend edges]
 
-###

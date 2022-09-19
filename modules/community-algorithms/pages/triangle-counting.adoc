@@ -9,9 +9,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Most applications of Triangle Count for a directed graph are better served by Cycle Detection.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/triangle_counting[Triangle Counting]
 
 ****
@@ -28,10 +25,15 @@ Note that it is computing a single number: How many triangles are in this graph?
 
 It is not common to count triangles in directed graphs, though it is certainly possible. If you choose to do so, you need to be very specific about the direction of interest: In a directed graph, If A--> B and B--> C, then
 
-* if A-->C, we have a "shortcut".
-* if C-->A, then we have a feedback loop.
+* if A->C, we have a "shortcut".
+* if C->A, then we have a feedback loop.
+
+== Notes
 
 This algorithm can only be run on TigerGraph v3.1 or higher.
+
+Most applications of Triangle Count for a directed graph are better served by Cycle Detection.
+
 
 == Specifications
 

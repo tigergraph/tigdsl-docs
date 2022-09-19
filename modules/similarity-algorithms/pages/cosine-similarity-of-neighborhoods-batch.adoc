@@ -18,8 +18,6 @@ This algorithm computes the same similarity scores as the xref:cosine-similarity
 Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage.
 The user can specify how many batches it is to be split into.
 
-This algorithm runs on graphs with weighted edges (directed or undirected).
-
 == Specifications
 
 [source,gsql]

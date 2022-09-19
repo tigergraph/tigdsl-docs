@@ -11,9 +11,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set[Maximal Independent Set] (contains links to all algorithm variants)
 ****
 
@@ -33,6 +30,11 @@ The deterministic version makes sure that you get the same results every time.
 The randomized version can produce different results every time you run it.
 The random version requires link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set/random[a user-defined function (UDF)].
 See xref:gsql-ref:querying:func/query-user-defined-functions.adoc[] for how to add a UDF.
+
+== Notes
+
+This algorithm ignores edge weights.
+
 
 == Specifications
 

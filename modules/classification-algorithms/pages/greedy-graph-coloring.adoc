@@ -9,15 +9,16 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/greedy_graph_coloring[Greedy Graph Coloring]
 ****
 
 This algorithm assigns a unique integer value known as its color to the vertices of a graph such that no neighboring vertices share the same color. The reason why this is called color is that this task is equivalent to assigning a color to each nation on a map so that no neighboring nations share the same color.
 
 Given a set of _k_ vertices, the algorithm first colors all vertices with the same color - the first color. It then starts from all the vertices and has each vertex send its own colors to its neighbors. If there are two neighboring vertices with the same color, the algorithm will reassign colors where there is a conflict. The same process is repeated until all conflicts are resolved.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 

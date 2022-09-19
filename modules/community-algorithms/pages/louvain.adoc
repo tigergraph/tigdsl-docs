@@ -16,9 +16,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-Louvain only works with directed graphs if reverse edges are included.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/louvain[Louvain]
 
 ****
@@ -52,6 +49,10 @@ The algorithm repeats these steps to move vertices into new communities and coar
 * The number of iterations of the reassignment-coarsen-measure cycle meets a pre-defined limit (the default is 10 iterations)
 
 The process of checking the modularity score increase for every possible vertex and community assignment is slow for large graphs.
+
+== Notes
+
+Louvain only works with directed graphs if reverse edges are included.
 
 An improved Parallel Louvain Method (PLM) calculates the best community to move to for each vertex in parallel{fn-staudt}.
 In the Parallel Louvain Method (PLM), the positive modularity gain is not guaranteed, which may result in swapping two vertices to each other's community.

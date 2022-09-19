@@ -13,9 +13,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-We suggest running Fast Random Projection on reverse edges of a directed graph to avoid the issue of source and sink vertices failing to update correctly.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/FastRP[Fast Random Projection]
 
 ****
@@ -31,8 +28,12 @@ This algorithm is especially useful in the following situations:
 * The dimensionality is very high and the number of samples are too sparse to calculate covariances.
 * You don't have access to the entire dataset, such as when working with real-time data.
 
-NOTE: FastRP was originally created to work on undirected graphs. It can work on directed graphs, although we recommend having reverse edges in your schema so the embeddings can be passed in both directions.
+== Notes
+
+FastRP was originally created to work on undirected graphs. It can work on directed graphs, although we recommend having reverse edges in your schema so the embeddings can be passed in both directions.
 If using a directed graph, there is a modification to allow it to run with sink vertices, but this may affect the embeddings.
+
+We suggest running Fast Random Projection on reverse edges of a directed graph to avoid the issue of source and sink vertices failing to update correctly.
 
 == Specifications
 

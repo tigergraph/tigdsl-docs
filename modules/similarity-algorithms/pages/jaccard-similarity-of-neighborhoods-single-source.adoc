@@ -13,7 +13,6 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-
 The Jaccard index measures the relative overlap between two sets. To compare two vertices by Jaccard similarity, first select a set of values for each vertex. For example, a set of values for a Person could be the cities the Person has lived in. Then the Jaccard index is computed for the two vectors.
 
 The Jaccard index of two sets A and B is defined as follows:
@@ -23,7 +22,7 @@ The Jaccard index of two sets A and B is defined as follows:
 Jaccard(A,B)=\frac{|A \cap B|}{|A \cup B|}
 ++++
 
-The value ranges from 0 to 1. If A and B are identical, then Jaccard(A, B) = 1. If both A and B are empty, we define the value to be 0.
+The value ranges from 0 to 1. If A and B are identical, then stem:[Jaccard(A, B) = 1]. If both A and B are empty, we define the value to be 0.
 
 == Specifications
 
