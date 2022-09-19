@@ -39,7 +39,9 @@ This algorithm has a time complexity of stem:[O(V+E)], where stem:[V] is equal t
 
 Returns all the vertices that are accessible from the source vertex.
 
-Result size V = number of vertices
+=== Result size
+
+The result size is equal to stem:[V], or the number of vertices.
 
 === Parameters
 
@@ -57,7 +59,7 @@ Result size V = number of vertices
 
 |`INT max_hops`
 |Maximum hops for the algorithm to look from each vertex
-|
+|10
 
 |`VERTEX v_start`
 |Source vertex for traversal
@@ -83,15 +85,15 @@ Result size V = number of vertices
 
 == Example
 
-In the example below, we run `+tg_bfs+` algorithm from the source vertex
+In the example below, we run the `+tg_bfs+` algorithm from the source vertex
 `+alex+` on the social10 graph.
 
-....
-# Use _ for default values
+[source.wrap,gsql]
+----
 RUN QUERY tg_bfs(["Person"], ["Friend"], _, ("Alex","Person"), _, _, _, _) <1>
-....
+----
 <1> Putting `_` in the position of a parameter will use the default value for that parameter.
 
-Below is the visualized result of the query:
+Below is the visualized result of the query.
 
 image::bfs-ex.png[]

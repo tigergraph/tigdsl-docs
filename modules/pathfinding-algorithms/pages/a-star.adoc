@@ -29,8 +29,11 @@ The algorithm terminates when the path it chooses to extend is a path
 from start to goal or if there are no paths eligible to be extended.
 The heuristic function is problem-specific.
 If the heuristic function is admissible, meaning that it never overestimates the actual cost to get
-to the target, the algorithm is guaranteed to return a least-cost path
-from source to target.
+to the target, the algorithm is guaranteed to return a least-cost path from source to target.
+
+== Notes
+
+The A* algorithm is relatively inefficient in terms of worst-case time and space complexity.
 
 == Specifications
 
@@ -70,6 +73,14 @@ from vertex source to target vertex.
 |The data type of the edge weights, if applicable. (Must be one of `INT`, `FLOAT`, `DOUBLE` )
 |(empty string)
 
+|`STRING latitude`
+|One of a pair of attributes used to calculate distance.
+|(empty string)
+
+|`STRING longitude`
+|One of a pair of attributes used to calculate distance.
+|(empty string)
+
 |`STRING wt_attr`
 |The attribute used as edge weight, if applicable
 |(empty string)
@@ -82,10 +93,12 @@ from vertex source to target vertex.
 
 == Example
 
-In the example below, we run the `+tg_astar+` algorithm to find the shortest path between the source vertex "Kings Cross" and the target vertex "Kentish Town" on a graph which is a transport network of stations. Each station has its geometric attibutes(i.e.latitude and longitude) and the edge weight represents the distance between stations in kilometers.
+We run the `+tg_astar+` algorithm to find the shortest path between the source vertex "Kings Cross" and the target vertex "Kentish Town" on a graph which is a transport network of stations.
+
+Each station has its geometric attibutes(i.e.latitude and longitude) and the edge weight represents the distance between stations in kilometers.
 
 The heuristic function used to guide the search is the
-https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes
+https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes.
 
 [source.wrap, sql]
 ----

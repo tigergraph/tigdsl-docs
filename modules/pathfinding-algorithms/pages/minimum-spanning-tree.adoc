@@ -109,7 +109,11 @@ In the graph `social10`, we consider only the undirected Coworker edges.
 
 image::screen-shot-2019-04-24-at-4.21.08-pm.png[Visualized results of example graph social10 graph with Coworker edges]
 
-This graph has 3 components. Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point. If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left. You can start from any vertex in the component and get the same or an equivalent MST result.
+This graph has 3 components.
+Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point.
+
+If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left.
+You can start from any vertex in the component and get the same or an equivalent MST result.
 
 The figure below shows the result of
 
