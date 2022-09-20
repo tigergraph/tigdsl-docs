@@ -10,11 +10,7 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-====
-On a graph with weighted edges, use xref:single-source-shortest-path-weighted.adoc[].
-With weighted edges, the algorithm must search the whole graph, whether you want the path for just one destination or for all destinations.
-====
+
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/unweighted[Single-source Shortest Path (Unweighted)]
 
@@ -31,6 +27,11 @@ If a graph has unweighted edges, then finding the shortest path from one vertex 
 When the graph is unweighted, we can use a "greedy" approach to find the shortest path. In computer science, a greedy algorithm does not re-evaluate choices with further iterations of itself.
 In this algorithm, the first path found to another vertex is considered to be the shortest path.
 
+
+== Notes
+
+On a graph with weighted edges, use xref:single-source-shortest-path-weighted.adoc[].
+With weighted edges, the algorithm must search the whole graph, whether you want the path for just one destination or for all destinations.
 
 == Specifications
 

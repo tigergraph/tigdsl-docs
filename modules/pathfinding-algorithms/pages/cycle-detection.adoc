@@ -12,10 +12,6 @@
 |===
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/cycle_detection[Cycle Detection]
-
-[NOTE]
-On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
-
 ****
 
 
@@ -38,6 +34,11 @@ For each Active vertex v:
   *** If id(v) is the least id of any id in P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
  ** Else, if id(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
  ** Else, append id(v) to the end of each of the remaining paths in its list.
+
+== Notes
+
+On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
+
 
 == Specifications
 
