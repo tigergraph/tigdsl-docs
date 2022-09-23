@@ -1,6 +1,6 @@
 name: graph-ml
 title: TigerGraph Graph Data Science Library
-version: pathfinding-checklist-DOC-1379
+version: 1.0
 display_version: "1.0"
 start_page: intro:index.adoc
 
