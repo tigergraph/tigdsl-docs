@@ -100,7 +100,7 @@ Each station has its geometric attibutes(i.e.latitude and longitude) and the edg
 The heuristic function used to guide the search is the
 https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes.
 
-[source.wrap, sql]
+[source.wrap,gsql]
 ----
 # Use _ for default values
 RUN QUERY astar(("Kings Cross","Station"), ("Kentish Town","Station"),["CONNECTION"], "FLOAT", "distance", _)
