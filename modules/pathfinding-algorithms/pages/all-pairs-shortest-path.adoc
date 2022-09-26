@@ -12,10 +12,6 @@
 |===
 
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path[All-Pairs Shortest Path] (contains links to all algorithm variants)
-
-[NOTE]
-The Unweighted variant does not support weighted edges.
-
 ****
 
 [CAUTION]
@@ -24,6 +20,12 @@ The All-Pairs Shortest Path algorithm is costly for large graphs because the com
 ====
 
 The All-Pairs Shortest Path (APSP) task seeks to find the shortest paths between every pair of vertices in the entire graph. In principle, this task can be handled by running the Single-Source Shortest Path (SSSP) algorithm for each input vertex, e.g.,
+
+== Notes
+
+The Unweighted variant does not support weighted edges.
+
+== Specifications
 
 [source,gsql]
 ----

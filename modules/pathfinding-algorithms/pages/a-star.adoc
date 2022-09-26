@@ -14,24 +14,26 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+A* (pronounced "A-star") is a graph traversal and path search algorithm
+that uses heuristics to estimate the most efficient path.
 
+As it traverses the graph, A* estimates the total cost of a path using each node on the way to the target.
 
-A* (pronounced "A-star") is a graph traversal and path search algorithm,
-which achieves better performance by using heuristics to guide its
-search.
+The best path is calculated by minimizing the function stem:[f(n)=g(n)+h(n)], where:
 
-The algorithm starts from a source node, and at each iteration of its
-main loop, it selects the path that minimizes stem:[f(n)=g(n)+h(n)] where n is the next node on the path, g(n) is the
-cost of the path from the source node to n, and h(n) is a heuristic
-function that estimates the cost of the cheapest path from n to the
-target node.
+* stem:[n] is the next node on the path
+* stem:[g(n)] is the cost of the path from the source node to stem:[n]
+* stem:[h(n)] is a heuristic function that estimates the cost of the cheapest path from stem:[n] to the target node.
 
 The algorithm terminates when the path it chooses to extend is a path
 from start to goal or if there are no paths eligible to be extended.
 The heuristic function is problem-specific.
 If the heuristic function is admissible, meaning that it never overestimates the actual cost to get
-to the target, the algorithm is guaranteed to return a least-cost path
-from source to target.
+to the target, the algorithm is guaranteed to return a least-cost path from source to target.
+
+== Notes
+
+The A* algorithm is relatively inefficient in terms of worst-case time and space complexity.
 
 == Specifications
 
@@ -45,36 +47,64 @@ STRING wt_attr, BOOL display = False)
 
 This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
 
-[cols=",",options="header",]
-|===
-|Characteristic |Value
-|Result |Computes a shortest distance (INT) and shortest path (STRING)
+=== Result
+Computes a shortest distance (INT) and shortest path (STRING)
 from vertex source to target vertex.
 
-|Required Input Parameters
-a|* *source_vertex*: start vertex
-* *target_vertex*: target vertex
-* *e_type*: edge types to traverse
-* *wt_type*: weight data type (`INT`, `FLOAT`, `DOUBLE`)
-* *wt_attr*: attribute for edge weights
-* *display*: output edges for visualization
+=== Parameters
 
-|Result Size |1
+[width="100%",cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
 
-|Graph Types |Directed or Undirected edges, Weighted edges
+|`VERTEX source_vertex`
+|ID of the source vertex
+|(empty string)
+
+|`VERTEX target_vertex`
+|ID of the target vertex
+|(empty string)
+
+|`EDGE e_type`
+|Edge types to traverse
+|(empty string)
+
+|`STRING wt_type`
+|The data type of the edge weights, if applicable. (Must be one of `INT`, `FLOAT`, `DOUBLE` )
+|(empty string)
+
+|`STRING latitude`
+|One of a pair of attributes used to calculate distance.
+|(empty string)
+
+|`STRING longitude`
+|One of a pair of attributes used to calculate distance.
+|(empty string)
+
+|`STRING wt_attr`
+|The attribute used as edge weight, if applicable
+|(empty string)
+
+|`BOOL display`
+|Whether to output edges for visualization
+|True
+
 |===
 
 == Example
 
-In the example below, we run the `+tg_astar+` algorithm to find the shortest path between the source vertex "Kings Cross" and the target vertex "Kentish Town" on a graph which is a transport network of stations. Each station has its geometric attibutes(i.e.latitude and longitude) and the edge weight represents the distance between stations in kilometers.
+We run the `+tg_astar+` algorithm to find the shortest path between the source vertex "Kings Cross" and the target vertex "Kentish Town" on a graph which is a transport network of stations.
+
+Each station has its geometric attibutes(i.e.latitude and longitude) and the edge weight represents the distance between stations in kilometers.
 
 The heuristic function used to guide the search is the
-https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes
+https://en.wikipedia.org/wiki/Haversine_formula[Haversine Formula], which computes the distance between two points on a sphere given their longitudes and latitudes.
 
-....
+[source.wrap,gsql]
+----
 # Use _ for default values
 RUN QUERY astar(("Kings Cross","Station"), ("Kentish Town","Station"),["CONNECTION"], "FLOAT", "distance", _)
-....
+----
 
 Below is the visualized result of the query:
 

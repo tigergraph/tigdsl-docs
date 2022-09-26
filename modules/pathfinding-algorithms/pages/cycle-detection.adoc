@@ -12,10 +12,6 @@
 |===
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/cycle_detection[Cycle Detection]
-
-[NOTE]
-On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
-
 ****
 
 
@@ -39,45 +35,66 @@ For each Active vertex v:
  ** Else, if id(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
  ** Else, append id(v) to the end of each of the remaining paths in its list.
 
+== Notes
+
+On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
+
+
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
 tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
   BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the lesser of either the maximum cycle length or the depth parameter.
 
+== Result
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
 Computes a list of vertex id lists, each of which is a cycle. The result
 is available in 2 forms:
 
-* streamed out in JSON format
+* streamed out to the console in JSON format
 * written to a file in tabular format
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT depth+`*: Maximum cycle length to search for = maximum number
-of iterations
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size a|
+=== Result Size
 Number of cycles * average cycle length
 
 Both of these measures are not known in advance.
 
-|Graph Types |Directed
+
+== Parameters
+
+[width="100%",cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+
+|`+SET<STRING> v_type+`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+SET<STRING> e_type+`
+|Names of edge types to use
+|(empty set of strings)
+
+|`INT depth`
+|Maximum cycle length to search for, equal to the maximum number of iterations
+|null
+
+|`+BOOL print_accum+`
+|If True, output JSON to standard output
+|True
+
+|`+STRING file_path+`
+|If not empty, write output to this file.
+|(empty string)
+
 |===
 
-== *Example*
+== Example
 
 In the social10 graph, there are 5 cycles, all with the Fiona-George-Howard-Ivy cluster.
 
