@@ -58,7 +58,8 @@ Suppose we have the following graph:
 
 image::preferential-attachment-ex.png[]
 
-Since Dan and Jenny has one shared neighbor `Tom`, who has two neighbors, running the algorithm between Dan and Jenny with friendship edges would give us a result of 0.5.
+Dan and Jenny have one shared neighbor `Tom`, who has two neighbors.
+Running the algorithm between Dan and Jenny with `friendship` edges returns a result of `0.5`.
 
 [tabs]
 ====

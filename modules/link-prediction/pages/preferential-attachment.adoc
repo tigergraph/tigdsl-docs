@@ -17,11 +17,14 @@ Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-Preferential Attachment is a measure to compute the closeness of vertices, based on the number of their neighbors. The algorithm returns the product two vertices' number of neighbors.
+Preferential Attachment is a measure to compute the closeness of vertices based on the number of their neighbors.
+The algorithm returns the product of the number of neighbors of the first vertex and the number of neighbors of the second vertex.
 
 For more information, see https://en.wikipedia.org/wiki/Preferential_attachment[Preferential Attachment].
 
 == Notes
+
+Preferential attachment as a metric works best on graphs that have an "unequal" structure where a majority of vertices have few connections and a minority of vertices have many connections.
 
 This algorithm ignores edge weights.
 
