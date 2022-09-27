@@ -14,7 +14,7 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 The Adamic/Adar index is a measure according to the number of shared links between two vertices.
-It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two vertics.
+It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two vertices.
 
 [stem]
 ++++
