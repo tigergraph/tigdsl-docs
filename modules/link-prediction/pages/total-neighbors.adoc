@@ -49,7 +49,7 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 |===
 
 == Return value
-The total number of neighbors of two vertices as a `closeness` 
+The total number of neighbors of two vertices as a `closeness` value.
 
 == Example
 Suppose we have the following graph.
