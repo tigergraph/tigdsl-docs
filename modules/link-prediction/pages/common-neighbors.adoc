@@ -15,7 +15,9 @@ Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-The common neighbors algorithm calculates the number of common neighbors between two vertices.
+A vertex stem:[A] that is connected to vertices stem:[B] and stem:[C] is considered to be a "common neighbor" of stem:[B] and stem:[C].
+
+The common neighbors algorithm counts the number of common neighbors between two vertices.
 
 == Notes
 
@@ -35,21 +37,21 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 |===
 |Name | Description | Data type
 
-| `a`
-|  A vertex.
-|  `VERTEX`
+| `VERTEX a`
+|  The first vertex to compare.
+| N/A
 
-| `b`
-| A vertex.
-| `VERTEX`
+| `VERTEX b`
+| The second vertex to compare with the first.
+| N/A
 
-| `e_type`
+| `SET<STRING> e_type`
 | Edge types to traverse.
-| `SET<STRING>`
+| (A blank set of strings)
 |===
 
-== Return value
-The number of common neighbors between two vertices.
+== Results
+Returns the number of common neighbors between two vertices expressed as a `closeness` value.
 
 == Example
 Suppose we have the following graph:

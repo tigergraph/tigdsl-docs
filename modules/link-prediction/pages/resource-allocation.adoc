@@ -13,8 +13,8 @@
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/resource_allocation[Resource Allocation]
 ****
 
-
-Resource Allocation is used to compute the closeness of nodes based on their shared neighbors. It is computed by the following formula:
+Resource Allocation is used to compute the closeness of nodes based on their shared neighbors.
+It is computed by the following formula:
 
 [stem]
 ++++
@@ -40,25 +40,30 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 |===
 |Name | Description | Data type
 
-| `a`
-|  A vertex.
-|  `VERTEX`
+| `VERTEX a`
+|  The first vertex to compare.
+| N/A
 
-| `b`
-| A vertex.
-| `VERTEX`
+| `VERTEX b`
+| The second vertex to compare with the first.
+| N/A
 
-| `e_type`
+| `SET<STRING> e_type`
 | Edge types to traverse.
-| `SET<STRING>`
+| (A blank set of strings)
 |===
+
+== Results
+
+Returns a closeness value for two input vertices.
 
 == Example
 Suppose we have the following graph:
 
 image::preferential-attachment-ex.png[]
 
-Since Dan and Jenny has one shared neighbor `Tom`, who has two neighbors, running the algorithm between Dan and Jenny with friendship edges would give us a result of 0.5.
+Dan and Jenny have one shared neighbor `Tom`, who has two neighbors.
+Running the algorithm between Dan and Jenny with `friendship` edges returns a result of `0.5`.
 
 [tabs]
 ====
