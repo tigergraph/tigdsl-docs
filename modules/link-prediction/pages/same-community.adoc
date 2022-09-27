@@ -42,24 +42,24 @@ The algorithm has a time complexity of stem:[O(1)].
 |===
 |Name | Description | Data type
 
-| `a`
-|  A vertex.
-|  `VERTEX`
+| `VERTEX a`
+|  The first vertex to compare.
+| N/A
 
-| `b`
-| A vertex.
-| `VERTEX`
+| `VERTEX b`
+| The second vertex to compare with the first.
+| N/A
 
-| `communityAttribute`
-| The community attribute used to store a vertex's community ID.
-| `STRING`
+| `STRING communityAttribute`
+| The vertex attribute used to store a vertex's community ID.
+| (A blank string)
 |===
 
 
 == Return value
 
-* Returns 1 if the two vertices are in the same community.
-* Returns 0 if the two vertices are not in the same community.
+* Returns `1` if the two vertices are in the same community.
+* Returns `0` if the two vertices are not in the same community.
 
 == Example
 Suppose we have the following vertices:

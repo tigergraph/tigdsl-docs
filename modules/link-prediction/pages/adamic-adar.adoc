@@ -44,11 +44,11 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 |Name | Description | Default value
 
 | `VERTEX a`
-|  A vertex.
+|  The first vertex to compare.
 | N/A
 
 | `VERTEX b`
-| A vertex.
+| The second vertex to compare with the first.
 | N/A
 
 | `SET<STRING> e_type`
