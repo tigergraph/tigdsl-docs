@@ -108,9 +108,9 @@ This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the n
 |(empty string)
 
 
-|`print_info`
+|`BOOL print_info`
 |If true, print results to JSON output.
-|`BOOL`
+|`True`
 
 
 |===
