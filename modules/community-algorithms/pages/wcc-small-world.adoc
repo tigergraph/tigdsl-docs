@@ -26,42 +26,48 @@ After identifying the first WCC, the algorithm uses the coloring method to ident
 
 == Notes
 
+We use a default value of `100000` for the threshold used to choose initial pivot vertices to increase the chances that the initial pivot is contained within the largest WCC.
+
 === Papers
 
-https://www.osti.gov/servlets/purl/1115145[Slota
-et al., _BFS and Coloring-based Parallel Algorithms for Strongly
+https://www.osti.gov/servlets/purl/1115145[Slota et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
 
 == Specifications
 
-....
+[source.wrap, gsql]
+----
 CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
 UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
-....
+----
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
 
 == Parameters
 
-[cols=",,",options="header",]
 |===
-|Name |Description |Data type
-|`+v_type+` |The vertex type to count as part of a connected component
-|`+STRING+`
+|Name |Description |Default value
 
-|`+e_type+` |The edge type to traverse |`+STRING+`
+|`STRING v_type`
+|The vertex type to count as part of a connected component
+| (empty string)
 
-|`+threshold+` |The threshold used to choose initial pivot vertices.
+|`STRING e_type`
+|The edge type to traverse
+| (empty string)
+
+|`UINT threshold`
+|The threshold used to choose initial pivot vertices.
 Only vertices whose product of indegree and outdegree exceed this
-threshold will be considered candidates for the pivot vertex. This is an
-attempt to increase the chances that the initial pivot is contained
-within the largest WCC. The default value for this parameter is 100000.
-It is suggested that you keep this default value when running the
-algorithm. |`+UINT+`
+threshold will be considered candidates for the pivot vertex.
+| `100000`
 
-|`+to_show_cc_count+` |If true, the algorithm will return the number of
-vertices in each connected component. |`+BOOL+`
+|`BOOL to_show_cc_count`
+|If true, the algorithm will return the number of
+vertices in each connected component.
+| True
+
 |===
 
 == Result

@@ -66,37 +66,18 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
   BOOL print_accum = TRUE, STRING attr= "", STRING file_path="")
 ----
 
-=== Time complexity
+== Results
+
+Assigns a component id (INT) to each vertex, such that members
+of the same component have the same ID value.
+
+
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Assigns a component id (INT) to each vertex, such that members
-of the same component have the same id value.
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+SET<STRING> rev_e_type+`*: Names of reverse direction edge types to
-use
-* *`+INT top_k_dist+`*: top k result in SCC distribution
-* *`+INT output_limit+`*: If >=0, max number of vertices to output to
-JSON.
-* *`+INT max_iter+`*: number of maximum iteration of the algorithm
-* *`+INT iter_wcc+`*: find weakly connected components for the active
-vertices in this iteration, since the largest SCCs are already found
-after several iterations; usually a small number(3 to 10)
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store community ID values
-(INT) to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size |V = number of vertices
-
-|Graph Types |Directed edges with reverse direction edges as well
-|===
+== Parameters
 
 |===
 |Parameter |Description |Default
@@ -115,7 +96,34 @@ after several iterations; usually a small number(3 to 10)
 
 |`INT top_k_dist`
 |The top _k_ results in the SCC distribution
-|(empty set of strings)
+| N/A
+
+|`INT output_limit`
+|The maximum number of vertices to output in JSON format.
+| N/A
+
+|`INT max_iter`
+|The maximum number of iterations of the algorithm.
+| 500
+
+|`INT iter_wcc`
+|Find weakly connected components for the active
+vertices in this iteration, since the largest SCCs are already found
+after several iterations. Usually a small number (3 to 10).
+| 5
+
+|`BOOL print_accum`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING result_attr`
+|If not empty, store community values in `INT` format to this vertex attribute
+|(empty string)
+
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
 
 |===
 
