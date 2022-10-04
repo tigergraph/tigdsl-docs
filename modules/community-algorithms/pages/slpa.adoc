@@ -52,11 +52,44 @@ a|* `v_type`: vertex types to traverse
 * `max_iter`: number of iterations
 * `print_accum`: print JSON output
 * `file_path`: file to write CSV output to
-* `output_limit`: max #vertices to output (-1 = all)
+* `output_limit`: maxi vertices to output (-1 = all)
 
 |Result size |V = number of vertices
 
 |Graph types |Undirected edges
+|===
+
+|===
+|Parameter |Description |Default
+
+|`SET<STRING> v_type`
+|The vertex types to use
+|(empty set of strings)
+
+|`SET<STRING> e_type`
+|The edge types to use
+|(empty set of strings)
+
+|`FLOAT threshold`
+|The threshold to drop a label
+|
+
+|`INT max_iter`
+|The maximum number of iterations
+|
+
+|`BOOL print_accum`
+|Whether to print the output in JSON format
+|False
+
+|`STRING file_path`
+|The file to write the output to in CSV format
+|(empty string)
+
+|`INT output_limit`
+|The maximum number of vertices to output. A value of `-1` will output all vertices.
+|0
+
 |===
 
 == Example
