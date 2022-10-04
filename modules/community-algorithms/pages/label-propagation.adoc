@@ -17,9 +17,15 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-Label Propagation is a heuristic method for determining communities. The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X.
+Label Propagation is a heuristic method for determining communities.
+The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X.
+In effect, this propagates a label from a single vertex to a group of vertices.
 
-The algorithm begins with each vertex having its own unique label. Then we iteratively update labels based on the neighbor influence described above. It is important that the order for updating the vertices be random. The algorithm is favored for its efficiency and simplicity, but it is not guaranteed to produce the same results every time.
+The algorithm begins with each vertex having its own unique label.
+It then iteratively updates labels based on the neighbor influence described above.
+It is important that the order for updating the vertices be random.
+
+This algorithm is favored for its efficiency and simplicity, but it is not guaranteed to produce the same results every time.
 
 In a variant version, some vertices could initially be known to belong to the same community. If they are well-connected to one another, they are likely to preserve their common membership and influence their neighbors,
 
@@ -38,8 +44,7 @@ This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number o
 [width="100%",cols="<5%,<50%",options="header",]
 |===
 |*Characteristic* |Value
-|Result |Assigns a component id (INT) to each vertex, such that members
-of the same component have the same id value.
+
 
 |Input Parameters a|
 * *`+SET<STRING> v_type+`*: Names of vertex types to use
@@ -51,11 +56,17 @@ JSON.
 * *`+STRING attr+`*: If not empty, store community id values (INT) to
 this attribute
 * *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size |V = number of vertices
-
-|Graph Types |Undirected edges
 |===
+
+
+== Results
+
+Assigns a component ID in `INT` format to each vertex.
+Members of the same component have the same ID value.
+
+=== Result size
+
+The result size is calculated by stem:[V], the number of vertices.
 
 == Example
 

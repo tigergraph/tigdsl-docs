@@ -17,14 +17,18 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 In addition to the regular weakly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small world graph means the graph has a hub community, where the vast majority of the vertices in the graph are weakly connected.
 
-This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several different methods used to find connected components in a multi-step process proposed by Slota et al. in _BFS and Coloring-based Parallel Algorithms for Strongly Connected Components and Related Problems_.
+This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several methods used to find connected components in a multi-step process.
 
 The algorithm starts by selecting an initial pivot vertex _v_ with a high product of indegree and outdegree. From the initial pivot vertex,
 the algorithm uses Breadth-First Search to determine the massive weakly connected component. The vertices that are not included in this SCC are passed off to the next step.
 
 After identifying the first WCC, the algorithm uses the coloring method to identify the WCCs in the remaining vertices.
 
-For more details, see https://www.osti.gov/servlets/purl/1115145[Slota
+== Notes
+
+=== Papers
+
+https://www.osti.gov/servlets/purl/1115145[Slota
 et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
 

@@ -15,21 +15,47 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-A strongly connected component (SCC) is a subgraph such that there is a path from any vertex to every other vertex. A graph can contain more than one separate SCC. An SCC algorithm finds the maximal SCCs within a graph.
+A strongly connected component (SCC) is a subgraph such that there is a path from any vertex to every other vertex.
+A graph can contain more than one separate SCC.
+This SCC algorithm finds the maximal SCCs within a graph.
 
-Our implementation is based on the Divide-and-Conquer Strong Components (DCSC) algorithm[1]. In each iteration, pick a pivot vertex `v` randomly, and find its descendant and predecessor sets, where descendant set `D_v` is the vertex reachable from `v`, and predecessor set `P_v` is the vertices which can reach `v` (stated another way, reachable from `v` through reverse edges). The intersection of these two sets is a strongly connected component `SCC_v`.
+Our implementation is based on the Divide-and-Conquer Strong Components (DCSC) algorithm:
 
-The graph can be partitioned into 4 sets: `SCC_v`, descendants `D_v` excluding `SCC_v`, predecessors `P_v` excluding `SCC`, and the remainders `R_v`. It is proved that _any SCC_ is a subset of one of the 4 sets [1]. Thus, we can divide the graph into different subsets and detect the SCCs independently and iteratively.
+* In each iteration, pick a pivot vertex `v` randomly.
+* Find its descendant and predecessor sets:
+** Descendant set `D_v` is the set of vertices reachable from `v` using regular edges.
+** Predecessor set `P_v` is the set of vertices reachable from `v` using reverse edges.
+* The intersection of these two sets is a strongly connected component `SCC_v`.
 
-The problem of this algorithm is unbalanced load and slow convergence when there are a lot of small SCCs, which is often the case in real-world use cases [3]. We added two trimming stages to improve the performance: size-1 SCC trimming[2] and weakly connected components[3].
+The graph can be partitioned into 4 sets:
+
+* `SCC_v`
+* Descendants `D_v` excluding `SCC_v`
+* Predecessors `P_v` excluding `SCC_v`
+* Remainders `R_v`.
+
+It is proved that _any SCC_ is a subset of one of the 4 sets.
+
+Thus, we can divide the graph into different subsets and detect the SCCs independently and iteratively.
+
+== Notes
 
 The implementation of this algorithm requires reverse edges for all directed edges considered in the graph.
 
-[1] Fleischer, Lisa K., Bruce Hendrickson, and Ali Pınar. "On identifying strongly connected components in parallel." International Parallel and Distributed Processing Symposium. Springer, Berlin, Heidelberg, 2000.
+The problem of this algorithm is unbalanced load and slow convergence when there are a lot of small SCCs, which is often the case in real-world use cases.
 
-[2] Mclendon Iii, William, et al. "Finding strongly connected components in distributed graphs." Journal of Parallel and Distributed Computing 65.8 (2005): 901-910.
+We added two trimming stages to improve the performance: Size-1 SCC Trimming and Weakly Connected Components.
 
-[3] Hong, Sungpack, Nicole C. Rodia, and Kunle Olukotun. "On fast parallel detection of strongly connected components (SCC) in small-world graphs." Proceedings of the International Conference on High Performance Computing, Networking, Storage and Analysis. ACM, 2013.
+=== Papers
+
+DCSC Algorithm:
+Fleischer, Lisa K., Bruce Hendrickson, and Ali Pınar. "On identifying strongly connected components in parallel." International Parallel and Distributed Processing Symposium. Springer, Berlin, Heidelberg, 2000.
+
+Size-1 SCC Trimming:
+Mclendon III, William, et al. "Finding strongly connected components in distributed graphs." Journal of Parallel and Distributed Computing 65.8 (2005): 901-910.
+
+Weakly Connected Components:
+Hong, Sungpack, Nicole C. Rodia, and Kunle Olukotun. "On fast parallel detection of strongly connected components (SCC) in small-world graphs." Proceedings of the International Conference on High Performance Computing, Networking, Storage and Analysis. ACM, 2013.
 
 == Specifications
 
@@ -70,6 +96,27 @@ after several iterations; usually a small number(3 to 10)
 |Result Size |V = number of vertices
 
 |Graph Types |Directed edges with reverse direction edges as well
+|===
+
+|===
+|Parameter |Description |Default
+
+|`SET<STRING> v_type`
+|The vertex types to use
+|(empty set of strings)
+
+|`SET<STRING> e_type`
+|The edge types to use
+|(empty set of strings)
+
+|`SET<STRING> rev_e_type`
+|The reverse edge types to use
+|(empty set of strings)
+
+|`INT top_k_dist`
+|The top _k_ results in the SCC distribution
+|(empty set of strings)
+
 |===
 
 == Example

@@ -13,7 +13,10 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-The Local Clustering Coefficient algorithm computes the local clustering coefficient of every vertex in a graph. The _local clustering coefficient_ of a vertex (node) in a graph quantifies how close its neighbors are to being a complete graph, where every two distinct vertices are connected by an edge.
+The _local clustering coefficient_ of a vertex in a graph quantifies how close its neighbors are to being a complete graph.
+In a complete graph, every two distinct vertices are connected.
+
+This algorithm computes the local clustering coefficient of every vertex in a graph.
 
 It is obtained by dividing the number of edges between a vertex's neighbors by the number of edges that could possibly exist.
 
