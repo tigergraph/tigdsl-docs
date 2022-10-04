@@ -10,9 +10,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-Use the Degree Centrality algorithm on an undirected graph instead of Personalized PageRank.
-
 ****
 
 

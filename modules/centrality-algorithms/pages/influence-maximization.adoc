@@ -21,6 +21,8 @@ There are two versions of the Influence Maximization algorithm.
 Both versions find k vertices that maximize the expected spread of influence in the network.
 The CELF version improves upon the efficiency of the greedy version and should be preferred in analyzing large networks.
 
+== Notes
+
 The algorithm is implemented based on the following research papers:
 
 * CELF: https://www.cs.cmu.edu/~jure/pubs/detect-kdd07.pdf[Cost-effective Outbreak Detection in Networks]

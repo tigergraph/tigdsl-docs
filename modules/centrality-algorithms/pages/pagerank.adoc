@@ -10,15 +10,18 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Use the Degree Centrality algorithm on an undirected graph.
-
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
 
 ****
 
 
-The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it. A vertex's influence tends to increase if (1) it has more referring vertices or if (2) its referring vertices have higher influence. The analogy to social influence is clear.
+The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it.
+A vertex's influence tends to increase if either of these conditions are met:
+
+. It has more referring vertices
+. Its referring vertices have higher influence
+
+The analogy to social influence is clear.
 
 A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is proportional to the probability that a random network surfer will be at that vertex at any given time.
 A vertex with a high PageRank score is a vertex that is frequently visited, assuming that vertices are visited according to the following Random Surfer scheme:
@@ -27,6 +30,8 @@ A vertex with a high PageRank score is a vertex that is frequently visited, assu
 * The surfer can start anywhere. This start-anywhere property is part of the magic of PageRank, meaning the score is a truly fundamental property of the graph structure itself.
 * Each round, the surfer randomly picks one of the outward connections from the surfer's current location. The surfer repeats this random walk for a long time.
 * There is a small probability that the surfer's next step will be a random vertex instead of a connected vertex. This probability is expressed in the algorithm as (1 - damping).
+
+== Notes
 
 For more information, see http://infolab.stanford.edu/~backrub/google.html[the Google paper on PageRank].
 
@@ -37,18 +42,18 @@ For more information, see http://infolab.stanford.edu/~backrub/google.html[the G
 tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-=== Result
+== Result
 
 Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
 
-=== Parameters
+== Parameters
 
 [width="100%",cols="0,1,0",options="header",]
 |===
