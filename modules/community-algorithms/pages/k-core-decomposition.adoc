@@ -67,7 +67,7 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
 | If `file_path` is provided, the algorithm will output results to a file specified by the file path in CSV format.
 
 | `BOOL print_all_k`
-|
+| Whether to print all _k_ connections
 
 | `BOOL show_shells`
 | The *k-shell* is the set of vertices that are part of the _k_-core but not part of the (_k_+1)-core. If `show_shells` is `true`, the algorithm will return the k-shells found for every value of k. within the range provided. For each k-shell, the results will include its member vertices.

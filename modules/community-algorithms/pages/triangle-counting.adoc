@@ -57,24 +57,43 @@ tg_tri_count_fast(STRING v_type, STRING e_type)
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<5%,<50%",options="header",]
 |===
-|*Characteristic* |Value
-|Result |Returns the number of triangles in the graph.
-|Input Parameters a|
-`+v_type+`: Vertex type to count
+|Parameter |Description |Default
 
-`+e_type+`: Edge type to traverse
+|`STRING v_type`
+|Vertex type to count
+|(empty string)
 
-|Result Size |1 integer
-|Graph Types |Undirected edges
+|`e_type`
+|Edge type to traverse
+|(empty string)
+
 |===
+
+== Result
+
+Returns the number of triangles in the graph, in JSON format.
+
+[source,text]
+----
+{
+  "results": [
+    {"num_triangles": 0}
+  ]
+}
+----
+
+This algorithm does not list out the members of each triangle or assign triangle IDs to each vertex.
 
 == Example
 
-In the social10 graph with Coworker edges, there are clearly 4 triangles.
+Consider a graph with Person vertices and Coworker edges.
+
+From the vertex display alone, a human can clearly see that there are 4 triangles.
 
 image::gr_social10_coworker.png[]
+
+The query returns the same result.
 
 [source,text]
 ----

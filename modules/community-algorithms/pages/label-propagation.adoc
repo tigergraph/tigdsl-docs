@@ -40,24 +40,34 @@ BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
 === Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
-
-[width="100%",cols="<5%,<50%",options="header",]
 |===
-|*Characteristic* |Value
+|Parameter |Description |Default
 
+|`SET<STRING> v_type`
+|Names of vertex types to use
+|(empty set of strings)
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT max_iter+`*: Number of maximum iteration of the algorithm
-* *`+INT output_limit+`*: If >=0, max number of vertices to output to
-JSON.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING attr+`*: If not empty, store community id values (INT) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
+|`SET<STRING> e_type`
+|Names of edge types to use
+|(empty set of strings)
+
+|`INT max_iter`
+|Maximum iterations of the algorithm
+|N/A
+
+|`INT output_limit`
+|Maximum number of vertices to output in JSON format
+|N/A. Use `-1` to output all vertices.
+
+|`BOOL print_accum`
+|Whether to print data in JSON format to the standard output
+|False
+
+|`STRING attr`
+|Vertex attribute where community ID values are assigned in `INT` format. No value is assigned if the string is left blank.
+|(empty string)
+
 |===
-
 
 == Results
 

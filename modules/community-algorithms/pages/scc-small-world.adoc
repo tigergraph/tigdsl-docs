@@ -33,6 +33,9 @@ This version improves upon the performance of the original algorithm when dealin
 https://www.osti.gov/servlets/purl/1115145[ Slota et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
 
+We use a default value of `100000` for the threshold used to choose initial pivot vertices to increase the chances that the initial pivot is contained within the largest SCC.
+
+
 == Specifications
 ....
 CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING re_type,
@@ -48,24 +51,21 @@ The algorithm has a time complexity of stem:[O(V + E)], where stem:[V] is the nu
 [cols=",,",options="header",]
 |===
 |Name |Description |Data type
-|`+v_type+` |The vertex type to count as part of a strongly connected
-component |`+STRING+`
+|`STRING v_type` |The vertex type to count as part of a strongly connected
+component | (empty string)
 
-|`STRING e_type` |The edge type to traverse |
+|`STRING e_type` |The edge type to traverse | (empty string)
 
 |`STRING re_type` |The reverse edge type to traverse. If the graph is
 undirected, fill in the name of the undirected edge here as well as for
-`+e_type.+` |
+`+e_type.+` | (empty string)
 
 |`UINT threshold` |The threshold used to choose initial pivot vertices.
 Only vertices whose product of indegree and outdegree exceed this
-threshold will be considered candidates for the pivot vertex. This is an
-attempt to increase the chances that the initial pivot is contained
-within the largest SCC. The default value for this parameter is 100000.
-It is suggested that you keep this default value when running the
-algorithm. |
+threshold will be considered candidates for the pivot vertex.
+|`100000`
 
-|`BOOL to_show_cc_count` |Whether to print the number of vertices in each strongly connected component.
+|`BOOL to_show_cc_count` |Whether to print the number of vertices in each strongly connected component. | False
 |===
 
 == Result

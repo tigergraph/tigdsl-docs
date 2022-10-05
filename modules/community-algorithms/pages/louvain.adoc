@@ -100,7 +100,7 @@ This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the n
 
 |`STRING result_attr`
 |If not empty, store community values in `INT` format to this vertex attribute
-|cid
+|(empty string)
 
 
 |`STRING file_path`
