@@ -17,9 +17,15 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-Label Propagation is a heuristic method for determining communities. The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X.
+Label Propagation is a heuristic method for determining communities.
+The idea is simple: If the plurality of your neighbors all bear the label X, then you should label yourself as also a member of X.
+In effect, this propagates a label from a single vertex to a group of vertices.
 
-The algorithm begins with each vertex having its own unique label. Then we iteratively update labels based on the neighbor influence described above. It is important that the order for updating the vertices be random. The algorithm is favored for its efficiency and simplicity, but it is not guaranteed to produce the same results every time.
+The algorithm begins with each vertex having its own unique label.
+It then iteratively updates labels based on the neighbor influence described above.
+It is important that the order for updating the vertices be random.
+
+This algorithm is favored for its efficiency and simplicity, but it is not guaranteed to produce the same results every time.
 
 In a variant version, some vertices could initially be known to belong to the same community. If they are well-connected to one another, they are likely to preserve their common membership and influence their neighbors,
 
@@ -34,28 +40,43 @@ BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
 === Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
-
-[width="100%",cols="<5%,<50%",options="header",]
 |===
-|*Characteristic* |Value
-|Result |Assigns a component id (INT) to each vertex, such that members
-of the same component have the same id value.
+|Parameter |Description |Default
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT max_iter+`*: Number of maximum iteration of the algorithm
-* *`+INT output_limit+`*: If >=0, max number of vertices to output to
-JSON.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING attr+`*: If not empty, store community id values (INT) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
+|`SET<STRING> v_type`
+|Names of vertex types to use
+|(empty set of strings)
 
-|Result Size |V = number of vertices
+|`SET<STRING> e_type`
+|Names of edge types to use
+|(empty set of strings)
 
-|Graph Types |Undirected edges
+|`INT max_iter`
+|Maximum iterations of the algorithm
+|N/A
+
+|`INT output_limit`
+|Maximum number of vertices to output in JSON format
+|N/A. Use `-1` to output all vertices.
+
+|`BOOL print_accum`
+|Whether to print data in JSON format to the standard output
+|False
+
+|`STRING attr`
+|Vertex attribute where community ID values are assigned in `INT` format. No value is assigned if the string is left blank.
+|(empty string)
+
 |===
+
+== Results
+
+Assigns a component ID in `INT` format to each vertex.
+Members of the same component have the same ID value.
+
+=== Result size
+
+The result size is calculated by stem:[V], the number of vertices.
 
 == Example
 

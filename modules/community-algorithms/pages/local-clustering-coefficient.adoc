@@ -13,7 +13,10 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-The Local Clustering Coefficient algorithm computes the local clustering coefficient of every vertex in a graph. The _local clustering coefficient_ of a vertex (node) in a graph quantifies how close its neighbors are to being a complete graph, where every two distinct vertices are connected by an edge.
+The _local clustering coefficient_ of a vertex in a graph quantifies how close its neighbors are to being a complete graph.
+In a complete graph, every two distinct vertices are connected.
+
+This algorithm computes the local clustering coefficient of every vertex in a graph.
 
 It is obtained by dividing the number of edges between a vertex's neighbors by the number of edges that could possibly exist.
 
@@ -28,7 +31,7 @@ Local Clustering Coefficient only works with directed graphs if reverse edges ar
 
 == Time complexity
 
-`O(n)`, where `n` is the number of vertices in the graph.
+stem:[O(V)], where stem:[V] is the number of vertices in the graph.
 
 == Specifications
 
@@ -44,33 +47,33 @@ tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
 |===
 | Parameter | Description | Data type
 
-| `v_type`
+| `STRING v_type`
 | Vertex type to calculate local clustering coefficient for
-| `STRING`
+| (empty string)
 
-| `e_type`
+| `STRING e_type`
 | Edge type to traverse. Only vertices that are connected by edges of this type are treated as connected in this algorithm.
-| `STRING`
+| (empty string)
 
-| `top_k`
+| `INT top_k`
 | Number of the highest local clustering coefficients to report.
-| `INT`
+| 100
 
-| `print_accum`
+| `BOOL print_accum`
 | If `true`, output JSON to standard output.
-| `BOOL`
+| True
 
-| `result_attr`
+| `STRING result_attr`
 | If provided, the local clustering coefficient of a vertex will be saved to this attribute.
-| `STRING`
+| (empty string)
 
-| `file_path`
+| `STRING file_path`
 | If provided, write output to this file in CSV.
-| `STRING`
+| (empty string)
 
-| `display_edges`
-| If `display_edges` is set to true, the algorithm will also return edges, which help produce better visualized results in GraphStudio.
-| `BOOL`
+| `BOOL display_edges`
+| If true, the algorithm will also return edges, which help produce better visualized results in GraphStudio.
+| False
 |===
 
 == Example
