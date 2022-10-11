@@ -5,7 +5,7 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/27
 
 Euclidean distance measures the straight line distance between two
 points in n-dimensional space. The algorithm takes two vectors denoted
-by `+ListAccum+` and return the Euclidean distance between them.
+by `ListAccum` and returns the Euclidean distance between them.
 
 == Notes
 

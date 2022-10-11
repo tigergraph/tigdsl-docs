@@ -16,8 +16,8 @@ overlap coefficient between them.
 
 == Notes
 
-This algorithm is implemented as a user-defined function. You need to
-follow the steps in link:[Add a User-Defined Function] to add the
+This algorithm is implemented as a user-defined function.
+Follow the steps in link:[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.
 

@@ -13,7 +13,12 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-The Jaccard index measures the relative overlap between two sets. To compare two vertices by Jaccard similarity, first select a set of values for each vertex. For example, a set of values for a Person could be the cities the Person has lived in. Then the Jaccard index is computed for the two vectors.
+The Jaccard index measures the relative overlap between two sets.
+
+To compare two vertices by Jaccard similarity, first select a set of attribute values for each vertex.
+
+For example, a set of values for a Person vertex could be the list of cities the person has lived in.
+The Jaccard index is computed for the two value sets.
 
 The Jaccard index of two sets A and B is defined as follows:
 
@@ -72,7 +77,11 @@ The algorithm will not output more than K vertices, so the algorithm may arbitra
 
 == Example
 
-Using the movie graph, we run `jaccard_nbor_ss("Neil", 5)`:
+This example uses a Movie Rating graph consisting of Person and Movie vertices.
+There are Likes edges that are weighted according to how much the person liked the movie.
+Each person in the dataset liked at least one movie, but not all movies were liked by all people.
+
+Here we run `jaccard_nbor_ss("Neil", 5)`:
 
 [,text]
 ----
