@@ -36,28 +36,17 @@ CREATE QUERY tg_slpa (SET<STRING> v_type, SET<STRING> e_type, FLOAT threshold, I
 BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
-[cols=",",options="header",]
-|===
-|Characteristic |Value
-|Result |Assigns a list of component id (INT) to each vertex, such that
-members of the same component have the same id value.
 
-|Required Input Parameters
-a|* `v_type`: vertex types to traverse
-* `e_type`: edge types to traverse
-* `threshold`: threshold to drop a label
-* `max_iter`: number of iterations
-* `print_accum`: print JSON output
-* `file_path`: file to write CSV output to
-* `output_limit`: maxi vertices to output (-1 = all)
+== Results
 
-|Result size |V = number of vertices
+Assigns a list of component IDs in INT form to each vertex, such that members of the same component have the same ID value.
 
-|Graph types |Undirected edges
-|===
+The result size is equal to stem:[V], the number of vertices.
+
+== Parameters
 
 |===
 |Parameter |Description |Default
@@ -72,11 +61,11 @@ a|* `v_type`: vertex types to traverse
 
 |`FLOAT threshold`
 |The threshold to drop a label
-|
+|0
 
 |`INT max_iter`
 |The maximum number of iterations
-|
+|10
 
 |`BOOL print_accum`
 |Whether to print the output in JSON format
@@ -131,5 +120,7 @@ Result::
 ----
 --
 ====
+
+The result shows that each community has a unique community ID in the `com` attribute.
 
 image::spla-ex.png[Visualized results]
