@@ -18,14 +18,21 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-In the xref:centrality-algorithms:closeness-centrality.adoc[Closeness Centrality algorithm], to obtain the closeness centrality score for a vertex, we measure the distance from the source vertex to every single vertex in the graph. In large graphs, running this calculation for every vertex can be highly time-consuming.
+In the xref:centrality-algorithms:closeness-centrality.adoc[Closeness Centrality algorithm], to obtain the closeness centrality score for a vertex, we measure the distance from the source vertex to every single vertex in the graph.
 
-The Approximate Closeness Centrality algorithm (based on https://arxiv.org/pdf/1409.0035.pdf[Cohen et al. 2014]) calculates the approximate closeness centrality score for each vertex by combining two estimation approaches - sampling and pivoting. This hybrid estimation approach offers near-linear time processing and linear space overhead within a small relative error. It runs on graphs with unweighted edges (directed or undirected).
+In large graphs, running this calculation for every vertex can be highly time-consuming.
+
+This algorithm approximates the closeness centrality score for each vertex pair by combining two estimation approaches: sampling and pivoting.
+This hybrid estimation approach offers near-linear time processing and linear space overhead within a small relative error.
 
 == Notes
 
 This query uses another subquery https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/schema-free/closeness_cent_approx_sub.gsql[`closeness_cent_approx_sub`],
 which needs to be installed before `closeness_approx` can be successfully run.
+
+=== Paper
+
+For further information about the algorithm design, see link:https://arxiv.org/pdf/1409.0035.pdf[Cohen et al., 2013, Computing Classic Closeness Centrality, at Scale.]
 
 == Specifications
 
@@ -51,38 +58,41 @@ tg_closeness_approx (
 |===
 | Name | Description
 
-| `v_type`
+| `SET<STRING> v_type`
 | Vertex types to calculate approximate closeness centrality for.
 
-| `e_type`
+| `SET<STRING> e_type`
 | Edge types to traverse.
 
-| `k`
+| `INT k`
 | Size of the sample.
 
-| `max_hops`
+| `INT max_hops`
 | Upper limit of how many jumps the algorithm will perform from each vertex.
 
-| `epsilon`
+| `DOUBLE epsilon`
 | The maximum relative error, between 0 and 1. Setting a lower value produces a more accurate estimate but increases run time.
 
-| `print_accum`
-| Boolean value that indicates whether or not to output to console in JSON format.
+| `BOOL print_accum`
+| Whether to print the output to console in JSON format.
 
-| `file_path`
+| `STRING file_path`
 | If provided, the algorithm will output to this file path in CSV format
 
-| `debug`
-| There are many conditional logging statements inside the query. If the input is 0, nothing will be logged. If the input is 1, everything else but the breadth-first-search process from the sample-node. If the input is 2, everything will be logged.
+| `INT debug`
+| There are many conditional logging statements inside the query.
+If the input is 0, nothing will be logged.
+If the input is 1, everything else but the breadth-first-search process from the sample-node will be logged.
+If the input is 2, everything will be logged.
 
-| `sample_index`
+| `INT sample_index`
 | The algorithm will partition the graph based on the sample size. This index indicates which partition to use when estimating closeness centrality.
 
-| `maxsize`
+| `INT maxsize`
 | If the number of vertices in the graph is lower than `maxsize`, the exact closeness centrality is calculated instead and nothing will be approximated.
 
-| `wf`
-| Boolean value that indicates whether to use the https://books.google.com/books/about/Social_Network_Analysis.html?id=CAm2DpIqRUIC[Wasserman and Faust]formula to calculate closeness centrality rather than the classic formula.
+| `BOOL wf`
+| Whether to use the https://books.google.com/books/about/Social_Network_Analysis.html?id=CAm2DpIqRUIC[Wasserman and Faust] formula to calculate closeness centrality rather than the classic formula.
 |===
 
 == Result
@@ -95,7 +105,7 @@ Below is an example of running the algorithm on the social10 test graph and an e
 
 [source,javascript]
 ----
-RUN QUERY tg_closeness_aprox(["Person"], ["Friend", "Coworker"], 6, 3   \
+RUN QUERY tg_closeness_approx(["Person"], ["Friend", "Coworker"], 6, 3   \
 0.1, true, "", 0, 0, 100, false)
 
 [

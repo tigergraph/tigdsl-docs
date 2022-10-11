@@ -17,7 +17,12 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-We all have an intuitive understanding when we say a home, an office, or a store is "centrally located." Closeness Centrality provides a precise measure of how "centrally located" a vertex is. The steps below show the steps for one vertex `v`:
+We all have an intuitive understanding when we say a home, an office, or a store is "centrally located."
+Something that is centrally located is roughly equidistant from several destinations.
+
+
+Closeness Centrality provides a precise measure of how "centrally located" all the vertices are.
+The steps below show the steps for one vertex `v`:
 
 |===
 | Step | Mathematical Formula
@@ -29,13 +34,19 @@ We all have an intuitive understanding when we say a home, an office, or a store
 | stem:[CC(v) = 1/d_{avg}(v)]
 |===
 
-TigerGraph's closeness centrality algorithm uses multi-source breadth-first search (MS-BFS) to traverse the graph and calculate the sum of a vertex's distance to every other vertex in the graph, which vastly improves the performance of the algorithm. The algorithm's implementation of MS-BFS is based on the paper https://db.in.tum.de/~kaufmann/papers/msbfs.pdf[The More the Merrier: Efficient Multi-source Graph Traversal by Then et al].
+This is repeated across all vertices in the graph.
 
 == Notes
 
 This algorithm query employs a subquery called `cc_subquery`.
 Both queries are needed to run the algorithm.
 
+=== Paper
+
+TigerGraph's closeness centrality algorithm uses multi-source breadth-first search (MS-BFS) to traverse the graph and calculate the sum of a vertex's distance to every other vertex in the graph, which vastly improves the performance of the algorithm.
+
+
+The algorithm's implementation of MS-BFS is based on the paper https://db.in.tum.de/~kaufmann/papers/msbfs.pdf[The More the Merrier: Efficient Multi-source Graph Traversal by Then et al].
 
 == Specifications
 
@@ -46,19 +57,25 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(E)] where stem:[E] is the number of edges.
 
 Parallel processing reduces the time needed for computation.
+
+== Result
+
+Computes a Closeness Centrality value (FLOAT type) for each vertex, calculated from the average distance between that vertex and every other vertex.
+
+=== Result size
+
+stem:[V], or the number of vertices. One FLOAT value is returned for each vertex.
 
 == *Parameters*
 
 [width="100%",cols="<,<50%",options="header",]
 |===
 |*Characteristic* |Value
-|Result |Computes a Closeness Centrality value (FLOAT type) for each
-vertex.
 
 |Required Input Parameters a|
 * `+SET<STRING> v_type+`: Names of vertex types to use
@@ -76,10 +93,6 @@ to this attribute
 CSV.
 * `+BOOL display_edges+`: If true, include the graph's edges in the JSON
 output, so that the full graph can be displayed.
-
-|Result Size |V = number of vertices
-
-|Graph Types |Directed or Undirected edges, Unweighted edges
 |===
 
 == Example
