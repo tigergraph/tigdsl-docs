@@ -18,12 +18,15 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-The Harmonic Centrality algorithm calculates the harmonic centrality of each vertex in the graph. Harmonic Centrality is a variant of Closeness Centrality. In a (not necessarily connected) graph, the *harmonic centrality* reverses the sum and reciprocal operations in the definition of closeness centrality:
+Harmonic Centrality is a variant of Closeness Centrality. In a (not necessarily connected) graph, the *harmonic centrality* reverses the sum and reciprocal operations in the definition of closeness centrality:
 
 [stem]
 ++++
 H(x)=\sum _{y\neq x}{\frac {1}{d(x,y)}}
 ++++
+
+The Harmonic Centrality algorithm calculates a harmonic centrality score for each vertex in the graph.
+
 
 == Notes
 
@@ -41,6 +44,17 @@ CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
 The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
 Parallel processing reduces the time needed for computation.
+
+
+== Results
+
+Returns a centrality score for all vertices of the specified type in the graph.
+The results are ordered from most central to least central.
+
+There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest centrality scores in the graph.
+This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
+
+The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
 
 == Parameters
 
@@ -64,7 +78,7 @@ Parallel processing reduces the time needed for computation.
 | `INT`
 
 | `top_k`
-| Sort the scores high to low and output the highest `k`  scores
+| Output the highest `k`  scores
 | `INT`
 
 | `wf`

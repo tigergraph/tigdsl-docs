@@ -73,33 +73,57 @@ stem:[V], or the number of vertices. One FLOAT value is returned for each vertex
 
 == *Parameters*
 
-[width="100%",cols="<,<50%",options="header",]
 |===
-|*Characteristic* |Value
+|*Parameter* |Description |Default
 
-|Required Input Parameters a|
-* `+SET<STRING> v_type+`: Names of vertex types to use
-* `+SET<STRING> e_type+`: Names of edge types to use
-* `+SET<STRING>+` `+re_type+`: Names of reverse edge types to use
-* `+INT max_hops+`: If >=0, look only this far from each vertex
-* `+INT top_k+`**:** Sort the scores highest first and output only this
-many scores
-* `+BOOL wf+`: If True, use Wasserman-Faust normalization for
-multi-component graphs
-* `+BOOL print_accum+`: If true, output JSON to standard output
-* `+STRING result_attr+`: If not empty, store centrality values (FLOAT)
-to this attribute
-* `+STRING file_path+`**:** If not empty, write output to this file in
-CSV.
-* `+BOOL display_edges+`: If true, include the graph's edges in the JSON
-output, so that the full graph can be displayed.
+|`SET<STRING> v_type`
+|Vertex types to use
+|(empty set of strings)
+
+|`SET<STRING> e_type`
+|Edge types to use
+|(empty set of strings)
+
+|`SET<STRING> re_type`
+|Reverse edge types to use
+|(empty set of strings)
+
+|`INT max_hops`
+|If >=0, look only this far from each vertex
+|10
+
+|`INT top_k`
+|Output only this many scores (scores are always sorted highest to lowest)
+|100
+
+|`BOOL wf`
+|Whether to use Wasserman-Faust normalization for multi-component graphs
+|True
+
+|`BOOL print_accum`
+|If True, output JSON to standard output
+|True
+
+|`STRING result_attr`
+|If not empty, store centrality values in `FLOAT` format to this vertex attribute
+|(empty string)
+
+|`STRING file_path`
+|If not empty, write output to this file in CSV format.
+|(empty string)
+
+|`BOOL display_edges`
+|If true, include the graph's edges in the JSON output so that the full graph can be displayed.
+|False
+
+
 |===
 
 == Example
 
 Closeness centrality can be measured for either directed edges (from `v` to others) or for undirected edges. Directed graphs may seem less intuitive, however, because if the distance from Alex to Bob is 1, it does not mean the distance from Bob to Alex is also 1.
 
-For our example, we wanted to use the topology of the Likes graph, but to have undirected edges. We emulated an undirected graph by using both `Friend` and `Also_Friend` (reverse-direction) edges.
+For our example, we wanted to use the topology of a friendship graph, but to have undirected edges. We emulated an undirected graph by using both `Friend` and `Also_Friend` (reverse-direction) edges.
 
 [,gsql]
 ----
