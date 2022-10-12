@@ -76,7 +76,6 @@ changing by less than `+max_change+` from one iteration to the next.
 |Maximum number of iterations.
 |25
 
-
 |`+FLOAT damping+`
 |Fraction of score that is due to the score of neighbors. The balance (1 - damping) is a minimum baseline score that every vertex receives.
 |0.85

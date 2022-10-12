@@ -18,12 +18,11 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-*Degree centrality* is defined as the number of edges incident upon a
-vertex (i.e., the number of ties that a node has).
-The degree can be
-interpreted in terms of the immediate risk of a node for catching
-whatever is flowing through the network (such as a virus, or some
-information).
+*Degree centrality* is defined as the number of edges incident upon a vertex (i.e., the number of ties that a node has).
+
+One major application of degree centrality is in cybersecurity, and more generally, network management.
+
+The degree can be interpreted in terms of the immediate risk of a node for catching whatever is flowing through the network (such as a virus, or some information).
 
 == Specifications
 
@@ -39,32 +38,32 @@ The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total 
 
 == Parameters
 
-[cols=",,",options="header",]
+[cols=",",options="header",]
 |===
-|Name |Description |Data type
-|`+v_type+` |A set of vertex types. |`+SET<STRING>+`
+|Name |Description
 
-|`+e_type+` |A set of edge types. |`+SET<STRING>+`
+|`SET<STRING> v_type` |A set of vertex types.
 
-|`+re_type+` |A set of reverse edge types. If an edge is undirected, put
-the edge name in the set as well. |``SET`
+|`SET<STRING> e_type` |A set of edge types.
 
-|`+in_degree+` |Boolean value that indicates whether to count the
-incoming edges as part of a vertex's degree centrality. |`+BOOL+`
+|`SET<STRING> re_type` |A set of reverse edge types. If an edge is undirected, put
+the edge name in the set as well.
 
-|`+out_degree+` |Boolean value that indicates whether to count the
-outgoing edges as part of a vertex's degree centrality. |`+BOOL+`
+|`BOOL in_degree` |Boolean value that indicates whether to count the
+incoming edges as part of a vertex's degree centrality.
 
-|`+top_k+` |The number of vertices with the highest scores to return.
-|`+INT+`
+|`BOOL out_degree` |Boolean value that indicates whether to count the
+outgoing edges as part of a vertex's degree centrality.
 
-|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
+|`INT top_k` |The number of vertices with the highest scores to return.
 
-|`+result_attr+` |If not empty, save the degree centrality score of each
-vertex to this attribute. |`+STRING+`
+|`BOOL print_accum` |If true, print results to JSON output.
 
-|`+file_attr+` |If not empty, save results in CSV to this file.
-|`+STRING+`
+|`STRING result_attr` |If not empty, save the degree centrality score of each
+vertex to this attribute.
+
+|`STRING file_attr` |If not empty, save results in CSV to this file.
+
 |===
 
 == Return value

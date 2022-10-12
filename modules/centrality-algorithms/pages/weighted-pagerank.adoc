@@ -24,42 +24,73 @@ tg_pagerank_wt (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
    BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-[width="100%",cols=",<50%",options="header",]
+== Results
+
+Computes a weighted PageRank value (FLOAT type) for each vertex.
+
+The result size is equal to stem:[V], the number of vertices in the graph, because a value is computed for every vertex.
+
+== Parameters
+
 |===
-|*Characteristic* |Value
-|Result |Computes a weighted PageRank value (FLOAT type) for each
-vertex.
+|*Parameter* |Description |Default
 
-|Input Parameters a|
+|`+STRING v_type+`
+|Names of vertex types to use
+|(empty string)
 
-* *`+STRING v_type+`*: Names of vertex type to use
-* *`+STRING e_type+`*: Names of edge type to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute
-* *`+FLOAT max_change+`*: PageRank will stop iterating when the largest
+|`+STRING e_type+`
+|Names of edge types to use
+|(empty string)
+
+
+|`STRING wt_attr`
+| Name of edge weight attribute
+|(empty string)
+
+| `FLOAT max_change`
+| PageRank will stop iterating when the largest
 difference between any vertex's current score and its previous score ≤
 `+max_change+`. That is, the scores have become very stable and are
 changing by less than `+max_change+` from one iteration to the next.
-* *`+INT max_iter+`*: Maximum number of iterations.
-* *`+FLOAT damping+`*: Fraction of score that is due to the score of
-neighbors. The balance (1 - damping) is a minimum baseline score that
-every vertex receives.
-* *`+INT top_k+`*: Sort the scores highest first and output only this
-many scores
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store PageRank values (FLOAT)
-to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+| 0.001
 
-|Result Size |V = number of vertices
+| `INT max_iter`
+| Maximum number of iterations.
+|25
 
-|Graph Types |Directed edges
+| `FLOAT damping`
+| Fraction of score that is due to the score of neighbors.
+The balance (1 - damping) is a minimum baseline score that every vertex receives.
+|0.85
+
+| `INT top_k`
+| Sort the scores highest first and output only this many scores
+|100
+
+
+| `BOOL print_accum`
+| If True, output JSON to standard output
+| True
+
+| `STRING result_attr`
+| If not empty, store PageRank values in FLOAT format to this vertex attribute
+| (empty string)
+
+| `STRING file_path+`
+| If not empty, write output to this file.
+| (empty string)
+
+| `BOOL display_edges`
+| If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
+| False
+
+
 |===
