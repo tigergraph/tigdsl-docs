@@ -68,14 +68,13 @@ vertex to this attribute.
 
 == Return value
 
-The vertices with the highest degree centrality scores along with their
-scores.
+The vertices with the highest degree centrality scores along with their scores.
 
 == Example
 
 Suppose we have the following graph:
 
-image::article-rank-ex.png[]
+image::social-graph-2022-10.png[]
 
 Running the query on the graph will show that Dan has the highest degree
 centrality:
@@ -95,41 +94,56 @@ Result::
 --
 [,json]
 ----
-{
-  "error": false,
-  "message": "",
-  "version": {
-    "schema": 2,
-    "edition": "enterprise",
-    "api": "v2"
-  },
-  "results": [{"top_scores": [
-    {
-      "score": 8,
-      "Vertex_ID": "Dan"
-    },
-    {
-      "score": 6,
-      "Vertex_ID": "Jenny"
-    },
-    {
-      "score": 4,
-      "Vertex_ID": "Nancy"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Kevin"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Amily"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Jack"
-    }
-  ]}]
-}
+[
+  {
+    "top_scores": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 4
+      },
+      {
+        "Vertex_ID": "Jenny",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Jack",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Emily",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Kevin",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Tom",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Denise",
+        "score": 1
+      },
+      {
+        "Vertex_ID": "Ben",
+        "score": 1
+      }
+    ]
+  }
+]
 ----
 --
 ====
