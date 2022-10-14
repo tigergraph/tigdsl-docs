@@ -16,7 +16,10 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 ArticleRank is an algorithm that has been derived from the PageRank algorithm to measure the influence of journal articles.
-Page Rank assumes that relationships originating from low-degree nodes have a higher influence than relationships from high-degree nodes. Article Rank modifies the formula in such a way that it retains the basic PageRank methodology but lowers the influence of low-degree nodes.
+
+Page Rank assumes that relationships originating from low-degree vertices have a higher influence than relationships from high-degree vertices.
+Article Rank keeps the PageRank methodology but modifies the formula to lower the influence of low-degree nodes.
+
 The Article Rank of a node stem:[v] at iteration stem:[i] is defined as:
 
 //image::article-rank.png[]
@@ -80,9 +83,9 @@ in this attribute. |`+STRING+`
 |`+file_path+` |If true, output CSV to this file. |`+STRING+`
 |===
 
-== *Return value*
+== Results
 
-The article rank score for each vertex.
+Returns the article rank score for each vertex in descending order. The result size is equal to stem:[V], the number of vertices, because one score is produced for every vertex in the graph.
 
 == *Example*
 

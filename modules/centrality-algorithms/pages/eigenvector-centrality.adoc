@@ -1,5 +1,5 @@
 = Eigenvector Centrality
-
+:stem: latexmath
 
 .Supported Graph Characteristics
 ****
@@ -16,10 +16,9 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-*Eigenvector centrality* (also called *eigencentrality* or *prestige
-score*) is a measure of the influence of a vertex in a network.
-Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring
-vertices.
+*Eigenvector centrality* (also called *eigencentrality* or *prestige score*) is a measure of the influence of a vertex in a network.
+Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring vertices.
+
 A high eigenvector score means that a vertex is connected to many vertices who themselves have high scores.
 
 == Specifications
@@ -31,7 +30,7 @@ CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
  )
 ....
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
@@ -62,15 +61,21 @@ attribute. |`+STRING+`
 |`+STRING+`
 |===
 
-== Return value
+== Results
 
-The stem:[k] top vertices with the highest eigenvector scores in the graph in JSON format.
+Returns an eigenvector centrality score for all vertices of the specified type in the graph.
+The results are ordered from most central to least central.
+
+There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest scores in the graph.
+This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
+
+The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
 
 == Example
 
 Suppose we have the following graph:
 
-image:article-rank-ex.png[]
+image:social-graph-2022-10.png[]
 
 Running the algorithm on the graph will show that Dan has the highest
 centrality score.
@@ -90,45 +95,56 @@ Result::
 --
 [,json]
 ----
-{
-  "error": false,
-  "message": "",
-  "version": {
-    "schema": 2,
-    "edition": "enterprise",
-    "api": "v2"
-  },
-  "results": [{"top_scores": [
-    {
-      "score": 0.59598,
-      "Vertex_ID": "Dan"
-    },
-    {
-      "score": 0.50223,
-      "Vertex_ID": "Jenny"
-    },
-    {
-      "score": 0.44381,
-      "Vertex_ID": "Tom"
-    },
-    {
-      "score": 0.28786,
-      "Vertex_ID": "Nancy"
-    },
-    {
-      "score": 0.24085,
-      "Vertex_ID": "Kevin"
-    },
-    {
-      "score": 0.20296,
-      "Vertex_ID": "Amily"
-    },
-    {
-      "score": 0.11633,
-      "Vertex_ID": "Jack"
-    }
-  ]}]
-}
+[
+  {
+    "top_scores": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 0.52728
+      },
+      {
+        "Vertex_ID": "Jenny",
+        "score": 0.42913
+      },
+      {
+        "Vertex_ID": "Tom",
+        "score": 0.35588
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 0.33529
+      },
+      {
+        "Vertex_ID": "Kevin",
+        "score": 0.2967
+      },
+      {
+        "Vertex_ID": "Emily",
+        "score": 0.27009
+      },
+      {
+        "Vertex_ID": "Jack",
+        "score": 0.24902
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 0.17584
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 0.15809
+      },
+      {
+        "Vertex_ID": "Ben",
+        "score": 0.12476
+      },
+      {
+        "Vertex_ID": "Denise",
+        "score": 0.06543
+      }
+    ]
+  }
+]
 
 ----
 --

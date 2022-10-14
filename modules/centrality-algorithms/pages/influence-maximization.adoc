@@ -75,3 +75,74 @@ return |`+INT+`
 == Return value
 
 The ID of the vertices with the highest influence scores along with their scores.
+
+== Examples
+
+We use this example graph showing a social network.
+
+image::social-graph-2022-10.png[]
+
+=== CELF
+
+[source,json]
+----
+[
+  {
+    "@@res_list": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 4
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 1
+      },
+      {
+        "Vertex_ID": "Kevin",
+        "score": 1
+      },
+
+    ]
+  }
+]
+----
+
+=== Greedy
+
+[source,json]
+----
+[
+  {
+    "@@res_list": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 4
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 1
+      },
+      {
+        "Vertex_ID": "Jenny",
+        "score": 1
+      },
+    ]
+  }
+]
+----

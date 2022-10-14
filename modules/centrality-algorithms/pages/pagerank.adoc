@@ -55,15 +55,12 @@ Computes a PageRank `FLOAT` value for each vertex and stores it in a specified a
 
 == Parameters
 
-[width="100%",cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 
 |`+STRING v_type+`
 |Names of vertex type to use
 |(empty string)
-
-
 
 |`+STRING e_type+`
 |Names of edge type to use
@@ -75,11 +72,9 @@ Computes a PageRank `FLOAT` value for each vertex and stores it in a specified a
 changing by less than `+max_change+` from one iteration to the next.
 |0.001
 
-
 |`+INT max_iter+`
 |Maximum number of iterations.
 |25
-
 
 |`+FLOAT damping+`
 |Fraction of score that is due to the score of neighbors. The balance (1 - damping) is a minimum baseline score that every vertex receives.
@@ -95,17 +90,13 @@ changing by less than `+max_change+` from one iteration to the next.
 |If True, output JSON to standard output
 |True
 
-
-
 |`+STRING result_attr+`
 |If not empty, store PageRank values in `FLOAT` format to this vertex attribute
 |(empty string)
 
-
 |`+STRING file_path+`
 |If not empty, write output to this file.
 |(empty string)
-
 
 |`+BOOL display_edges+`
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed.

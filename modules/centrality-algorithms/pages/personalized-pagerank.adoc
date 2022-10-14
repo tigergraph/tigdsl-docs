@@ -24,6 +24,53 @@ FLOAT max_change=0.001, INT max_iter=25, FLOAT damping = 0.85, INT top_k = 100
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
+== Parameters
+
+|===
+|*Parameter* |Description |Default
+
+|`SET<VERTEX> source`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+STRING e_type+`
+|Name of edge types to use
+|(empty string)
+
+| `FLOAT max_change`
+| PageRank will stop iterating when the largest
+difference between any vertex's current score and its previous score ≤
+`+max_change+`. That is, the scores have become very stable and are
+changing by less than `+max_change+` from one iteration to the next.
+| 0.001
+
+| `INT max_iter`
+| Maximum number of iterations.
+|25
+
+| `FLOAT damping`
+| Fraction of score that is due to the score of neighbors.
+The balance (1 - damping) is a minimum baseline score that every vertex receives.
+|0.85
+
+| `INT top_k`
+| Sort the scores highest first and output only this many scores
+|100
+
+| `BOOL print_accum`
+| If True, output JSON to standard output
+| True
+
+| `STRING result_attr`
+| If not empty, store PageRank values in FLOAT format to this vertex attribute
+| (empty string)
+
+| `STRING file_path+`
+| If not empty, write output to this file.
+| (empty string)
+
+
+|===
 == Example
 
 We ran Personalized PageRank on the graph `social10` using Friend edges with the following parameter values:
