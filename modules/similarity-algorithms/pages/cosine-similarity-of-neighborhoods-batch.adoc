@@ -73,12 +73,10 @@ The result can be output in JSON format, in CSV to a file, or saved as a similar
 
 Using the `social10` graph, we can calculate the cosine similarity of every person to every other person connected by the `Friend` edge, and print out the top _k_ most similar pairs for each vertex.
 
-[source,gsql]
-----
-GSQL > RUN QUERY tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)
+We run `tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)`:
 
-// Every vertex and their most similar pairs ranked by their Cosine
-// Similarity score.
+[source,json]
+----
 [
   {
     "start": [
