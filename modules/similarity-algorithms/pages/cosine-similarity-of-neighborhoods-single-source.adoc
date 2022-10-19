@@ -115,8 +115,13 @@ Still using a Movie Rating graph, one way to calculate similarity between two pe
 
 Starting from one person's name, this algorithm calculates the cosine similarity between the given person and every other person in the graph, as long as there is at least one movie they have both rated.
 
-If the source vertex is Alex, and `top_k` is set to 5, then we calculate the cosine similarity between him and two other persons, Jing and Kevin.
-The JSON output shows the top 5 most similar vertices and their similarity scores in descending order.
+[,gsql]
+----
+tg_cosine_nbor_ss ("Alex", "Likes", "Reverse_Likes", "weight", 5, 5,_,_,_)
+----
+
+If the source vertex is Alex, and `top_k` is set to 5, then we calculate the cosine similarity between him and two other persons, Jing and Kevin (since our graph does not have enough data to return 5 Person vertices).
+The JSON output shows the most similar vertices and their similarity scores in descending order.
 
 The output limit is 5 persons, but we have only 2 qualified persons:
 
@@ -124,16 +129,20 @@ The output limit is 5 persons, but we have only 2 qualified persons:
 ----
 [
   {
-    "@@result_topk": [
+    "neighbours": [
       {
-        "vertex1": "Alex",
-        "vertex2": "Jing",
-        "score": 0.42173
+        "attributes": {
+          "neighbours.@sum_similarity": 0.42173
+        },
+        "v_id": "Jing",
+        "v_type": "Person"
       },
       {
-        "vertex1": "Alex",
-        "vertex2": "Kevin",
-        "score": 0.14248
+        "attributes": {
+          "neighbours.@sum_similarity": 0.14248
+        },
+        "v_id": "Kevin",
+        "v_type": "Person"
       }
     ]
   }
