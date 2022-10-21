@@ -13,7 +13,11 @@
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Similarity/cosine/single_source[Cosine Similarity of Neighborhoods (Single-Source)]
 ****
 
-To compare two vertices by https://en.wikipedia.org/wiki/Cosine_similarity[cosine similarity], the selected properties of each vertex are first represented as a vector. For example, a property vector for a Person vertex could have the elements age, height, and weight. Then the cosine function is applied to the two vectors.
+This algorithm calculates the similarity between a given vertex and every other vertex in the graph using https://en.wikipedia.org/wiki/Cosine_similarity[cosine similarity].
+
+For each vertex pair, the selected properties of each vertex are first represented as a vector.
+For example, a property vector for a Person vertex could have the elements `age`, `height`, and `weight`.
+Then the cosine function is applied to the two vectors.
 
 The cosine similarity of two vectors A and B is defined as follows:
 
@@ -22,13 +26,17 @@ The cosine similarity of two vectors A and B is defined as follows:
 cos(A,B)=\frac{A\cdot B}{||A||\cdot ||B||} = \frac{\sum_iA_i B_i}{\sqrt{\sum_iA^2_i}\sqrt{\sum_iB^2_i}}
 ++++
 
-If A and B are identical, then cos(A, B) = 1. As expected for a cosine function, the value can also be negative or zero. In fact, cosine similarity is closely related to the Pearson correlation coefficient.
+If A and B are identical, then stem:[cos(A, B) = 1]. As expected for a cosine function, the value can also be negative or zero. In fact, cosine similarity is closely related to the Pearson correlation coefficient.
 
-For this library function, the feature vector is the set of edge weights between the two vertices and their neighbors.
+For this implementation of the algorithm, the feature vector is the set of edge weights between the two vertices and their neighbors.
 
-In the movie graph shown in the figure below, there are Person vertices and Movie vertices. Every person may give a rating to some of the movies. The rating score is stored on the Likes edge using the weight attribute. For example, in the graph below, Alex gives a rating of 10 to the movie "Free Solo".
+On a graph with many vertices, it is very likely that most vertices will be dissimilar to each other. For this reason, we can limit output with the `top_k` parameter.
 
-image::screen-shot-2018-12-21-at-10.51.01-am.png[movie graph]
+In the Movie Rating graph shown in the figure below, there are Person vertices and Movie vertices.
+Every person has given a rating to one or more movies. The rating score is stored on the Likes edge using the weight attribute (not shown in the diagram).
+For example, in the graph below, Alex gives a rating of 10 to the movie "Free Solo".
+
+image::movie-graph.png[View of a graph illustrating Person vertices connected to Movie vertices by Likes edges.]
 
 == Specifications
 
@@ -43,11 +51,9 @@ RETURNS (MapAccum<VERTEX, FLOAT>)
 
 This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
-The top K vertices in the graph that have the highest similarity scores,
+== Results
+
+The top stem:[k] vertices in the graph that have the highest similarity scores,
 along with their scores.
 
 The result is available in three forms:
@@ -56,53 +62,94 @@ The result is available in three forms:
 * written to a file in tabular format
 * stored as a vertex attribute value
 
-|Input Parameters a|
-* `+VERTEX source+`**:** Source vertex
-* `+SET<STRING> e_type+`: Edge type to traverse
-* `+SET<STRING> re_type+`: Reverse edge type to traverse
-* `+STRING weight:+`The edge attribute to use as the weight of the edge
-* `+INT top_k+`: Number of vertices
-* `+INT output_limit:+`
-* `+BOOL print_accum+`: If `+true+`, output JSON to standard output.
-* `+STRING filepath+`: If provided, the output will be written to this
-file path in CSV format.
-* `+STRING similarity_edge+`: If provided, the similarity score will be
-saved to this edge.
+== Parameters
 
-|Result Size |`+top_k+`
+[options="header"]
+|===
+|Parameter |Description |Default value
 
-|Graph Types |Undirected or directed edges, weighted edges
+| `VERTEX source`
+| Source vertex
+| (empty set of strings)
+
+| `SET<STRING> e_type`
+| Edge type to traverse
+| (empty set of strings)
+
+| `SET<STRING> re_type`
+| Reverse edge type to traverse
+| (empty set of strings)
+
+| `STRING weight`
+| The edge attribute to use as the weight of the edge.
+| (empty string)
+
+| `INT top_k`
+| The number of vertices to return
+| 10
+
+| `INT output_limit`
+| The maximum number of vertices to return
+| 10
+
+| `BOOL print_accum`
+| Whether to output the final results to the console in JSON format
+| True
+
+| `STRING filepath`
+| If provided, the algorithm will save the output in CSV format to this file
+| (empty string)
+
+| `STRING similarity_edge`
+| If provided, the similarity score will be saved to this edge
+| (empty string)
+
 |===
 
-The output size is always K (if K <= N), so the algorithm may arbitrarily choose to output one vertex over another if there are tied similarity scores.
+The output size is almost always stem:[k], except in cases where the number of total vertices is lower than stem:[k].
+The algorithm may arbitrarily choose to output one vertex over another if there are tied similarity scores.
 
 == Example
 
-Given one person's name, this algorithm calculates the cosine similarity between this person and each other person where there is at one movie they have both rated.
+Still using a Movie Rating graph, one way to calculate similarity between two people would be to see which movies they both rated similarly.
 
-In the previous example, if the source vertex is Alex, and `top_k` is set to 5, then we calculate the cosine similarity between him and two other persons, Jing and Kevin. The JSON output shows the top 5 similar vertices and their similarity score in descending order. The output limit is 5 persons, but we have only 2 qualified persons:
+Starting from one person's name, this algorithm calculates the cosine similarity between the given person and every other person in the graph, as long as there is at least one movie they have both rated.
 
-[,text]
+[,gsql]
+----
+tg_cosine_nbor_ss ("Alex", "Likes", "Reverse_Likes", "weight", 5, 5,_,_,_)
+----
+
+If the source vertex is Alex, and `top_k` is set to 5, then we calculate the cosine similarity between him and two other persons, Jing and Kevin (since our graph does not have enough data to return 5 Person vertices).
+The JSON output shows the most similar vertices and their similarity scores in descending order.
+
+The output limit is 5 persons, but we have only 2 qualified persons:
+
+[source,json]
 ----
 [
   {
-    "@@result_topk": [
+    "neighbours": [
       {
-        "vertex1": "Alex",
-        "vertex2": "Jing",
-        "score": 0.42173
+        "attributes": {
+          "neighbours.@sum_similarity": 0.42173
+        },
+        "v_id": "Jing",
+        "v_type": "Person"
       },
       {
-        "vertex1": "Alex",
-        "vertex2": "Kevin",
-        "score": 0.14248
+        "attributes": {
+          "neighbours.@sum_similarity": 0.14248
+        },
+        "v_id": "Kevin",
+        "v_type": "Person"
       }
     ]
   }
 ]
 ----
 
-The FILE version output is not necessarily in descending order. It looks like the following:
+The CSV file version output, if selected, is not necessarily in descending order. It looks like the following:
 
 [,text]
 ----
@@ -111,6 +158,6 @@ Alex,Kevin,0.142484
 Alex,Jing,0.421731
 ----
 
-The ATTR version inserts an edge into the graph with the similarity score as an edge attribute whenever the score is larger than zero. The result looks like this:
+The ATTR version inserts a new edge called Similarity into the graph with the similarity score as an edge attribute whenever the score is larger than zero. The result looks like this:
 
 image::screen-shot-2019-02-13-at-5.18.03-pm.png[]

@@ -13,7 +13,9 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-This algorithm computes the same similarity scores as the xref:cosine-similarity-of-neighborhoods-single-source.adoc[Cosine similarity of neighborhoods, single source algorithm] except that it starts from all vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
+This algorithm computes the same similarity scores as the xref:cosine-similarity-of-neighborhoods-single-source.adoc[Cosine similarity of neighborhoods, single source algorithm].
+
+Instead of selecting a single source vertex, however, it calculates similarity scores for all vertex pairs in the graph in parallel.
 
 Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage.
 The user can specify how many batches it is to be split into.
@@ -71,12 +73,10 @@ The result can be output in JSON format, in CSV to a file, or saved as a similar
 
 Using the `social10` graph, we can calculate the cosine similarity of every person to every other person connected by the `Friend` edge, and print out the top _k_ most similar pairs for each vertex.
 
-[source,gsql]
-----
-GSQL > RUN QUERY tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)
+We run `tg_cosine_batch("Person", "Friend", "weight", 5, true, "", "", 1)`:
 
-// Every vertex and their most similar pairs ranked by their Cosine
-// Similarity score.
+[source,json]
+----
 [
   {
     "start": [
