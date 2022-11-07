@@ -38,31 +38,30 @@ The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total 
 
 == Parameters
 
-[cols=",",options="header",]
 |===
-|Name |Description
+|Name |Description | Default value
 
-|`SET<STRING> v_type` |A set of vertex types.
+|`SET<STRING> v_type` |A set of vertex types. | (empty set of strings)
 
-|`SET<STRING> e_type` |A set of edge types.
+|`SET<STRING> e_type` |A set of edge types. | (empty set of strings)
 
-|`SET<STRING> re_type` |A set of reverse edge types. If an edge is undirected, put
-the edge name in the set as well.
+|`SET<STRING> re_type` |A set of reverse edge types.
+If an edge is undirected, put the edge name in the set as well. | (empty set of strings)
 
 |`BOOL in_degree` |Boolean value that indicates whether to count the
-incoming edges as part of a vertex's degree centrality.
+incoming edges as part of a vertex's degree centrality. | True
 
 |`BOOL out_degree` |Boolean value that indicates whether to count the
-outgoing edges as part of a vertex's degree centrality.
+outgoing edges as part of a vertex's degree centrality. | True
 
-|`INT top_k` |The number of vertices with the highest scores to return.
+|`INT top_k` |The number of vertices with the highest scores to return. | 100
 
-|`BOOL print_accum` |If true, print results to JSON output.
+|`BOOL print_accum` |If true, print results to JSON output. | True
 
 |`STRING result_attr` |If not empty, save the degree centrality score of each
-vertex to this attribute.
+vertex to this attribute. | (empty string)
 
-|`STRING file_attr` |If not empty, save results in CSV to this file.
+|`STRING file_path` |If not empty, save results in CSV to this file. | (empty string)
 
 |===
 

@@ -40,25 +40,22 @@ Parallel processing reduces the time needed for computation.
 
 [cols=",,",options="header",]
 |===
-|Name |Description |Data type
-|`+v_type+` |Vertex types to assign scores to. |`+SET<STRING>+`
+|Name |Description |Default value
+|`SET<STRING> v_type` |Vertex types to assign scores to. |(empty set of strings)
 
-|`+e_type+` |Edge types to traverse. |`+SET<STRING>+`
+|`SET<STRING> e_type` |Edge types to traverse. |(empty set of strings)
 
-|`+maxIter+` |Maximum number of iteration. |`+INT+`
+|`INT maxIter` |Maximum number of iteration. |100
 
-|`+convLimit+` |The convergence limit. |`+FLOAT+`
+|`FLOAT convLimit` |The convergence limit. | 0.000001
 
-|`+top_k+` |The number of vertices with the highest scores to return.
-|`+INT+`
+|`INT top_k` |The number of vertices with the highest scores to return. |100
 
-|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
+|`BOOL print_accum` |If true, print results to JSON output. | True
 
-|`+result_attr+` |If not empty, save the score of each vertex to this
-attribute. |`+STRING+`
+|`STRING result_attr` |If not empty, save the score of each vertex to this attribute. | (empty string)
 
-|`+file_path+` |If not empty, print results in CSV to this file.
-|`+STRING+`
+|`STRING file_path` |If not empty, print results in CSV to this file. | (empty string)
 |===
 
 == Results

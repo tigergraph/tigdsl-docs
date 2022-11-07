@@ -34,22 +34,22 @@ The algorithm has a worst-case time complexity of stem:[O(V^2 + E)], where stem:
 |===
 | Name | Description
 
-| `v_type`
+| `STRING v_type`
 | A set of all vertex types to color.
 
-| `e_type`
+| `STRING e_type`
 | A set of all edge types to traverse.
 
-| `max_colors`
+| `INT max_colors`
 | The Maximum number of colors that can be used. Use a large number like `999999` unless there is a strict limit.
 
-| `print_color_count`
+| `BOOL print_color_count`
 | If set to true, the total number of colors used will be displayed
 
-| `display`
+| `BOOL display`
 | If set to true, the output will display all vertices and their associated color
 
-| `file_path`
+| `STRING file_path`
 | If a file path is provided, the output will be saved to the file indicated by the file path in CSV format.
 |===
 

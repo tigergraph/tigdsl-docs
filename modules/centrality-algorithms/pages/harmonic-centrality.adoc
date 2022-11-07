@@ -61,7 +61,7 @@ The maximum result size is equal to stem:[V], the number of vertices, because on
 == Parameters
 
 |===
-| Name | Description | Data type
+| Name | Description | Default value
 
 | `SET<STRING> v_type`
 | Vertex types to calculate harmonic centrality for

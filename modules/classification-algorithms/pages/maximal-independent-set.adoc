@@ -55,22 +55,37 @@ tg_maximal_indep_set_random(STRING v_type, STRING e_type,
 == Time complexity
 This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
-[width="100%",cols="<50%,<50%",options="header",]
+== Results
+
+Returns a set of vertices that form a maximal independent set.
+
+If the graph is a set of N unconnected vertices, then the MIS is all N vertices.
+
+== Parameters
+
 |===
-|*Characteristic* |Value
-|Result |A set of vertices that form a maximal independent set.
+|Parameter |Description |Default Value
 
-|Input Parameters a|
-* *`+STRING v_type+`*: Name of vertex type to use
-* *`+STRING e_type+`*: Name of edge type to use
-* *`+INT max_iter+`:* maximum number of iterations for the search
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING file_path+`:* If not empty, write output to this file.
+|`STRING v_type`
+|The vertex type to use
+|(empty string)
 
-|Result Size |Size of the MIS: unknown. Worst case: If the graph is a
-set of N unconnected vertices, then the MIS is all N vertices.
+|`STRING e_type`
+|The edge type to use
+|(empty string)
 
-|Graph Types |Undirected edges
+|`INT max_iter`
+|The number of nearest neighbors to consider
+| N/A
+
+|`BOOL print_accum`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+
 |===
 
 == Example
@@ -79,6 +94,10 @@ Consider our social10 graph, with three components.
 
 image::image (14).png[]
 
-It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS. For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen. If the algorithm selects either George or Ivy, then no other independent vertices remain in the component. However, the algorithm could select both Fiona and Howard; they are independent of one another.
+It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS.
+
+For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen.
+If the algorithm selects either George or Ivy, then no other independent vertices remain in the component.
+However, the algorithm could select both Fiona and Howard; they are independent of one another.
 
 This demonstrates the uncertainty of the Maximal Independent Set algorithm and how it differs from Maximum Independent Set. A _maximum_ independent set algorithm would _always_ select Fiona and Howard, plus 2 others, for a total of 4 vertices. The _maximal_ independent set algorithm relies on chance. It could return either 3 or 4 vertices.

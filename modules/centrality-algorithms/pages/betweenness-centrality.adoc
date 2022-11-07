@@ -79,31 +79,53 @@ This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the numb
 Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
 Parallel processing reduces the time needed for computation.
 
+== Results
+
+Computes a Betweenness Centrality value (`FLOAT` type) for each vertex.
+The result size is equal to stem:[V], the number of vertices.
+
 == *Parameters*
 
-[width="100%",cols="1,2",options="header",]
 |===
-|*Characteristic* |Value
-|Result |Computes a Betweenness Centrality value (FLOAT type) for each
-vertex.
+|Parameter |Description |Default Value
 
-|Required Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* **`+SET<STRING> re_type: +`**Names of reverse edge types to use
-* *`+INT max_hops+`*: If >=0, look only this far from each vertex
-* *`+INT top_k+`:* Sort the scores highest first and output only this
-many scores
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store centrality values
-(FLOAT) to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+|`SET STRING v_type`
+|The vertex types to use
+|(empty set of strings)
 
-|Result Size |V = number of vertices
+|`SET STRING e_type`
+|The edge types to use
+|(empty set of strings)
 
-|Graph Types |Undirected edges, Unweighted edges
+|`SET STRING re_type`
+|The reverse edge types to use
+|(empty set of strings)
+
+|`INT max_hops`
+|If >=0, look only this far from each vertex
+| 10
+
+|`INT top_k`
+|The number of scores to output, sorted in descending order
+| 100
+
+|`BOOL print_accum`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING result_attr`
+|If not empty, store centrality values in `FLOAT` format to this attribute
+|(empty string)
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+
+|`BOOL display_edges`
+|If true,  include the graph's edges in the JSON output, so that the full graph can be displayed.
+|True
+
+
 |===
 
 == Example

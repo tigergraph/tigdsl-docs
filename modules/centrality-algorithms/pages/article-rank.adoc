@@ -55,32 +55,30 @@ Parallel processing reduces the time needed for computation.
 
 == Parameters
 
-[cols=",,",options="header",]
+[cols=",",options="header",]
 |===
-|Name |Description |Data type
-|`+v_type+` |A vertex type. |`+STRING+`
+|Name |Description
+|`STRING v_type` |A vertex type.
 
-|`+e_type+` |An edge type. |`+STRING+`
+|`STRING e_type` |An edge type.
 
-|`+max_change+` |Article Rank will stop iterating when the largest
+|`FLOAT max_change` |Article Rank will stop iterating when the largest
 difference between any vertex's current score and its previous score ≤
-`+max_change.+` That is, the scores have become very stable and are
-changing by less than `+max_change+` from one iteration to the next.
-|`+FLOAT+`
+`max_change.` That is, the scores have become very stable and are
+changing by less than `max_change` from one iteration to the next.
 
-|`+max_iter+` |Maximum number of iterations. |`+INT+`
+|`INT max_iter` |Maximum number of iterations.
 
-|`+damping+` |The damping factor. Usually set to 0.85. |`+FLOAT+`
+|`FLOAT damping` |The damping factor. Usually set to 0.85.
 
-|`+top_k+` |The number of results with the highest scores to return.
-|`+INT+`
+|`INT top_k` |The number of results with the highest scores to return.
 
-|`+print_accum+` |If true, print JSON output. |`+BOOL+`
+|`BOOL print_accum` |If true, print JSON output.
 
-|`+result_attr+` |If true, store the article rank score of each vertex
-in this attribute. |`+STRING+`
+|`STRING result_attr` |If true, store the article rank score of each vertex
+in this attribute.
 
-|`+file_path+` |If true, output CSV to this file. |`+STRING+`
+|`STRING file_path` |If true, output CSV to this file.
 |===
 
 == Results

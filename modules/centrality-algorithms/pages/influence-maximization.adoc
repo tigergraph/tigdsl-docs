@@ -44,37 +44,36 @@ CREATE QUERY tg_influence_maximization_greedy(STRING v_type,
   BOOL print_accum = True, STRING file_path = "")
 ----
 
-
 == Time complexity
 The greedy version has a complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the number of top scores to report.
 
 The CELF version also has a worst-case complexity of stem:[O(E * k)], but generally performs much better with a best-case complexity of stem:[O(E)].
 
+== Results
+
+Returns the ID of the vertices with the highest influence scores along with their scores.
+
+
 == Parameters
 The CELF version and the greedy version of the algorithms share the same set of parameters.
 
-[cols=",,",options="header",]
+[cols=",",options="header",]
 |===
-|Name |Description |Data type
-|`+v_type+` |A vertex type |`+STRING+`
+|Name |Description
 
-|`+e_type+` |An edge type |`+STRING+`
+|`STRING v_type` | The vertex type to measure influence of
 
-|`+weight+` |The name of the weight attribute on the edge type
-|`+STRING+`
+|`STRING e_type` |The edge type to traverse
 
-|`+top_k+` |The number of vertices with the highest influence score to
-return |`+INT+`
+|`STRING weight` |The name of the weight attribute on the edge type
 
-|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
+|`INT top_k` |The number of vertices with the highest influence score to return
 
-|`+file_path+` |If not empty, save results in CSV to this file.
-|`+STRING+`
+|`BOOL print_accum` |If true, print results to JSON output.
+
+|`STRING file_path` |If not empty, save results in CSV to this file.
 |===
 
-== Return value
-
-The ID of the vertices with the highest influence scores along with their scores.
 
 == Examples
 

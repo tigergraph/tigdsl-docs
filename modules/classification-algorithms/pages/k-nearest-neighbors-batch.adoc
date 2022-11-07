@@ -14,11 +14,9 @@ tg_knn_cosine_all(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 == Time complexity
 This algorithm has a complexity of stem:[O(E^2 / V)], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
 
-[width="100%",cols="<5,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
-The predicted label for the vertices whose label attribute is empty.
+== Results
+
+Returns the predicted label for the vertices whose label attribute is empty.
 
 The result is available in three forms:
 
@@ -26,24 +24,50 @@ The result is available in three forms:
 * written to a file in tabular format, or
 * stored as a vertex attribute value.
 
-|Input Parameters a|
-* `+SET<STRING> v_type+`: Vertex types to calculate distance to source
-vertex for
-* `+SET<STRING> e_type+`: Edge types to traverse
-* `+SET<STRING> re_type+`: Reverse edge types to traverse
-* `+STRING weight+`: Edge attribute to use as the weight of the edge
-* `+STRING label+`: Vertex attribute to recognize as the label of the
-vertex
-* `+INT top_k+`: number of nearest neighbors to consider
-* `+BOOL print_accum+`: Boolean value that indicates whether to output
-to console in JSON
-* `+STRING filepath+`: If provided, the algorithm will output to this
-file path in CSV format
-* `+STRING attr+`: Vertex attribute to save the predicted label as.
+The result size is equal to stem:[V], the number of vertices in the graph.
 
-|Result Size |V = number of vertices
+== Parameters
 
-|Graph Types |Undirected or directed edges, weighted edges
+
+|===
+|Parameter |Description |Default Value
+
+|`SET<STRING> v_type`
+|The vertex types to calculate the distance for.
+|(empty set of strings)
+
+|`SET<STRING> e_type`
+|The edge types to use
+|(empty set of strings)
+
+|`SET<STRING> re_type`
+|The reverse edge types to use
+|(empty set of strings)
+
+|`STRING weight`
+|If not empty, use this edge attribute as the edge weight.
+|(empty string)
+
+|`STRING label`
+|If not empty, read an existing label from this attribute.
+|(empty string)
+
+|`INT top_k`
+|The number of nearest neighbors to consider
+| N/A
+
+|`BOOL print_accum`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING filepath`
+|If not empty, write output to this file.
+|(empty string)
+
+|`STRING attr`
+|If not empty, store the predicted label to this vertex attribute.
+|(empty string)
+
 |===
 
 == Example

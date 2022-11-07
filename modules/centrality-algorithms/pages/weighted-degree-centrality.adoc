@@ -37,47 +37,37 @@ The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total numbe
 
 
 |===
-|Parameter |Type |Description
+|Parameter |Description
 
-|`v_type`
-|`STRING`
+|`STRING v_type`
 |Vertex type to traverse.
 
-|`e_type`
-|`STRING`
+|`STRING e_type`
 |Edge type to traverse.
 
-|`re_type`
-|`STRING`
+|`STRING re_type`
 |Reverse vertex type to traverse and calculate in-degree.
 
-|`weight`
-|`STRING`
+|`STRING weight`
 |The name of the attribute that indicates the weight of the edge.
 The attribute itself must be of type `INT`.
 
-|`in_degree`
-|`BOOL`
+|`BOOL in_degree`
 |Whether to count incoming edges when calculating degree centrality.
 
-|`out_degree`
-|`BOOL`
+|`BOOL out_degree`
 |Whether to count outgoing edges when calculating degree centrality.
 
-|`top_k`
-|`INT`
+|`INT top_k`
 |The number of vertices with the highest degree centrality to return.
 
-|`print_accum`
-|`BOOL`
+|`BOOL print_accum`
 |If true, return JSON results to standard output.
 
-|`result_attr`
-|`STRING`
+|`STRING result_attr`
 |If not empty, save the degree centrality of each vertex to this attribute.
 
-|`file_path`
-|`STRING`
+|`STRING file_path`
 |If not empty, output CSV results to this filepath.
 |===
 
