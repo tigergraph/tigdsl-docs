@@ -41,7 +41,7 @@ tg_shortest_ss_any_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
  STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 

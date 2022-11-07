@@ -66,15 +66,15 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
   BOOL print_accum = TRUE, STRING attr= "", STRING file_path="")
 ----
 
+== Time complexity
+
+This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
+
+
 == Results
 
 Assigns a component id (INT) to each vertex, such that members
 of the same component have the same ID value.
-
-
-== Time complexity
-
-This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
 
 
 == Parameters

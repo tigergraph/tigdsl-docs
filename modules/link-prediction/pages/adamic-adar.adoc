@@ -34,7 +34,7 @@ This algorithm ignores edge weights.
 CREATE QUERY tg_adamic_adar(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 == Parameters

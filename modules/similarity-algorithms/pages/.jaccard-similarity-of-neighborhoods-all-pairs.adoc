@@ -10,7 +10,7 @@ tg_jaccard_nbor_ap(STRING v_type, STRING e_type, STRING re_type, INT top_k,
   BOOL print_accum = TRUE, STRING similarity_edge = "", STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(E^2 / V)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 

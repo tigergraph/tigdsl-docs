@@ -52,7 +52,7 @@ tg_maximal_indep_set_random(STRING v_type, STRING e_type,
     INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
 [width="100%",cols="<50%,<50%",options="header",]

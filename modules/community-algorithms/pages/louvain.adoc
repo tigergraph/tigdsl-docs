@@ -69,7 +69,7 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 ----
 
 
-=== Time complexity
+== Time complexity
 This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
 
 

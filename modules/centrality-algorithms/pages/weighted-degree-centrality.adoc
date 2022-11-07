@@ -29,7 +29,7 @@ CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
     STRING result_attr = "",STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total number of edges in the graph.
 
 

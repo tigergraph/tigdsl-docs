@@ -76,7 +76,7 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
 
 == Example
 
-In the example below based on the https://docs.tigergraph.com/start/gsql-101/get-set#GSQL101-DataSet[`social`] graph from GSQL 101, we can see that Dan, Tom, and Jenny make up a 2-core, which is the max-core of the graph:
+In the example below based on the `social` graph from GSQL 101, we can see that Dan, Tom, and Jenny make up a 2-core, which is the max-core of the graph:
 
 image::image.png[]
 

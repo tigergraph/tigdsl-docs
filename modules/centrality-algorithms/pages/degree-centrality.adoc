@@ -33,7 +33,7 @@ CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
   STRING file_path = "")
 ....
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
 
 == Parameters

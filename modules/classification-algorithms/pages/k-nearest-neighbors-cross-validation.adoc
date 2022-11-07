@@ -12,7 +12,7 @@ tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
 ----
 
-=== Time complexity
+== Time complexity
 This algorithm has a complexity of stem:[O(max\_k*\frac{E^2}{V})], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
 
 [width="100%",cols="<5%,<50%",options="header",]

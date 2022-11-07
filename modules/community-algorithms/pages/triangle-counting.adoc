@@ -53,7 +53,7 @@ tri_count_fast() is a smarter algorithm which does two passes over the edges. In
 tg_tri_count_fast(STRING v_type, STRING e_type)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 

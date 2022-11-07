@@ -40,7 +40,7 @@ CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink, Set<STRING> v_type,
   STRING cap_type, FLOAT min_flow_threshhold = 0.001, BOOL print_accum = TRUE, BOOL display_edges = TRUE, BOOL spit_to_file = FALSE, STRING file_path = "/home/tigergraph/tg_query_output.csv")
 ----
 
-=== Time complexity
+== Time complexity
 
 stem:[O(F + E)]
 

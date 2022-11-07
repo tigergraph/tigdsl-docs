@@ -29,13 +29,13 @@ This algorithm ignores edge weights.
 CREATE QUERY tg_common_neighbors(VERTEX a, VERTEX b, SET<STRING> e_type)
 ----
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 == Parameters
 [cols="1,1,1"]
 |===
-|Name | Description | Data type
+|Name | Description | Default value
 
 | `VERTEX a`
 |  The first vertex to compare.
@@ -58,7 +58,7 @@ Suppose we have the following graph:
 
 image::adamic-adar-ex.png[]
 
-Running the algorithm between Dan and Jenny will show that they have 1 common neighbor.
+Running the algorithm between Dan and Jenny shows that they have 1 common neighbor.
 
 [tabs]
 ====

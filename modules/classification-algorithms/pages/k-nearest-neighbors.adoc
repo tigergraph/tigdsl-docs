@@ -36,7 +36,7 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
   RETURNS (STRING)
 ----
 
-=== Time complexity
+== Time complexity
 This algorithm has a complexity of stem:[O(D^2)], where stem:[D] is the outdegree of the given vertex.
 
 [width="100%",cols=",<50%",options="header",]

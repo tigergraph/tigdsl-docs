@@ -31,7 +31,7 @@ CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
     STRING file_path = "", BOOL display_edges = True)
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(V+E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 

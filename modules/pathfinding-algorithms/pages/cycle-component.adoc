@@ -15,7 +15,7 @@ It returns a set of only the vertices which are on at least one cycle, which sav
 CREATE QUERY tg_cycle_component(STRING v_type, STRING e_type, BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "")
 ----
 
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(VE)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
 

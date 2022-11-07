@@ -47,11 +47,11 @@ CREATE QUERY tg_wcc (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 
     BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-=== Time Complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is the maximum component diameter.
 
-=== Space Complexity
+=== Space complexity
 
 This algorithm has a space complexity of stem:[O(V)], where stem:[V] is the number of vertices.
 

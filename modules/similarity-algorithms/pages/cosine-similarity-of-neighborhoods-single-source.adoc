@@ -47,7 +47,7 @@ tg_cosine_nbor_ss (VERTEX source, SET<STRING> e_type, SET<STRING> re_type,
   STRING file_path = "", STRING similarity_edge = "")
 RETURNS (MapAccum<VERTEX, FLOAT>)
 ----
-=== Time complexity
+== Time complexity
 
 This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
 

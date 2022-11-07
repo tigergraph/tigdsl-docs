@@ -41,7 +41,7 @@ CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
 UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
 ----
 
-=== Time complexity
+== Time complexity
 The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
 
 == Parameters

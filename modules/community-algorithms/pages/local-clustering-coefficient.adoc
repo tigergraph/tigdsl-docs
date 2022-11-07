@@ -28,11 +28,6 @@ The algorithm does not report the local clustering coefficient for vertices that
 
 Local Clustering Coefficient only works with directed graphs if reverse edges are included.
 
-
-== Time complexity
-
-stem:[O(V)], where stem:[V] is the number of vertices in the graph.
-
 == Specifications
 
 [source,gsql]
@@ -41,6 +36,11 @@ tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
   BOOL print_accum = True, STRING result_attr = "",
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
+
+== Time complexity
+
+stem:[O(V)], where stem:[V] is the number of vertices in the graph.
+
 
 == Parameters
 
