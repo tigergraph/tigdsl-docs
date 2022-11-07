@@ -1,5 +1,6 @@
 = Weighted Degree Centrality
 :description: Overview of the weighted degree centrality algorithm.
+:stem: latexmath
 
 .Supported Graph Characteristics
 ****
@@ -30,8 +31,8 @@ CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
 ----
 
 == Time complexity
-The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total number of edges in the graph.
 
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
 
 == Parameters
 
