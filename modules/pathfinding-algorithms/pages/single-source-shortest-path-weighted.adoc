@@ -15,14 +15,17 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+Finding shortest paths in a graph with weighted edges is algorithmically harder than in an unweighted graph because even after you find a path to a vertex T, you cannot be certain that it is a shortest path.
 
-Finding shortest paths in a graph with weighted edges is algorithmically harder than in an unweighted graph because even after you find a path to a vertex T, you cannot be certain that it is a shortest path. If edge weights are always positive, then you must keep trying until you have considered every in-edge to T. If edge weights can be negative, then it's even harder. You must consider all possible paths.
+If edge weights are always positive, then you must keep trying until you have considered every in-edge to T. If edge weights can be negative, then it's even harder. You must consider all possible paths.
 
-A classic application for weighted shortest path is finding the shortest travel route to get from A to B. (Think of route planning "GPS" apps.) In general, any application where you are looking for the cheapest route is a possible fit.
+A classic application for a weighted shortest path algorithm is finding the shortest travel route to get from an origin location to a destination location.
+In this case, the edge weights would be the distances between vertices.
+In general, any application where you are looking for the cheapest route is a possible fit.
 
 == Specifications
 
-The shortest path algorithm can be optimized if we know all the weights are nonnegative. If there can be negative weights, then sometimes a longer path will have a lower cumulative weight. Therefore, we have two versions of this algorithm
+The shortest path algorithm can be optimized if we know all the weights are non-negative. If there can be negative weights, then sometimes a longer path will have a lower cumulative weight. Therefore, we have two versions of this algorithm
 
 [source,gsql]
 ----
@@ -42,31 +45,71 @@ tg_shortest_ss_any_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<5%,<50%",options="header",]
+
+== Results
+
+Computes a shortest distance (given in `INT` format) and a shortest path (`STRING`) from a given _source_ vertex to all other vertices in the graph.
+
+Returns a result size of stem:[V], the number of vertices in the graph.
+
+== Parameters
+
+[width="100%",cols="0,1,0",options="header",]
 |===
-|*Characteristic* |Value
-|Result |Computes a shortest distance (INT) and shortest path (STRING)
-from vertex _source_ to each other vertex.
+|*Parameter* |Description |Default
 
-|Input Parameters a|
-* *`+VERTEX source+`:* Id of the source vertex
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute
-* *`+STRING wt_type+`*: Data type of edge weight attribute: "INT",
-"FLOAT", or "DOUBLE"
-* *`+INT output_limit+`*: If >=0, max number of vertices to output to
-JSON.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store distance values (INT) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+|`VERTEX source`
+|ID of the source vertex
+|(empty string)
 
-|Result Size |V = number of vertices
 
-|Graph Types |Directed or Undirected edges, Weighted edges
+|`SET<STRING> v_type`
+|Names of vertex types to use
+|(empty string)
+
+
+
+|`SET<STRING> e_type`
+|Names of edge types to use
+|N/A
+
+|`STRING wt_attr`
+|Name of the edge weight attribute
+|(empty string)
+
+|`STRING wt_type`
+|The data type of the edge weight attribute.
+Can be `INT`, `FLOAT`, or `DOUBLE`.
+|(empty string)
+
+
+|`INT output_limit`
+|If >=0, max number of vertices to output to JSON
+|-1
+
+
+
+|`BOOL print_accum`
+|Whether to print results in JSON format to standard output
+|True
+
+
+
+|`STRING result_attr`
+|If not empty, store distance values in INT to this vertex attribute
+|(empty string)
+
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+
+
+|`BOOL display_edges`
+|If true, include the graph's edges in the JSON output, so that the full graph can be displayed in the query view window on GraphStudio.
+|False
+|No
+
 |===
 
 [NOTE]
