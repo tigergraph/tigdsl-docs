@@ -42,7 +42,7 @@ stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number
 
 == Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[options="header",]
 |===
 |*Parameter* |Description |Default
 

@@ -45,7 +45,7 @@ The result size is equal to stem:[V], or the number of vertices.
 
 === Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 

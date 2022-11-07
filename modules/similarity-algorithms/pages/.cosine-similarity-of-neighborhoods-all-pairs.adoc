@@ -16,7 +16,7 @@ tg_cosine_nbor_ap (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 This algorithm has a time complexity of stem:[O(E)], where stem:[E] is equal to the number of edges.
 
 
-[width="100%",cols="<5%,<50%",options="header",]
+[options="header",]
 |===
 |*Characteristic* |Value
 |Result a|

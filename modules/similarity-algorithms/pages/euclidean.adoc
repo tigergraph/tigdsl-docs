@@ -25,7 +25,7 @@ The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of d
 
 == Parameters
 
-[cols=",,",options="header",]
+[options="header",]
 |===
 |Name |Description |Data type
 |`+A+` |An n-dimensional vector denoted by a `+ListAccum+` of length

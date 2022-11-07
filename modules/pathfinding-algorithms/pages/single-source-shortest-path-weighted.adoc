@@ -54,7 +54,7 @@ Returns a result size of stem:[V], the number of vertices in the graph.
 
 == Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[options="header",]
 |===
 |*Parameter* |Description |Default
 

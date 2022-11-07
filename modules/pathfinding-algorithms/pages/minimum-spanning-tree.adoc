@@ -60,7 +60,7 @@ stem:[V-1], or the number of vertices minus 1
 
 == Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 

@@ -53,7 +53,7 @@ from vertex source to target vertex.
 
 === Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 
