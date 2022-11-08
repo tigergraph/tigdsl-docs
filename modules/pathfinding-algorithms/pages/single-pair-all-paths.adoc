@@ -41,7 +41,7 @@ CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT 
 
 == Time complexity
 
-stem:[O(1)-O(VE)]
+stem:[O(1)-O(VE)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
 
 === Space complexity
 

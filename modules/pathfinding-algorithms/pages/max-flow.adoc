@@ -42,59 +42,48 @@ CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink, Set<STRING> v_type,
 
 == Time complexity
 
-stem:[O(F + E)]
+The time complexity of the Edmond-Karp algorithm is independent of maximum flow in the graph.
+Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
 == Parameters
 
 |===
-|Parameter |Data type |Description
+|Parameter |Description
 
-|`source`
-|`VERTEX`
+|`VERTEX source`
 |Source vertex where the flow starts.
 
-|`sink`
-|`VERTEX`
+|`VERTEX sink`
 |Target vertex where the flow is to be sent to.
 
-|`v_type`
-|`SET<STRING>`
+|`SET<STRING> v_type`
 |Vertex types to consider in the path.
 
-|`e_type`
-|`SET<STRING>`
+|`SET<STRING> e_type`
 |Edge types to traverse.
 
-|`reverse_e_type`
-|`SET<STRING>`
+|`SET<STRING> reverse_e_type`
 |Reverse edge types to traverse.
 
-|`cap_attr`
-|`STRING`
+|`STRING cap_attr`
 |Name of the attribute that contains the capacity of the edge.
 
-|`cap_type`
-|`STRING`
+|`STRING cap_type`
 |Data type of the `cap_attr` attribute.
 
-|`min_flow_threshold`
-|`FLOAT`
+|`FLOAT min_flow_threshold`
 |Minimum flow for an edge to carry if it is to carry any flow.
 
-|`print_accum`
-|`BOOL`
+|`BOOL print_accum`
 |If true, output JSON to standard output.
 
-|`display_edges`
-|`BOOL`
+|`BOOL display_edges`
 |If true, the resulting path includes edges in addition to vertices.
 
-|`split_to_file`
-|`BOOL`
+|`BOOL split_to_file`
 |If true, the file output will contain every edge and how much flow they would carry to achieve the maximum flow.
 
-|`file_path`
-|`STRING`
+|`STRING file_path`
 |If not empty, write output to this file.
 |===
 

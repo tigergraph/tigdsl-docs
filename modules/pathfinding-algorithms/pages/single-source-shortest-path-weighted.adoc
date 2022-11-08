@@ -23,6 +23,12 @@ A classic application for a weighted shortest path algorithm is finding the shor
 In this case, the edge weights would be the distances between vertices.
 In general, any application where you are looking for the cheapest route is a possible fit.
 
+== Notes
+
+The `shortest_path_any_wt` algorithm in this library is an implementation of the Bellman-Ford algorithm. If there is more than one path with the same total weight, the algorithm returns one of them.
+
+Currently, `shortest_path_pos_wt` also uses Bellman-Ford. The well-known Dijsktra's algorithm is designed for serial computation and cannot work with GSQL's parallel processing.
+
 == Specifications
 
 The shortest path algorithm can be optimized if we know all the weights are non-negative. If there can be negative weights, then sometimes a longer path will have a lower cumulative weight. Therefore, we have two versions of this algorithm
@@ -44,7 +50,6 @@ tg_shortest_ss_any_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
 == Time complexity
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
-
 
 == Results
 
@@ -111,13 +116,6 @@ Can be `INT`, `FLOAT`, or `DOUBLE`.
 |No
 
 |===
-
-[NOTE]
-====
-The shortest_path_any_wt query is an implementation of the Bellman-Ford algorithm. If there is more than one path with the same total weight, the algorithm returns one of them.
-
-Currently, shortest_path_pos_wt also uses Bellman-Ford. The well-known Dijsktra's algorithm is designed for serial computation and cannot work with GSQL's parallel processing.
-====
 
 == Example
 

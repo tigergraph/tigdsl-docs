@@ -30,9 +30,9 @@ For each Active vertex v:
 
 . Send its list of paths to each of its out-neighbors.
 . Inspect each path P in the list of the paths received:
- ** If the first IDin P is also ID(v), a cycle has been found:
+ ** If the first ID in P is also ID(v), a cycle has been found:
   *** Remove P from its list.
-  *** If ID(v) is the least IDof any IDin P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
+  *** If ID(v) is the least ID of any ID in P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
  ** Else, if ID(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
  ** Else, append ID(v) to the end of each of the remaining paths in its list.
 
@@ -54,8 +54,8 @@ The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the nu
 
 == Result
 
-Computes a list of vertex IDlists, each of which is a cycle. 
-The result is available in 2 forms:
+Computes a list of vertex ID lists, each of which is a cycle.
+The result is available in two forms:
 
 * streamed out to the console in JSON format
 * written to a file in tabular format
@@ -64,7 +64,6 @@ The result is available in 2 forms:
 Number of cycles * average cycle length
 
 Both of these measures are not known in advance.
-
 
 == Parameters
 

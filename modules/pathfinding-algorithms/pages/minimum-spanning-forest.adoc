@@ -15,7 +15,11 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-Given an undirected graph with one or more connected components, a minimum spanning forest is a set of minimum spanning trees, one for each component. The library implements the algorithm in section 6.2 of Qin et al. 2014: link:http://www-std1.se.cuhk.edu.hk/~hcheng/paper/SIGMOD2014qin.pdf[Scalable Big Graph Processing in MapReduce]
+Given an undirected graph with one or more connected components, a minimum spanning forest is a set of minimum spanning trees, one for each component.
+
+== Notes
+
+This is an implementation of the algorithm in section 6.2 of Qin et al. 2014: link:http://www-std1.se.cuhk.edu.hk/~hcheng/paper/SIGMOD2014qin.pdf[Scalable Big Graph Processing in MapReduce]
 
 == Specifications
 
@@ -79,4 +83,4 @@ stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number
 
 == *Example*
 
-Refer to the example for the MST algorithm. This graph has 3 components. MSF will find an MST for each of the three components.
+Refer to the example for the xref:minimum-spanning-tree.adoc[] algorithm. This graph has three components. The MSF algorithm finds an MST for each of the three components.

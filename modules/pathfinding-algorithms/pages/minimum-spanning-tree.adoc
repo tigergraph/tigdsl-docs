@@ -31,7 +31,7 @@ If the user specifies a source vertex, this will be used as the _seed_. Otherwis
 
 If the graph contains multiple components (i.e., some vertices are disconnected from the rest of the graph), then the algorithm will span only the component of the seed vertex.
 
-If you do not have a preferred vertex, and the graph might have more than one component, then you should use the Minimum Spanning Forest (MSF) algorithm instead.
+If you do not have a preferred vertex, and the graph might have more than one component, then you should use the xref:minimum-spanning-forest.adoc[] algorithm instead.
 
 
 == Specifications

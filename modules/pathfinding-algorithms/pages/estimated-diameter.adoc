@@ -23,11 +23,11 @@ It calculates the distances from each of these stem:[K] vertices to all other ve
 So, instead of calculating stem:[V*(V-1)] distances, this algorithm only calculates stem:[K*(V-1)] distances.
 The higher the value of stem:[K], the greater the likelihood of finding the true diameter.
 
-The current version only computes unweighted distances.
-
 == Notes
 This algorithm query employs a subquery called *max_BFS_depth*.
 Both queries must be installed to run the algorithm.
+
+The current version of this algorithm only computes unweighted distances.
 
 == Specifications
 

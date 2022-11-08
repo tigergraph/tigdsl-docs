@@ -47,15 +47,14 @@ STRING wt_attr, BOOL display = False)
 
 This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
 
-=== Result
-Computes a shortest distance (INT) and shortest path (STRING)
-from vertex source to target vertex.
+== Results
+Computes a shortest distance (in `INT` format) and shortest path (`STRING`) from the source to the target vertex.
 
-=== Parameters
+== Parameters
 
 [cols="0,1,0",options="header",]
 |===
-|*Parameter* |Description |Default
+|*Parameter* |Description |Default value
 
 |`VERTEX source_vertex`
 |ID of the source vertex
