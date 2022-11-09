@@ -38,10 +38,7 @@ If using a directed graph, there is a modification to allow it to run with sink 
 
 [source,gsql]
 ----
-CREATE QUERY tg_fastRP(SET<STRING> v_type, SET<STRING> e_type,
-    STRING weights, FLOAT beta, INT k, INT reduced_dim,
-    INT sampling_constant, INT random_seed, BOOL print_accum=FALSE,
-    STRING result_attr="", STRING file_path="")
+CREATE QUERY tg_fastRP(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> output_v_type, STRING weights, FLOAT beta, INT total_dim, INT default_idx = 0, INT default_length, FLOAT default_weight, SET<STRING> embedding_dim_map, SET<STRING> feature_dim_map, INT sampling_constant, INT random_seed, STRING result_attr="", SET<VERTEX> filter_v_set, SET<STRING> stop_set, STRING component_attr="", INT batch_iter=0, BOOL print_to_file=FALSE, STRING filepath="", BOOL print_all=FALSE, INT print_sample_size=5)
 ----
 
 This query needs to be modified based upon your schema to set the embedding
@@ -54,58 +51,67 @@ If you do not wish to store the embeddings in graph, delete the lines that use t
 
 |===
 | Parameter | Description | Data type
-
-| `v_type`
-| Vertex types to consider.
-| `SET<STRING>`
-
-| `e_type`
-| Edge types to consider.
-| `SET<STRING>`
-
-| `k`
-| "Depth" of embedding.
-k=2 means that the resulting embedding would take vertices within 2 hops into account.
-| `INT`
-
-| `sampling_constant`
-| The sampling constant that controls the sparsity of the resulting embedding.
-A high `sampling_constant` increases the speed of the algorithm. See more details in Parameter Tuning.
-| `INT`
-
-|`random_seed`
-|Seed number of the random number generator used to generate the random vectors.
-It can be set to any positive integer.
-If the seed number is kept the same, the numbers used to generate random vectors stay the same.
-|`INT`
-
-| `reduced_dim`
-| The length of the produced vectors.
-A greater dimension offers a greater precision, but is more costly to operate over.
-| `INT`
-
-| `beta`
-| Hyperparameter that is typically between -1 and 0.
-| `DOUBLE`
-
-| `weights`
-| Comma-separated string of weights for each hop in the graph.
-The number of weights must be equal the value of the parameter `k`.
-when k=3 gives the nearest neighbor a weight of 1, neighbors 2 hops away a weight of 2 and neighbors 3 hops away a weight of 4.
-| `STRING`
-
-|`print_accum`
-|If true, print results to standard JSON output.
-| `BOOL`
-
-| `result_attr`
-|If provided, the algorithm stores the produced embeddings in this attribute.
-The attribute must be of type `LIST<DOUBLE>`.
-| `STRING`
-
-|`file_path`
-|If provided, print results to this filepath in CSV format.
-| `STRING`
+|v_type:
+|Set of all vertex types to traverse in the graph.
+|SET<STRING>
+|e_type:
+|Set of all edge types to traverse in the graph.
+|SET<STRING>
+|output_v_type:
+|Set of vertex types to produce output embeddings for.
+|SET<STRING>
+|iteration_weights:
+|A comma-separated string of numbers to weight each iteration of the embedding process.
+|STRING
+|beta:
+|A float value that normalizes high-degree vertices in the graph. Usually between -1 and 0, where
+-1 penalizes high-degree vertices heavily. If desired, one can use a positive value to weight
+high-degree vertices more than low-degree vertices.
+|FLOAT
+|embedding_dimension:
+|The total dimension of the desired embedding.
+|INT
+|default_index:
+|Index in the embedding vector default edges (edge types that are not explicitly defined in `embedding_dim_map`) start to 
+be incorporated in the vector.
+|INT
+|default_length:
+|Length of the embedding region that incorporates default edge type information.
+|INT
+|default_weight:
+|Influence that the default edge types have in the region of the embedding they are incorporated. Defaults to 1.
+|INT
+|embedding_dim_map:
+|Set of comma-separated tuples of '<edge type>,<length>,<weight>,<starting index>'. Use if incorporating specific edge types
+into certain regions of the embedding is desired. If the empty set is used, all edge types will be considered "default" edge types.
+|SET<STRING>
+|sampling_constant:
+|Parameter defined from the FastRP paper. Controls the sparsity of the embedding. Usually an integer between 1 (fully dense embedding)
+and 3 works well.
+|INT
+|random_seed:
+|Seed for random number generator. Defaults to 42.
+|INT
+|result_attribute:
+|Attribute to store the result embedding to. Must be of type LIST<FLOAT>. If empty, algorithm does not write the embedding to an attribute.
+|STRING
+|component_attribute:
+|If batching the embedding process by connected components, specify the vertex attribute that contains the
+integer ID of the component.
+|STRING
+|batch_number:
+|If batching by connected component, specify which batch to compute the embeddings for.
+|INT
+|filepath:
+|If specified, what file to write the computed embeddings to.
+|STRING
+|print_results:
+|If TRUE, all vertex embeddings will be printed.
+|BOOL
+|choose_k:
+|Will print a sample of K vertices and their embeddings. Defaults to 5.
+|INT
+  */
 |===
 
 === Parameter tuning
