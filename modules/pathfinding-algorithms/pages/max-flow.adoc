@@ -40,12 +40,12 @@ CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink, Set<STRING> v_type,
   STRING cap_type, FLOAT min_flow_threshhold = 0.001, BOOL print_accum = TRUE, BOOL display_edges = TRUE, BOOL spit_to_file = FALSE, STRING file_path = "/home/tigergraph/tg_query_output.csv")
 ----
 
-== Time complexity
+=== Time complexity
 
 The time complexity of the Edmond-Karp algorithm is independent of maximum flow in the graph.
 Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description
@@ -87,7 +87,7 @@ Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vert
 |If not empty, write output to this file.
 |===
 
-== Result
+=== Output
 
 JSON result::
 The return value is the maximum flow that can be carried from the source to the sink.

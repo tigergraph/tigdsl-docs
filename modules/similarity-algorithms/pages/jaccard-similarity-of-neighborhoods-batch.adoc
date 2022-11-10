@@ -29,12 +29,12 @@ CREATE QUERY tg_jaccard_nbor_ap_batch ( INT top_k = 10, SET<STRING> v_type,
     BOOL print_accum = true, INT print_limit = 50, STRING file_path = "")
 ----
 
-== Time complexity
+=== Time complexity
 
 This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
 
-== Parameters
+=== Parameters
 
 |===
 | Name | Description
@@ -74,7 +74,7 @@ This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the numbe
 
 |===
 
-== Result
+=== Output
 
 The result contains the top _k_ Jaccard *similarity* scores for each vertex and its corresponding pair. A pair is only included if its similarity is greater than 0, meaning there is at least one common neighbor between the pair. The result is available in JSON format, or can be output to a file in CSV, or it can be saved as an edge on the graph itself. A JSON formatted result could look like this:
 

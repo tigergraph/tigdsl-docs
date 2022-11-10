@@ -46,7 +46,7 @@ The problem of this algorithm is unbalanced load and slow convergence when there
 
 We added two trimming stages to improve the performance: Size-1 SCC Trimming and Weakly Connected Components.
 
-=== Papers
+=== References
 
 DCSC Algorithm:
 Fleischer, Lisa K., Bruce Hendrickson, and Ali Pınar. "On identifying strongly connected components in parallel." International Parallel and Distributed Processing Symposium. Springer, Berlin, Heidelberg, 2000.
@@ -66,18 +66,7 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
   BOOL print_accum = TRUE, STRING attr= "", STRING file_path="")
 ----
 
-== Time complexity
-
-This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
-
-
-== Results
-
-Assigns a component id (INT) to each vertex, such that members
-of the same component have the same ID value.
-
-
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description |Default Value
@@ -126,6 +115,16 @@ after several iterations. Usually a small number (3 to 10).
 |(empty string)
 
 |===
+
+=== Output
+
+Assigns a component id (INT) to each vertex, such that members
+of the same component have the same ID value.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
+
 
 == Example
 

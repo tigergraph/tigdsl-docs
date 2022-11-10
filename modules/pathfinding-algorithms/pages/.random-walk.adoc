@@ -11,7 +11,7 @@ INT step = 8, INT path_size = 4, STRING filepath = "/home/tigergraph/path.csv",
 SET<STRING> edge_types, INT sample_num)
 ----
 
-== Parameters
+=== Parameters
 
 |===
 | Name | Description | Data type

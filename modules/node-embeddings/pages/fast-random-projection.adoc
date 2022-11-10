@@ -51,7 +51,7 @@ On line 92, change `fastrp_embedding` to the name of the attribute where you wan
 The attribute must type `LIST<DOUBLE>`.
 If you do not wish to store the embeddings in graph, delete the lines that use the attribute `fastrp_embedding`.
 
-== Parameters
+=== Parameters
 
 |===
 | Parameter | Description | Data type

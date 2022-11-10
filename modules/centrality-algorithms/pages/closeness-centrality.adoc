@@ -44,7 +44,7 @@ Both queries are needed to run the algorithm.
 The `re_type` (reverse edge type) parameter is always required.
 For undirected edges, use the same value for both `e_type` and `re_type`.
 
-=== Paper
+=== References
 
 TigerGraph's closeness centrality algorithm uses multi-source breadth-first search (MS-BFS) to traverse the graph and calculate the sum of a vertex's distance to every other vertex in the graph, which vastly improves the performance of the algorithm.
 
@@ -60,13 +60,13 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-== Time complexity
+=== Time complexity
 
 This algorithm has a time complexity of stem:[O(E)] where stem:[E] is the number of edges.
 
 Parallel processing reduces the time needed for computation.
 
-== Result
+=== Output
 
 Computes a Closeness Centrality value (FLOAT type) for each vertex, calculated from the average distance between that vertex and every other vertex.
 

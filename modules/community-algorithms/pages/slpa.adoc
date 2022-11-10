@@ -36,17 +36,17 @@ CREATE QUERY tg_slpa (SET<STRING> v_type, SET<STRING> e_type, FLOAT threshold, I
 BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-== Time complexity
+=== Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 
-== Results
+=== Output
 
 Assigns a list of component IDs in INT form to each vertex, such that members of the same component have the same ID value.
 
 The result size is equal to stem:[V], the number of vertices.
 
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description |Default

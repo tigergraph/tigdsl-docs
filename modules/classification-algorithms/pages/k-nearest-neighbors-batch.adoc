@@ -11,22 +11,7 @@ tg_knn_cosine_all(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
   STRING file_path = "", STRING attr = "")
 ----
 
-== Time complexity
-This algorithm has a complexity of stem:[O(E^2 / V)], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
-
-== Results
-
-Returns the predicted label for the vertices whose label attribute is empty.
-
-The result is available in three forms:
-
-* streamed out in JSON format
-* written to a file in tabular format, or
-* stored as a vertex attribute value.
-
-The result size is equal to stem:[V], the number of vertices in the graph.
-
-== Parameters
+=== Parameters
 
 
 |===
@@ -69,6 +54,22 @@ The result size is equal to stem:[V], the number of vertices in the graph.
 |(empty string)
 
 |===
+
+=== Output
+
+Returns the predicted label for the vertices whose label attribute is empty.
+
+The result is available in three forms:
+
+* streamed out in JSON format
+* written to a file in tabular format, or
+* stored as a vertex attribute value.
+
+The result size is equal to stem:[V], the number of vertices in the graph.
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(E^2 / V)], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
+
 
 == Example
 

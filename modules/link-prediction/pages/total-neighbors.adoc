@@ -27,10 +27,10 @@ CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
     SET<STRING> e_type)
 ----
 
-== Time complexity
+=== Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
-== Parameters
+=== Parameters
 [cols="1,1,1"]
 |===
 |Name | Description | Default value

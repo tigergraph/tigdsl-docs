@@ -26,9 +26,6 @@ To obtain the k-core of a graph, the algorithm first deletes the vertices whose 
 
 This is an implementation of Algorithm 2 in https://ieeexplore.ieee.org/document/8622056[Scalable K-Core Decomposition for Static Graphs Using a Dynamic Graph Data Structure, Tripathy et al., IEEE Big Data 2018].
 
-== Time complexity
-
-stem:[O(E)], where stem:[E] is the number of edges in the graph.
 
 == Specifications
 
@@ -40,7 +37,7 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
   BOOL print_all_k = FALSE, BOOL show_shells=FALSE)
 ----
 
-== Parameters
+=== Parameters
 
 |===
 | Parameter | Description
@@ -73,6 +70,10 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
 | The *k-shell* is the set of vertices that are part of the _k_-core but not part of the (_k_+1)-core. If `show_shells` is `true`, the algorithm will return the k-shells found for every value of k. within the range provided. For each k-shell, the results will include its member vertices.
 
 |===
+
+=== Time complexity
+
+stem:[O(E)], where stem:[E] is the number of edges in the graph.
 
 == Example
 

@@ -34,10 +34,10 @@ CREATE QUERY tg_same_community(VERTEX a, VERTEX b, STRING
     communityAttribute)
 ----
 
-== Time complexity
+=== Time complexity
 The algorithm has a time complexity of stem:[O(1)].
 
-== Parameters
+=== Parameters
 [cols="1,1,1"]
 |===
 |Name | Description | Default value

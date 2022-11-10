@@ -19,19 +19,7 @@ tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
 STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
 ----
 
-== Time complexity
-This algorithm has a complexity of stem:[O(max\_k*\frac{E^2}{V})], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
-
-== Results
-
-A list of prediction accuracy for every k value in the given range, and the value of k with the highest predicting accuracy in the given range.
-
-The result is available in JSON format.
-
-The result size is equal to `max_k` - `min_k` + 1.
-
-
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description |Default Value
@@ -64,10 +52,19 @@ The result size is equal to `max_k` - `min_k` + 1.
 |The upper bound of _k_ (inclusive)
 | N/A
 
-
-
-
 |===
+
+=== Output
+
+A list of prediction accuracy for every k value in the given range, and the value of k with the highest predicting accuracy in the given range.
+
+The result is available in JSON format.
+
+The result size is equal to `max_k` - `min_k` + 1.
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(max\_k*\frac{E^2}{V})], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
+
 == Example
 
 Run knn_cosine_cv with min_k=2, max_k = 5. The JSON result:

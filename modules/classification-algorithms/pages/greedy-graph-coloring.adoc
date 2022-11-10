@@ -29,7 +29,7 @@ CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UIN
 
 The algorithm has a worst-case time complexity of stem:[O(V^2 + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
 
-== Parameters
+=== Parameters
 
 |===
 | Name | Description

@@ -42,18 +42,7 @@ For more information, see http://infolab.stanford.edu/~backrub/google.html[the G
 tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
 
-== Time complexity
-
-This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
-
-The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
-
-== Result
-
-Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
-
-== Parameters
+=== Parameters
 
 |===
 |*Parameter* |Description |Default
@@ -102,8 +91,20 @@ changing by less than `+max_change+` from one iteration to the next.
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
 |False
 
-
 |===
+
+=== Output
+
+Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.
+
 
 == Example
 

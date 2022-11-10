@@ -68,12 +68,7 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
     BOOL print_info = FALSE)
 ----
 
-
-== Time complexity
-This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
-
-
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description |Default
@@ -116,7 +111,7 @@ This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the n
 |===
 
 
-== Result
+=== Output
 
 If `result_attr` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
 
@@ -124,6 +119,11 @@ if `print_info` is set to true or `file_path` is provided, the JSON or .csv outp
 
 * The number of vertices and communities in the graph.
 * The heuristic statistics used by Louvain.
+
+
+=== Time complexity
+This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
+
 
 
 == Example

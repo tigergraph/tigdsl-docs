@@ -49,7 +49,7 @@ tg_node2vec_query(STRING filepath = "/home/tigergraph/path.csv",
 Installing this query requires xref:gsql-ref:querying:func/query-user-defined-functions.adoc[installing a UDF], which can be found in the https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/Node2Vec[GitHub repository of the query].
 If you are running the query on a cluster, you need to manually install the UDF on every node of the cluster.
 
-== Parameters
+=== Parameters
 
 |===
 | Parameter | Description | Data type

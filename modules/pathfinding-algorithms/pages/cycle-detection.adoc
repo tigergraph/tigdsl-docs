@@ -49,10 +49,10 @@ tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
   BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-== Time complexity
+=== Time complexity
 The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the lesser of either the maximum cycle length or the depth parameter.
 
-== Result
+=== Output
 
 Computes a list of vertex ID lists, each of which is a cycle.
 The result is available in two forms:
@@ -60,12 +60,12 @@ The result is available in two forms:
 * streamed out to the console in JSON format
 * written to a file in tabular format
 
-=== Result Size
+=== Result size
 Number of cycles * average cycle length
 
 Both of these measures are not known in advance.
 
-== Parameters
+=== Parameters
 
 [cols="0,1,0",options="header",]
 |===

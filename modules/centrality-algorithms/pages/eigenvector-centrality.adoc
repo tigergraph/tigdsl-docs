@@ -30,13 +30,13 @@ CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
  )
 ....
 
-== Time complexity
+=== Time complexity
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-== Parameters
+=== Parameters
 
 [cols=",,",options="header",]
 |===
@@ -58,7 +58,7 @@ Parallel processing reduces the time needed for computation.
 |`STRING file_path` |If not empty, print results in CSV to this file. | (empty string)
 |===
 
-== Results
+=== Output
 
 Returns an eigenvector centrality score for all vertices of the specified type in the graph.
 The results are ordered from most central to least central.

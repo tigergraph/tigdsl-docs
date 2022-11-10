@@ -44,17 +44,17 @@ CREATE QUERY tg_influence_maximization_greedy(STRING v_type,
   BOOL print_accum = True, STRING file_path = "")
 ----
 
-== Time complexity
+=== Time complexity
 The greedy version has a complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the number of top scores to report.
 
 The CELF version also has a worst-case complexity of stem:[O(E * k)], but generally performs much better with a best-case complexity of stem:[O(E)].
 
-== Results
+=== Output
 
 Returns the ID of the vertices with the highest influence scores along with their scores.
 
 
-== Parameters
+=== Parameters
 The CELF version and the greedy version of the algorithms share the same set of parameters.
 
 [cols=",",options="header",]

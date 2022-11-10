@@ -28,7 +28,7 @@ After identifying the first WCC, the algorithm uses the coloring method to ident
 
 We use a default value of `100000` for the threshold used to choose initial pivot vertices to increase the chances that the initial pivot is contained within the largest WCC.
 
-=== Papers
+=== References
 
 https://www.osti.gov/servlets/purl/1115145[Slota et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
@@ -40,11 +40,7 @@ Connected Components and Related Problems._]
 CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
 UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
 ----
-
-== Time complexity
-The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
-
-== Parameters
+=== Parameters
 
 |===
 |Name |Description |Default value
@@ -70,10 +66,14 @@ vertices in each connected component.
 
 |===
 
-== Result
+=== Output
 
 If `+to_show_cc_count+` is set to true, the algorithm will return the
 number of vertices in each weakly connected component.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
+
 
 == Example
 

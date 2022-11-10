@@ -37,7 +37,7 @@ tg_label_prop (SET<STRING> v_type, SET<STRING> e_type, INT max_iter, INT output_
 BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
 ----
 
-== Time complexity
+=== Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 |===
@@ -69,7 +69,7 @@ This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number o
 
 |===
 
-== Results
+=== Output
 
 Assigns a component ID in `INT` format to each vertex.
 Members of the same component have the same ID value.

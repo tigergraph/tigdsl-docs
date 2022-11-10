@@ -29,11 +29,11 @@ tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-== Time complexity
+=== Time complexity
 
 This algorithm has a time complexity of stem:[O((V+E) * log(V))], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-== Result
+=== Output
 
 Computes a minimum spanning forest. If the JSON or file output
 selected, the output is the set of edges that form the MSF. If the
@@ -44,7 +44,7 @@ tagged True; other edges are tagged False.
 
 stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number of components.
 
-== Parameters
+=== Parameters
 
 [options="header",]
 |===
