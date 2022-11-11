@@ -42,10 +42,6 @@ CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING re_type,
  UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
 ....
 
-=== Time complexity
-
-The algorithm has a time complexity of stem:[O(V + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
-
 === Parameters
 
 [cols=",,",options="header",]
@@ -70,8 +66,12 @@ threshold will be considered candidates for the pivot vertex.
 
 === Output
 
-When `+to_show_cc_count+` is set to `true`, the algorithm will return the
-number of strongly connected components in the graph.
+When `+to_show_cc_count+` is set to `true`, the algorithm returns the number of strongly connected components in the graph.
+
+=== Time complexity
+
+The algorithm has a time complexity of stem:[O(V + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
+
 
 == Example
 

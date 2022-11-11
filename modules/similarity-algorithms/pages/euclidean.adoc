@@ -20,9 +20,6 @@ query in the same way as a built-in GSQL function.
 tg_euclidean_distance_accum(A, B)
 ....
 
-=== Time complexity
-The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
-
 === Parameters
 
 [options="header",]
@@ -35,9 +32,13 @@ The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of d
 `+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
 |===
 
-== Return value
+=== Output
 
 The Euclidean distance between the two vectors.
+
+=== Time complexity
+The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+
 
 == Example
 

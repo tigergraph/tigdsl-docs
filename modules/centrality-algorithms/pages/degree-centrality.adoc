@@ -33,9 +33,6 @@ CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
   STRING file_path = "")
 ....
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
-
 === Parameters
 
 |===
@@ -65,9 +62,13 @@ vertex to this attribute. | (empty string)
 
 |===
 
-== Return value
+=== Output
 
 The vertices with the highest degree centrality scores along with their scores.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
+
 
 == Example
 

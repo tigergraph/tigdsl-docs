@@ -27,8 +27,6 @@ CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
     SET<STRING> e_type)
 ----
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
 === Parameters
 [cols="1,1,1"]
@@ -48,8 +46,12 @@ The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and st
 | (an empty set of strings)
 |===
 
-== Return value
+=== Output
 The total number of neighbors of two vertices as a `closeness` value.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
+
 
 == Example
 Suppose we have the following graph.

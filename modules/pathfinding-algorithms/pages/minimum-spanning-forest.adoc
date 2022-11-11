@@ -29,20 +29,6 @@ tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
 BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O((V+E) * log(V))], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
-
-=== Output
-
-Computes a minimum spanning forest. If the JSON or file output
-selected, the output is the set of edges that form the MSF. If the
-result_attr option is selected, the edges which are part of the MSF are
-tagged True; other edges are tagged False.
-
-=== Result size
-
-stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number of components.
 
 === Parameters
 
@@ -81,6 +67,21 @@ stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number
 
 |===
 
-== *Example*
+=== Output
+
+Computes a minimum spanning forest. If the JSON or file output
+selected, the output is the set of edges that form the MSF. If the
+result_attr option is selected, the edges which are part of the MSF are
+tagged True; other edges are tagged False.
+
+=== Result size
+
+stem:[V - c] where stem:[V] is the number of vertices and stem:[c] is the number of components.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O((V+E) * log(V))], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
+
+== Example
 
 Refer to the example for the xref:minimum-spanning-tree.adoc[] algorithm. This graph has three components. The MSF algorithm finds an MST for each of the three components.

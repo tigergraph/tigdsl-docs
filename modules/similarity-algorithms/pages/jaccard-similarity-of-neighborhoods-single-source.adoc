@@ -37,21 +37,6 @@ tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k 
   BOOL print_accum = TRUE, STRING similarity_edge_type = "",STRING file_path = "")
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
-
-=== Output
-
-The top _k_ vertices in the graph that have the highest similarity scores, along with their scores.
-
-Vertices with a similarity score of 0 to the target vertex are not included.
-
-The result is available in three forms:
-
-* streamed out in JSON format
-* written to a file in tabular format, or
-* stored as a vertex attribute value.
 
 === Parameters
 
@@ -90,8 +75,28 @@ The result is available in three forms:
 
 |===
 
+
+=== Output
+
+The top _k_ vertices in the graph that have the highest similarity scores, along with their scores.
+
+Vertices with a similarity score of 0 to the target vertex are not included.
+
+The result is available in three forms:
+
+* streamed out in JSON format
+* written to a file in tabular format, or
+* stored as a vertex attribute value.
+
+=== Result size
+
 If there are several vertices with identical similarity scores and returning them all would exceed the limit imposed by `top_k`,
 the algorithm arbitrarily chooses which results to display.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
+
 
 == Example
 

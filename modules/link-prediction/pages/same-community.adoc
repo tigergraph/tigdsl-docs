@@ -34,8 +34,6 @@ CREATE QUERY tg_same_community(VERTEX a, VERTEX b, STRING
     communityAttribute)
 ----
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(1)].
 
 === Parameters
 [cols="1,1,1"]
@@ -55,11 +53,13 @@ The algorithm has a time complexity of stem:[O(1)].
 | (A blank string)
 |===
 
-
-== Return value
+=== Output
 
 * Returns `1` if the two vertices are in the same community.
 * Returns `0` if the two vertices are not in the same community.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(1)].
 
 == Example
 Suppose we have the following vertices:

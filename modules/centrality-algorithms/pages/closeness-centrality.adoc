@@ -60,19 +60,6 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(E)] where stem:[E] is the number of edges.
-
-Parallel processing reduces the time needed for computation.
-
-=== Output
-
-Computes a Closeness Centrality value (FLOAT type) for each vertex, calculated from the average distance between that vertex and every other vertex.
-
-=== Result size
-
-stem:[V], or the number of vertices. One FLOAT value is returned for each vertex.
 
 == *Parameters*
 
@@ -121,6 +108,22 @@ stem:[V], or the number of vertices. One FLOAT value is returned for each vertex
 
 
 |===
+
+
+=== Output
+
+Computes a Closeness Centrality value (FLOAT type) for each vertex, calculated from the average distance between that vertex and every other vertex.
+
+=== Result size
+
+stem:[V], or the number of vertices. One FLOAT value is returned for each vertex.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E)] where stem:[E] is the number of edges.
+
+Parallel processing reduces the time needed for computation.
 
 == Example
 

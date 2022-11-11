@@ -42,22 +42,6 @@ CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
     STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
-
-Parallel processing reduces the time needed for computation.
-
-
-=== Output
-
-Returns a centrality score for all vertices of the specified type in the graph.
-The results are ordered from most central to least central.
-
-There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest centrality scores in the graph.
-This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
-
-The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
-
 === Parameters
 
 |===
@@ -105,6 +89,23 @@ If set to a non-positive value, the limit is ignored.
 | False
 
 |===
+
+=== Output
+
+Returns a centrality score for all vertices of the specified type in the graph.
+The results are ordered from most central to least central.
+
+=== Result size
+
+There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest centrality scores in the graph.
+This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
+
+The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
+Parallel processing reduces the time needed for computation.
 
 == Example
 If we have the following graph, we can see that Ivy is the most central of the five vertices. Running the algorithm on the graph shows that Ivy has the highest centrality score:

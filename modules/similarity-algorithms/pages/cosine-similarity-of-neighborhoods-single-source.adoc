@@ -47,20 +47,6 @@ tg_cosine_nbor_ss (VERTEX source, SET<STRING> e_type, SET<STRING> re_type,
   STRING file_path = "", STRING similarity_edge = "")
 RETURNS (MapAccum<VERTEX, FLOAT>)
 ----
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
-
-=== Output
-
-The top stem:[k] vertices in the graph that have the highest similarity scores,
-along with their scores.
-
-The result is available in three forms:
-
-* streamed out in JSON format
-* written to a file in tabular format
-* stored as a vertex attribute value
 
 === Parameters
 
@@ -106,8 +92,28 @@ The result is available in three forms:
 
 |===
 
+
+=== Output
+
+The top stem:[k] vertices in the graph that have the highest similarity scores,
+along with their scores.
+
+The result is available in three forms:
+
+* streamed out in JSON format
+* written to a file in tabular format
+* stored as a vertex attribute value
+
+=== Result size
+
 The output size is almost always stem:[k], except in cases where the number of total vertices is lower than stem:[k].
 The algorithm may arbitrarily choose to output one vertex over another if there are tied similarity scores.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
+
 
 == Example
 

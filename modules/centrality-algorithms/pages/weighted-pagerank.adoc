@@ -24,18 +24,6 @@ tg_pagerank_wt (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
    BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
-
-The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
-
-=== Output
-
-Computes a weighted PageRank value (FLOAT type) for each vertex.
-
-The result size is equal to stem:[V], the number of vertices in the graph, because a value is computed for every vertex.
 
 === Parameters
 
@@ -94,3 +82,17 @@ The balance (1 - damping) is a minimum baseline score that every vertex receives
 
 
 |===
+
+=== Output
+
+Computes a weighted PageRank value (FLOAT type) for each vertex.
+
+The result size is equal to stem:[V], the number of vertices in the graph, because a value is computed for every vertex.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.

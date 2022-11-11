@@ -30,11 +30,6 @@ CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
  )
 ....
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
-
-The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
 
 === Parameters
 
@@ -67,6 +62,12 @@ There is an optional parameter, `top_k`, that limits the results to an arbitrary
 This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
 
 The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.
 
 == Example
 

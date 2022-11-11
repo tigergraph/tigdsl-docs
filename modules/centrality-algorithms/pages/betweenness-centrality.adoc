@@ -72,17 +72,6 @@ STRING re_type,INT max_hops=10, INT top_k=100, BOOL print_accum = True,
 STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the number of edges and stem:[V] is the number of vertices.
-
-Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
-Parallel processing reduces the time needed for computation.
-
-=== Output
-
-Computes a Betweenness Centrality value (`FLOAT` type) for each vertex.
-The result size is equal to stem:[V], the number of vertices.
 
 == *Parameters*
 
@@ -125,12 +114,25 @@ The result size is equal to stem:[V], the number of vertices.
 |If true,  include the graph's edges in the JSON output, so that the full graph can be displayed.
 |True
 
-
 |===
+
+=== Output
+
+Computes a Betweenness Centrality value (`FLOAT` type) for each vertex.
+The result size is equal to stem:[V], the number of vertices.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the number of edges and stem:[V] is the number of vertices.
+
+Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
+Parallel processing reduces the time needed for computation.
+
+
 
 == Example
 
-In the example below, Claire is in the very center of the graph and has the highest betweenness centrality. Six shortest paths pass through Sam (i.e. paths from Victor to all other 6 people except for Sam and Victor), so the score of Sam is 6. David also has a score of 6, since Brian has 6 paths to other people that pass through David.
+In this example, Claire is in the very center of the graph and has the highest betweenness centrality. Six shortest paths pass through Sam (i.e. paths from Victor to all other 6 people except for Sam and Victor), so the score of Sam is 6. David also has a score of 6, since Brian has 6 paths to other people that pass through David.
 
 [,gsql]
 ----

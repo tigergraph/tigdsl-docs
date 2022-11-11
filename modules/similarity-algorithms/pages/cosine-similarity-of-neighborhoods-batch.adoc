@@ -29,10 +29,6 @@ CREATE QUERY tg_cosine_nbor_ap_batch(STRING vertex_type, STRING edge_type,
     STRING file_path, STRING similarity_edge, INT num_of_batches = 1)
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
-
 === Parameters
 
 |===
@@ -68,6 +64,11 @@ This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the numbe
 The result of this algorithm is the top _k_ cosine similarity scores and their corresponding pair for each vertex. The score is only included if it is greater than 0.
 
 The result can be output in JSON format, in CSV to a file, or saved as a similarity edge in the graph itself.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
 
 == Example
 

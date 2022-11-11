@@ -52,15 +52,6 @@ tg_maximal_indep_set_random(STRING v_type, STRING e_type,
     INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
-=== Output
-
-Returns a set of vertices that form a maximal independent set.
-
-If the graph is a set of N unconnected vertices, then the maximal independent set is all N vertices.
-
-=== Time complexity
-This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of edges.
-
 === Parameters
 
 |===
@@ -87,6 +78,16 @@ This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of 
 |(empty string)
 
 |===
+
+=== Output
+
+Returns a set of vertices that form a maximal independent set.
+
+If the graph is a set of N unconnected vertices, then the maximal independent set is all N vertices.
+
+=== Time complexity
+This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
 
 == Example
 

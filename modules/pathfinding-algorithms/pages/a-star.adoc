@@ -43,13 +43,6 @@ CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex, SET<STRING> e_
 STRING wt_attr, BOOL display = False)
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
-
-=== Output
-Computes a shortest distance (in `INT` format) and shortest path (`STRING`) from the source to the target vertex.
-
 === Parameters
 
 [cols="0,1,0",options="header",]
@@ -89,6 +82,15 @@ Computes a shortest distance (in `INT` format) and shortest path (`STRING`) from
 |True
 
 |===
+
+=== Output
+Computes a shortest distance (in `INT` format) and shortest path (`STRING`) from the source to the target vertex.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
+
 
 == Example
 

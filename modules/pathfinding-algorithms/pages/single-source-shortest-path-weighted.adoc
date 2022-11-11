@@ -47,15 +47,8 @@ tg_shortest_ss_any_wt (VERTEX source, SET<STRING> v_type, SET<STRING> e_type,
  STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
 
-This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-=== Output
-
-Computes a shortest distance (given in `INT` format) and a shortest path (`STRING`) from a given _source_ vertex to all other vertices in the graph.
-
-Returns a result size of stem:[V], the number of vertices in the graph.
 
 === Parameters
 
@@ -116,6 +109,17 @@ Can be `INT`, `FLOAT`, or `DOUBLE`.
 |No
 
 |===
+
+=== Output
+
+Computes a shortest distance (given in `INT` format) and a shortest path (`STRING`) from a given _source_ vertex to all other vertices in the graph.
+
+Returns a result size of stem:[V], the number of vertices in the graph.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
+
 
 == Example
 

@@ -73,12 +73,12 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 |===
 |Parameter |Description |Default
 
-|`STRING v_type`
+|`SET<STRING> v_type`
 |Names of vertex types to use
 |(empty string)
 
 
-|`STRING e_type`
+|`SET<STRING> e_type`
 |Names of edge types to use
 |(empty string)
 

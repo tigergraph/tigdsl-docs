@@ -36,13 +36,6 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
     INT depth, INT out_put_limit, BOOL print_accum = TRUE,
     STRING result_attr = "",STRING file_path = "")
 ----
-
-=== Time complexity
-This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
-
-=== Space complexity
-This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
-
 === Parameters
 
 
@@ -78,11 +71,21 @@ This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the numbe
 |If not empty, save the result in CSV format to this filepath.
 |===
 
-
-== Return value
+=== Output
 
 When `print_accum` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
 If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
+
+
+
+=== Time complexity
+This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
+
+=== Space complexity
+This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
+
+
+
 
 == Example
 

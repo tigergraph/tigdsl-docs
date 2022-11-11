@@ -43,21 +43,6 @@ tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
   BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 ----
 
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
-
-=== Output
-
-Computes a minimum spanning tree. If the JSON or file output
-selected, the output is the set of edges that form the MST. If the
-result_attr option is selected, the edges which are part of the MST are
-tagged True; other edges are tagged False.
-
-=== Result size
-
-stem:[V-1], or the number of vertices minus 1
-
 === Parameters
 
 [cols="0,1,0",options="header",]
@@ -102,6 +87,23 @@ then the result is not a true spanning tree.
 |(empty string)
 
 |===
+
+
+=== Output
+
+Computes a minimum spanning tree. If the JSON or file output
+selected, the output is the set of edges that form the MST. If the
+result_attr option is selected, the edges which are part of the MST are
+tagged True; other edges are tagged False.
+
+=== Result size
+
+stem:[V-1], or the number of vertices minus 1
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
+
 
 == *Example*
 

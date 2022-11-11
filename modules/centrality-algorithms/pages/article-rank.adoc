@@ -47,11 +47,6 @@ CREATE QUERY tg_article_rank (STRING v_type, STRING e_type,
  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100, BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "")
 ....
 
-=== Time complexity
-The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
-
-The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
 
 === Parameters
 
@@ -82,7 +77,18 @@ changing by less than `max_change` from one iteration to the next.
 
 === Output
 
-Returns the article rank score for each vertex in descending order. The result size is equal to stem:[V], the number of vertices, because one score is produced for every vertex in the graph.
+Returns the article rank score for each vertex in descending order.
+
+=== Result size
+
+The result size is equal to stem:[V], the number of vertices, because one score is produced for every vertex in the graph.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.
+
 
 == *Example*
 

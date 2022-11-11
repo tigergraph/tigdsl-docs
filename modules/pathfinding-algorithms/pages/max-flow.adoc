@@ -40,11 +40,6 @@ CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink, Set<STRING> v_type,
   STRING cap_type, FLOAT min_flow_threshhold = 0.001, BOOL print_accum = TRUE, BOOL display_edges = TRUE, BOOL spit_to_file = FALSE, STRING file_path = "/home/tigergraph/tg_query_output.csv")
 ----
 
-=== Time complexity
-
-The time complexity of the Edmond-Karp algorithm is independent of maximum flow in the graph.
-Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
-
 === Parameters
 
 |===
@@ -97,6 +92,12 @@ However, it does not output how much flow each edge carries to achieve the maxim
 CSV result::
 The first line is the maximum flow that can be carried from the source to the sink.
 If you set `split_to_file` to true, the result will contain all edges that carry flow as well as how much flow they carry to achieve maximum flow.
+
+
+=== Time complexity
+
+The time complexity of the Edmond-Karp algorithm is independent of maximum flow in the graph.
+Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
 == Example
 
