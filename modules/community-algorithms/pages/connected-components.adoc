@@ -43,8 +43,8 @@ image::conn_comp_result.png[Visualized results of example query on social10 grap
 
 [source,gsql]
 ----
-CREATE QUERY tg_wcc (SET<STRING> v_type, SET<STRING> e_type, INT output_limit = 100,
-    BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+CREATE QUERY tg_wcc ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT print_limit = 100,
+    BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
 
 === Time complexity
@@ -72,24 +72,24 @@ The return value in JSON includes all vertices and the component they belong to,
 |===
 |Parameter |Description |Default
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |(empty set of strings)
 
-|`INT output_limit`
+|`INT print_limit`
 |The maximum number of vertices to output in JSON format.
 Use `-1` for an unlimited value.
 |`100`
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |Whether to print the JSON to the standard output.
 |False
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |The vertex attribute where community ID values will be stored.
 Must be of type `INT`.
 |(empty string)

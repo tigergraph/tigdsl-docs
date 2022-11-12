@@ -37,9 +37,9 @@ With weighted edges, the algorithm must search the whole graph, whether you want
 
 [source,gsql]
 ----
-CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
-  SET<STRING> e_type, INT output_limit = -1, BOOL print_accum =TRUE,
-  STRING result_attr ="", STRING file_path ="", BOOL display_edges =FALSE)
+CREATE QUERY tg_shortest_ss_no_wt (VERTEX source,  SET<STRING> v_type_set,
+   SET<STRING> e_type_set, INT print_limit = -1, BOOL print_results =TRUE,
+  STRING result_attribute ="", STRING file_path ="", BOOL display_edges =FALSE)
 ----
 
 
@@ -54,31 +54,31 @@ CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
 |(empty string)
 
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty string)
 
 
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |N/A
 
 
 
-|`INT output_limit`
+|`INT print_limit`
 |If >=0, max number of vertices to output to JSON
 |-1
 
 
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |Whether to print results in JSON format to standard output
 |True
 
 
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store distance values in INT to this vertex attribute
 |(empty string)
 

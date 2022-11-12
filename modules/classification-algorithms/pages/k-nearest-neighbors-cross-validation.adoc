@@ -15,8 +15,8 @@ The goal is to find the value of k with highest predicting accuracy in the given
 
 [source,gsql]
 ----
-tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
-STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
+tg_knn_cosine_cv( SET<STRING> v_type_set,  SET<STRING> e_type_set, SET<STRING> reverse_e_type_set,
+STRING weight_attribute, STRING label, INT min_k, INT max_k) RETURNS (INT)
 ----
 
 === Parameters
@@ -24,19 +24,19 @@ STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
 |===
 |Parameter |Description |Default Value
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |The vertex types to calculate the distance to the source vertex for.
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |The edge types to use
 |(empty set of strings)
 
-|`SET<STRING> re_type`
+|`SET<STRING> reverse_e_type_set`
 |The reverse edge types to use
 |(empty set of strings)
 
-|`STRING weight`
+|`STRING weight_attribute`
 |If not empty, use this edge attribute as the edge weight.
 |(empty string)
 

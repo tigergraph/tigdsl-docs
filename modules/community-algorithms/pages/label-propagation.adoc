@@ -33,8 +33,8 @@ In a variant version, some vertices could initially be known to belong to the sa
 
 [source,gsql]
 ----
-tg_label_prop (SET<STRING> v_type, SET<STRING> e_type, INT max_iter, INT output_limit,
-BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
+tg_label_prop ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT maximum_iteration, INT print_limit,
+BOOL print_results = TRUE, STRING file_path = "", STRING attr = "")
 ----
 
 === Time complexity
@@ -43,23 +43,23 @@ This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number o
 |===
 |Parameter |Description |Default
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |(empty set of strings)
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |Maximum iterations of the algorithm
 |N/A
 
-|`INT output_limit`
+|`INT print_limit`
 |Maximum number of vertices to output in JSON format
 |N/A. Use `-1` to output all vertices.
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |Whether to print data in JSON format to the standard output
 |False
 
@@ -87,7 +87,7 @@ This is the same graph that was used in the Connected Component example. The res
 
 Label Propagation tries to find natural clusters and separations within connected components. That is, it looks at the quality and pattern of connections. The Connected Component algorithm simply asks the Yes or No question: Are these two vertices connected?
 
-We set `max_iter` to 10, but the algorithm reaches a steady state after 3 iterations:
+We set `maximum_iteration` to 10, but the algorithm reaches a steady state after 3 iterations:
 
 [source,gsql]
 ----

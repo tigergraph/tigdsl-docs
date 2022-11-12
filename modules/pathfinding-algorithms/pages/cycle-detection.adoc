@@ -45,8 +45,8 @@ On a large graph with undirected edges, Cycle Detection is likely to run out of 
 
 [source.wrap,gsql]
 ----
-tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+tg_cycle_detection ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT depth,
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 
@@ -69,7 +69,7 @@ tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
 |Maximum cycle length to search for, equal to the maximum number of iterations
 |null
 
-|`+BOOL print_accum+`
+|`+BOOL print_results+`
 |If True, output JSON to standard output
 |True
 

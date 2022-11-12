@@ -36,9 +36,9 @@ For more information, see the paper on Harmonic Centrality: https://arxiv.org/pd
 
 [source,gsql]
 ----
-CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
-    SET<STRING> re_type,INT max_hops=10, INT top_k=100,
-    BOOL wf = TRUE,BOOL print_accum = True, STRING result_attr = "",
+CREATE QUERY harmonic_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+    SET<STRING> reverse_e_type_set,INT max_hops=10, INT top_k=100,
+    BOOL wf = TRUE,BOOL print_results = True, STRING result_attribute = "",
     STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
@@ -47,15 +47,15 @@ CREATE QUERY harmonic_cent(SET<STRING> v_type, SET<STRING> e_type,
 |===
 | Name | Description | Default value
 
-| `SET<STRING> v_type`
+| `SET<STRING> v_type_set`
 | Vertex types to calculate harmonic centrality for
 | (empty set of strings)
 
-| `SET<STRING> e_type`
+| `SET<STRING> e_type_set`
 | Edge types to traverse
 | (empty set of strings)
 
-| `SET<STRING> re_type`
+| `SET<STRING> reverse_e_type_set`
 | Reverse edge types to traverse
 | (empty set of strings)
 
@@ -72,11 +72,11 @@ If set to a non-positive value, the limit is ignored.
 | Whether to use the Wasserman-Faust normalization for multi-component graphs
 | True
 
-| `BOOL print_accum`
+| `BOOL print_results`
 | Whether to output JSON to standard output
 | True
 
-| `STRING result_attr`
+| `STRING result_attribute`
 | If not empty, store centrality values in FLOAT format to this attribute
 | (empty string)
 

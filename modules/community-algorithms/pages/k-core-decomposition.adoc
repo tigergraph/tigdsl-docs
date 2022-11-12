@@ -32,8 +32,8 @@ This is an implementation of Algorithm 2 in https://ieeexplore.ieee.org/document
 [source,gsql]
 ----
 tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
-  INT k_max = -1, BOOL print_accum = TRUE,
-  STRING result_attr = "", STRING file_path = "",
+  INT k_max = -1, BOOL print_results = TRUE,
+  STRING result_attribute = "", STRING file_path = "",
   BOOL print_all_k = FALSE, BOOL show_shells=FALSE)
 ----
 
@@ -54,10 +54,10 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
 | `INT k_max`
 | Maximum value of k. If `k_max` is smaller than `k_min`, the algorithm will ignore this parameter and keep looking for k-cores until it reaches a value of k where a k-core cannot be found.
 
-| `BOOL print_accum`
+| `BOOL print_results`
 | Boolean value that decides whether the algorithm will return output in JSON
 
-| `STRING result_attr`
+| `STRING result_attribute`
 | An attribute of the vertex to save the core level of the vertex to. If `attr` is provided, the core level of the vertex will be saved to this attribute of the vertex.
 
 | `STRING file_path`

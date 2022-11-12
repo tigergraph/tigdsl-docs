@@ -61,9 +61,9 @@ Hong, Sungpack, Nicole C. Rodia, and Kunle Olukotun. "On fast parallel detection
 
 [source,gsql]
 ----
-tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
-  INT top_k_dist, INT output_limit, INT max_iter = 500, INT iter_wcc = 5,
-  BOOL print_accum = TRUE, STRING attr= "", STRING file_path="")
+tg_scc ( SET<STRING> v_type_set,  SET<STRING> e_type_set, SET<STRING> rev_e_type,
+  INT top_k_dist, INT print_limit, INT maximum_iteration = 500, INT iter_wcc = 5,
+  BOOL print_results = TRUE, STRING result_attribute= "", STRING file_path="")
 ----
 
 === Parameters
@@ -71,11 +71,11 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
 |===
 |Parameter |Description |Default Value
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |The vertex types to use
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |The edge types to use
 |(empty set of strings)
 
@@ -87,11 +87,11 @@ tg_scc (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> rev_e_type,
 |The top _k_ results in the SCC distribution
 | N/A
 
-|`INT output_limit`
+|`INT print_limit`
 |The maximum number of vertices to output in JSON format.
 | N/A
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |The maximum number of iterations of the algorithm.
 | 500
 
@@ -101,11 +101,11 @@ vertices in this iteration, since the largest SCCs are already found
 after several iterations. Usually a small number (3 to 10).
 | 5
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If true, print output in JSON format to the standard output.
 |True
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store community values in `INT` format to this vertex attribute
 |(empty string)
 

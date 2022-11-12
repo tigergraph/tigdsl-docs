@@ -33,8 +33,8 @@ The current version of this algorithm only computes unweighted distances.
 
 [source.wrap,gsql]
 ----
-tg_estimate_diameter (SET<STRING> v_type, SET<STRING> e_type, INT seed_set_length,
-  BOOL print_accum = TRUE, STRING file_path = "", BOOL display = FALSE)
+tg_estimate_diameter ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT seed_set_length,
+  BOOL print_results = TRUE, STRING file_path = "", BOOL display = FALSE)
 ----
 
 === Parameters
@@ -56,7 +56,7 @@ tg_estimate_diameter (SET<STRING> v_type, SET<STRING> e_type, INT seed_set_lengt
 |The number stem:[k] of random seed vertices to use
 |10
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If True, output JSON to standard output
 |False
 

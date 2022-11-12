@@ -24,9 +24,9 @@ A high eigenvector score means that a vertex is connected to many vertices who t
 == Specifications
 
 ....
-CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
- INT maxIter = 100, FLOAT convLimit = 0.000001, INT top_k = 100,
- BOOL print_accum = True, STRING result_attr = "", STRING file_path = ""
+CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+ INT maximum_iteration = 100, FLOAT conv_limit = 0.000001, INT top_k = 100,
+ BOOL print_results = True, STRING result_attribute = "", STRING file_path = ""
  )
 ....
 
@@ -36,19 +36,19 @@ CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
 [cols=",,",options="header",]
 |===
 |Name |Description |Default value
-|`SET<STRING> v_type` |Vertex types to assign scores to. |(empty set of strings)
+|`SET<STRING> v_type_set` |Vertex types to assign scores to. |(empty set of strings)
 
-|`SET<STRING> e_type` |Edge types to traverse. |(empty set of strings)
+|`SET<STRING> e_type_set` |Edge types to traverse. |(empty set of strings)
 
-|`INT maxIter` |Maximum number of iteration. |100
+|`INT maximum_iteration` |Maximum number of iteration. |100
 
-|`FLOAT convLimit` |The convergence limit. | 0.000001
+|`FLOAT conv_limit` |The convergence limit. | 0.000001
 
 |`INT top_k` |The number of vertices with the highest scores to return. |100
 
-|`BOOL print_accum` |If true, print results to JSON output. | True
+|`BOOL print_results` |If true, print results to JSON output. | True
 
-|`STRING result_attr` |If not empty, save the score of each vertex to this attribute. | (empty string)
+|`STRING result_attribute` |If not empty, save the score of each vertex to this attribute. | (empty string)
 
 |`STRING file_path` |If not empty, print results in CSV to this file. | (empty string)
 |===

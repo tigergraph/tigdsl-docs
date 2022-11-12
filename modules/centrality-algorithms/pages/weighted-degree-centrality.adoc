@@ -25,9 +25,9 @@ Weighted degree centrality allows you to assign weights to the edges connected t
 [,gsql]
 ----
 CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
-    STRING re_type, STRING weight, BOOL in_degree = TRUE,
-    BOOL out_degree = TRUE, INT top_k=100, BOOL print_accum = TRUE,
-    STRING result_attr = "",STRING file_path = "")
+    STRING reverse_e_type, STRING weight_attribute, BOOL in_degree = TRUE,
+    BOOL out_degree = TRUE, INT top_k=100, BOOL print_results = TRUE,
+    STRING result_attribute = "",STRING file_path = "")
 ----
 
 === Parameters
@@ -41,10 +41,10 @@ CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
 |`STRING e_type`
 |Edge type to traverse.
 
-|`STRING re_type`
+|`STRING reverse_e_type`
 |Reverse vertex type to traverse and calculate in-degree.
 
-|`STRING weight`
+|`STRING weight_attribute`
 |The name of the attribute that indicates the weight of the edge.
 The attribute itself must be of type `INT`.
 
@@ -57,10 +57,10 @@ The attribute itself must be of type `INT`.
 |`INT top_k`
 |The number of vertices with the highest degree centrality to return.
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If true, return JSON results to standard output.
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, save the degree centrality of each vertex to this attribute.
 
 |`STRING file_path`

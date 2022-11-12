@@ -38,9 +38,9 @@ If you do not have a preferred vertex, and the graph might have more than one co
 
 [source.wrap,gsql]
 ----
-tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
-  STRIN wt_attr, STRING wt_type, INT max_iter = -1,
-  BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+tg_mst (VERTEX opt_source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
+  STRIN wt_attr, STRING wt_type, INT maximum_iteration = -1,
+  BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
 
 === Parameters
@@ -69,16 +69,16 @@ tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
 |Data type of edge weight attribute (must be `INT`, `FLOAT`, or `DOUBLE`)
 |(empty string)
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |Maximum number of edges to include. If less than the number of vertices minus 1,
 then the result is not a true spanning tree.
 |-1
 
-|`+BOOL print_accum+`
+|`+BOOL print_results+`
 |If True, output JSON to standard output
 |True
 
-|`+STRING result_attr+`
+|`+STRING result_attribute+`
 |If not empty, store result values (`BOOL`) to this attribute
 |(empty string)
 
@@ -93,7 +93,7 @@ then the result is not a true spanning tree.
 
 Computes a minimum spanning tree. If the JSON or file output
 selected, the output is the set of edges that form the MST. If the
-result_attr option is selected, the edges which are part of the MST are
+result_attribute option is selected, the edges which are part of the MST are
 tagged True; other edges are tagged False.
 
 === Result size

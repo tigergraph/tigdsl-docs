@@ -26,8 +26,8 @@ the next depth level.
 
 [.wrap,gsql]
 ----
-CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
-    VERTEX v_start, BOOL print_accum = True, STRING result_attr = "",
+CREATE QUERY tg_bfs( SET<STRING> v_type_set,  SET<STRING> e_type_set,INT max_hops=10,
+    VERTEX v_start, BOOL print_results = True, STRING result_attribute = "",
     STRING file_path = "", BOOL display_edges = True)
 ----
 
@@ -55,11 +55,11 @@ CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
 |Source vertex for traversal
 |(empty string)
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |Whether to print JSON output
 |True
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |The vertex attribute to store results to in `INT` format
 |(empty string)
 

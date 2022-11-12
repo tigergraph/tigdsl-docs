@@ -42,14 +42,14 @@ This algorithm ignores edge weights.
 [source,gsql]
 ----
 tg_maximal_indep_set(STRING v_type, STRING e_type,
-INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
+INT maximum_iteration = 100, BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 .Randomized MIS
 [.wrap,gsql]
 ----
 tg_maximal_indep_set_random(STRING v_type, STRING e_type,
-    INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
+    INT maximum_iteration = 100, BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 === Parameters
@@ -65,11 +65,11 @@ tg_maximal_indep_set_random(STRING v_type, STRING e_type,
 |The edge type to use
 |(empty string)
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |The number of nearest neighbors to consider
 | N/A
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If true, print output in JSON format to the standard output.
 |True
 

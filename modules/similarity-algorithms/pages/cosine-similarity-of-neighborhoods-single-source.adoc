@@ -42,8 +42,8 @@ image::movie-graph.png[View of a graph illustrating Person vertices connected to
 
 [,gsql]
 ----
-tg_cosine_nbor_ss (VERTEX source, SET<STRING> e_type, SET<STRING> re_type,
-  STRING weight, INT top_k, INT output_limit, BOOL print_accum = TRUE,
+tg_cosine_nbor_ss (VERTEX source,  SET<STRING> e_type_set, SET<STRING> reverse_e_type_set,
+  STRING weight_attribute, INT top_k, INT print_limit, BOOL print_results = TRUE,
   STRING file_path = "", STRING similarity_edge = "")
 RETURNS (MapAccum<VERTEX, FLOAT>)
 ----
@@ -58,15 +58,15 @@ RETURNS (MapAccum<VERTEX, FLOAT>)
 | Source vertex
 | (empty set of strings)
 
-| `SET<STRING> e_type`
+| `SET<STRING> e_type_set`
 | Edge type to traverse
 | (empty set of strings)
 
-| `SET<STRING> re_type`
+| `SET<STRING> reverse_e_type_set`
 | Reverse edge type to traverse
 | (empty set of strings)
 
-| `STRING weight`
+| `STRING weight_attribute`
 | The edge attribute to use as the weight of the edge.
 | (empty string)
 
@@ -74,11 +74,11 @@ RETURNS (MapAccum<VERTEX, FLOAT>)
 | The number of vertices to return
 | 10
 
-| `INT output_limit`
+| `INT print_limit`
 | The maximum number of vertices to return
 | 10
 
-| `BOOL print_accum`
+| `BOOL print_results`
 | Whether to output the final results to the console in JSON format
 | True
 

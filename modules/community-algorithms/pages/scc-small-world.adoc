@@ -38,8 +38,8 @@ We use a default value of `100000` for the threshold used to choose initial pivo
 
 == Specifications
 ....
-CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING re_type,
- UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
+CREATE QUERY tg_scc_small_world(STRING v_type, STRING e_type, STRING reverse_e_type,
+ UINT threshold = 100000, BOOL print_results=FALSE)
 ....
 
 === Parameters
@@ -52,7 +52,7 @@ component | (empty string)
 
 |`STRING e_type` |The edge type to traverse | (empty string)
 
-|`STRING re_type` |The reverse edge type to traverse. If the graph is
+|`STRING reverse_e_type` |The reverse edge type to traverse. If the graph is
 undirected, fill in the name of the undirected edge here as well as for
 `+e_type.+` | (empty string)
 
@@ -61,12 +61,12 @@ Only vertices whose product of indegree and outdegree exceed this
 threshold will be considered candidates for the pivot vertex.
 |`100000`
 
-|`BOOL to_show_cc_count` |Whether to print the number of vertices in each strongly connected component. | False
+|`BOOL print_results` |Whether to print the number of vertices in each strongly connected component. | False
 |===
 
 === Output
 
-When `+to_show_cc_count+` is set to `true`, the algorithm returns the number of strongly connected components in the graph.
+When `+print_results+` is set to `true`, the algorithm returns the number of strongly connected components in the graph.
 
 === Time complexity
 

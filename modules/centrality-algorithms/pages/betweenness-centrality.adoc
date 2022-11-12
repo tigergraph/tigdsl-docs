@@ -67,9 +67,9 @@ Both queries are needed to run the algorithm.
 
 [,gsql]
 ----
-CREATE QUERY tg_betweenness_cent(SET<STRING> v_type, SET<STRING> e_type,
-STRING re_type,INT max_hops=10, INT top_k=100, BOOL print_accum = True,
-STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
+CREATE QUERY tg_betweenness_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+STRING reverse_e_type,INT max_hops=10, INT top_k=100, BOOL print_results = True,
+STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
 
@@ -86,7 +86,7 @@ STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 |The edge types to use
 |(empty set of strings)
 
-|`SET STRING re_type`
+|`SET STRING reverse_e_type`
 |The reverse edge types to use
 |(empty set of strings)
 
@@ -98,11 +98,11 @@ STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
 |The number of scores to output, sorted in descending order
 | 100
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If true, print output in JSON format to the standard output.
 |True
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store centrality values in `FLOAT` format to this attribute
 |(empty string)
 

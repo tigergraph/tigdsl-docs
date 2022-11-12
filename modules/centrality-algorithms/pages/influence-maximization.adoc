@@ -33,15 +33,15 @@ The algorithm is implemented based on the following research papers:
 .CELF
 [,gsql]
 ----
-CREATE QUERY tg_influence_maximization_CELF(STRING v_type,STRING e_type, STRING weight, INT top_k, BOOL print_accum = True, STRING file_path = "")
+CREATE QUERY tg_influence_maximization_CELF(STRING v_type,STRING e_type, STRING weight_attribute, INT top_k, BOOL print_results = True, STRING file_path = "")
 ----
 
 .Greedy
 [,gsql]
 ----
 CREATE QUERY tg_influence_maximization_greedy(STRING v_type,
-  STRING e_type,STRING weight,INT top_k,
-  BOOL print_accum = True, STRING file_path = "")
+  STRING e_type,STRING weight_attribute,INT top_k,
+  BOOL print_results = True, STRING file_path = "")
 ----
 
 
@@ -57,11 +57,11 @@ The CELF version and the greedy version of the algorithms share the same set of 
 
 |`STRING e_type` |The edge type to traverse
 
-|`STRING weight` |The name of the weight attribute on the edge type
+|`STRING weight_attribute` |The name of the weight attribute on the edge type
 
 |`INT top_k` |The number of vertices with the highest influence score to return
 
-|`BOOL print_accum` |If true, print results to JSON output.
+|`BOOL print_results` |If true, print results to JSON output.
 
 |`STRING file_path` |If not empty, save results in CSV to this file.
 |===

@@ -26,7 +26,8 @@ This algorithm ignores edge weights.
 
 [source,gsql]
 ----
-CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UINT max_colors = 999999,BOOL print_color_count = TRUE, BOOL display = TRUE, STRING file_path = "")
+CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type_set,SET<STRING> e_type_set,UINT max_colors = 999999,
+  BOOL print_color_count = TRUE, BOOL print_stats = TRUE, STRING file_path = "")  SYNTAX V1 {
 ----
 
 === Parameters
@@ -34,10 +35,10 @@ CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UIN
 |===
 | Name | Description
 
-| `STRING v_type`
+| `SET<STRING> v_type_set`
 | A set of all vertex types to color.
 
-| `STRING e_type`
+| `SET<STRING> e_type_set`
 | A set of all edge types to traverse.
 
 | `INT max_colors`
@@ -46,7 +47,7 @@ CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UIN
 | `BOOL print_color_count`
 | If set to true, the total number of colors used will be displayed
 
-| `BOOL display`
+| `BOOL print_stats`
 | If set to true, the output will display all vertices and their associated color
 
 | `STRING file_path`

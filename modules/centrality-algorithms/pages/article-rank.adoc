@@ -44,7 +44,7 @@ For more information, see https://www.emeraldinsight.com/doi/abs/10.1108/0001253
 [source,gsql]
 ....
 CREATE QUERY tg_article_rank (STRING v_type, STRING e_type,
- FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100, BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "")
+ FLOAT max_change=0.001, INT maximum_iteration=25, FLOAT damping=0.85, INT top_k = 100, BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "")
 ....
 
 
@@ -62,15 +62,15 @@ difference between any vertex's current score and its previous score ≤
 `max_change.` That is, the scores have become very stable and are
 changing by less than `max_change` from one iteration to the next.
 
-|`INT max_iter` |Maximum number of iterations.
+|`INT maximum_iteration` |Maximum number of iterations.
 
 |`FLOAT damping` |The damping factor. Usually set to 0.85.
 
 |`INT top_k` |The number of results with the highest scores to return.
 
-|`BOOL print_accum` |If true, print JSON output.
+|`BOOL print_results` |If true, print JSON output.
 
-|`STRING result_attr` |If not empty, store the article rank score of each vertex in this attribute.
+|`STRING result_attribute` |If not empty, store the article rank score of each vertex in this attribute.
 
 |`STRING file_path` |If not empty, write output to this file.
 |===
@@ -87,7 +87,7 @@ The result size is equal to stem:[V], the number of vertices, because one score 
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
+Parallel processing reduces the time needed for compRutation.
 
 
 == *Example*

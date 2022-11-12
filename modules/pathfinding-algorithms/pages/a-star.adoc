@@ -39,7 +39,7 @@ The A* algorithm is relatively inefficient in terms of worst-case time and space
 
 [source.wrap, gsql]
 ----
-CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex, SET<STRING> e_type, STRING wt_type,
+CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex,  SET<STRING> e_type_set, STRING wt_type,
 STRING wt_attr, BOOL display = False)
 ----
 

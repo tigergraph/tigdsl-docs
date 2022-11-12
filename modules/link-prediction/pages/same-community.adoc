@@ -30,7 +30,7 @@ This algorithm ignores edge weights.
 == Specifications
 [,gsql]
 ----
-CREATE QUERY tg_same_community(VERTEX a, VERTEX b, STRING
+CREATE QUERY tg_same_community(VERTEX v_source VERTEX v_target, STRING
     communityAttribute)
 ----
 
@@ -40,11 +40,11 @@ CREATE QUERY tg_same_community(VERTEX a, VERTEX b, STRING
 |===
 |Name | Description | Default value
 
-| `VERTEX a`
+| `VERTEX v_source`
 |  The first vertex to compare.
 | N/A
 
-| `VERTEX b`
+| `VERTEX v_target`
 | The second vertex to compare with the first.
 | N/A
 

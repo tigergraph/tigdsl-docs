@@ -41,8 +41,8 @@ This is repeated across all vertices in the graph.
 This algorithm query employs a subquery called `cc_subquery`.
 Both queries are needed to run the algorithm.
 
-The `re_type` (reverse edge type) parameter is always required.
-For undirected edges, use the same value for both `e_type` and `re_type`.
+The `reverse_e_type` (reverse edge type) parameter is always required.
+For undirected edges, use the same value for both `e_type` and `reverse_e_type`.
 
 === References
 
@@ -55,8 +55,8 @@ The algorithm's implementation of MS-BFS is based on the paper https://db.in.tum
 
 [,gsql]
 ----
-tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
-  INT top_k=100, BOOL wf = TRUE, BOOL print_accum = True, STRING result_attr = "",
+tg_closeness_cent (SET<STRING> v_type_set, SET<STRING> e_type_set, INT max_hops=10,
+  INT top_k=100, BOOL wf = TRUE, BOOL print_results = True, STRING result_attribute = "",
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
@@ -66,15 +66,15 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
 |===
 |*Parameter* |Description |Default
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Vertex types to use
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Edge types to use
 |(empty set of strings)
 
-|`SET<STRING> re_type`
+|`SET<STRING> reverse_e_type_set`
 |Reverse edge types to use
 |(empty set of strings)
 
@@ -90,11 +90,11 @@ tg_closeness_cent (SET<STRING> v_type, SET<STRING> e_type, INT max_hops=10,
 |Whether to use Wasserman-Faust normalization for multi-component graphs
 |True
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If True, output JSON to standard output
 |True
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store centrality values in `FLOAT` format to this vertex attribute
 |(empty string)
 

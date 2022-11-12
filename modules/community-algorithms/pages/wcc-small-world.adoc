@@ -38,7 +38,7 @@ Connected Components and Related Problems._]
 [source.wrap, gsql]
 ----
 CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
-UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
+UINT threshold = 100000, BOOL print_results=FALSE)
 ----
 === Parameters
 
@@ -59,7 +59,7 @@ Only vertices whose product of indegree and outdegree exceed this
 threshold will be considered candidates for the pivot vertex.
 | `100000`
 
-|`BOOL to_show_cc_count`
+|`BOOL print_results`
 |If true, the algorithm will return the number of
 vertices in each connected component.
 | True
@@ -68,7 +68,7 @@ vertices in each connected component.
 
 === Output
 
-If `+to_show_cc_count+` is set to true, the algorithm will return the
+If `+print_results+` is set to true, the algorithm will return the
 number of vertices in each weakly connected component.
 
 === Time complexity

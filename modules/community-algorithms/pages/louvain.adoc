@@ -62,9 +62,9 @@ In the Parallel Louvain Method (PLM), the positive modularity gain is not guaran
 
 [source.wrap,gsql]
 ----
-CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
-    STRING wt_attr = "weight", INT max_iter = 10,
-    STRING result_attr = "cid", STRING file_path = "",
+CREATE QUERY tg_louvain( SET<STRING> v_type_set,  SET<STRING> e_type_set,
+    STRING wt_attr = "weight", INT maximum_iteration = 10,
+    STRING result_attribute = "cid", STRING file_path = "",
     BOOL print_info = FALSE)
 ----
 
@@ -73,12 +73,12 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 |===
 |Parameter |Description |Default
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty string)
 
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |(empty string)
 
@@ -88,12 +88,12 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 |(empty string)
 
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |Maximum number of iterations
 |10
 
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store community values in `INT` format to this vertex attribute
 |(empty string)
 
@@ -113,7 +113,7 @@ CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
 
 === Output
 
-If `result_attr` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
+If `result_attribute` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
 
 if `print_info` is set to true or `file_path` is provided, the JSON or .csv output contains the following information:
 

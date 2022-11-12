@@ -12,7 +12,7 @@ It returns a set of only the vertices which are on at least one cycle, which sav
 
 [.wrap,gsql]
 ----
-CREATE QUERY tg_cycle_component(STRING v_type, STRING e_type, BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "")
+CREATE QUERY tg_cycle_component(STRING v_type, STRING e_type, BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "")
 ----
 
 === Parameters
@@ -28,11 +28,11 @@ CREATE QUERY tg_cycle_component(STRING v_type, STRING e_type, BOOL print_accum =
 |`STRING`
 |The type of edge to search for.
 
-|`print_accum`
+|`print_results`
 |`BOOL`
 |Whether or not to print the path to the console.
 
-|`result_attr`
+|`result_attribute`
 |`STRING`
 |The attribute on the vertex that will store the result.
 

@@ -27,9 +27,9 @@ The degree can be interpreted in terms of the immediate risk of a node for catch
 == Specifications
 
 ....
-CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
-  SET<STRING> re_type, BOOL in_degree = TRUE, BOOL out_degree = TRUE,
-  INT top_k=100, BOOL print_accum = True, STRING result_attr = "",
+CREATE QUERY tg_degree_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+  SET<STRING> reverse_e_type_set, BOOL in_degree = TRUE, BOOL out_degree = TRUE,
+  INT top_k=100, BOOL print_results = True, STRING result_attribute = "",
   STRING file_path = "")
 ....
 
@@ -38,11 +38,11 @@ CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
 |===
 |Name |Description | Default value
 
-|`SET<STRING> v_type` |A set of vertex types. | (empty set of strings)
+|`SET<STRING> v_type_set` |A set of vertex types. | (empty set of strings)
 
-|`SET<STRING> e_type` |A set of edge types. | (empty set of strings)
+|`SET<STRING> e_type_set` |A set of edge types. | (empty set of strings)
 
-|`SET<STRING> re_type` |A set of reverse edge types.
+|`SET<STRING> reverse_e_type_set` |A set of reverse edge types.
 If an edge is undirected, put the edge name in the set as well. | (empty set of strings)
 
 |`BOOL in_degree` |Boolean value that indicates whether to count the
@@ -53,9 +53,9 @@ outgoing edges as part of a vertex's degree centrality. | True
 
 |`INT top_k` |The number of vertices with the highest scores to return. | 100
 
-|`BOOL print_accum` |If true, print results to JSON output. | True
+|`BOOL print_results` |If true, print results to JSON output. | True
 
-|`STRING result_attr` |If not empty, save the degree centrality score of each
+|`STRING result_attribute` |If not empty, save the degree centrality score of each
 vertex to this attribute. | (empty string)
 
 |`STRING file_path` |If not empty, save results in CSV to this file. | (empty string)

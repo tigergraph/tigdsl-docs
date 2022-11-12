@@ -6,8 +6,8 @@ This algorithm computes the same similarity scores as the xref:jaccard-similarit
 
 [source,gsql]
 ----
-tg_jaccard_nbor_ap(STRING v_type, STRING e_type, STRING re_type, INT top_k,
-  BOOL print_accum = TRUE, STRING similarity_edge = "", STRING file_path = "")
+tg_jaccard_nbor_ap(STRING v_type, STRING e_type, STRING reverse_e_type, INT top_k,
+  BOOL print_results = TRUE, STRING similarity_edge = "", STRING file_path = "")
 ----
 
 === Time complexity
@@ -30,10 +30,10 @@ The result is available in three forms:
 |Input Parameters a|
 * `+SET<STRING> v_type+`: Vertex types to calculate similarity score for
 * `+SET<STRING> e_type+`: Edge types to traverse
-* `+SET<STRING> re_type+`: Reverse edge types to traverse
+* `+SET<STRING> reverse_e_type+`: Reverse edge types to traverse
 * `+INT top_k+`: the number of vertex pairs with the highest similarity
 scores to return
-* `+BOOL print_accum+`: Boolean value that decides whether to output to
+* `+BOOL print_results+`: Boolean value that decides whether to output to
 console
 * `+STRING similarity_edge+`: If provided, the similarity score will be
 saved to this edge

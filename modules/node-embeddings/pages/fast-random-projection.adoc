@@ -39,10 +39,10 @@ We suggest running Fast Random Projection on reverse edges of a directed graph t
 
 [source,gsql]
 ----
-CREATE QUERY tg_fastRP(SET<STRING> v_type, SET<STRING> e_type,
-    STRING weights, FLOAT beta, INT k, INT reduced_dim,
-    INT sampling_constant, INT random_seed, BOOL print_accum=FALSE,
-    STRING result_attr="", STRING file_path="")
+CREATE QUERY tg_fastRP( SET<STRING> v_type_set,  SET<STRING> e_type_set,
+    STRING weight_attributes, FLOAT beta, INT k, INT reduced_dim,
+    INT sampling_constant, INT random_seed, BOOL print_results=FALSE,
+    STRING result_attribute="", STRING file_path="")
 ----
 
 This query needs to be modified based upon your schema to set the embedding
@@ -95,11 +95,11 @@ The number of weights must be equal the value of the parameter `k`.
 when k=3 gives the nearest neighbor a weight of 1, neighbors 2 hops away a weight of 2 and neighbors 3 hops away a weight of 4.
 | `STRING`
 
-|`print_accum`
+|`print_results`
 |If true, print results to standard JSON output.
 | `BOOL`
 
-| `result_attr`
+| `result_attribute`
 |If provided, the algorithm stores the produced embeddings in this attribute.
 The attribute must be of type `LIST<DOUBLE>`.
 | `STRING`

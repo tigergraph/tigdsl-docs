@@ -6,8 +6,8 @@ This algorithm computes the same similarity scores as the cosine similarity of n
 
 [source,gsql]
 ----
-tg_cosine_nbor_ap (SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
-  STRING weight, INT top_k, INT output_limit, BOOL print_accum = TRUE,
+tg_cosine_nbor_ap ( SET<STRING> v_type_set,  SET<STRING> e_type_set, SET<STRING> reverse_e_type_set,
+  STRING weight_attribute, INT top_k, INT print_limit, BOOL print_results = TRUE,
   STRING similarity_edge = "", STRING file_path = "")
 ----
 
@@ -33,13 +33,13 @@ The result is available in three forms:
 * `+SET<STRING> v_type+`: Vertex types to calculate cosine similarity
 score for
 * `+SET<STRING> e_type+`: Edge types to traverse
-* `+SET<STRING> re_type+`: Reverse edge types to traverse
-* `+STRING weight+`: Edge attribute to use as weight
+* `+SET<STRING> reverse_e_type+`: Reverse edge types to traverse
+* `+STRING weight_attribute+`: Edge attribute to use as weight
 * `+INT top_k+`: the number of vertex pairs with the highest similarity
 scores to return
-* `+INT output_limit+`: If >=0, max number of vertices to output to
+* `+INT print_limit+`: If >=0, max number of vertices to output to
 JSON.
-* `+BOOL print_accum+`: If `+true, output JSON to standard output.+`
+* `+BOOL print_results+`: If `+true, output JSON to standard output.+`
 * `+STRING similarity_edge+`: If provided, the similarity score will be
 saved to this edge
 * `+filepath+`(for file output only): the path to the output file

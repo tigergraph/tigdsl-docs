@@ -39,12 +39,12 @@ For further information about the algorithm design, see link:https://arxiv.org/p
 [source,gsql]
 ----
 tg_closeness_approx (
-    SET<STRING> v_type,
-    SET<STRING> e_type,
+    SET<STRING> v_type_set,
+    SET<STRING> e_type_set,
         INT k = 100,  # sample num
         INT max_hops = 10,  # max BFS explore steps
         DOUBLE epsilon = 0.1,  # error parameter
-    BOOL print_accum = true, # output to console
+    BOOL print_results = true, # output to console
         STRING file_path = "",  # output file
         INT debug = 0,  # debug flag -- 0: No LOG;1: LOG without the sample-node bfs loop;2: ALL LOG.
         INT sample_index = 0,  # random sample group
@@ -58,10 +58,10 @@ tg_closeness_approx (
 |===
 | Name | Description
 
-| `SET<STRING> v_type`
+| `SET<STRING> v_type_set`
 | Vertex types to calculate approximate closeness centrality for.
 
-| `SET<STRING> e_type`
+| `SET<STRING> e_type_set`
 | Edge types to traverse.
 
 | `INT k`
@@ -73,7 +73,7 @@ tg_closeness_approx (
 | `DOUBLE epsilon`
 | The maximum relative error, between 0 and 1. Setting a lower value produces a more accurate estimate but increases run time.
 
-| `BOOL print_accum`
+| `BOOL print_results`
 | Whether to print the output to console in JSON format.
 
 | `STRING file_path`

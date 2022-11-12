@@ -23,7 +23,7 @@ This algorithm ignores edge weights.
 == Specifications
 [,gsql]
 ----
-CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
+CREATE QUERY tg_total_neighbors(VERTEX v_source VERTEX v_target,
     SET<STRING> e_type)
 ----
 
@@ -33,15 +33,15 @@ CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
 |===
 |Name | Description | Default value
 
-| `VERTEX a`
+| `VERTEX v_source`
 |  The first vertex to compare.
 |  N/A
 
-| `VERTEX b`
+| `VERTEX v_target`
 | The second vertex to compare with the first.
 | N/A
 
-| `SET<STRING> e_type`
+| `SET<STRING> e_type_set`
 | Edge types to traverse.
 | (an empty set of strings)
 |===

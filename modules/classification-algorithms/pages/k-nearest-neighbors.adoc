@@ -37,9 +37,9 @@ The algorithm will not output more than stem:[k] vertex pairs, so the algorithm 
 
 [source,gsql]
 ----
-tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STRING>
-  re_type, STRING weight, STRING label, INT top_k,
-  BOOL print_accum = TRUE, STRING file_path = "", STRING attr = "")
+tg_knn_cosine_ss (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_type_set, SET<STRING>
+  reverse_e_type, STRING weight_attribute, STRING label, INT top_k,
+  BOOL print_results = TRUE, STRING file_path = "", STRING attr = "")
   RETURNS (STRING)
 ----
 
@@ -52,19 +52,19 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
 |The vertex that you want to predict the labels from.
 |(empty string)
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |The vertex types to use
 |(empty set of strings)
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |The edge types to use
 |(empty set of strings)
 
-|`SET<STRING> re_type`
+|`SET<STRING> reverse_e_type_set`
 |The reverse edge types to use
 |(empty set of strings)
 
-|`STRING weight`
+|`STRING weight_attribute`
 |If not empty, use this edge attribute as the edge weight.
 |(empty string)
 
@@ -76,7 +76,7 @@ tg_knn_cosine_ss (VERTEX source, SET<STRING> v_type, SET<STRING> e_type, SET<STR
 |The number of nearest neighbors to consider
 | N/A
 
-|`BOOL print_accum`
+|`BOOL print_results`
 |If true, print output in JSON format to the standard output.
 |True
 

@@ -25,8 +25,8 @@ This is an implementation of the algorithm in section 6.2 of Qin et al. 2014: li
 
 [source.wrap,gsql]
 ----
-tg_msf (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr, STRING wt_type,
-BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+tg_msf ( SET<STRING> v_type_set,  SET<STRING> e_type_set, STRING wt_attr, STRING wt_type,
+BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
 
 
@@ -53,11 +53,11 @@ BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 |(empty string)
 
 
-|`+BOOL print_accum+`
+|`+BOOL print_results+`
 |If True, output JSON to standard output
 |True
 
-|`+STRING result_attr+`
+|`+STRING result_attribute+`
 |If not empty, store result values (`BOOL`) to this attribute
 |(empty string)
 
@@ -71,7 +71,7 @@ BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
 
 Computes a minimum spanning forest. If the JSON or file output
 selected, the output is the set of edges that form the MSF. If the
-result_attr option is selected, the edges which are part of the MSF are
+result_attribute option is selected, the edges which are part of the MSF are
 tagged True; other edges are tagged False.
 
 === Result size

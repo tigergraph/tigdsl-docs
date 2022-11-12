@@ -29,14 +29,14 @@ There are directional and bidirectional versions of this algorithm.
 [source.wrap,gsql]
 ----
 CREATE QUERY tg_find_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 .Bidirectional
 [.wrap,gsql]
 ----
 CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 
@@ -57,7 +57,7 @@ CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT 
 |`INT`
 |The maximum length of the path returned.
 
-|`print_accum`
+|`print_results`
 |`BOOL`
 |If `true`, write output to the console in JSON format.
 

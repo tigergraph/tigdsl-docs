@@ -33,8 +33,8 @@ It finds the isomorphic subgraphs, and gives every vertex in the isomorphic subg
 [,gsql]
 ----
 CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
-    INT depth, INT out_put_limit, BOOL print_accum = TRUE,
-    STRING result_attr = "",STRING file_path = "")
+    INT depth, INT out_put_limit, BOOL print_results = TRUE,
+    STRING result_attribute = "",STRING file_path = "")
 ----
 === Parameters
 
@@ -56,13 +56,13 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
 
 |`out_put_limit`
 |`INT`
-|If `print_accum` is set to true, print a maximum of this number of vertices..
+|If `print_results` is set to true, print a maximum of this number of vertices..
 
-|`print_accum`
+|`print_results`
 |`BOOL`
 |If true, print JSON to standard output.
 
-|`result_attr`
+|`result_attribute`
 |`STRING`
 |If not empty, save the label of each vertex to this attribute.
 
@@ -73,7 +73,7 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
 
 === Output
 
-When `print_accum` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
+When `print_results` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
 If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
 
 

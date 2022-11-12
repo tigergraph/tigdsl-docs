@@ -33,7 +33,7 @@ Local Clustering Coefficient only works with directed graphs if reverse edges ar
 [source,gsql]
 ----
 tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
-  BOOL print_accum = True, STRING result_attr = "",
+  BOOL print_results = True, STRING result_attribute = "",
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
@@ -59,11 +59,11 @@ stem:[O(V)], where stem:[V] is the number of vertices in the graph.
 | Number of the highest local clustering coefficients to report.
 | 100
 
-| `BOOL print_accum`
+| `BOOL print_results`
 | If `true`, output JSON to standard output.
 | True
 
-| `STRING result_attr`
+| `STRING result_attribute`
 | If provided, the local clustering coefficient of a vertex will be saved to this attribute.
 | (empty string)
 
