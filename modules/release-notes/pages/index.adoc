@@ -1,0 +1,10 @@
+= Release Notes
+
+This page tracks release changes for the Graph Data Science Algorithm Library since November 15, 2022, when version 3.8.0 of TigerGraph Server and the Algorithm Library were released.
+
+== 3.8.0
+
+* Added xref:using-an-algorithm:index.adoc[Packaged Template Queries] that can easily be installed and run from within GSQL.
+* Added additional queries to GraphStudio for easy access.
+* Enabled some Pathfinding and Community Detection algorithms in TigerGraph Insights for zero-code data dashboard creation.
+* Unified parameter names across all algorithms for better internal consistency.
