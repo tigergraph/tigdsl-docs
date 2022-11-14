@@ -23,12 +23,14 @@ You usually have the option to output one or more of the following:
 * CSV output to a file
 * Results written to an attribute of vertices or edges
 
-== Packaged queries
+== Packaged template queries
 
-Packaged queries are a new, simplified method for working with query algorithms that are preinstalled in a TigerGraph instance.
+Packaged template queries are a new, simplified method for working with query algorithms that are preinstalled in a TigerGraph instance.
+They use a new keyword, `CALL`, to run with just-in-time compilation for improved performance.
+
 The syntax is very similar to using a package in Python.
 
-=== Import and explore packaged queries
+=== Import and explore template queries
 
 Using a TigerGraph installation version 3.8.0 and later, run the following command to import the query package.
 
@@ -133,7 +135,7 @@ On the `ldbc_snb` graph, the results look like this after the query runs:
 }
 ----
 
-xref:gui:graphstudio:overview.adoc[GraphStudio] does not support using the `CALL` command for packaged queries.
+xref:gui:graphstudio:overview.adoc[GraphStudio] does not support using the `CALL` command for packaged template queries.
 To install queries on GraphStudio, use the non-packaged method in the next section.
 
 == Non-Packaged queries
