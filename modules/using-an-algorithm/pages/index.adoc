@@ -108,10 +108,12 @@ In this example, we call the xref:community-algorithms:louvain.adoc[] algorithm,
 * An empty string `""` for the file path, ensuring the results will not be written as a file
 * A boolean `true` to print the results to the console in JSON format.
 
-The *first* time you call an algorithm on a particular graph and with a particular set of schema elements (vertex types, edge types, and attributes if appropriate),
+The *first* time you call an algorithm on a particular graph and with a particular set of graph schema elements (vertex types, edge types, and/or vertex or edge attributes),
 it goes through a short just-in-time-compilation process to optimize the execution plan for the query.
 
-If you run the same algorithm with the same schema elements (regardless of modification to other parameters), it will skip the compilation and immediately run the algorithm query.
+If you run the same algorithm with the same graph schema elements (regardless of modification to other non-schema parameters such as number of iterations), it does not require compilation and immediately runs the algorithm query.
+
+Therefore, in the previous example, changing any of the first three parameters requires recompilation, but changing any of the other parameters runs the query without needing compilation.
 
 On the `ldbc_snb` graph, the results look like this after the query runs:
 
