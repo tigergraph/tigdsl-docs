@@ -78,6 +78,22 @@ The vertices with the highest degree centrality scores along with their scores.
 The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
 
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_weighted_degree_cent (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.weighted_degree_cent (<parameters>)
+----
+
 == See also
 
 xref:degree-centrality.adoc[]

@@ -125,6 +125,23 @@ This algorithm has a time complexity of stem:[O(E)] where stem:[E] is the number
 
 Parallel processing reduces the time needed for computation.
 
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_closeness_cent (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.closeness_cent (<parameters>)
+----
+
 == Example
 
 Closeness centrality can be measured for either directed edges (from `v` to others) or for undirected edges. Directed graphs may seem less intuitive, however, because if the distance from Alex to Bob is 1, it does not mean the distance from Bob to Alex is also 1.

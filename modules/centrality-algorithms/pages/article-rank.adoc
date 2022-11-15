@@ -87,8 +87,23 @@ The result size is equal to stem:[V], the number of vertices, because one score 
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
 The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for compRutation.
+Parallel processing reduces the time needed for computation.
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_article_rank (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.article_rank (<parameters>)
+----
 
 == *Example*
 

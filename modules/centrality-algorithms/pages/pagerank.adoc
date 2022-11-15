@@ -10,10 +10,8 @@
 ^|Homogeneous vertex types
 |===
 
-Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
-
+Schema-free query algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
 ****
-
 
 The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it.
 A vertex's influence tends to increase if either of these conditions are met:
@@ -37,10 +35,12 @@ For more information, see http://infolab.stanford.edu/~backrub/google.html[the G
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
 tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT maximum_iteration=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
+
+
 
 === Parameters
 
@@ -105,6 +105,21 @@ This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_pagerank (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.pagerank (<parameters>)
+----
 
 == Example
 

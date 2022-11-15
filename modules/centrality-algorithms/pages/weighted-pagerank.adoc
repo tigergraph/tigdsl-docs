@@ -38,7 +38,6 @@ tg_pagerank_wt (SET<STRING> v_type_set, SET<STRING> e_type_set, STRING weight_at
 |Names of edge types to use
 |(empty string)
 
-
 |`STRING weight_attribute`
 | Name of edge weight attribute
 |(empty string)
@@ -62,7 +61,6 @@ The balance (1 - damping) is a minimum baseline score that every vertex receives
 | `INT top_k`
 | Sort the scores highest first and output only this many scores
 |100
-
 
 | `BOOL print_results`
 | If True, output JSON to standard output
@@ -96,3 +94,19 @@ This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the numb
 
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_pagerank_wt (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.pagerank_wt (<parameters>)
+----

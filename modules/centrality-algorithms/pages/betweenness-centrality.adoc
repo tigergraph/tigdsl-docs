@@ -78,17 +78,17 @@ STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 |===
 |Parameter |Description |Default Value
 
-|`SET STRING v_type`
+|`SET<STRING> v_type_set`
 |The vertex types to use
 |(empty set of strings)
 
-|`SET STRING e_type`
+|`SET<STRING> e_type_set`
 |The edge types to use
 |(empty set of strings)
 
-|`SET STRING reverse_e_type`
-|The reverse edge types to use
-|(empty set of strings)
+|`STRING reverse_e_type`
+|The reverse edge type to use
+|(empty string)
 
 |`INT max_hops`
 |If >=0, look only this far from each vertex
@@ -128,7 +128,21 @@ This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the numb
 Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
 Parallel processing reduces the time needed for computation.
 
+=== Run commands
 
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_betweenness_cent (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.betweenness_cent (<parameters>)
+----
 
 == Example
 
