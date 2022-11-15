@@ -71,22 +71,22 @@ The balance (1 - damping) is a minimum baseline score that every vertex receives
 
 
 |===
-
-=== Run commands
-
-==== Schema-Free Query
-
-[source.wrap,gsql]
-----
-RUN QUERY tg_pagerank_pers (<parameters>)
-----
-
-==== Packaged Template Query
-
-[source.wrap,gsql]
-----
-CALL GDBMS_ALGO.centrality.pagerank_pers (<parameters>)
-----
+//
+//=== Run commands
+//
+//==== Schema-Free Query
+//
+//[source.wrap,gsql]
+//----
+//RUN QUERY tg_pagerank_pers (<parameters>)
+//----
+//
+//==== Packaged Template Query
+//
+//[source.wrap,gsql]
+//----
+//CALL GDBMS_ALGO.centrality.pagerank_pers (<parameters>)
+//----
 
 == Example
 

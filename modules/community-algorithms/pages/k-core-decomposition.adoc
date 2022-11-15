@@ -75,6 +75,23 @@ tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
 
 stem:[O(E)], where stem:[E] is the number of edges in the graph.
 
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_kcore (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.kcore (<parameters>)
+----
+
 == Example
 
 In the example below based on the `social` graph from GSQL 101, we can see that Dan, Tom, and Jenny make up a 2-core, which is the max-core of the graph:

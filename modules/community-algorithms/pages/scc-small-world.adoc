@@ -72,6 +72,22 @@ When `+print_results+` is set to `true`, the algorithm returns the number of str
 
 The algorithm has a time complexity of stem:[O(V + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_scc_small_world (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.scc_small_world (<parameters>)
+----
+
 
 == Example
 

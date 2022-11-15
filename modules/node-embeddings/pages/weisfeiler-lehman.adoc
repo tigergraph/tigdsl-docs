@@ -40,34 +40,27 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
 
 
 |===
-|Parameter |Type |Description
+|Parameter |Descriptiono
 
-|`v_type`
-|`STRING`
+|`STRING v_type`
 |Vertex type to consider.
 
-|`e_type`
-|`STRING`
+|`STRING e_type`
 |Edge type to traverse.
 
-|`depth`
-|`INT`
+|`INT depth`
 |Number of hops to consider
 
-|`out_put_limit`
-|`INT`
+|`INT out_put_limit`
 |If `print_results` is set to true, print a maximum of this number of vertices..
 
-|`print_results`
-|`BOOL`
+|`BOOL print_results`
 |If true, print JSON to standard output.
 
-|`result_attribute`
-|`STRING`
+|`STRING result_attribute`
 |If not empty, save the label of each vertex to this attribute.
 
-|`file_path`
-|`STRING`
+|`STRING file_path`
 |If not empty, save the result in CSV format to this filepath.
 |===
 
@@ -85,6 +78,21 @@ This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the num
 This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
 
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_weisfeiler_lehman (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.graphML.weisfeiler_lehman (<parameters>)
+----
 
 
 == Example

@@ -125,6 +125,22 @@ of the same component have the same ID value.
 
 This algorithm has a time complexity of stem:[O(k * d)], where stem:[k] is equal to the number of iterations and stem:[d] is equal to the maximum component diameter.
 
+//=== Run commands
+//
+//==== Schema-Free Query
+//
+//[source.wrap,gsql]
+//----
+//RUN QUERY tg_scc (<parameters>)
+//----
+//
+//==== Packaged Template Query
+//
+//[source.wrap,gsql]
+//----
+//CALL GDBMS_ALGO.community.scc (<parameters>)
+//----
+
 
 == Example
 

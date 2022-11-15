@@ -63,6 +63,10 @@ This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number o
 |Whether to print data in JSON format to the standard output
 |False
 
+|`STRING file_path`
+|The file path where the output will be written to, if applicable
+|(empty string)
+
 |`STRING attr`
 |Vertex attribute where community ID values are assigned in `INT` format. No value is assigned if the string is left blank.
 |(empty string)
@@ -77,6 +81,23 @@ Members of the same component have the same ID value.
 === Result size
 
 The result size is calculated by stem:[V], the number of vertices.
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_label_prop (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.label_prop (<parameters>)
+----
+
 
 == Example
 

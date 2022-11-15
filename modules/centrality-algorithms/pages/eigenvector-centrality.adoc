@@ -69,22 +69,22 @@ The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-
-=== Run commands
-
-==== Schema-Free Query
-
-[source.wrap,gsql]
-----
-RUN QUERY tg_eigenvector_cent (<parameters>)
-----
-
-==== Packaged Template Query
-
-[source.wrap,gsql]
-----
-CALL GDBMS_ALGO.centrality.eigenvector_cent (<parameters>)
-----
+//
+//=== Run commands
+//
+//==== Schema-Free Query
+//
+//[source.wrap,gsql]
+//----
+//RUN QUERY tg_eigenvector_cent (<parameters>)
+//----
+//
+//==== Packaged Template Query
+//
+//[source.wrap,gsql]
+//----
+//CALL GDBMS_ALGO.centrality.eigenvector_cent (<parameters>)
+//----
 
 
 == Example

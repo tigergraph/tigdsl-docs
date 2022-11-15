@@ -58,6 +58,22 @@ CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type_set,SET<STRING> e_type_
 
 The algorithm has a worst-case time complexity of stem:[O(V^2 + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY greedy_graph_coloring (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.classification.greedy_graph_coloring (<parameters>)
+----
+
 == Example
 
 On the https://github.com/tigergraph/gsql-graph-algorithms/blob/master/tests/social/data/social10.csv[social10] graph, say we want to color the `Person` vertices in such a way that any two vertices that are either connected by a `Friend` edge or a `Coworker` edge do not have the same color. By running the `greedy_graph_color` algorithm, we get the following result:

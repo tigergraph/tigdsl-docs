@@ -82,6 +82,22 @@ The result size is equal to stem:[V], the number of vertices.
 === Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_slpa(<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.slpa (<parameters>)
+----
+
 
 == Example
 
@@ -95,7 +111,7 @@ Query::
 [,gsql]
 ----
 # Use _ for default values
-RUN QUERY (["Person"], ["Coworker"], _, _, _, _, _
+RUN QUERY tg_slpa(["Person"], ["Coworker"], _, _, _, _, _
 ----
 --
 Result::
