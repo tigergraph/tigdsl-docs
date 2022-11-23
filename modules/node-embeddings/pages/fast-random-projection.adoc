@@ -23,16 +23,26 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 Fast Random Projection (FastRP) is a scalable and performant node-embedding algorithm.
 It generates node embeddings (vectors) of low dimensionality through random projections from the graph's adjacency matrix (a high-dimensional matrix) to a low-dimensional matrix, significantly reducing the computing power required to process the data.
 
-The algorithm is theoretically backed by the https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma[Johnson-Lindenstrauss lemma], which states that a set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are https://en.wikipedia.org/wiki/Stretch_factor[nearly preserved].
+The algorithm is theoretically backed by the link:https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma[Johnson-Lindenstrauss lemma], which states that a set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are link:https://en.wikipedia.org/wiki/Stretch_factor[nearly preserved].
 
 This algorithm is especially useful in the following situations:
 
-* Your data is in such high dimension that it is too expensive to perform calculations.
+* Your data is of such high dimension that it is too expensive to perform calculations.
 * The dimensionality is very high and the number of samples are too sparse to calculate covariances.
 * You don't have access to the entire dataset, such as when working with real-time data.
 
-NOTE: FastRP was originally created to work on undirected graphs. It can work on directed graphs, although we recommend having reverse edges in your schema so the embeddings can be passed in both directions.
+
+== Notes
+
+FastRP was originally created to work on undirected graphs. It can work on directed graphs, although we recommend having reverse edges in your schema so the embeddings can be passed in both directions.
 If using a directed graph, there is a modification to allow it to run with sink vertices, but this may affect the embeddings.
+
+This query needs to be modified based upon your schema to set the embedding
+attribute accordingly if you wish to store the embeddings in your graph.
+On line 92, change `fastrp_embedding` to the name of the attribute where you want to store the embedding.
+The attribute must be of type `LIST<DOUBLE>`.
+
+If you do not wish to store the embeddings in the graph, delete the lines that use the attribute `fastrp_embedding`.
 
 == Specifications
 
@@ -41,82 +51,99 @@ If using a directed graph, there is a modification to allow it to run with sink 
 CREATE QUERY tg_fastRP(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> output_v_type, STRING weights, FLOAT beta, INT total_dim, INT default_idx = 0, INT default_length, FLOAT default_weight, SET<STRING> embedding_dim_map, SET<STRING> feature_dim_map, INT sampling_constant, INT random_seed, STRING result_attr="", SET<VERTEX> filter_v_set, SET<STRING> stop_set, STRING component_attr="", INT batch_iter=0, BOOL print_to_file=FALSE, STRING filepath="", BOOL print_all=FALSE, INT print_sample_size=5)
 ----
 
-This query needs to be modified based upon your schema to set the embedding
-attribute accordingly if you wish to store the embeddings in your graph.
-On line 92, change `fastrp_embedding` to the name of the attribute where you want to store the embedding.
-The attribute must type `LIST<DOUBLE>`.
-If you do not wish to store the embeddings in graph, delete the lines that use the attribute `fastrp_embedding`.
-
-== Parameters
+=== Parameters
 
 |===
-| Parameter | Description | Data type
-|v_type:
+| Parameter | Description | Default value
+
+|`SET<STRING> v_type`
 |Set of all vertex types to traverse in the graph.
-|SET<STRING>
-|e_type:
+|(empty set of strings)
+
+|`SET<STRING> e_type`
 |Set of all edge types to traverse in the graph.
-|SET<STRING>
-|output_v_type:
+|(empty set of strings)
+
+|`SET<STRING> output_v_type`
 |Set of vertex types to produce output embeddings for.
-|SET<STRING>
-|iteration_weights:
+|(empty set of strings)
+
+|`STRING iteration_weights`
 |A comma-separated string of numbers to weight each iteration of the embedding process.
-|STRING
-|beta:
+|(empty string)
+
+|`FLOAT beta`
 |A float value that normalizes high-degree vertices in the graph. Usually between -1 and 0, where
 -1 penalizes high-degree vertices heavily. If desired, one can use a positive value to weight
 high-degree vertices more than low-degree vertices.
-|FLOAT
-|embedding_dimension:
-|The total dimension of the desired embedding.
-|INT
-|default_index:
+|N/A
+
+|`INT embedding_dimension`
+|The total dimensions of the desired embedding.
+|N/A
+
+|`INT default_index`
 |Index in the embedding vector default edges (edge types that are not explicitly defined in `embedding_dim_map`) start to 
 be incorporated in the vector.
-|INT
-|default_length:
+|N/A
+
+|`INT default_length`
 |Length of the embedding region that incorporates default edge type information.
-|INT
-|default_weight:
-|Influence that the default edge types have in the region of the embedding they are incorporated. Defaults to 1.
-|INT
-|embedding_dim_map:
-|Set of comma-separated tuples of '<edge type>,<length>,<weight>,<starting index>'. Use if incorporating specific edge types
-into certain regions of the embedding is desired. If the empty set is used, all edge types will be considered "default" edge types.
-|SET<STRING>
-|sampling_constant:
-|Parameter defined from the FastRP paper. Controls the sparsity of the embedding. Usually an integer between 1 (fully dense embedding)
-and 3 works well.
-|INT
-|random_seed:
-|Seed for random number generator. Defaults to 42.
-|INT
-|result_attribute:
-|Attribute to store the result embedding to. Must be of type LIST<FLOAT>. If empty, algorithm does not write the embedding to an attribute.
-|STRING
-|component_attribute:
+|N/A
+
+|`INT default_weight`
+|Influence that the default edge types have in the region of the embedding they are incorporated.
+|1
+
+|`SET<STRING> embedding_dim_map`
+|Set of comma-separated tuples of `<edge type>,<length>,<weight>,<starting index>`.
+Use if incorporating specific edge types into certain regions of the embedding is desired.
+If the empty set is used, all edge types will be considered "default" edge types.
+|(empty set of strings)
+
+|`INT sampling_constant`
+|Parameter defined from the FastRP paper.
+Controls the sparsity of the embedding.
+Usually an integer between 1 (fully dense embedding) and 3 works well.
+|N/A
+
+|`INT random_seed`
+|Seed for the random number generator.
+|42
+
+|`STRING result_attribute`
+|Attribute where the result embedding is stored.
+Must be of type LIST<FLOAT>.
+If empty, the algorithm does not write the embedding to an attribute.
+|(empty string)
+
+|`STRING component_attribute`
 |If batching the embedding process by connected components, specify the vertex attribute that contains the
 integer ID of the component.
-|STRING
-|batch_number:
+|(empty string)
+
+|`INT batch_number`
 |If batching by connected component, specify which batch to compute the embeddings for.
-|INT
-|filepath:
+|N/A
+
+|`STRING filepath`
 |If specified, what file to write the computed embeddings to.
-|STRING
-|print_results:
-|If TRUE, all vertex embeddings will be printed.
-|BOOL
-|choose_k:
-|Will print a sample of K vertices and their embeddings. Defaults to 5.
-|INT
-  */
+|(empty string)
+
+|`BOOL print_results`
+|If `TRUE`, all vertex embeddings will be printed.
+|False
+
+|`INT choose_k`
+|Prints a sample of this many vertices and their embeddings.
+|5
+
+
 |===
 
 === Parameter tuning
 
-The optimal values for the following parameters depend on your dataset. In order to obtain the best quality embeddings for your graph, it is a good idea to tune these parameters.
+The optimal values for the following parameters depend on your dataset. Tune these parameters to obtain the best quality embeddings for your graph.
 
 ==== `reduced_dimension`
 
@@ -140,4 +167,4 @@ FastRP uses _very_ _sparse random projection_ to reduce the dimensionality of th
 
 image::image (38).png[]
 
-Where _s_ is the sampling constant (`sampling_constant`). The higher the constant, the higher the number of zeros in the resulting matrix, which speeds up the algorithm.
+_s_ is the sampling constant (`sampling_constant`). The higher the constant, the higher the number of zeros in the resulting matrix, which speeds up the algorithm.
