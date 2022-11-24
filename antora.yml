@@ -1,7 +1,7 @@
 name: graph-ml
 title: TigerGraph Graph Data Science Library
-version: 1.0
-display_version: "1.0"
+version: 3.8
+display_version: "3.8"
 start_page: intro:index.adoc
 
 nav:
@@ -14,3 +14,4 @@ nav:
 - modules/pathfinding-algorithms/nav.adoc
 - modules/similarity-algorithms/nav.adoc
 - modules/link-prediction/nav.adoc
+- modules/release-notes/pages/index.adoc

@@ -10,8 +10,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Use the Degree Centrality algorithm on an undirected graph instead of Weighted PageRank.
 ****
 
 The only difference between weighted PageRank and standard PageRank is that edges have weights, and the influence that a vertex receives from an in-neighbor is multiplied by the weight of the in-edge.
@@ -20,11 +18,75 @@ The only difference between weighted PageRank and standard PageRank is that edge
 
 [source,gsql]
 ----
-tg_pagerank_wt (SET<STRING> v_type, SET<STRING> e_type, STRING wt_attr,
-  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k=100,
-   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",
+tg_pagerank_wt (SET<STRING> v_type_set, SET<STRING> e_type_set, STRING weight_attribute,
+  FLOAT max_change=0.001, INT maximum_iteration=25, FLOAT damping=0.85, INT top_k=100,
+   BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "",
    BOOL display_edges = FALSE)
 ----
+
+
+=== Parameters
+
+|===
+|*Parameter* |Description |Default
+
+|`+STRING v_type+`
+|Names of vertex types to use
+|(empty string)
+
+|`+STRING e_type+`
+|Names of edge types to use
+|(empty string)
+
+|`STRING weight_attribute`
+| Name of edge weight attribute
+|(empty string)
+
+| `FLOAT max_change`
+| PageRank will stop iterating when the largest
+difference between any vertex's current score and its previous score ≤
+`+max_change+`. That is, the scores have become very stable and are
+changing by less than `+max_change+` from one iteration to the next.
+| 0.001
+
+| `INT maximum_iteration`
+| Maximum number of iterations.
+|25
+
+| `FLOAT damping`
+| Fraction of score that is due to the score of neighbors.
+The balance (1 - damping) is a minimum baseline score that every vertex receives.
+|0.85
+
+| `INT top_k`
+| Sort the scores highest first and output only this many scores
+|100
+
+| `BOOL print_results`
+| If True, output JSON to standard output
+| True
+
+| `STRING result_attribute`
+| If not empty, store PageRank values in FLOAT format to this vertex attribute
+| (empty string)
+
+| `STRING file_path+`
+| If not empty, write output to this file.
+| (empty string)
+
+| `BOOL display_edges`
+| If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
+| False
+
+
+|===
+
+=== Output
+
+Computes a weighted PageRank value (FLOAT type) for each vertex.
+
+The result size is equal to stem:[V], the number of vertices in the graph, because a value is computed for every vertex.
+
 
 === Time complexity
 
@@ -33,35 +95,18 @@ This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-[width="100%",cols=",<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Computes a weighted PageRank value (FLOAT type) for each
-vertex.
+=== Run commands
 
-|Input Parameters a|
+==== Schema-Free Query
 
-* *`+STRING v_type+`*: Names of vertex type to use
-* *`+STRING e_type+`*: Names of edge type to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute
-* *`+FLOAT max_change+`*: PageRank will stop iterating when the largest
-difference between any vertex's current score and its previous score ≤
-`+max_change+`. That is, the scores have become very stable and are
-changing by less than `+max_change+` from one iteration to the next.
-* *`+INT max_iter+`*: Maximum number of iterations.
-* *`+FLOAT damping+`*: Fraction of score that is due to the score of
-neighbors. The balance (1 - damping) is a minimum baseline score that
-every vertex receives.
-* *`+INT top_k+`*: Sort the scores highest first and output only this
-many scores
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store PageRank values (FLOAT)
-to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+[source.wrap,gsql]
+----
+RUN QUERY tg_pagerank_wt (<parameters>)
+----
 
-|Result Size |V = number of vertices
+==== Packaged Template Query
 
-|Graph Types |Directed edges
-|===
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.pagerank_wt (<parameters>)
+----

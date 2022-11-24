@@ -58,20 +58,68 @@ For every vertex, the algorithm works in two phases.
 The first phase calculates the number of shortest paths passing through each vertex.
 Then starting from the vertex on the most outside layer in a non-incremental order with pair dependency initial value of 0, traverse back to the starting vertex.
 
+== Notes
 
-[CAUTION]
-====
-This algorithm query employs a subquery called *bc_subquery*. Both queries are needed to run the algorithm.
-====
+This query algorithm employs a subquery called *bc_subquery*.
+Both queries are needed to run the algorithm.
 
-== *Specifications*
+== Specifications
 
 [,gsql]
 ----
-CREATE QUERY tg_betweenness_cent(SET<STRING> v_type, SET<STRING> e_type,
-STRING re_type,INT max_hops=10, INT top_k=100, BOOL print_accum = True,
-STRING result_attr = "", STRING file_path = "", BOOL display_edges = FALSE)
+CREATE QUERY tg_betweenness_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+STRING reverse_e_type,INT max_hops=10, INT top_k=100, BOOL print_results = True,
+STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
+
+
+== *Parameters*
+
+|===
+|Parameter |Description |Default Value
+
+|`SET<STRING> v_type_set`
+|The vertex types to use
+|(empty set of strings)
+
+|`SET<STRING> e_type_set`
+|The edge types to use
+|(empty set of strings)
+
+|`STRING reverse_e_type`
+|The reverse edge type to use
+|(empty string)
+
+|`INT max_hops`
+|If >=0, look only this far from each vertex
+| 10
+
+|`INT top_k`
+|The number of scores to output, sorted in descending order
+| 100
+
+|`BOOL print_results`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING result_attribute`
+|If not empty, store centrality values in `FLOAT` format to this attribute
+|(empty string)
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+
+|`BOOL display_edges`
+|If true,  include the graph's edges in the JSON output, so that the full graph can be displayed.
+|True
+
+|===
+
+=== Output
+
+Computes a Betweenness Centrality value (`FLOAT` type) for each vertex.
+The result size is equal to stem:[V], the number of vertices.
 
 === Time complexity
 
@@ -80,36 +128,25 @@ This algorithm has a time complexity of stem:[O(E*V)] where stem:[E] is the numb
 Considering the high time cost of running this algorithm on a big graph, users can set a maximum number of iterations.
 Parallel processing reduces the time needed for computation.
 
-== *Parameters*
+=== Run commands
 
-[width="100%",cols="1,2",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Computes a Betweenness Centrality value (FLOAT type) for each
-vertex.
+==== Schema-Free Query
 
-|Required Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* **`+SET<STRING> re_type: +`**Names of reverse edge types to use
-* *`+INT max_hops+`*: If >=0, look only this far from each vertex
-* *`+INT top_k+`:* Sort the scores highest first and output only this
-many scores
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store centrality values
-(FLOAT) to this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-* *`+BOOL display_edges+`*: If true, include the graph's edges in the
-JSON output, so that the full graph can be displayed.
+[source.wrap,gsql]
+----
+RUN QUERY tg_betweenness_cent (<parameters>)
+----
 
-|Result Size |V = number of vertices
+==== Packaged Template Query
 
-|Graph Types |Undirected edges, Unweighted edges
-|===
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.betweenness_cent (<parameters>)
+----
 
 == Example
 
-In the example below, Claire is in the very center of the graph and has the highest betweenness centrality. Six shortest paths pass through Sam (i.e. paths from Victor to all other 6 people except for Sam and Victor), so the score of Sam is 6. David also has a score of 6, since Brian has 6 paths to other people that pass through David.
+In this example, Claire is in the very center of the graph and has the highest betweenness centrality. Six shortest paths pass through Sam (i.e. paths from Victor to all other 6 people except for Sam and Victor), so the score of Sam is 6. David also has a score of 6, since Brian has 6 paths to other people that pass through David.
 
 [,gsql]
 ----

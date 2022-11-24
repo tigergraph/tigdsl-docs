@@ -16,9 +16,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-Louvain only works with directed graphs if reverse edges are included.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/louvain[Louvain]
 
 ****
@@ -53,6 +50,10 @@ The algorithm repeats these steps to move vertices into new communities and coar
 
 The process of checking the modularity score increase for every possible vertex and community assignment is slow for large graphs.
 
+== Notes
+
+Louvain only works with directed graphs if reverse edges are included.
+
 An improved Parallel Louvain Method (PLM) calculates the best community to move to for each vertex in parallel{fn-staudt}.
 In the Parallel Louvain Method (PLM), the positive modularity gain is not guaranteed, which may result in swapping two vertices to each other's community.
 
@@ -61,28 +62,23 @@ In the Parallel Louvain Method (PLM), the positive modularity gain is not guaran
 
 [source.wrap,gsql]
 ----
-CREATE QUERY tg_louvain(SET<STRING> v_type, SET<STRING> e_type,
-    STRING wt_attr = "weight", INT max_iter = 10,
-    STRING result_attr = "cid", STRING file_path = "",
+CREATE QUERY tg_louvain( SET<STRING> v_type_set,  SET<STRING> e_type_set,
+    STRING wt_attr = "weight", INT maximum_iteration = 10,
+    STRING result_attribute = "cid", STRING file_path = "",
     BOOL print_info = FALSE)
 ----
 
-
-=== Time complexity
-This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
-
-
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Description |Default
 
-|`STRING v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty string)
 
 
-|`STRING e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |(empty string)
 
@@ -92,14 +88,14 @@ This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the n
 |(empty string)
 
 
-|`INT max_iter`
+|`INT maximum_iteration`
 |Maximum number of iterations
 |10
 
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store community values in `INT` format to this vertex attribute
-|cid
+|(empty string)
 
 
 |`STRING file_path`
@@ -107,22 +103,27 @@ This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the n
 |(empty string)
 
 
-|`print_info`
+|`BOOL print_info`
 |If true, print results to JSON output.
-|`BOOL`
+|`True`
 
 
 |===
 
 
-== Result
+=== Output
 
-If `result_attr` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
+If `result_attribute` is provided, the algorithm assigns a module ID (`INT`) to each vertex, such that members of the same module have the same ID value.
 
 if `print_info` is set to true or `file_path` is provided, the JSON or .csv output contains the following information:
 
 * The number of vertices and communities in the graph.
 * The heuristic statistics used by Louvain.
+
+
+=== Time complexity
+This algorithm has a time complexity of stem:[O(V^2*L)], where stem:[V] is the number of vertices and stem:[L] is the total number of iterations.
+
 
 
 == Example

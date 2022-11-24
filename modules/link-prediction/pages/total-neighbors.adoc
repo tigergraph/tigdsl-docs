@@ -11,52 +11,69 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/total_neighbors[Total Neighbors]
 
-
 ****
-The algorithm calculates the total number of neighbors of two vertices.
+The algorithm counts the total number of neighbors, or vertices connected by one hop, of two vertices.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]
 ----
-CREATE QUERY tg_total_neighbors(VERTEX a, VERTEX b,
+CREATE QUERY tg_total_neighbors(VERTEX v_source VERTEX v_target,
     SET<STRING> e_type)
 ----
+
+
+=== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Default value
+
+| `VERTEX v_source`
+|  The first vertex to compare.
+|  N/A
+
+| `VERTEX v_target`
+| The second vertex to compare with the first.
+| N/A
+
+| `SET<STRING> e_type_set`
+| Edge types to traverse.
+| (an empty set of strings)
+|===
+
+=== Output
+The total number of neighbors of two vertices as a `closeness` value.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
-== Parameters
-[cols="1,1,1"]
-|===
-|Name | Description | Data type
-
-| `a`
-|  A vertex.
-|  `VERTEX`
-
-| `b`
-| A vertex.
-| `VERTEX`
-
-| `e_type`
-| Edge types to traverse.
-| `SET<STRING>`
-|===
-
-== Return value
-The total number of neighbors of two vertices.
 
 == Example
 Suppose we have the following graph.
 
 image::preferential-attachment-ex.png[]
 
-Dan and Jenny together have 6 neighbors in total. Running the algorithm between Dan and Jenny would give us a result of 6. Note that since Jenny and Dan are neighbors themselves, the union of their neighbors includes both Jenny and Dan:
+Dan and Jenny together have 6 neighbors in total.
+
+Dan's neighbors are:
+
+* Nancy
+* Kevin
+* Tom
+* Jenny
+
+and Jenny's neighbors are:
+
+* Dan
+* Tom
+* Amily
+
+Running the algorithm with input vertices of `Dan` and `Jenny` would give us a result of `6` because the connection Dan - Jenny and Jenny - Dan is not double-counted.
 
 [tabs]
 ====

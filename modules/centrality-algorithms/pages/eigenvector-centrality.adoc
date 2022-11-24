@@ -1,5 +1,5 @@
 = Eigenvector Centrality
-
+:stem: latexmath
 
 .Supported Graph Characteristics
 ****
@@ -16,22 +16,52 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-*Eigenvector centrality* (also called *eigencentrality* or *prestige
-score*) is a measure of the influence of a vertex in a network.
-Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring
-vertices.
-A high eigenvector score means that a vertex is connected to many vertices who themselves have high scores.
+*Eigenvector centrality* (also called *eigencentrality* or *prestige score*) is a measure of the influence of a vertex in a network.
+Relative scores are assigned to all vertices in the network based on the concept that connections to high-scoring vertices contribute more to the score of the vertex in question than equal connections to low-scoring vertices.
 
-For more information, see https://en.wikipedia.org/wiki/Eigenvector_centrality[Eigenvector Centrality].
+A high eigenvector score means that a vertex is connected to many vertices who themselves have high scores.
 
 == Specifications
 
 ....
-CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type, SET<STRING> e_type,
- INT maxIter = 100, FLOAT convLimit = 0.000001, INT top_k = 100,
- BOOL print_accum = True, STRING result_attr = "", STRING file_path = ""
+CREATE QUERY tg_eigenvector_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+ INT maximum_iteration = 100, FLOAT conv_limit = 0.000001, INT top_k = 100,
+ BOOL print_results = True, STRING result_attribute = "", STRING file_path = ""
  )
 ....
+
+
+=== Parameters
+
+[cols=",,",options="header",]
+|===
+|Name |Description |Default value
+|`SET<STRING> v_type_set` |Vertex types to assign scores to. |(empty set of strings)
+
+|`SET<STRING> e_type_set` |Edge types to traverse. |(empty set of strings)
+
+|`INT maximum_iteration` |Maximum number of iteration. |100
+
+|`FLOAT conv_limit` |The convergence limit. | 0.000001
+
+|`INT top_k` |The number of vertices with the highest scores to return. |100
+
+|`BOOL print_results` |If true, print results to JSON output. | True
+
+|`STRING result_attribute` |If not empty, save the score of each vertex to this attribute. | (empty string)
+
+|`STRING file_path` |If not empty, print results in CSV to this file. | (empty string)
+|===
+
+=== Output
+
+Returns an eigenvector centrality score for all vertices of the specified type in the graph.
+The results are ordered from most central to least central.
+
+There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest scores in the graph.
+This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
+
+The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
@@ -39,40 +69,29 @@ The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-== Parameters
+//
+//=== Run commands
+//
+//==== Schema-Free Query
+//
+//[source.wrap,gsql]
+//----
+//RUN QUERY tg_eigenvector_cent (<parameters>)
+//----
+//
+//==== Packaged Template Query
+//
+//[source.wrap,gsql]
+//----
+//CALL GDBMS_ALGO.centrality.eigenvector_cent (<parameters>)
+//----
 
-[cols=",,",options="header",]
-|===
-|Name |Description |Data type
-|`+v_type+` |Vertex types to assign scores to. |`+SET<STRING>+`
-
-|`+e_type+` |Edge types to traverse. |`+SET<STRING>+`
-
-|`+maxIter+` |Maximum number of iteration. |`+INT+`
-
-|`+convLimit+` |The convergence limit. |`+FLOAT+`
-
-|`+top_k+` |The number of vertices with the highest scores to return.
-|`+INT+`
-
-|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
-
-|`+result_attr+` |If not empty, save the score of each vertex to this
-attribute. |`+STRING+`
-
-|`+file_path+` |If not empty, print results in CSV to this file.
-|`+STRING+`
-|===
-
-== Return value
-
-The I
 
 == Example
 
 Suppose we have the following graph:
 
-image:article-rank-ex.png[]
+image:social-graph-2022-10.png[]
 
 Running the algorithm on the graph will show that Dan has the highest
 centrality score.
@@ -92,45 +111,56 @@ Result::
 --
 [,json]
 ----
-{
-  "error": false,
-  "message": "",
-  "version": {
-    "schema": 2,
-    "edition": "enterprise",
-    "api": "v2"
-  },
-  "results": [{"top_scores": [
-    {
-      "score": 0.59598,
-      "Vertex_ID": "Dan"
-    },
-    {
-      "score": 0.50223,
-      "Vertex_ID": "Jenny"
-    },
-    {
-      "score": 0.44381,
-      "Vertex_ID": "Tom"
-    },
-    {
-      "score": 0.28786,
-      "Vertex_ID": "Nancy"
-    },
-    {
-      "score": 0.24085,
-      "Vertex_ID": "Kevin"
-    },
-    {
-      "score": 0.20296,
-      "Vertex_ID": "Amily"
-    },
-    {
-      "score": 0.11633,
-      "Vertex_ID": "Jack"
-    }
-  ]}]
-}
+[
+  {
+    "top_scores": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 0.52728
+      },
+      {
+        "Vertex_ID": "Jenny",
+        "score": 0.42913
+      },
+      {
+        "Vertex_ID": "Tom",
+        "score": 0.35588
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 0.33529
+      },
+      {
+        "Vertex_ID": "Kevin",
+        "score": 0.2967
+      },
+      {
+        "Vertex_ID": "Emily",
+        "score": 0.27009
+      },
+      {
+        "Vertex_ID": "Jack",
+        "score": 0.24902
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 0.17584
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 0.15809
+      },
+      {
+        "Vertex_ID": "Ben",
+        "score": 0.12476
+      },
+      {
+        "Vertex_ID": "Denise",
+        "score": 0.06543
+      }
+    ]
+  }
+]
 
 ----
 --

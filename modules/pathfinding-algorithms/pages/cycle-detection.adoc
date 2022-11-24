@@ -12,72 +12,91 @@
 |===
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/cycle_detection[Cycle Detection]
-
-[NOTE]
-On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
-
 ****
 
 
-The Cycle Detection problem seeks to find all the cycles (loops) in a graph. We apply the usual restriction that the cycles must be "simple cycles", that is, they are paths that start and end at the same vertex but otherwise never visit any vertex twice.
+The Cycle Detection problem seeks to find all the cycles (loops) in a graph. 
+We apply the usual restriction that the cycles must be "simple cycles", that is, they must be paths that start and end at the same vertex but otherwise never visit any vertex twice.
 
 There are two versions of the task: for directed graphs and undirected graphs. The GSQL algorithm library currently supports only directed cycle detection. The https://en.wikipedia.org/wiki/Rocha%E2%80%93Thatte_cycle_detection_algorithm[Rocha--Thatte algorithm] is an efficient distributed algorithm, which detects all the cycles in a directed graph. The algorithm will self-terminate, but it is also possible to stop at k iterations, which finds all the cycles having lengths up to k edges.
 
 The basic idea of the algorithm is to (potentially) traverse every edge in parallel, again and again, forming all possible paths. At each step, if a path forms a cycle, it records it and stops extending it. More specifically:
 
 *Initialization* +
-For each vertex, record one path consisting of its own id. Mark the vertex as Active.
+For each vertex, record one path consisting of its own ID. Mark the vertex as Active.
 
 *Iteration steps:* +
 For each Active vertex v:
 
 . Send its list of paths to each of its out-neighbors.
 . Inspect each path P in the list of the paths received:
- ** If the first id in P is also id(v), a cycle has been found:
+ ** If the first ID in P is also ID(v), a cycle has been found:
   *** Remove P from its list.
-  *** If id(v) is the least id of any id in P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
- ** Else, if id(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
- ** Else, append id(v) to the end of each of the remaining paths in its list.
+  *** If ID(v) is the least ID of any ID in P, then add P to the Cycle List. (The purpose is to count each cycle only once.)
+ ** Else, if ID(v) is somewhere else in the path, then remove P from the path list (because this cycle must have been counted already).
+ ** Else, append ID(v) to the end of each of the remaining paths in its list.
+
+== Notes
+
+On a large graph with undirected edges, Cycle Detection is likely to run out of memory. In addition, it will detect duplicate cycles that differ only in their direction.
+
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-tg_cycle_detection (SET<STRING> v_type, SET<STRING> e_type, INT depth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+tg_cycle_detection ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT depth,
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
+
+
+=== Parameters
+
+[cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+
+|`+SET<STRING> v_type+`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+SET<STRING> e_type+`
+|Names of edge types to use
+|(empty set of strings)
+
+|`INT depth`
+|Maximum cycle length to search for, equal to the maximum number of iterations
+|null
+
+|`+BOOL print_results+`
+|If True, output JSON to standard output
+|True
+
+|`+STRING file_path+`
+|If not empty, write output to this file.
+|(empty string)
+
+|===
+
+=== Output
+
+Computes a list of vertex ID lists, each of which is a cycle.
+The result is available in two forms:
+
+* streamed out to the console in JSON format
+* written to a file in tabular format
+
+=== Result size
+Number of cycles * average cycle length
+
+Both of these measures are not known in advance.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E * k)], where stem:[E] is the number of edges and stem:[k] is the lesser of either the maximum cycle length or the depth parameter.
 
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
-Computes a list of vertex id lists, each of which is a cycle. The result
-is available in 2 forms:
-
-* streamed out in JSON format
-* written to a file in tabular format
-
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT depth+`*: Maximum cycle length to search for = maximum number
-of iterations
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size a|
-Number of cycles * average cycle length
-
-Both of these measures are not known in advance.
-
-|Graph Types |Directed
-|===
-
-== *Example*
+== Example
 
 In the social10 graph, there are 5 cycles, all with the Fiona-George-Howard-Ivy cluster.
 

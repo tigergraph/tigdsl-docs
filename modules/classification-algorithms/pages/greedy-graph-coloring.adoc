@@ -9,48 +9,70 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/greedy_graph_coloring[Greedy Graph Coloring]
 ****
 
-This algorithm assigns a unique integer value known as its color to the vertices of a graph such that no neighboring vertices share the same color. The reason why this is called color is that this task is equivalent to assigning a color to each nation on a map so that no neighboring nations share the same color.
+This algorithm assigns a unique integer value known as its color to the vertices of a graph such that no neighboring vertices share the same color.
+The reason why this is called color is that this task is equivalent to assigning a color to each nation on a map so that no neighboring nations share the same color.
 
-Given a set of _k_ vertices, the algorithm first colors all vertices with the same color - the first color. It then starts from all the vertices and has each vertex send its own colors to its neighbors. If there are two neighboring vertices with the same color, the algorithm will reassign colors where there is a conflict. The same process is repeated until all conflicts are resolved.
+Given a set of _k_ vertices, the algorithm first colors all vertices with the same color - the first color.
+It then starts from all the vertices and has each vertex send its own colors to its neighbors. If there are two neighboring vertices with the same color, the algorithm will reassign colors where there is a conflict. The same process is repeated until all conflicts are resolved.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 
 [source,gsql]
 ----
-CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type,SET<STRING> e_type, UINT max_colors = 999999,BOOL print_color_count = TRUE, BOOL display = TRUE, STRING file_path = "")
+CREATE QUERY tg_greedy_graph_coloring(SET<STRING> v_type_set,SET<STRING> e_type_set,UINT max_colors = 999999,
+  BOOL print_color_count = TRUE, BOOL print_stats = TRUE, STRING file_path = "")  SYNTAX V1 {
 ----
 
-The algorithm has a worst-case time complexity of stem:[O(V^2 + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
-
-== Parameters
+=== Parameters
 
 |===
 | Name | Description
 
-| `v_type`
+| `SET<STRING> v_type_set`
 | A set of all vertex types to color.
 
-| `e_type`
+| `SET<STRING> e_type_set`
 | A set of all edge types to traverse.
 
-| `max_colors`
+| `INT max_colors`
 | The Maximum number of colors that can be used. Use a large number like `999999` unless there is a strict limit.
 
-| `print_color_count`
+| `BOOL print_color_count`
 | If set to true, the total number of colors used will be displayed
 
-| `display`
+| `BOOL print_stats`
 | If set to true, the output will display all vertices and their associated color
 
-| `file_path`
+| `STRING file_path`
 | If a file path is provided, the output will be saved to the file indicated by the file path in CSV format.
 |===
+
+=== Time complexity
+
+The algorithm has a worst-case time complexity of stem:[O(V^2 + E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY greedy_graph_coloring (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.classification.greedy_graph_coloring (<parameters>)
+----
 
 == Example
 

@@ -9,54 +9,56 @@
 ^|Homogeneous vertex types
 ^|Heterogeneous vertex types
 |===
-
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/adamic_adar[Adamic Adar]
 
 ****
 
-
-The Adamic/Adar index is a measure introduced in 2003 by Lada Adamic and Eytan Adar to predict links in a social network, according to the number of shared links between two nodes.
-It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two nodes.
+The Adamic/Adar index is a measure according to the number of shared links between two vertices.
+It is defined as the sum of the inverse logarithmic degree centrality of the neighbors shared by the two vertices.
 
 [stem]
 ++++
 {A(x,y)=\sum _{u\in N(x)\cap N(y)}{\frac {1}{\log {|N(u)|}}}}
 ++++
-Where stem:[{N(u)}] is the set of nodes adjacent to _u_.
+Where stem:[{N(u)}] is the set of vertices adjacent to _u_.
+
+This algorithm was created in 2003 by Lada Adamic and Eytan Adar.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]
 ----
-CREATE QUERY tg_adamic_adar(VERTEX a, VERTEX b, SET<STRING> e_type)
+CREATE QUERY tg_adamic_adar(VERTEX v_source VERTEX v_target, SET<STRING> e_type)
 ----
+=== Parameters
+
+[cols="1,1,1"]
+|===
+|Name | Description | Default value
+
+| `VERTEX v_source`
+|  The first vertex to compare.
+| N/A
+
+| `VERTEX v_target`
+| The second vertex to compare with the first.
+| N/A
+
+| `SET<STRING> e_type_set`
+| Edge types to traverse.
+| (A blank set of strings)
+|===
+
+=== Output
+Returns Adamic Adar index between the two given vertices.
+If the two vertices do not have common neighbors, the algorithm will return a division by 0 error.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
-== Parameters
-
-[cols="1,1,1"]
-|===
-|Name | Description | Data type
-
-| `a`
-|  A vertex.
-|  `VERTEX`
-
-| `b`
-| A vertex.
-| `VERTEX`
-
-| `e_type`
-| Edge types to traverse.
-| `SET<STRING>`
-|===
-
-== Return value
-The Adamic Adar index between two vertices. If the two vertices do not have common neighbors, the algorithm will return a division by 0 error.
 
 == Example
 Suppose we have the graph below:

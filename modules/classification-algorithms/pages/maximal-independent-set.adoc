@@ -11,9 +11,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set[Maximal Independent Set] (contains links to all algorithm variants)
 ****
 
@@ -34,42 +31,79 @@ The randomized version can produce different results every time you run it.
 The random version requires link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Classification/maximal_independent_set/random[a user-defined function (UDF)].
 See xref:gsql-ref:querying:func/query-user-defined-functions.adoc[] for how to add a UDF.
 
+== Notes
+
+This algorithm ignores edge weights.
+
+
 == Specifications
 
 .Deterministic MIS
 [source,gsql]
 ----
 tg_maximal_indep_set(STRING v_type, STRING e_type,
-INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
+INT maximum_iteration = 100, BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 .Randomized MIS
 [.wrap,gsql]
 ----
 tg_maximal_indep_set_random(STRING v_type, STRING e_type,
-    INT max_iter = 100, BOOL print_accum = TRUE, STRING file_path = "")
+    INT maximum_iteration = 100, BOOL print_results = TRUE, STRING file_path = "")
 ----
+
+=== Parameters
+
+|===
+|Parameter |Description |Default Value
+
+|`STRING v_type`
+|The vertex type to use
+|(empty string)
+
+|`STRING e_type`
+|The edge type to use
+|(empty string)
+
+|`INT maximum_iteration`
+|The number of nearest neighbors to consider
+| N/A
+
+|`BOOL print_results`
+|If true, print output in JSON format to the standard output.
+|True
+
+|`STRING file_path`
+|If not empty, write output to this file.
+|(empty string)
+
+|===
+
+=== Output
+
+Returns a set of vertices that form a maximal independent set.
+
+If the graph is a set of N unconnected vertices, then the maximal independent set is all N vertices.
 
 === Time complexity
 This algorithm has a complexity of stem:[O(E)], where stem:[E] is the number of edges.
 
-[width="100%",cols="<50%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |A set of vertices that form a maximal independent set.
 
-|Input Parameters a|
-* *`+STRING v_type+`*: Name of vertex type to use
-* *`+STRING e_type+`*: Name of edge type to use
-* *`+INT max_iter+`:* maximum number of iterations for the search
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size |Size of the MIS: unknown. Worst case: If the graph is a
-set of N unconnected vertices, then the MIS is all N vertices.
-
-|Graph Types |Undirected edges
-|===
+//=== Run commands
+//
+//==== Schema-Free Query
+//
+//[source.wrap,gsql]
+//----
+//RUN QUERY tg_maximal_indep_set (<parameters>)
+//----
+//
+//==== Packaged Template Query
+//
+//[source.wrap,gsql]
+//----
+//CALL GDBMS_ALGO.classification.maximal_indep_set (<parameters>)
+//----
 
 == Example
 
@@ -77,6 +111,10 @@ Consider our social10 graph, with three components.
 
 image::image (14).png[]
 
-It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS. For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen. If the algorithm selects either George or Ivy, then no other independent vertices remain in the component. However, the algorithm could select both Fiona and Howard; they are independent of one another.
+It is clear that for each of the two triangles -- (Alex, Bob, Justin) and (Chase, Damon, Eddie) -- we can select one vertex from each triangle to be part of the MIS.
+
+For the 4-vertex component (Fiona, George, Howard, Ivy), it is less clear what will happen.
+If the algorithm selects either George or Ivy, then no other independent vertices remain in the component.
+However, the algorithm could select both Fiona and Howard; they are independent of one another.
 
 This demonstrates the uncertainty of the Maximal Independent Set algorithm and how it differs from Maximum Independent Set. A _maximum_ independent set algorithm would _always_ select Fiona and Howard, plus 2 others, for a total of 4 vertices. The _maximal_ independent set algorithm relies on chance. It could return either 3 or 4 vertices.

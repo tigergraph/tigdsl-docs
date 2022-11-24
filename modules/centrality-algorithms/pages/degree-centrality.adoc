@@ -18,65 +18,80 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 ****
 
 
-*Degree centrality* is defined as the number of edges incident upon a
-vertex (i.e., the number of ties that a node has).
-The degree can be
-interpreted in terms of the immediate risk of a node for catching
-whatever is flowing through the network (such as a virus, or some
-information).
+*Degree centrality* is defined as the number of edges incident upon a vertex (i.e., the number of ties that a node has).
+
+One major application of degree centrality is in cybersecurity, and more generally, network management.
+
+The degree can be interpreted in terms of the immediate risk of a node for catching whatever is flowing through the network (such as a virus, or some information).
 
 == Specifications
 
 ....
-CREATE QUERY tg_degree_cent(SET<STRING> v_type, SET<STRING> e_type,
-  SET<STRING> re_type, BOOL in_degree = TRUE, BOOL out_degree = TRUE,
-  INT top_k=100, BOOL print_accum = True, STRING result_attr = "",
+CREATE QUERY tg_degree_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+  SET<STRING> reverse_e_type_set, BOOL in_degree = TRUE, BOOL out_degree = TRUE,
+  INT top_k=100, BOOL print_results = True, STRING result_attribute = "",
   STRING file_path = "")
 ....
+
+=== Parameters
+
+|===
+|Name |Description | Default value
+
+|`SET<STRING> v_type_set` |A set of vertex types. | (empty set of strings)
+
+|`SET<STRING> e_type_set` |A set of edge types. | (empty set of strings)
+
+|`SET<STRING> reverse_e_type_set` |A set of reverse edge types.
+If an edge is undirected, put the edge name in the set as well. | (empty set of strings)
+
+|`BOOL in_degree` |Boolean value that indicates whether to count the
+incoming edges as part of a vertex's degree centrality. | True
+
+|`BOOL out_degree` |Boolean value that indicates whether to count the
+outgoing edges as part of a vertex's degree centrality. | True
+
+|`INT top_k` |The number of vertices with the highest scores to return. | 100
+
+|`BOOL print_results` |If true, print results to JSON output. | True
+
+|`STRING result_attribute` |If not empty, save the degree centrality score of each
+vertex to this attribute. | (empty string)
+
+|`STRING file_path` |If not empty, save results in CSV to this file. | (empty string)
+
+|===
+
+=== Output
+
+The vertices with the highest degree centrality scores along with their scores.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
 
-== Parameters
 
-[cols=",,",options="header",]
-|===
-|Name |Description |Data type
-|`+v_type+` |A set of vertex types. |`+SET<STRING>+`
+=== Run commands
 
-|`+e_type+` |A set of edge types. |`+SET<STRING>+`
+==== Schema-Free Query
 
-|`+re_type+` |A set of reverse edge types. If an edge is undirected, put
-the edge name in the set as well. |``SET`
+[source.wrap,gsql]
+----
+RUN QUERY tg_degree_cent (<parameters>)
+----
 
-|`+in_degree+` |Boolean value that indicates whether to count the
-incoming edges as part of a vertex's degree centrality. |`+BOOL+`
+==== Packaged Template Query
 
-|`+out_degree+` |Boolean value that indicates whether to count the
-outgoing edges as part of a vertex's degree centrality. |`+BOOL+`
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.degree_cent (<parameters>)
+----
 
-|`+top_k+` |The number of vertices with the highest scores to return.
-|`+INT+`
-
-|`+print_accum+` |If true, print results to JSON output. |`+BOOL+`
-
-|`+result_attr+` |If not empty, save the degree centrality score of each
-vertex to this attribute. |`+STRING+`
-
-|`+file_attr+` |If not empty, save results in CSV to this file.
-|`+STRING+`
-|===
-
-== Return value
-
-The vertices with the highest degree centrality scores along with their
-scores.
 
 == Example
 
 Suppose we have the following graph:
 
-image::article-rank-ex.png[]
+image::social-graph-2022-10.png[]
 
 Running the query on the graph will show that Dan has the highest degree
 centrality:
@@ -96,41 +111,56 @@ Result::
 --
 [,json]
 ----
-{
-  "error": false,
-  "message": "",
-  "version": {
-    "schema": 2,
-    "edition": "enterprise",
-    "api": "v2"
-  },
-  "results": [{"top_scores": [
-    {
-      "score": 8,
-      "Vertex_ID": "Dan"
-    },
-    {
-      "score": 6,
-      "Vertex_ID": "Jenny"
-    },
-    {
-      "score": 4,
-      "Vertex_ID": "Nancy"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Kevin"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Amily"
-    },
-    {
-      "score": 2,
-      "Vertex_ID": "Jack"
-    }
-  ]}]
-}
+[
+  {
+    "top_scores": [
+      {
+        "Vertex_ID": "Dan",
+        "score": 4
+      },
+      {
+        "Vertex_ID": "Jenny",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Nancy",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Vicki",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Jack",
+        "score": 3
+      },
+      {
+        "Vertex_ID": "Juan",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Emily",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Kevin",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Tom",
+        "score": 2
+      },
+      {
+        "Vertex_ID": "Denise",
+        "score": 1
+      },
+      {
+        "Vertex_ID": "Ben",
+        "score": 1
+      }
+    ]
+  }
+]
 ----
 --
 ====

@@ -13,29 +13,24 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+This algorithm computes the same similarity scores as the xref:jaccard-similarity-of-neighborhoods-single-source.adoc[Jaccard similarity of neighborhoods, single source].
 
-This algorithm computes the same similarity scores as the xref:jaccard-similarity-of-neighborhoods-single-source.adoc[Jaccard similarity of neighborhoods, all pairs] except that it starts from all vertices as the source vertex and computes its similarity scores with its neighbors for all the vertices in parallel.
+Instead of selecting a single source vertex, however, it calculates similarity scores for all vertex pairs in the graph in parallel.
 
 Since this is a memory-intensive operation, it is split into batches to reduce peak memory usage. The user can specify how many batches it is to be split into.
 
-This algorithm runs on graphs with unweighted edges (directed or undirected).
-
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-CREATE QUERY tg_jaccard_nbor_ap_batch ( INT top_k = 10, SET<STRING> v_type,
-    SET<STRING> feat_v_type, SET<STRING> e_type, SET<STRING> re_type,
+CREATE QUERY tg_jaccard_nbor_ap_batch ( INT top_k = 10,  SET<STRING> v_type_set,
+    SET<STRING> feat_v_type,  SET<STRING> e_type_set, SET<STRING> reverse_e_type_set,
     STRING similarity_edge, INT src_batch_num = 50, INT nbor_batch_num = 10,
-    BOOL print_accum = true, INT print_limit = 50, STRING file_path = "")
+    BOOL print_results = true, INT print_limit = 50, STRING file_path = "")
 ----
 
-=== Time complexity
 
-This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
-
-
-== Parameters
+=== Parameters
 
 |===
 | Name | Description
@@ -52,7 +47,7 @@ This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the numbe
 | `e_type`
 | Directed edge type to traverse
 
-| `re_type`
+| `reverse_e_type`
 | Reverse edge type to traverse
 
 | `similarity_edge`
@@ -64,7 +59,7 @@ This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the numbe
 | `nbor_batch_num`
 | Number of batches to split the 2-hop neighbor vertices into
 
-| `print_accum`
+| `print_results`
 | If `true`, output JSON to standard output.
 
 | `print_limit`
@@ -75,7 +70,12 @@ This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the numbe
 
 |===
 
-== Result
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
+
+=== Output
 
 The result contains the top _k_ Jaccard *similarity* scores for each vertex and its corresponding pair. A pair is only included if its similarity is greater than 0, meaning there is at least one common neighbor between the pair. The result is available in JSON format, or can be output to a file in CSV, or it can be saved as an edge on the graph itself. A JSON formatted result could look like this:
 

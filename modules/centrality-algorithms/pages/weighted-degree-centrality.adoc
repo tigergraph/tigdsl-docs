@@ -1,5 +1,6 @@
 = Weighted Degree Centrality
 :description: Overview of the weighted degree centrality algorithm.
+:stem: latexmath
 
 .Supported Graph Characteristics
 ****
@@ -24,66 +25,74 @@ Weighted degree centrality allows you to assign weights to the edges connected t
 [,gsql]
 ----
 CREATE QUERY tg_weighted_degree_cent(STRING v_type, STRING e_type,
-    STRING re_type, STRING weight, BOOL in_degree = TRUE,
-    BOOL out_degree = TRUE, INT top_k=100, BOOL print_accum = TRUE,
-    STRING result_attr = "",STRING file_path = "")
+    STRING reverse_e_type, STRING weight_attribute, BOOL in_degree = TRUE,
+    BOOL out_degree = TRUE, INT top_k=100, BOOL print_results = TRUE,
+    STRING result_attribute = "",STRING file_path = "")
 ----
 
-=== Time complexity
-The algorithm has a time complexity of 𝑂(𝐸), where 𝐸 is the total number of edges in the graph.
-
-
-== Parameters
-
+=== Parameters
 
 |===
-|Parameter |Type |Description
+|Parameter |Description
 
-|`v_type`
-|`STRING`
+|`STRING v_type`
 |Vertex type to traverse.
 
-|`e_type`
-|`STRING`
+|`STRING e_type`
 |Edge type to traverse.
 
-|`re_type`
-|`STRING`
+|`STRING reverse_e_type`
 |Reverse vertex type to traverse and calculate in-degree.
 
-|`weight`
-|`STRING`
+|`STRING weight_attribute`
 |The name of the attribute that indicates the weight of the edge.
 The attribute itself must be of type `INT`.
 
-|`in_degree`
-|`BOOL`
+|`BOOL in_degree`
 |Whether to count incoming edges when calculating degree centrality.
 
-|`out_degree`
-|`BOOL`
+|`BOOL out_degree`
 |Whether to count outgoing edges when calculating degree centrality.
 
-|`top_k`
-|`INT`
+|`INT top_k`
 |The number of vertices with the highest degree centrality to return.
 
-|`print_accum`
-|`BOOL`
+|`BOOL print_results`
 |If true, return JSON results to standard output.
 
-|`result_attr`
-|`STRING`
+|`STRING result_attribute`
 |If not empty, save the degree centrality of each vertex to this attribute.
 
-|`file_path`
-|`STRING`
+|`STRING file_path`
 |If not empty, output CSV results to this filepath.
 |===
 
 
-== Return value
+=== Output
+
 The vertices with the highest degree centrality scores along with their scores.
+
+
+=== Time complexity
+
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the total number of edges in the graph.
+
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_weighted_degree_cent (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.weighted_degree_cent (<parameters>)
+----
 
 == See also
 

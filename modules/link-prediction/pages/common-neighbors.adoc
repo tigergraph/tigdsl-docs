@@ -11,51 +11,55 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-This algorithm ignores edge weights.
-
 Algorithm Link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Topological%20Link%20Prediction/common_neighbors[Common Neighbors]
 
 ****
 
-The common neighbors algorithm calculates the number of common neighbors between two vertices.
+A vertex stem:[A] that is connected to vertices stem:[B] and stem:[C] is considered to be a "common neighbor" of stem:[B] and stem:[C].
+
+The common neighbors algorithm counts the number of common neighbors between two vertices.
+
+== Notes
+
+This algorithm ignores edge weights.
 
 == Specifications
 [,gsql]
 ----
-CREATE QUERY tg_common_neighbors(VERTEX a, VERTEX b, SET<STRING> e_type)
+CREATE QUERY tg_common_neighbors(VERTEX v_source VERTEX v_target, SET<STRING> e_type)
 ----
+
+=== Parameters
+[cols="1,1,1"]
+|===
+|Name | Description | Default value
+
+| `VERTEX v_source`
+|  The first vertex to compare.
+| N/A
+
+| `VERTEX v_target`
+| The second vertex to compare with the first.
+| N/A
+
+| `SET<STRING> e_type_set`
+| Edge types to traverse.
+| (A blank set of strings)
+|===
+
+=== Output
+Returns the number of common neighbors between two vertices expressed as a `closeness` value.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(D1 + D2)], where stem:[D1] and stem:[D2] are the degrees of the two vertices.
 
-== Parameters
-[cols="1,1,1"]
-|===
-|Name | Description | Data type
-
-| `a`
-|  A vertex.
-|  `VERTEX`
-
-| `b`
-| A vertex.
-| `VERTEX`
-
-| `e_type`
-| Edge types to traverse.
-| `SET<STRING>`
-|===
-
-== Return value
-The number of common neighbors between two vertices.
 
 == Example
-Suppose to have the following graph:
+Suppose we have the following graph:
 
 image::adamic-adar-ex.png[]
 
-Running the algorithm between Dan and Jenny will show that they have 1 common neighbor.
+Running the algorithm between Dan and Jenny shows that they have 1 common neighbor.
 
 [tabs]
 ====

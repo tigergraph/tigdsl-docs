@@ -10,11 +10,7 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-====
-On a graph with weighted edges, use xref:single-source-shortest-path-weighted.adoc[].
-With weighted edges, the algorithm must search the whole graph, whether you want the path for just one destination or for all destinations.
-====
+
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/unweighted[Single-source Shortest Path (Unweighted)]
 
@@ -32,32 +28,24 @@ When the graph is unweighted, we can use a "greedy" approach to find the shortes
 In this algorithm, the first path found to another vertex is considered to be the shortest path.
 
 
+== Notes
+
+On a graph with weighted edges, use xref:single-source-shortest-path-weighted.adoc[].
+With weighted edges, the algorithm must search the whole graph, whether you want the path for just one destination or for all destinations.
+
 == Specifications
 
 [source,gsql]
 ----
-CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
-  SET<STRING> e_type, INT output_limit = -1, BOOL print_accum =TRUE,
-  STRING result_attr ="", STRING file_path ="", BOOL display_edges =FALSE)
+CREATE QUERY tg_shortest_ss_no_wt (VERTEX source,  SET<STRING> v_type_set,
+   SET<STRING> e_type_set, INT print_limit = -1, BOOL print_results =TRUE,
+  STRING result_attribute ="", STRING file_path ="", BOOL display_edges =FALSE)
 ----
-
-=== Time complexity
-
-This algorithm has a time complexity of stem:[O(E)], where stem:[E] is equal to the number of edges.
-
-=== Space complexity
-
-This algorithm has a space complexity of stem:[O(V logV)], where stem:[V] is equal to the number of vertices.
-
-=== Results
-Computes a shortest distance `INT` and shortest path `STRING` from the given source to every other vertex.
-
-Optionally, writes the distance value from the source to each target vertex on a specified INT attribute.
 
 
 === Parameters
 
-[width="100%",cols="0,1,0",options="header",]
+[cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 
@@ -66,31 +54,31 @@ Optionally, writes the distance value from the source to each target vertex on a
 |(empty string)
 
 
-|`SET<STRING> v_type`
+|`SET<STRING> v_type_set`
 |Names of vertex types to use
 |(empty string)
 
 
 
-|`SET<STRING> e_type`
+|`SET<STRING> e_type_set`
 |Names of edge types to use
 |N/A
 
 
 
-|`INT output_limit`
+|`INT print_limit`
 |If >=0, max number of vertices to output to JSON
 |-1
 
 
-.
-|`BOOL print_accum`
+
+|`BOOL print_results`
 |Whether to print results in JSON format to standard output
 |True
 
 
 
-|`STRING result_attr`
+|`STRING result_attribute`
 |If not empty, store distance values in INT to this vertex attribute
 |(empty string)
 
@@ -107,6 +95,22 @@ Optionally, writes the distance value from the source to each target vertex on a
 |No
 
 |===
+
+
+=== Output
+Computes a shortest distance `INT` and shortest path `STRING` from the given source to every other vertex.
+
+Optionally, writes the distance value from the source to each target vertex on a specified INT attribute.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E)], where stem:[E] is equal to the number of edges.
+
+=== Space complexity
+
+This algorithm has a space complexity of stem:[O(V logV)], where stem:[V] is equal to the number of vertices.
+
 
 == Example
 

@@ -27,52 +27,83 @@ Given an undirected and connected graph, a minimum spanning tree is a set of edg
 
 If the user specifies a source vertex, this will be used as the _seed_. Otherwise, the algorithm will select a random _seed_ vertex.
 
-[CAUTION]
-====
-If the graph contains multiple components (i.e., some vertices are disconnected from the rest of the graph, then the algorithm will span only the component of the seed vertex.
+== Notes
 
-If you do not have a preferred vertex, and the graph might have more than one component, then you should use the Minimum Spanning Forest (MDF) algorithm instead.
-====
+If the graph contains multiple components (i.e., some vertices are disconnected from the rest of the graph), then the algorithm will span only the component of the seed vertex.
+
+If you do not have a preferred vertex, and the graph might have more than one component, then you should use the xref:minimum-spanning-forest.adoc[] algorithm instead.
+
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-tg_mst (VERTEX opt_source, SET<STRING> v_type, SET<STRING> e_type,
-  STRIN wt_attr, STRING wt_type, INT max_iter = -1,
-  BOOL print_accum = TRUE, STRING result_attr = "", STRING file_path = "")
+tg_mst (VERTEX opt_source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
+  STRIN wt_attr, STRING wt_type, INT maximum_iteration = -1,
+  BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
+
+=== Parameters
+
+[cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+|`+VERTEX opt_source+`
+|ID of a source vertex (optional)
+|(empty set of strings)
+
+|`+SET<STRING> v_type+`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+SET<STRING> e_type+`
+|Names of edge types to use
+|(empty set of strings)
+
+|`+STRING wt_attr+`
+|Name of edge weight attribute
+|(empty string)
+
+|`+STRING wt_type+`
+|Data type of edge weight attribute (must be `INT`, `FLOAT`, or `DOUBLE`)
+|(empty string)
+
+|`INT maximum_iteration`
+|Maximum number of edges to include. If less than the number of vertices minus 1,
+then the result is not a true spanning tree.
+|-1
+
+|`+BOOL print_results+`
+|If True, output JSON to standard output
+|True
+
+|`+STRING result_attribute+`
+|If not empty, store result values (`BOOL`) to this attribute
+|(empty string)
+
+|`+STRING file_path+`
+|If not empty, write output to this file.
+|(empty string)
+
+|===
+
+
+=== Output
+
+Computes a minimum spanning tree. If the JSON or file output
+selected, the output is the set of edges that form the MST. If the
+result_attribute option is selected, the edges which are part of the MST are
+tagged True; other edges are tagged False.
+
+=== Result size
+
+stem:[V-1], or the number of vertices minus 1
 
 === Time complexity
 
 This algorithm has a time complexity of stem:[O(V^2)], where stem:[V] is equal to the number of vertices.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Computes a minimum spanning tree. If the JSON or file output
-selected, the output is the set of edges that form the MST. If the
-result_attr option is selected, the edges which are part of the MST are
-tagged True; other edges are tagged False.
-
-|Input Parameters a|
-* *`+VERTEX opt_source+`:* ID of a source vertex (optional)
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+STRING wt_attr+`*: Name of edge weight attribute
-* *`+STRING wt_type+`*: Data type of edge weight attribute: "INT",
-"FLOAT", or "DOUBLE"
-* *`+INT max_iter+`*: Maximum of edges to include. If less than (V-1),
-then the result is not a true spanning tree.
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING result_attr+`*: If not empty, store result values (BOOL) to
-this attribute
-* *`+STRING file_path+`:* If not empty, write output to this file.
-
-|Result Size |V - 1 = number of vertices - 1
-
-|Graph Types |Undirected edges and connected
-|===
 
 == *Example*
 
@@ -80,7 +111,11 @@ In the graph `social10`, we consider only the undirected Coworker edges.
 
 image::screen-shot-2019-04-24-at-4.21.08-pm.png[Visualized results of example graph social10 graph with Coworker edges]
 
-This graph has 3 components. Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point. If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left. You can start from any vertex in the component and get the same or an equivalent MST result.
+This graph has 3 components.
+Minimum Spanning Tree finds a tree for one component, so which component it will work on depends on what vertex we give as the starting point.
+
+If we select Fiona, George, Howard, or Ivy as the start vertex, then it works on the 4-vertex component on the left.
+You can start from any vertex in the component and get the same or an equivalent MST result.
 
 The figure below shows the result of
 

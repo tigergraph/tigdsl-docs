@@ -15,8 +15,13 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+Flow is the concept of something moving from one vertex to another in a graph, such as money (in a financial graph), data (in a computer network), or even water (in a utility network).
 
-The maximum flow problem is to find the maximum possible flow from a source vertex to the target vertex given a graph which represents a flow network where every edge has a capacity under the following constraints :
+A graph must have weighted edges to represent flow.
+
+The maximum flow problem is to find the maximum possible flow from a source vertex to the target vertex.
+
+Assuming a weighted graph where every edge has a capacity under the following constraints:
 
 * Flow on an edge doesn't exceed the capacity of the edge.
 * Incoming flow is equal to outgoing flow for every vertex except `s` and `t`.
@@ -30,70 +35,54 @@ The Maximum Flow algorithm has real world applications such as https://www.resea
 
 [.wrap,gsql]
 ----
-CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink, Set<STRING> v_type,
-  SET<STRING> e_type, SET<STRING> reverse_e_type, STRING cap_attr,
-  STRING cap_type, FLOAT min_flow_threshhold = 0.001, BOOL print_accum = TRUE, BOOL display_edges = TRUE, BOOL spit_to_file = FALSE, STRING file_path = "/home/tigergraph/tg_query_output.csv")
+CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink,  SET<STRING> v_type_set,
+   SET<STRING> e_type_set, SET<STRING> reverse_e_type_set, STRING cap_attr,
+  STRING cap_type, FLOAT min_flow_threshhold = 0.001, BOOL print_results = TRUE, BOOL display_edges = TRUE, BOOL spit_to_file = FALSE, STRING file_path = "/home/tigergraph/tg_query_output.csv")
 ----
 
-=== Time complexity
-
-stem:[O(F + E)]
-
-== Parameters
+=== Parameters
 
 |===
-|Parameter |Data type |Description
+|Parameter |Description
 
-|`source`
-|`VERTEX`
+|`VERTEX source`
 |Source vertex where the flow starts.
 
-|`sink`
-|`VERTEX`
+|`VERTEX sink`
 |Target vertex where the flow is to be sent to.
 
-|`v_type`
-|`SET<STRING>`
+|`SET<STRING> v_type_set`
 |Vertex types to consider in the path.
 
-|`e_type`
-|`SET<STRING>`
+|`SET<STRING> e_type_set`
 |Edge types to traverse.
 
-|`reverse_e_type`
-|`SET<STRING>`
+|`SET<STRING> reverse_e_type_set`
 |Reverse edge types to traverse.
 
-|`cap_attr`
-|`STRING`
+|`STRING cap_attr`
 |Name of the attribute that contains the capacity of the edge.
 
-|`cap_type`
-|`STRING`
+|`STRING cap_type`
 |Data type of the `cap_attr` attribute.
 
-|`min_flow_threshold`
-|`FLOAT`
+|`FLOAT min_flow_threshold`
 |Minimum flow for an edge to carry if it is to carry any flow.
 
-|`print_accum`
-|`BOOL`
+|`BOOL print_results`
 |If true, output JSON to standard output.
 
-|`display_edges`
-|`BOOL`
+|`BOOL display_edges`
 |If true, the resulting path includes edges in addition to vertices.
 
-|`split_to_file`
-|`BOOL`
+|`BOOL split_to_file`
 |If true, the file output will contain every edge and how much flow they would carry to achieve the maximum flow.
 
-|`file_path`
-|`STRING`
+|`STRING file_path`
 |If not empty, write output to this file.
 |===
 
-== Result
+=== Output
 
 JSON result::
 The return value is the maximum flow that can be carried from the source to the sink.
@@ -103,6 +92,12 @@ However, it does not output how much flow each edge carries to achieve the maxim
 CSV result::
 The first line is the maximum flow that can be carried from the source to the sink.
 If you set `split_to_file` to true, the result will contain all edges that carry flow as well as how much flow they carry to achieve maximum flow.
+
+
+=== Time complexity
+
+The time complexity of the Edmond-Karp algorithm is independent of maximum flow in the graph.
+Here, the time complexity is stem:[O(VE^2)] where stem:[V] is the number of vertices and stem:[E] is the number of edges in the graph.
 
 == Example
 

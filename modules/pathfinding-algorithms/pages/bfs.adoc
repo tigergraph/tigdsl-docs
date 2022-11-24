@@ -26,50 +26,75 @@ the next depth level.
 
 [.wrap,gsql]
 ----
-CREATE QUERY tg_bfs(SET<STRING> v_type, SET<STRING> e_type,INT max_hops=10,
-    VERTEX v_start, BOOL print_accum = True, STRING result_attr = "",
+CREATE QUERY tg_bfs( SET<STRING> v_type_set,  SET<STRING> e_type_set,INT max_hops=10,
+    VERTEX v_start, BOOL print_results = True, STRING result_attribute = "",
     STRING file_path = "", BOOL display_edges = True)
 ----
+
+
+
+=== Parameters
+
+[cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+|`VERTEX v_type`
+|Vertex types to traverse
+|(empty string)
+
+|`EDGE e_type`
+|Edge types to traverse
+|(empty string)
+
+|`INT max_hops`
+|Maximum hops for the algorithm to look from each vertex
+|10
+
+|`VERTEX v_start`
+|Source vertex for traversal
+|(empty string)
+
+|`BOOL print_results`
+|Whether to print JSON output
+|True
+
+|`STRING result_attribute`
+|The vertex attribute to store results to in `INT` format
+|(empty string)
+
+|`STRING file_path`
+|The path for a CSV output file
+|(empty string)
+
+|`BOOL display_edges`
+|Whether to output edges for visualization
+|False
+
+|===
+
+=== Output
+
+Returns all the vertices that are accessible from the source vertex.
+
+The result size is equal to stem:[V], or the number of vertices.
 
 === Time complexity
 
 This algorithm has a time complexity of stem:[O(V+E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[cols=",",options="header",]
-|===
-|Characteristic |Value
-|Result |Returns all the vertices that are accessible from the source
-vertex
-
-|Required input parameters
-a|* `+v_type+`: vertex types to
-traverse
-* `+e_type+`: edge types to traverse
-* `+max_hops+`: look only this far from each vertex
-* `+v_start+`: source vertex for traversal
-* `+print_accum+`: print JSON output
-* `+result_attr+`: INT
-attr to store results to
-* `+file_path+`: file to write CSV output
-to
-* `+display_edges+`:output edges for visualization
-
-|Result size |V = number of vertices
-
-|Graph types |Directed or undirected edges, weighted or unweighted edges
-|===
 
 == Example
 
-In the example below, we run `+tg_bfs+` algorithm from the source vertex
+In the example below, we run the `+tg_bfs+` algorithm from the source vertex
 `+alex+` on the social10 graph.
 
-....
-# Use _ for default values
+[source.wrap,gsql]
+----
 RUN QUERY tg_bfs(["Person"], ["Friend"], _, ("Alex","Person"), _, _, _, _) <1>
-....
+----
 <1> Putting `_` in the position of a parameter will use the default value for that parameter.
 
-Below is the visualized result of the query:
+Below is the visualized result of the query.
 
 image::bfs-ex.png[]

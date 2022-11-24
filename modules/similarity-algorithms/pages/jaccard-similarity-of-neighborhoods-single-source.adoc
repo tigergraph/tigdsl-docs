@@ -13,8 +13,12 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
+The Jaccard index measures the relative overlap between two sets.
 
-The Jaccard index measures the relative overlap between two sets. To compare two vertices by Jaccard similarity, first select a set of values for each vertex. For example, a set of values for a Person could be the cities the Person has lived in. Then the Jaccard index is computed for the two vectors.
+To compare two vertices by Jaccard similarity, first select a set of attribute values for each vertex.
+
+For example, a set of values for a Person vertex could be the list of cities the person has lived in.
+The Jaccard index is computed for the two value sets.
 
 The Jaccard index of two sets A and B is defined as follows:
 
@@ -23,27 +27,60 @@ The Jaccard index of two sets A and B is defined as follows:
 Jaccard(A,B)=\frac{|A \cap B|}{|A \cup B|}
 ++++
 
-The value ranges from 0 to 1. If A and B are identical, then Jaccard(A, B) = 1. If both A and B are empty, we define the value to be 0.
+The value ranges from 0 to 1. If A and B are identical, then stem:[Jaccard(A, B) = 1]. If both A and B are empty, we define the value to be 0.
 
 == Specifications
 
 [,gsql]
 ----
 tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k = 100,
-  BOOL print_accum = TRUE, STRING similarity_edge_type = "",STRING file_path = "")
+  BOOL print_results = TRUE, STRING similarity_edge_type = "",STRING file_path = "")
 ----
 
-=== Time complexity
 
-This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
+=== Parameters
 
-
-[width="100%",cols="<5%,<50%",options="header",]
+[options="header"]
 |===
-|*Characteristic* |Value
-|Result a|
-The top _k_ vertices in the graph that have the highest similarity
-scores, along with their scores.
+|Parameter |Description |Default value
+
+| `SET<STRING> v_type_set`
+| Vertex type used to calculate similarity score
+| (empty set of strings)
+
+| `SET<STRING> e_type_set`
+| Edge type to traverse
+| (empty set of strings)
+
+| `SET<STRING> reverse_e_type_set`
+| Reverse edge type to traverse
+| (empty set of strings)
+
+| `INT top_k`
+| The number of vertex pairs with the highest similarity scores to return. Limits number of returned items.
+| 100
+
+| `BOOL print_results`
+| Whether to output the final results to the console in JSON format
+| True
+
+
+| `STRING similarity_edge`
+| If provided, the similarity score will be saved to this edge
+| (empty string)
+
+| `STRING filepath`
+| If provided, the algorithm will save the output in CSV format to this file
+| (empty string)
+
+|===
+
+
+=== Output
+
+The top _k_ vertices in the graph that have the highest similarity scores, along with their scores.
+
+Vertices with a similarity score of 0 to the target vertex are not included.
 
 The result is available in three forms:
 
@@ -51,62 +88,73 @@ The result is available in three forms:
 * written to a file in tabular format, or
 * stored as a vertex attribute value.
 
-|Input Parameters a|
-* `+SET<STRING> v_type+`: Vertex type to calculate similarity score for
-* `+SET<STRING> e_type+`: Edge type to traverse
-* `+SET<STRING> re_type+`: Reverse edge type to traverse
-* `+INT top_k+`: the number of vertex pairs with the highest similarity
-scores to return
-* `+BOOL print_accum+`: Boolean value that decides whether to output to
-console
-* `+STRING similarity_edge+`: If provided, the similarity score will be
-saved to this edge
-* `+STRING filepath:+`If provided, the algorithm will output to the file
-path in CSV format
+=== Result size
 
-|Result Size |`+top_k+`
+If there are several vertices with identical similarity scores and returning them all would exceed the limit imposed by `top_k`,
+the algorithm arbitrarily chooses which results to display.
 
-|Graph Types |Undirected or directed edges, unweighted edges
-|===
+=== Time complexity
 
-The algorithm will not output more than K vertices, so the algorithm may arbitrarily choose to output one vertex over another if there are tied similarity scores.
+This algorithm has a time complexity of stem:[O(D^2)], where stem:[D] is equal to the outdegree of the vertex.
+
 
 == Example
 
-Using the movie graph, we run `jaccard_nbor_ss("Neil", 5)`:
+This example uses a Movie Rating graph consisting of Person and Movie vertices.
+There are Likes edges that are weighted according to how much the person liked the movie.
+Each person in the dataset liked at least one movie, but not all movies were liked by all people.
 
-[,text]
+image::movie-graph.png[View of a graph illustrating Person vertices connected to Movie vertices by Likes edges.]
+
+Here we run `tg_jaccard_nbor_ss("Neil", "Likes", "Reverse_Likes", 5)`:
+
+[source,json]
 ----
 [
   {
-    "@@result_topK": [
+    "Others": [
       {
-        "vertex1": "Neil",
-        "vertex2": "Kat",
-        "score": 0.5
+        "attributes": {
+          "Others.@sum_similarity": 0.5
+        },
+        "v_id": "Kat",
+        "v_type": "Person"
       },
       {
-        "vertex1": "Neil",
-        "vertex2": "Kevin",
-        "score": 0.4
+        "attributes": {
+          "Others.@sum_similarity": 0.4
+        },
+        "v_id": "Kevin",
+        "v_type": "Person"
       },
       {
-        "vertex1": "Neil",
-        "vertex2": "Jing",
-        "score": 0.2
+        "attributes": {
+          "Others.@sum_similarity": 0.2
+        },
+        "v_id": "Jing",
+        "v_type": "Person"
       }
     ]
   }
 ]
 ----
 
-If the source vertex (person) doesn't have any common neighbors (movies) with any other vertex (person), such as Elena in our example, the result will be an empty list:
+When comparing similarity to Neil, Kat is ranked higher than Kevin.
+This makes intuitive sense, because Kat likes two movies, both of which were also liked by Neil.
+Kevin also likes two movies that Neil likes.
+However, Kevin also likes a third movie that Neil doesn't like, and is therefore less similar than Kat was.
 
-[,text]
+Although we set `top_k` to `5`, only three vertices were returned because neither Alex nor Elena likes any movies that Kevin likes.
+
+If the source vertex (Person) doesn't have any common neighbors (Movies) with any other vertex (Person), such as Elena in our example, the result is an empty list:
+
+Here we run `tg_jaccard_nbor_ss("Elena", "Likes", "Reverse_Likes", 5)`:
+
+[source,json]
 ----
 [
   {
-    "@@result_topK": []
+    "Others": []
   }
 ]
 ----

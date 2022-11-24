@@ -14,7 +14,8 @@ that measures the overlap between two finite sets.
 The algorithm takes two vectors denoted by `+ListAccum+` and returns the
 overlap coefficient between them.
 
-NOTE: This algorithm is implemented as a user-defined function. You need to
+== Notes
+This algorithm is implemented as a user-defined function. You need to
 follow the steps in link:[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.
@@ -25,12 +26,9 @@ query in the same way as a built-in GSQL function.
 tg_overlap_similarity_accum( A, B )
 ....
 
-=== Time complexity
-The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+=== Parameters
 
-== Parameters
-
-[cols=",,",options="header",]
+[options="header",]
 |===
 |Name |Description |Data type
 |`+A+` |An n-dimensional vector denoted by a `+ListAccum+` of length
@@ -40,9 +38,13 @@ The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of d
 `+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
 |===
 
-== Return value
+=== Output
 
 The overlap coefficient between the two vectors.
+
+=== Time complexity
+The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+
 
 == Example
 [tabs]

@@ -11,15 +11,15 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Use the Degree Centrality algorithm on an undirected graph instead of ArticleRank.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/article_rank[Article Rank]
 
 ****
 
 ArticleRank is an algorithm that has been derived from the PageRank algorithm to measure the influence of journal articles.
-Page Rank assumes that relationships originating from low-degree nodes have a higher influence than relationships from high-degree nodes. Article Rank modifies the formula in such a way that it retains the basic PageRank methodology but lowers the influence of low-degree nodes.
+
+Page Rank assumes that relationships originating from low-degree vertices have a higher influence than relationships from high-degree vertices.
+Article Rank keeps the PageRank methodology but modifies the formula to lower the influence of low-degree nodes.
+
 The Article Rank of a node stem:[v] at iteration stem:[i] is defined as:
 
 //image::article-rank.png[]
@@ -35,15 +35,53 @@ Within the formula:
 * stem:[d] is a damping factor in [0, 1], usually set to 0.85.
 * stem:[\overline{N_{out}}] is the average outdegree.
 
+
+== Notes
+
 For more information, see https://www.emeraldinsight.com/doi/abs/10.1108/00012530911005544[ArticleRank: a PageRank‐based alternative to numbers of citations for analysing citation networks].
 
-
-== *Specifications*
+== Specifications
 [source,gsql]
 ....
 CREATE QUERY tg_article_rank (STRING v_type, STRING e_type,
- FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100, BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "")
+ FLOAT max_change=0.001, INT maximum_iteration=25, FLOAT damping=0.85, INT top_k = 100, BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "")
 ....
+
+
+=== Parameters
+
+[cols=",",options="header",]
+|===
+|Name |Description
+|`STRING v_type` |A vertex type.
+
+|`STRING e_type` |An edge type.
+
+|`FLOAT max_change` |Article Rank will stop iterating when the largest
+difference between any vertex's current score and its previous score ≤
+`max_change.` That is, the scores have become very stable and are
+changing by less than `max_change` from one iteration to the next.
+
+|`INT maximum_iteration` |Maximum number of iterations.
+
+|`FLOAT damping` |The damping factor. Usually set to 0.85.
+
+|`INT top_k` |The number of results with the highest scores to return.
+
+|`BOOL print_results` |If true, print JSON output.
+
+|`STRING result_attribute` |If not empty, store the article rank score of each vertex in this attribute.
+
+|`STRING file_path` |If not empty, write output to this file.
+|===
+
+=== Output
+
+Returns the article rank score for each vertex in descending order.
+
+=== Result size
+
+The result size is equal to stem:[V], the number of vertices, because one score is produced for every vertex in the graph.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
@@ -51,39 +89,21 @@ The algorithm has a time complexity of stem:[O(E*k)], where stem:[E] is the numb
 The number of iterations is data-dependent, but the user can set a maximum.
 Parallel processing reduces the time needed for computation.
 
-== *Parameters*
+=== Run commands
 
-[cols=",,",options="header",]
-|===
-|Name |Description |Data type
-|`+v_type+` |A vertex type. |`+STRING+`
+==== Schema-Free Query
 
-|`+e_type+` |An edge type. |`+STRING+`
+[source.wrap,gsql]
+----
+RUN QUERY tg_article_rank (<parameters>)
+----
 
-|`+max_change+` |Article Rank will stop iterating when the largest
-difference between any vertex's current score and its previous score ≤
-`+max_change.+` That is, the scores have become very stable and are
-changing by less than `+max_change+` from one iteration to the next.
-|`+FLOAT+`
+==== Packaged Template Query
 
-|`+max_iter+` |Maximum number of iterations. |`+INT+`
-
-|`+damping+` |The damping factor. Usually set to 0.85. |`+FLOAT+`
-
-|`+top_k+` |The number of results with the highest scores to return.
-|`+INT+`
-
-|`+print_accum+` |If true, print JSON output. |`+BOOL+`
-
-|`+result_attr+` |If true, store the article rank score of each vertex
-in this attribute. |`+STRING+`
-
-|`+file_path+` |If true, output CSV to this file. |`+STRING+`
-|===
-
-== *Return value*
-
-The article rank score for each vertex.
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.article_rank (<parameters>)
+----
 
 == *Example*
 

@@ -26,28 +26,21 @@ There are directional and bidirectional versions of this algorithm.
 == Specifications
 
 .Directional
-[.wrap,gsql]
+[source.wrap,gsql]
 ----
 CREATE QUERY tg_find_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 .Bidirectional
 [.wrap,gsql]
 ----
 CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_accum = TRUE, STRING file_path = "")
+  BOOL print_results = TRUE, STRING file_path = "")
 ----
 
-=== Time complexity
 
-stem:[O(1)-O(VE)]
-
-=== Space complexity
-
-stem:[O(1)-O(V^2E)]
-
-== Parameters
+=== Parameters
 
 |===
 |Parameter |Data type |Description
@@ -64,7 +57,7 @@ stem:[O(1)-O(V^2E)]
 |`INT`
 |The maximum length of the path returned.
 
-|`print_accum`
+|`print_results`
 |`BOOL`
 |If `true`, write output to the console in JSON format.
 
@@ -73,9 +66,17 @@ stem:[O(1)-O(V^2E)]
 |If not empty, write output to this file.
 |===
 
-== Result
+=== Output
 
 In both JSON and CSV outputs, the result is a list of vertices visited on each path.
+
+=== Time complexity
+
+stem:[O(1)-O(VE)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
+
+=== Space complexity
+
+stem:[O(1)-O(V^2E)]
 
 == Example
 

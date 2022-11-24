@@ -2,48 +2,72 @@
 
 :stem: latexmath
 
-k-Nearest Neighbors (kNN) is often used for machine learning. You can choose the value for `topK` based on your experience, or using cross-validation to optimize the hyperparameters. In our library, Leave-one-out cross-validation for selecting optimal _k_ is provided. Given a _k_ value, we run the algorithm repeatedly using every vertex with a known label as the source vertex and predict its label. We assess the accuracy of the predictions for each value of _k_, and then repeat for different values of k in the given range. The goal is to find the value of k with highest predicting accuracy in the given range, for that dataset.
+k-Nearest Neighbors (kNN) is often used for machine learning.
+You can choose the value for `topK` based on your experience, or using cross-validation to optimize the hyperparameters.
+
+In our library, Leave-one-out cross-validation for selecting optimal _k_ is provided.
+Given a _k_ value, we run the algorithm repeatedly using every vertex with a known label as the source vertex and predict its label.
+We assess the accuracy of the predictions for each value of _k_, and then repeat for different values of k in the given range.
+
+The goal is to find the value of k with highest predicting accuracy in the given range, for that dataset.
 
 == Specifications
 
 [source,gsql]
 ----
-tg_knn_cosine_cv(SET<STRING> v_type, SET<STRING> e_type, SET<STRING> re_type,
-STRING weight, STRING label, INT min_k, INT max_k) RETURNS (INT)
+tg_knn_cosine_cv( SET<STRING> v_type_set,  SET<STRING> e_type_set, SET<STRING> reverse_e_type_set,
+STRING weight_attribute, STRING label, INT min_k, INT max_k) RETURNS (INT)
 ----
+
+=== Parameters
+
+|===
+|Parameter |Description |Default Value
+
+|`SET<STRING> v_type_set`
+|The vertex types to calculate the distance to the source vertex for.
+|(empty set of strings)
+
+|`SET<STRING> e_type_set`
+|The edge types to use
+|(empty set of strings)
+
+|`SET<STRING> reverse_e_type_set`
+|The reverse edge types to use
+|(empty set of strings)
+
+|`STRING weight_attribute`
+|If not empty, use this edge attribute as the edge weight.
+|(empty string)
+
+|`STRING label`
+|If not empty, read an existing label from this attribute.
+|(empty string)
+
+|`INT min_k`
+|The lower bound of _k_ (inclusive)
+| N/A
+
+|`INT max_k`
+|The upper bound of _k_ (inclusive)
+| N/A
+
+|===
+
+=== Output
+
+A list of prediction accuracy for every k value in the given range, and the value of k with the highest predicting accuracy in the given range.
+
+The result is available in JSON format.
+
+The result size is equal to `max_k` - `min_k` + 1.
 
 === Time complexity
 This algorithm has a complexity of stem:[O(max\_k*\frac{E^2}{V})], where stem:[E] is the number of edges and stem:[V] is the number of vertices.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result a|
-A list of prediction accuracy for every k value in the given range, and
-
-the value of k with the highest predicting accuracy in the given range.
-
-The result is available in JSON format
-
-|Input Parameters a|
-* `+SET<STRING> v_type+`: Vertex types to calculate distance to source
-vertex for
-* `+SET<STRING> e_type+`: Edge types to traverse
-* `+SET<STRING> re_type+`: Reverse edge types to traverse
-* `+STRING weight+`: Edge attribute to use as the weight of the edge
-* `+STRING label+`: Vertex attribute to recognize as the label of the
-vertex
-* `+INT min_k+`: lower bound of k (inclusive)
-* `+INT max_k+`: upper bound of k (inclusive)
-
-|Result Size |max_k-min_k+1
-
-|Graph Types |Undirected or directed edges, weighted edges
-|===
-
 == Example
 
-Run knn_cosine_cv with min_k=2, max_k = 5. The JOSN result:
+Run knn_cosine_cv with min_k=2, max_k = 5. The JSON result:
 
 [source,text]
 ----

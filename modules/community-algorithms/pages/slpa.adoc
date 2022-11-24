@@ -24,42 +24,84 @@ The algorithm begins with each vertex having its own unique label. It then itera
 Then the post-processing of the record labels is applied.
 Finally, the algorithm removes the nested communities and outputs all the communities. Note that it is not guaranteed to produce the same results every time.
 
+== Notes
+
 For more information, see https://arxiv.org/pdf/1109.5720.pdf[SLPA: Uncovering Overlapping Communities in Social Networks via A Speaker-listener Interaction Dynamic Process].
 
 == Specifications
 
 [source.wrap,gsql]
 ----
-CREATE QUERY tg_slpa (SET<STRING> v_type, SET<STRING> e_type, FLOAT threshold, INT max_iter, INT output_limit,
-BOOL print_accum = TRUE, STRING file_path = "")
+CREATE QUERY tg_slpa ( SET<STRING> v_type_set,  SET<STRING> e_type_set, FLOAT threshold, INT maximum_iteration, INT print_limit,
+BOOL print_results = TRUE, STRING file_path = "")
 ----
+
+
+=== Parameters
+
+|===
+|Parameter |Description |Default
+
+|`SET<STRING> v_type_set`
+|The vertex types to use
+|(empty set of strings)
+
+|`SET<STRING> e_type_set`
+|The edge types to use
+|(empty set of strings)
+
+|`FLOAT threshold`
+|The threshold to drop a label
+|0
+
+|`INT maximum_iteration`
+|The maximum number of iterations
+|10
+
+|`BOOL print_results`
+|Whether to print the output in JSON format
+|False
+
+|`STRING file_path`
+|The file to write the output to in CSV format
+|(empty string)
+
+|`INT print_limit`
+|The maximum number of vertices to output. A value of `-1` will output all vertices.
+|0
+
+|===
+
+=== Output
+
+Assigns a list of component IDs in INT form to each vertex, such that members of the same component have the same ID value.
+
+The result size is equal to stem:[V], the number of vertices.
+
 
 === Time complexity
 This algorithm has a complexity of stem:[O(E*k)], where stem:[E] is the number of edges and stem:[k] is the number of iterations.
 
-[cols=",",options="header",]
-|===
-|Characteristic |Value
-|Result |Assigns a list of component id (INT) to each vertex, such that
-members of the same component have the same id value.
+=== Run commands
 
-|Required Input Parameters
-a|* `v_type`: vertex types to traverse
-* `e_type`: edge types to traverse
-* `threshold`: threshold to drop a label
-* `max_iter`: number of iterations
-* `print_accum`: print JSON output
-* `file_path`: file to write CSV output to
-* `output_limit`: max #vertices to output (-1 = all)
+==== Schema-Free Query
 
-|Result size |V = number of vertices
+[source.wrap,gsql]
+----
+RUN QUERY tg_slpa(<parameters>)
+----
 
-|Graph types |Undirected edges
-|===
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.slpa (<parameters>)
+----
+
 
 == Example
 
-In the example below, we run the `+tg_slpa+` algorithm on the social10 graph. We set max_iter = 10 and threshold = 0.1.
+In the example below, we run the `+tg_slpa+` algorithm on the social10 graph. We set maximum_iteration = 10 and threshold = 0.1.
 
 [tabs]
 ====
@@ -69,7 +111,7 @@ Query::
 [,gsql]
 ----
 # Use _ for default values
-RUN QUERY (["Person"], ["Coworker"], _, _, _, _, _
+RUN QUERY tg_slpa(["Person"], ["Coworker"], _, _, _, _, _
 ----
 --
 Result::
@@ -96,5 +138,7 @@ Result::
 ----
 --
 ====
+
+The result shows that each community has a unique community ID in the `com` attribute.
 
 image::spla-ex.png[Visualized results]

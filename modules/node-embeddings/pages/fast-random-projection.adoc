@@ -13,9 +13,6 @@
 ^|Heterogeneous vertex types
 |===
 
-[NOTE]
-We suggest running Fast Random Projection on reverse edges of a directed graph to avoid the issue of source and sink vertices failing to update correctly.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/GraphML/Embeddings/FastRP[Fast Random Projection]
 
 ****
@@ -30,7 +27,6 @@ This algorithm is especially useful in the following situations:
 * Your data is of such high dimension that it is too expensive to perform calculations.
 * The dimensionality is very high and the number of samples are too sparse to calculate covariances.
 * You don't have access to the entire dataset, such as when working with real-time data.
-
 
 == Notes
 
@@ -136,7 +132,6 @@ integer ID of the component.
 |`INT choose_k`
 |Prints a sample of this many vertices and their embeddings.
 |5
-
 
 |===
 

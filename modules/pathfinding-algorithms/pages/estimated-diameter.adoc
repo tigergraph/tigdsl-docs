@@ -15,44 +15,71 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-
 The diameter of a graph is the worst-case length of a shortest path between any pair of vertices in a graph. It is the farthest distance to travel, to get from one vertex to another, if you always take the shortest path. Finding the diameter requires calculating (the lengths of) all shortest paths, which can be quite slow.
 
-This algorithm uses a simple heuristic to estimate the diameter. rather than calculating the distance from each vertex to every other vertex, it selects K vertices randomly, where K is a user-provided parameter. It calculates the distances from each of these K vertices to all other vertices. So, instead of calculating V*(V-1) distances, this algorithm only calculates K*(V-1) distances. The higher the value of K, the greater the likelihood of hitting the actual longest shortest path.
+This algorithm uses a simple heuristic to estimate the diameter.
+Rather than calculating the distance from each vertex to every other vertex, it selects stem:[K] vertices randomly, where stem:[K] is a user-provided parameter.
+It calculates the distances from each of these stem:[K] vertices to all other vertices.
+So, instead of calculating stem:[V*(V-1)] distances, this algorithm only calculates stem:[K*(V-1)] distances.
+The higher the value of stem:[K], the greater the likelihood of finding the true diameter.
 
-The current version only computes unweighted distances.
+== Notes
+This algorithm query employs a subquery called *max_BFS_depth*.
+Both queries must be installed to run the algorithm.
 
-[CAUTION]
-====
-This algorithm query employs a subquery called *max_BFS_depth*. Both queries are needed to run the algorithm.
-====
+The current version of this algorithm only computes unweighted distances.
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-tg_estimate_diameter (SET<STRING> v_type, SET<STRING> e_type, INT seed_set_length,
-  BOOL print_accum = TRUE, STRING file_path = "", BOOL display = FALSE)
+tg_estimate_diameter ( SET<STRING> v_type_set,  SET<STRING> e_type_set, INT seed_set_length,
+  BOOL print_results = TRUE, STRING file_path = "", BOOL display = FALSE)
 ----
+
+=== Parameters
+
+[cols="0,1,0",options="header",]
+|===
+|*Parameter* |Description |Default
+
+
+|`+SET<STRING> v_type+`
+|Names of vertex types to use
+|(empty set of strings)
+
+|`+SET<STRING> e_type+`
+|Names of edge types to use
+|(empty set of strings)
+
+|`INT seed_set_length`
+|The number stem:[k] of random seed vertices to use
+|10
+
+|`BOOL print_results`
+|If True, output JSON to standard output
+|False
+
+|`STRING file_path`
+|If not empty, write output to this file
+|(empty string)
+|===
+
+=== Output
+
+Returns the single integer that is the estimated diameter of the graph.
 
 === Time complexity
 
 This algorithm has a time complexity of stem:[O(k*E)], where stem:[k] is equal to the number of seed vertices and stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Returns the estimated value for the diameter of the graph
 
-|Input Parameters a|
-* *`+SET<STRING> v_type+`*: Names of vertex types to use
-* *`+SET<STRING> e_type+`*: Names of edge types to use
-* *`+INT seed_set_length+`*: The number (K) of random seed vertices to
-use
-* *`+BOOL print_accum+`*: If True, output JSON to standard output
-* *`+STRING file_path+`:* If not empty, write output to this file.
+== Example
 
-|Result Size |one integer
+We can estimate the diameter of the graph included in the Shortest Path Algorithms TGCloud Starter Kit.
 
-|Graph Types |Directed
-|===
+This graph contains data for 7,927 `Airport` vertices and 19,257 `flight_route` edges.
+
+With `seed_set_length` set to `10`, the estimated diameter returned is `9`.
+With a larger `seed_set_length` of `100`, the new, more accurate, estimated diameter returned is `12`,
+because the greater number of randomly selected vertices happened to capture a larger worst-case scenario of graph diameter.

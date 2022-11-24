@@ -33,9 +33,43 @@ It finds the isomorphic subgraphs, and gives every vertex in the isomorphic subg
 [,gsql]
 ----
 CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
-    INT depth, INT out_put_limit, BOOL print_accum = TRUE,
-    STRING result_attr = "",STRING file_path = "")
+    INT depth, INT out_put_limit, BOOL print_results = TRUE,
+    STRING result_attribute = "",STRING file_path = "")
 ----
+=== Parameters
+
+
+|===
+|Parameter |Descriptiono
+
+|`STRING v_type`
+|Vertex type to consider.
+
+|`STRING e_type`
+|Edge type to traverse.
+
+|`INT depth`
+|Number of hops to consider
+
+|`INT out_put_limit`
+|If `print_results` is set to true, print a maximum of this number of vertices..
+
+|`BOOL print_results`
+|If true, print JSON to standard output.
+
+|`STRING result_attribute`
+|If not empty, save the label of each vertex to this attribute.
+
+|`STRING file_path`
+|If not empty, save the result in CSV format to this filepath.
+|===
+
+=== Output
+
+When `print_results` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
+If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
+
+
 
 === Time complexity
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
@@ -43,46 +77,23 @@ This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is the num
 === Space complexity
 This algorithm has a time complexity of stem:[O(V)], where stem:[V] is the number of vertices.
 
-== Parameters
 
+=== Run commands
 
-|===
-|Parameter |Type |Description
+==== Schema-Free Query
 
-|`v_type`
-|`STRING`
-|Vertex type to consider.
+[source.wrap,gsql]
+----
+RUN QUERY tg_weisfeiler_lehman (<parameters>)
+----
 
-|`e_type`
-|`STRING`
-|Edge type to traverse.
+==== Packaged Template Query
 
-|`depth`
-|`INT`
-|Number of hops to consider
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.graphML.weisfeiler_lehman (<parameters>)
+----
 
-|`out_put_limit`
-|`INT`
-|If `print_accum` is set to true, print a maximum of this number of vertices..
-
-|`print_accum`
-|`BOOL`
-|If true, print JSON to standard output.
-
-|`result_attr`
-|`STRING`
-|If not empty, save the label of each vertex to this attribute.
-
-|`file_path`
-|`STRING`
-|If not empty, save the result in CSV format to this filepath.
-|===
-
-
-== Return value
-
-When `print_accum` is set to true, the `@current_label` accumulator on a vertex represents the final label of the vertex.
-If two vertices share a label, it means that they are corresponding vertices in two isomorphic subgraphs.
 
 == Example
 
@@ -98,7 +109,7 @@ Running the algorithm on the graph produces the following results：
 Query::
 +
 --
-[,gsql]
+[source.wrap,gsql]
 ----
 RUN QUERY tg_weisfeiler_lehman ("Person", "Friendship", 3, 8, true, _, _)
 ----

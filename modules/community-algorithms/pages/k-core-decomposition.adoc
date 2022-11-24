@@ -14,59 +14,87 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-A *k-core* of a graph is a maximal connected subgraph in which every vertex is connected to at least k vertices in the subgraph. To obtain the k-core of a graph, the algorithm first deletes the vertices whose outdegree is less than _k_. It then updates the outdegree of the neighbors of the deleted vertices, and if that causes a vertex's outdegree to fall below _k_, it will also delete that vertex. The algorithm repeats this operation until every vertex left in the subgraph has an outdegree of at least _k_.
+A *k-core* of a graph is a maximal connected subgraph in which every vertex is connected to at least stem:[k] vertices in the subgraph.
 
-Our algorithm takes a range of values for _k_ and returns the set of the vertices that constitute the k-core with the highest possible value of _k_ within the range. It is an implementation of Algorithm 2 in https://ieeexplore.ieee.org/document/8622056[Scalable K-Core Decomposition for Static Graphs Using a Dynamic Graph Data Structure, Tripathy et al., IEEE Big Data 2018].
+This algorithm takes a range of values for stem:[k] and returns the vertex set that constitutes the k-core with the highest possible value of stem:[k] within the range.
 
-== Time complexity
 
-O(E), where E is the number of edges in the graph.
+To obtain the k-core of a graph, the algorithm first deletes the vertices whose outdegree is less than _k_. It then updates the outdegree of the neighbors of the deleted vertices, and if that causes a vertex's outdegree to fall below _k_, it will also delete that vertex. The algorithm repeats this operation until every vertex left in the subgraph has an outdegree of at least _k_.
+
+
+== Notes
+
+This is an implementation of Algorithm 2 in https://ieeexplore.ieee.org/document/8622056[Scalable K-Core Decomposition for Static Graphs Using a Dynamic Graph Data Structure, Tripathy et al., IEEE Big Data 2018].
+
 
 == Specifications
 
 [source,gsql]
 ----
-tg_kcore(STRING v_type, STRING e_type, INT k_min = 0, INT k_max = -1,
-BOOL print_accum = TRUE, STRING attr = "", STRING file_path = "",
-BOOL show_membership = FALSE, BOOL show_shells=FALSE)
+tg_kcore(STRING v_type, STRING e_type, INT k_min = 0,
+  INT k_max = -1, BOOL print_results = TRUE,
+  STRING result_attribute = "", STRING file_path = "",
+  BOOL print_all_k = FALSE, BOOL show_shells=FALSE)
 ----
 
-== Parameters
+=== Parameters
 
 |===
 | Parameter | Description
 
-| `v_type`
+| `STRING v_type`
 | Vertex type to include in the k-core
 
-| `e_type`
+| `STRING e_type`
 | Edge type to count for k-core connections
 
-| `k_min`
+| `INT k_min`
 | Minimum value of k. If the actual maximum core is below `k_min`, the algorithm will return an empty set.
 
-| `k_max`
+| `INT k_max`
 | Maximum value of k. If `k_max` is smaller than `k_min`, the algorithm will ignore this parameter and keep looking for k-cores until it reaches a value of k where a k-core cannot be found.
 
-| `show_membership`
-| If `show_membership` is `true`, the algorithm will return the k-cores found for every value of k within the range provided. For each k-core, the results will include its member vertices.
-
-| `show_shells`
-| The _*k*_*-shell* is the set of vertices that are part of the _k_-core but not part of the (_k_+1)-core. If `show_shells` is `true`, the algorithm will return the k-shells found for every value of k. within the range provided. For each k-shell, the results will include its member vertices.
-
-| `print_accum`
+| `BOOL print_results`
 | Boolean value that decides whether the algorithm will return output in JSON
 
-| `attr`
-| Optional. An attribute of the vertex to save the core level of the vertex to. If `attr` is provided, the core level of the vertex will be saved to this attribute of the vertex.
+| `STRING result_attribute`
+| An attribute of the vertex to save the core level of the vertex to. If `attr` is provided, the core level of the vertex will be saved to this attribute of the vertex.
 
-| `file_path`
-| Optional. If `file_path` is provided, the algorithm will output results to a file specified by the file path in CSV format.
+| `STRING file_path`
+| If `file_path` is provided, the algorithm will output results to a file specified by the file path in CSV format.
+
+| `BOOL print_all_k`
+| Whether to print all _k_ connections
+
+| `BOOL show_shells`
+| The *k-shell* is the set of vertices that are part of the _k_-core but not part of the (_k_+1)-core. If `show_shells` is `true`, the algorithm will return the k-shells found for every value of k. within the range provided. For each k-shell, the results will include its member vertices.
+
 |===
+
+=== Time complexity
+
+stem:[O(E)], where stem:[E] is the number of edges in the graph.
+
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_kcore (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.kcore (<parameters>)
+----
 
 == Example
 
-In the example below based on the https://docs.tigergraph.com/start/gsql-101/get-set#GSQL101-DataSet[`social`] graph from GSQL 101, we can see that Dan, Tom, and Jenny make up a 2-core, which is the max-core of the graph:
+In the example below based on the `social` graph from GSQL 101, we can see that Dan, Tom, and Jenny make up a 2-core, which is the max-core of the graph:
 
 image::image.png[]
 

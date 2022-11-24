@@ -9,68 +9,89 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Local Clustering Coefficient only works with directed graphs if reverse edges are included.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/local_clustering_coefficient[Local Clustering Coefficient]
-
 
 ****
 
-The Local Clustering Coefficient algorithm computes the local clustering coefficient of every vertex in a graph. The _local clustering coefficient_ of a vertex (node) in a graph quantifies how close its neighbors are to being a complete graph, where every two distinct vertices are connected by an edge.
+The _local clustering coefficient_ of a vertex in a graph quantifies how close its neighbors are to being a complete graph.
+In a complete graph, every two distinct vertices are connected.
+
+This algorithm computes the local clustering coefficient of every vertex in a graph.
 
 It is obtained by dividing the number of edges between a vertex's neighbors by the number of edges that could possibly exist.
 
-The algorithm does not report the local clustering coefficient for vertices that have only one neighbor.
-
 For more information, see https://en.wikipedia.org/wiki/Clustering_coefficient[Clustering Coefficient].
 
-== Time complexity
+== Notes
 
-`O(n)`, where `n` is the number of vertices in the graph.
+The algorithm does not report the local clustering coefficient for vertices that have only one neighbor.
+
+Local Clustering Coefficient only works with directed graphs if reverse edges are included.
 
 == Specifications
 
 [source,gsql]
 ----
 tg_lcc(STRING v_type, STRING e_type,INT top_k=100,
-  BOOL print_accum = True, STRING result_attr = "",
+  BOOL print_results = True, STRING result_attribute = "",
   STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
-== Parameters
+=== Time complexity
+
+stem:[O(V)], where stem:[V] is the number of vertices in the graph.
+
+
+=== Parameters
 
 |===
 | Parameter | Description | Data type
 
-| `v_type`
+| `STRING v_type`
 | Vertex type to calculate local clustering coefficient for
-| `STRING`
+| (empty string)
 
-| `e_type`
+| `STRING e_type`
 | Edge type to traverse. Only vertices that are connected by edges of this type are treated as connected in this algorithm.
-| `STRING`
+| (empty string)
 
-| `top_k`
+| `INT top_k`
 | Number of the highest local clustering coefficients to report.
-| `INT`
+| 100
 
-| `print_accum`
+| `BOOL print_results`
 | If `true`, output JSON to standard output.
-| `BOOL`
+| True
 
-| `result_attr`
+| `STRING result_attribute`
 | If provided, the local clustering coefficient of a vertex will be saved to this attribute.
-| `STRING`
+| (empty string)
 
-| `file_path`
+| `STRING file_path`
 | If provided, write output to this file in CSV.
-| `STRING`
+| (empty string)
 
-| `display_edges`
-| If `display_edges` is set to true, the algorithm will also return edges, which help produce better visualized results in GraphStudio.
-| `BOOL`
+| `BOOL display_edges`
+| If true, the algorithm will also return edges, which help produce better visualized results in GraphStudio.
+| False
 |===
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_lcc (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.lcc (<parameters>)
+----
+
 
 == Example
 

@@ -9,9 +9,6 @@
 ^|Homogeneous vertex types
 |===
 
-[NOTE]
-Most applications of Triangle Count for a directed graph are better served by Cycle Detection.
-
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Community/triangle_counting[Triangle Counting]
 
 ****
@@ -28,10 +25,15 @@ Note that it is computing a single number: How many triangles are in this graph?
 
 It is not common to count triangles in directed graphs, though it is certainly possible. If you choose to do so, you need to be very specific about the direction of interest: In a directed graph, If A--> B and B--> C, then
 
-* if A-->C, we have a "shortcut".
-* if C-->A, then we have a feedback loop.
+* if A->C, we have a "shortcut".
+* if C->A, then we have a feedback loop.
+
+== Notes
 
 This algorithm can only be run on TigerGraph v3.1 or higher.
+
+Most applications of Triangle Count for a directed graph are better served by Cycle Detection.
+
 
 == Specifications
 
@@ -51,28 +53,66 @@ tri_count_fast() is a smarter algorithm which does two passes over the edges. In
 tg_tri_count_fast(STRING v_type, STRING e_type)
 ----
 
+=== Parameters
+
+|===
+|Parameter |Description |Default
+
+|`STRING v_type`
+|Vertex type to count
+|(empty string)
+
+|`STRING e_type`
+|Edge type to traverse
+|(empty string)
+
+|===
+
+=== Output
+
+Returns the number of triangles in the graph, in JSON format.
+
+[source,text]
+----
+{
+  "results": [
+    {"num_triangles": 0}
+  ]
+}
+----
+
+This algorithm does not list out the members of each triangle or assign triangle IDs to each vertex.
+
 === Time complexity
 
 This algorithm has a time complexity of stem:[O(V*E)], where stem:[V] is equal to the number of vertices and stem:[E] is equal to the number of edges.
 
-[width="100%",cols="<5%,<50%",options="header",]
-|===
-|*Characteristic* |Value
-|Result |Returns the number of triangles in the graph.
-|Input Parameters a|
-`+v_type+`: Vertex type to count
+=== Run commands
 
-`+e_type+`: Edge type to traverse
+==== Schema-Free Query
 
-|Result Size |1 integer
-|Graph Types |Undirected edges
-|===
+[source.wrap,gsql]
+----
+RUN QUERY tg_tri_count (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.community.tri_count (<parameters>)
+----
+
 
 == Example
 
-In the social10 graph with Coworker edges, there are clearly 4 triangles.
+Consider a graph with Person vertices and Coworker edges.
+
+From the vertex display alone, a human can clearly see that there are 4 triangles.
 
 image::gr_social10_coworker.png[]
+
+The query returns the same result.
 
 [source,text]
 ----

@@ -1,0 +1,117 @@
+= Cycle Component
+:description: Overview of TigerGraph's implementation of the Cycle Component algorithm
+:stem: latexmath
+
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Path/cycle_component/tg_cycle_component.gsql[Cycle Component]
+
+The Cycle Component algorithm finds vertices that are on a cycle.
+It can be used as a helper algorithm for the xref:cycle-detection.adoc[] algorithm.
+It returns a set of only the vertices which are on at least one cycle, which saves memory compared to finding and returning all cycles.
+
+== Specifications
+
+[.wrap,gsql]
+----
+CREATE QUERY tg_cycle_component(STRING v_type, STRING e_type, BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "")
+----
+
+=== Parameters
+
+|===
+|Parameter |Data type |Description
+
+|`v_type`
+|`STRING`
+|The type of vertex to search for.
+
+|`e_type`
+|`STRING`
+|The type of edge to search for.
+
+|`print_results`
+|`BOOL`
+|Whether or not to print the path to the console.
+
+|`result_attribute`
+|`STRING`
+|The attribute on the vertex that will store the result.
+
+|`file_path`
+|`STRING`
+|If not empty, write output to this file.
+|===
+
+=== Output
+
+This query returns the vertices that appear on at least one cycle in JSON format.
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(VE)], where stem:[V] is the number of vertices and stem:[E] is the number of edges.
+
+=== Space complexity
+
+This algorithm has a space complexity of stem:[O(V)], where stem:[V] is the number of vertices.
+
+
+== Example
+
+You can run this query on the default Friendship graph included with the Getting Started with Docker tutorial.
+
+image::cycle-component-graph-dark.png[]
+
+In this graph, there is a cycle that includes Tom, Dan, and Jenny. Running tg_cycle_component returns those three vertices.
+
+image::cycle-component-results-dark.png[]
+
+[source]
+----
+[
+  {
+    "V": [
+      {
+        "attributes": {
+          "@or_nocycle": false,
+          "@sum_outdegree": 2,
+          "@sum_outdegree_curr": 0,
+          "age": 40,
+          "gender": "male",
+          "name": "Tom",
+          "state": "ca"
+        },
+        "v_id": "Tom",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@or_nocycle": false,
+          "@sum_outdegree": 4,
+          "@sum_outdegree_curr": 2,
+          "age": 34,
+          "gender": "male",
+          "name": "Dan",
+          "state": "ny"
+        },
+        "v_id": "Dan",
+        "v_type": "Person"
+      },
+      {
+        "attributes": {
+          "@or_nocycle": false,
+          "@sum_outdegree": 3,
+          "@sum_outdegree_curr": 1,
+          "age": 25,
+          "gender": "female",
+          "name": "Jenny",
+          "state": "tx"
+        },
+        "v_id": "Jenny",
+        "v_type": "Person"
+      }
+    ]
+  },
+  {
+    "\"tg_cycle_component works!\"": "tg_cycle_component works!"
+  }
+]
+----

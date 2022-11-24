@@ -10,12 +10,16 @@
 ^|Homogeneous vertex types
 |===
 
-Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
-
+Schema-free query algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/pagerank[PageRank]
 ****
 
+The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it.
+A vertex's influence tends to increase if either of these conditions are met:
 
-The PageRank algorithm measures the influence of each vertex on every other vertex. PageRank influence is defined recursively: a vertex's influence is based on the influence of the vertices which refer to it. A vertex's influence tends to increase if (1) it has more referring vertices or if (2) its referring vertices have higher influence. The analogy to social influence is clear.
+. It has more referring vertices
+. Its referring vertices have higher influence
+
+The analogy to social influence is clear.
 
 A common way of interpreting PageRank value is through the Random Network Surfer model. A vertex's PageRank score is proportional to the probability that a random network surfer will be at that vertex at any given time.
 A vertex with a high PageRank score is a vertex that is frequently visited, assuming that vertices are visited according to the following Random Surfer scheme:
@@ -25,37 +29,27 @@ A vertex with a high PageRank score is a vertex that is frequently visited, assu
 * Each round, the surfer randomly picks one of the outward connections from the surfer's current location. The surfer repeats this random walk for a long time.
 * There is a small probability that the surfer's next step will be a random vertex instead of a connected vertex. This probability is expressed in the algorithm as (1 - damping).
 
+== Notes
+
 For more information, see http://infolab.stanford.edu/~backrub/google.html[the Google paper on PageRank].
 
 == Specifications
 
-[source,gsql]
+[source.wrap,gsql]
 ----
-tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT max_iter=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_accum = TRUE, STRING result_attr =  "", STRING file_path = "",   BOOL display_edges = FALSE)
+tg_pagerank (STRING v_type, STRING e_type,  FLOAT max_change=0.001, INT maximum_iteration=25, FLOAT damping=0.85, INT top_k = 100,   BOOL print_results = TRUE, STRING result_attribute =  "", STRING file_path = "",   BOOL display_edges = FALSE)
 ----
 
-=== Time complexity
 
-This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
-
-The number of iterations is data-dependent, but the user can set a maximum.
-Parallel processing reduces the time needed for computation.
-
-=== Result
-
-Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
 
 === Parameters
 
-[width="100%",cols="0,1,0",options="header",]
 |===
 |*Parameter* |Description |Default
 
 |`+STRING v_type+`
 |Names of vertex type to use
 |(empty string)
-
-
 
 |`+STRING e_type+`
 |Names of edge type to use
@@ -67,11 +61,9 @@ Computes a PageRank `FLOAT` value for each vertex and stores it in a specified a
 changing by less than `+max_change+` from one iteration to the next.
 |0.001
 
-
-|`+INT max_iter+`
+|`+INT maximum_iteration+`
 |Maximum number of iterations.
 |25
-
 
 |`+FLOAT damping+`
 |Fraction of score that is due to the score of neighbors. The balance (1 - damping) is a minimum baseline score that every vertex receives.
@@ -83,28 +75,51 @@ changing by less than `+max_change+` from one iteration to the next.
 |100
 
 
-|`+BOOL print_accum+`
+|`+BOOL print_results+`
 |If True, output JSON to standard output
 |True
 
-
-
-|`+STRING result_attr+`
+|`+STRING result_attribute+`
 |If not empty, store PageRank values in `FLOAT` format to this vertex attribute
 |(empty string)
-
 
 |`+STRING file_path+`
 |If not empty, write output to this file.
 |(empty string)
 
-
 |`+BOOL display_edges+`
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed.
 |False
 
-
 |===
+
+=== Output
+
+Computes a PageRank `FLOAT` value for each vertex and stores it in a specified attribute on each vertex.
+
+
+=== Time complexity
+
+This algorithm has a time complexity of stem:[O(E*k)] where stem:[E] is the number of edges and stem:[k] is the number of iterations.
+
+The number of iterations is data-dependent, but the user can set a maximum.
+Parallel processing reduces the time needed for computation.
+
+=== Run commands
+
+==== Schema-Free Query
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_pagerank (<parameters>)
+----
+
+==== Packaged Template Query
+
+[source.wrap,gsql]
+----
+CALL GDBMS_ALGO.centrality.pagerank (<parameters>)
+----
 
 == Example
 
@@ -118,7 +133,7 @@ We ran PageRank on our `test10` graph (using Friend edges) with the following pa
 
 * damping=0.85
 * max_change=0.001
-* max_iter=25
+* maximum_iteration=25
 
 We see that Ivy (center bottom) has the highest PageRank score (1.12).
 This makes sense since there are 3 neighboring persons who point to Ivy, more than for any other person.

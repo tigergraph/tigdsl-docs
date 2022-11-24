@@ -14,57 +14,66 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/ma
 
 ****
 
-
 In addition to the regular weakly connected component algorithm, we also provide a version that is optimized for small-world graphs.
 A small world graph means the graph has a hub community, where the vast majority of the vertices in the graph are weakly connected.
 
-This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several different methods used to find connected components in a multi-step process proposed by Slota et al. in _BFS and Coloring-based Parallel Algorithms for Strongly Connected Components and Related Problems_.
+This version improves upon the performance of the original algorithm when dealing with small-world graphs by combining several methods used to find connected components in a multi-step process.
 
 The algorithm starts by selecting an initial pivot vertex _v_ with a high product of indegree and outdegree. From the initial pivot vertex,
 the algorithm uses Breadth-First Search to determine the massive weakly connected component. The vertices that are not included in this SCC are passed off to the next step.
 
 After identifying the first WCC, the algorithm uses the coloring method to identify the WCCs in the remaining vertices.
 
-For more details, see https://www.osti.gov/servlets/purl/1115145[Slota
-et al., _BFS and Coloring-based Parallel Algorithms for Strongly
+== Notes
+
+We use a default value of `100000` for the threshold used to choose initial pivot vertices to increase the chances that the initial pivot is contained within the largest WCC.
+
+=== References
+
+https://www.osti.gov/servlets/purl/1115145[Slota et al., _BFS and Coloring-based Parallel Algorithms for Strongly
 Connected Components and Related Problems._]
 
 == Specifications
 
-....
+[source.wrap, gsql]
+----
 CREATE QUERY tg_wcc_small_world(STRING v_type, STRING e_type,
-UINT threshold = 100000, BOOL to_show_cc_count=FALSE)
-....
+UINT threshold = 100000, BOOL print_results=FALSE)
+----
+=== Parameters
+
+|===
+|Name |Description |Default value
+
+|`STRING v_type`
+|The vertex type to count as part of a connected component
+| (empty string)
+
+|`STRING e_type`
+|The edge type to traverse
+| (empty string)
+
+|`UINT threshold`
+|The threshold used to choose initial pivot vertices.
+Only vertices whose product of indegree and outdegree exceed this
+threshold will be considered candidates for the pivot vertex.
+| `100000`
+
+|`BOOL print_results`
+|If true, the algorithm will return the number of
+vertices in each connected component.
+| True
+
+|===
+
+=== Output
+
+If `+print_results+` is set to true, the algorithm will return the
+number of vertices in each weakly connected component.
 
 === Time complexity
 The algorithm has a time complexity of stem:[O(E*d)], where stem:[E] is the number of edges and stem:[d] is max(diameter of components).
 
-== Parameters
-
-[cols=",,",options="header",]
-|===
-|Name |Description |Data type
-|`+v_type+` |The vertex type to count as part of a connected component
-|`+STRING+`
-
-|`+e_type+` |The edge type to traverse |`+STRING+`
-
-|`+threshold+` |The threshold used to choose initial pivot vertices.
-Only vertices whose product of indegree and outdegree exceed this
-threshold will be considered candidates for the pivot vertex. This is an
-attempt to increase the chances that the initial pivot is contained
-within the largest WCC. The default value for this parameter is 100000.
-It is suggested that you keep this default value when running the
-algorithm. |`+UINT+`
-
-|`+to_show_cc_count+` |If true, the algorithm will return the number of
-vertices in each connected component. |`+BOOL+`
-|===
-
-== Result
-
-If `+to_show_cc_count+` is set to true, the algorithm will return the
-number of vertices in each weakly connected component.
 
 == Example
 

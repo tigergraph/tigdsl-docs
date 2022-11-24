@@ -5,9 +5,11 @@ Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/27
 
 Euclidean distance measures the straight line distance between two
 points in n-dimensional space. The algorithm takes two vectors denoted
-by `+ListAccum+` and return the Euclidean distance between them.
+by `ListAccum` and returns the Euclidean distance between them.
 
-NOTE: This algorithm is implemented as a user-defined function. You need to
+== Notes
+
+This algorithm is implemented as a user-defined function. You need to
 follow the steps in xref:gsql-ref:querying:func/query-user-defined-functions.adoc[Add a User-Defined Function] to add the
 function to GSQL. After adding the function, you can call it in any GSQL
 query in the same way as a built-in GSQL function.
@@ -18,12 +20,9 @@ query in the same way as a built-in GSQL function.
 tg_euclidean_distance_accum(A, B)
 ....
 
-=== Time complexity
-The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+=== Parameters
 
-== Parameters
-
-[cols=",,",options="header",]
+[options="header",]
 |===
 |Name |Description |Data type
 |`+A+` |An n-dimensional vector denoted by a `+ListAccum+` of length
@@ -33,9 +32,13 @@ The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of d
 `+n+` |`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
 |===
 
-== Return value
+=== Output
 
 The Euclidean distance between the two vectors.
+
+=== Time complexity
+The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+
 
 == Example
 
