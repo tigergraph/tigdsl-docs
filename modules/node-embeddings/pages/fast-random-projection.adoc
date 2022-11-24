@@ -83,8 +83,7 @@ high-degree vertices more than low-degree vertices.
 |N/A
 
 |`INT default_index`
-|Index in the embedding vector default edges (edge types that are not explicitly defined in `embedding_dim_map`) start to 
-be incorporated in the vector.
+|The default_index parameter sets the index in the set of default edges in the embedding vector where the edges start to be incorporated in the vector.
 |N/A
 
 |`INT default_length`
@@ -113,7 +112,7 @@ Usually an integer between 1 (fully dense embedding) and 3 works well.
 
 |`STRING result_attribute`
 |Attribute where the result embedding is stored.
-Must be of type LIST<FLOAT>.
+Must be of type `LIST<FLOAT>`.
 If empty, the algorithm does not write the embedding to an attribute.
 |(empty string)
 
