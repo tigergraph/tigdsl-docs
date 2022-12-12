@@ -28,14 +28,14 @@ There are directional and bidirectional versions of this algorithm.
 .Directional
 [source.wrap,gsql]
 ----
-CREATE QUERY tg_find_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
+CREATE QUERY tg_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
   BOOL print_results = TRUE, STRING file_path = "")
 ----
 
 .Bidirectional
 [.wrap,gsql]
 ----
-CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
+CREATE QUERY tg_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
   BOOL print_results = TRUE, STRING file_path = "")
 ----
 
@@ -57,7 +57,7 @@ CREATE QUERY tg_find_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT 
 |`INT`
 |The maximum length of the path returned.
 
-|`print_results`
+|`print_accum`
 |`BOOL`
 |If `true`, write output to the console in JSON format.
 
@@ -92,7 +92,7 @@ The paths can also be output in JSON format to the console or CSV format to a fi
 .Query
 [.wrap,gsql]
 ----
-RUN QUERY tg_find_all_path("P001", "P002", 3, TRUE, "/home/tigergraph/output.csv")
+RUN QUERY tg_all_path("P001", "P002", 3, TRUE, "/home/tigergraph/output.csv")
 ----
 
 .Result
