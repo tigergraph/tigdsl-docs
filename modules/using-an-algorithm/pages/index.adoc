@@ -38,7 +38,7 @@ In TigerGraph version 3.8.0 and later, run the following command to import the q
 
 [source, gsql]
 ----
-GSQL > IMPORT PACKAGE GDBMS.ALGO.*
+GSQL > IMPORT PACKAGE GDBMS_ALGO.*
 ----
 
 Wait a few moments for the queries to load. Run `SHOW PACKAGE` to check that installation was successful.
@@ -144,7 +144,7 @@ On the `ldbc_snb` graph, the results look like this after the query runs:
 xref:gui:graphstudio:overview.adoc[GraphStudio] version 3.8 does not support using the `CALL` command for packaged template queries.
 To install queries on GraphStudio, use the non-packaged method in the next section.
 
-== Non-Packaged queries
+== Non-packaged queries
 
 TigerGraph provides an open-source GitHub repository with the full text of each query algorithm.
 These queries can be installed just like any other GSQL query.
