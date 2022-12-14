@@ -38,11 +38,11 @@ CREATE QUERY tg_resource_allocation(VERTEX v_source VERTEX v_target, SET<STRING>
 |Name | Description | Data type
 
 | `VERTEX v_source`
-|  The first vertex to compare.
+|  The first vertex to compare. Provide the vertex ID and type as a tuple: `("id","type")`
 | N/A
 
 | `VERTEX v_target`
-| The second vertex to compare with the first.
+| The second vertex to compare with the first. Provide the vertex ID and type as a tuple: `("id","type")`
 | N/A
 
 | `SET<STRING> e_type_set`

@@ -50,8 +50,8 @@ CREATE QUERY tg_shortest_ss_no_wt (VERTEX source,  SET<STRING> v_type_set,
 |*Parameter* |Description |Default
 
 |`VERTEX source`
-|ID of the source vertex
-|(empty string)
+|The source vertex to start from. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
 
 |`SET<STRING> v_type_set`

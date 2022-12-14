@@ -50,16 +50,16 @@ STRING wt_attr, BOOL display = False)
 |*Parameter* |Description |Default value
 
 |`VERTEX source_vertex`
-|ID of the source vertex
-|(empty string)
+|The source vertex to start from. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
 |`VERTEX target_vertex`
-|ID of the target vertex
-|(empty string)
+|The target vertex to end at.
+|N/A
 
-|`EDGE e_type`
+|`SET<STRING> e_type_set`
 |Edge types to traverse
-|(empty string)
+|(empty set of strings)
 
 |`STRING wt_type`
 |The data type of the edge weights, if applicable. (Must be one of `INT`, `FLOAT`, `DOUBLE` )

@@ -47,11 +47,11 @@ CREATE QUERY tg_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDe
 
 |`source_v`
 |`VERTEX`
-|Source vertex where the paths start.
+|Source vertex where the paths start. Provide the vertex ID and type as a tuple: `("id","type")`
 
 |`target_v`
 |`VERTEX`
-|Target vertex where the paths end.
+|Target vertex where the paths end. Provide the vertex ID and type as a tuple: `("id","type")`
 
 |`maxDepth`
 |`INT`

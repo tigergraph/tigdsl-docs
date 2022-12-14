@@ -41,11 +41,11 @@ CREATE QUERY tg_same_community(VERTEX v_source VERTEX v_target, STRING
 |Name | Description | Default value
 
 | `VERTEX v_source`
-|  The first vertex to compare.
+|  The first vertex to compare. Provide the vertex ID and type as a tuple: `("id","type")`
 | N/A
 
 | `VERTEX v_target`
-| The second vertex to compare with the first.
+| The second vertex to compare with the first. Provide the vertex ID and type as a tuple: `("id","type")`
 | N/A
 
 | `STRING communityAttribute`
