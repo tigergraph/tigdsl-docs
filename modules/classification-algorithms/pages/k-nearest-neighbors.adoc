@@ -49,8 +49,8 @@ tg_knn_cosine_ss (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_type_se
 |Parameter |Description |Default Value
 
 |`VERTEX source`
-|The vertex that you want to predict the labels from.
-|(empty string)
+|The vertex that you want to predict the labels from. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
 |`SET<STRING> v_type_set`
 |The vertex types to use

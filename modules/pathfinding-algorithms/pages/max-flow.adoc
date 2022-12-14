@@ -46,10 +46,10 @@ CREATE QUERY tg_maxflow(VERTEX source, VERTEX sink,  SET<STRING> v_type_set,
 |Parameter |Description
 
 |`VERTEX source`
-|Source vertex where the flow starts.
+|Source vertex where the flow starts. Provide the vertex ID and type as a tuple: `("id","type")`
 
 |`VERTEX sink`
-|Target vertex where the flow is to be sent to.
+|Target vertex where the flow is to be sent to. Provide the vertex ID and type as a tuple: `("id","type")`
 
 |`SET<STRING> v_type_set`
 |Vertex types to consider in the path.

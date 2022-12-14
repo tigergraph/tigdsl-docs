@@ -39,11 +39,11 @@ CREATE QUERY tg_bfs( SET<STRING> v_type_set,  SET<STRING> e_type_set,INT max_hop
 |===
 |*Parameter* |Description |Default
 
-|`VERTEX v_type`
+|`SET<STRING> v_type_set`
 |Vertex types to traverse
-|(empty string)
+|(empty set of strings)
 
-|`EDGE e_type`
+|`SET<STRING> e_type_set`
 |Edge types to traverse
 |(empty string)
 
@@ -52,8 +52,8 @@ CREATE QUERY tg_bfs( SET<STRING> v_type_set,  SET<STRING> e_type_set,INT max_hop
 |10
 
 |`VERTEX v_start`
-|Source vertex for traversal
-|(empty string)
+|Source vertex for traversal. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
 |`BOOL print_results`
 |Whether to print JSON output

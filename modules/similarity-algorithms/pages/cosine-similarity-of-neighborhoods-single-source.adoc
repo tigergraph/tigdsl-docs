@@ -55,11 +55,11 @@ RETURNS (MapAccum<VERTEX, FLOAT>)
 |Parameter |Description |Default value
 
 | `VERTEX source`
-| Source vertex
-| (empty set of strings)
+| The source vertex to start from. Provide the vertex ID and type as a tuple: `("id","type")`
+| N/A
 
 | `SET<STRING> e_type_set`
-| Edge type to traverse
+| Edge types to traverse
 | (empty set of strings)
 
 | `SET<STRING> reverse_e_type_set`

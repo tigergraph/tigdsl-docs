@@ -57,7 +57,7 @@ tg_shortest_ss_any_wt (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_ty
 |*Parameter* |Description |Default
 
 |`VERTEX source`
-|ID of the source vertex
+|The source vertex to start from. Provide the vertex ID and type as a tuple: `("id","type")`
 |(empty string)
 
 

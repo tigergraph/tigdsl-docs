@@ -50,8 +50,8 @@ tg_mst (VERTEX opt_source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
 |*Parameter* |Description |Default
 
 |`+VERTEX opt_source+`
-|ID of a source vertex (optional)
-|(empty set of strings)
+|The vertex to use as a source (optional). Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
 |`+SET<STRING> v_type+`
 |Names of vertex types to use

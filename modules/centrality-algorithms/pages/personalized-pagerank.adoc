@@ -30,8 +30,8 @@ BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 |*Parameter* |Description |Default
 
 |`SET<VERTEX> source`
-|Names of vertex types to use
-|(empty set of strings)
+|IDs and types of vertices to use. Provide each vertex ID and type as a tuple: `("id","type")`
+|(empty set of string tuples)
 
 |`+STRING e_type+`
 |Name of edge types to use
