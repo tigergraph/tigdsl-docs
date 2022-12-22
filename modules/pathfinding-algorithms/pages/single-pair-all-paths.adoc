@@ -28,42 +28,48 @@ There are directional and bidirectional versions of this algorithm.
 .Directional
 [source.wrap,gsql]
 ----
-CREATE QUERY tg_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_results = TRUE, STRING file_path = "")
+CREATE QUERY tg_all_path(VERTEX source_v, VERTEX target_v, INT maxDepth = 10,
+  BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
 .Bidirectional
 [.wrap,gsql]
 ----
-CREATE QUERY tg_all_path_bidirection(VERTEX source_v, VERTEX target_v, INT maxDepth,
-  BOOL print_results = TRUE, STRING file_path = "")
+CREATE QUERY tg_all_path_bidirection(VERTEX source_v, VERTEX target_v, SET<STRING> e_type, INT maxDepth = 3,
+  BOOL print_accum = TRUE, STRING file_path = "")
 ----
 
 
 === Parameters
 
 |===
-|Parameter |Data type |Description
+|Parameter |Description |Default value
 
-|`source_v`
-|`VERTEX`
+|`VERTEX source_v`
 |Source vertex where the paths start. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
-|`target_v`
-|`VERTEX`
+|`VERTEX target_v`
 |Target vertex where the paths end. Provide the vertex ID and type as a tuple: `("id","type")`
+|N/A
 
-|`maxDepth`
-|`INT`
+|`SET<STRING> e_type`
+|Used for the bidirectional version of the algorithm.
+A set of strings referring to the edge types to use.
+|(empty set of strings)
+
+|`INT maxDepth`
 |The maximum length of the path returned.
+|10
 
-|`print_accum`
-|`BOOL`
+|`BOOL print_accum`
 |If `true`, write output to the console in JSON format.
+|True
 
-|`file_path`
-|`SET<STRING>`
+|`STRING file_path`
 |If not empty, write output to this file.
+|(empty string)
+
 |===
 
 === Output

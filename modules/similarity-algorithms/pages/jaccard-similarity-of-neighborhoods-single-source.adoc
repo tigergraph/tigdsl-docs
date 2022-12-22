@@ -33,8 +33,8 @@ The value ranges from 0 to 1. If A and B are identical, then stem:[Jaccard(A, B)
 
 [,gsql]
 ----
-tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k = 100,
-  BOOL print_results = TRUE, STRING similarity_edge_type = "",STRING file_path = "")
+tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING reverse_e_type,
+ INT top_k = 100, BOOL print_results = TRUE, STRING similarity_edge_type = "", STRING file_path = "")
 ----
 
 
@@ -44,17 +44,17 @@ tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k 
 |===
 |Parameter |Description |Default value
 
-| `SET<STRING> v_type_set`
-| Vertex type used to calculate similarity score
-| (empty set of strings)
+| `VERTEX source`
+| Source vertex to calculate similarity from. Provide the vertex ID and type as a tuple: `("id","type")`
+| N/A
 
-| `SET<STRING> e_type_set`
+| `STRING e_type`
 | Edge type to traverse
-| (empty set of strings)
+| (empty string)
 
-| `SET<STRING> reverse_e_type_set`
+| `STRING reverse_e_type`
 | Reverse edge type to traverse
-| (empty set of strings)
+| (empty string)
 
 | `INT top_k`
 | The number of vertex pairs with the highest similarity scores to return. Limits number of returned items.
@@ -64,12 +64,11 @@ tg_jaccard_nbor_ss (VERTEX source, STRING e_type, STRING rev_e_type,  INT top_k 
 | Whether to output the final results to the console in JSON format
 | True
 
-
-| `STRING similarity_edge`
+| `STRING similarity_edge_type`
 | If provided, the similarity score will be saved to this edge
 | (empty string)
 
-| `STRING filepath`
+| `STRING file_path`
 | If provided, the algorithm will save the output in CSV format to this file
 | (empty string)
 

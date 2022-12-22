@@ -80,15 +80,15 @@ high-degree vertices more than low-degree vertices.
 
 |`INT default_index`
 |The default_index parameter sets the index in the set of default edges in the embedding vector where the edges start to be incorporated in the vector.
-|N/A
+|0
 
 |`INT default_length`
 |Length of the embedding region that incorporates default edge type information.
 |N/A
 
-|`INT default_weight`
+|`FLOAT default_weight`
 |Influence that the default edge types have in the region of the embedding they are incorporated.
-|1
+|1.0
 
 |`SET<STRING> embedding_dim_map`
 |Set of comma-separated tuples of `<edge type>,<length>,<weight>,<starting index>`.
@@ -100,7 +100,7 @@ If the empty set is used, all edge types will be considered "default" edge types
 |Parameter defined from the FastRP paper.
 Controls the sparsity of the embedding.
 Usually an integer between 1 (fully dense embedding) and 3 works well.
-|N/A
+|3
 
 |`INT random_seed`
 |Seed for the random number generator.
