@@ -4,6 +4,7 @@
 ** xref:single-pair-all-paths.adoc[]
 ** xref:bfs.adoc[]
 ** xref:cycle-detection.adoc[]
+** xref:cycle-component.adoc[]
 ** xref:estimated-diameter.adoc[]
 ** xref:max-flow.adoc[]
 ** xref:minimum-spanning-forest.adoc[]
