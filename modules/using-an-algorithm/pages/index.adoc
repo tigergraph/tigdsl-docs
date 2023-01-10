@@ -9,7 +9,6 @@ All GDS algorithms can be found at https://github.com/tigergraph/gsql-graph-algo
 The algorithms are divided into several categories.
 Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
 
-
 GDS Library algorithms are implemented in GSQL as GSQL queries.
 Therefore, the process to run an algorithm query is the same as the process to run any other query.
 
@@ -24,6 +23,9 @@ You usually have the option to output one or more of the following:
 * JSON output to console
 * CSV output to a file
 * Results written to an attribute of vertices or edges
+
+If you are running an algorithm on a TigerGraph Cloud cluster, you need to use AdminPortal to download the files to your local machine.
+See xref:gui:admin-portal:gsql-output-file.adoc[] for details.
 
 == Packaged template queries
 
