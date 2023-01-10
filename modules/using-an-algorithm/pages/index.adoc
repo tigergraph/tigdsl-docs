@@ -24,7 +24,7 @@ You usually have the option to output one or more of the following:
 * CSV output to a file
 * Results written to an attribute of vertices or edges
 
-If you are running an algorithm on a TigerGraph Cloud cluster, you need to use AdminPortal to download the files to your local machine.
+If you are running an algorithm on a TigerGraph Cloud cluster, you need to use AdminPortal to download the algorithm's output files to your local machine.
 See xref:gui:admin-portal:gsql-output-file.adoc[] for details.
 
 == Packaged template queries
