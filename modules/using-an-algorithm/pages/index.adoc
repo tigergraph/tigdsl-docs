@@ -13,7 +13,7 @@ GDS Library algorithms are implemented in GSQL as GSQL queries.
 Therefore, the process to run an algorithm query is the same as the process to run any other query.
 
 The algorithm library is included, ready to install, with the TigerGraph database.
-Version 3.8 offers the library in an additional format, as packaged template queries.
+Database versions 3.8 and newer offer the library in an additional format, as packaged template queries.
 The packaging simplifies the installation and management of the library, and new CALL command performs just-in-time compilation of the template queries to offer even better performance than before.
 TigerGraph is continually improving its library. To get the latest version, users can always go to our GitHub repository: link:https://github.com/tigergraph/gsql-graph-algorithms[GSQL Graph Algorithm Repository].
 
@@ -144,7 +144,7 @@ On the `ldbc_snb` graph, the results look like this after the query runs:
 ----
 
 xref:gui:graphstudio:overview.adoc[GraphStudio] version 3.8 does not support using the `CALL` command for packaged template queries.
-To install queries on GraphStudio, use the non-packaged method in the next section.
+To install queries from the library on GraphStudio, you can either import them from the GUI or copy and paste the query source code from the TigerGraph GitHub repository.
 
 == Non-packaged queries
 
@@ -186,7 +186,6 @@ Follow these instructions to first create, then install the query:
 * xref:gsql-ref:querying:query-operations.adoc#_create_query[Create a query]
 * xref:gsql-ref:querying:query-operations.adoc#_install_query[Install a query]
 
-
 You can create the query in the following ways:
 
 [tabs]
@@ -201,9 +200,18 @@ It is a `.gsql` file named after the query.
 . Run `@<file path>` from the GSQL shell, and replace `<file path>` with the absolute path to the file where you copied the query.
 For example, if your filepath is `/home/tigergraph/query/pagerank.gsql`, run `@/home/tigergraph/query/pagerank.gsql` from the GSQL shell.
 --
-GraphStudio::
+GraphStudio Library Import::
 +
 --
+This method is easier than copying and pasting the source code, but not all queries, subqueries, and query variants are available using this method.
+
+Follow the instructions in xref:gui:graphstudio:write-queries.adoc[] to open the Write Query window and select a query from the library through the GUI.
+--
+GraphStudio Source Code::
++
+--
+This method is more complex than the library import, but gives you access to all queries, subqueries, and query variants that may not yet be available in the library import.
+
 WARNING: Saving a query in GraphStudio does not create the query in GSQL.
 
 . Locate the query in the GDS Library GitHub repository.
