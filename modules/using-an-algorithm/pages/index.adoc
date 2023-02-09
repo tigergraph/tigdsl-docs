@@ -210,7 +210,7 @@ Follow the instructions in xref:gui:graphstudio:write-queries.adoc[] to open the
 GraphStudio Source Code::
 +
 --
-This method is more complex than the library import, but gives you access to all queries, subqueries, and query variants that may not yet be available in the library import.
+This method is more complex than the library import, but is suitable for all queries, subqueries, and query variants, including any library algorithms that may not yet be available via the library import method.
 
 WARNING: Saving a query in GraphStudio does not create the query in GSQL.
 
