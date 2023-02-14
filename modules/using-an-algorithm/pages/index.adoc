@@ -32,10 +32,12 @@ See xref:gui:admin-portal:gsql-output-file.adoc[] for details.
 == Packaged template queries
 
 If your version of TigerGraph Server is 3.8 or higher, you can use packaged queries to run most Graph Data Science Library algorithms.
-Packaged queries cannot be run from GraphStudio.
 
 Packaged template queries are a new, simplified method for working with algorithms that are preinstalled in a TigerGraph instance.
 They use a new keyword, `CALL`, to run with just-in-time compilation for improved performance.
+
+[NOTE]
+Packaged queries cannot be run from GraphStudio.
 
 The syntax is very similar to using a package in Python.
 
