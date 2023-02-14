@@ -9,11 +9,13 @@ All GDS algorithms can be found at https://github.com/tigergraph/gsql-graph-algo
 The algorithms are divided into several categories.
 Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
 
+Some query algorithms rely on subqueries, which need to be created as separate queries and must be installed together.
+
 GDS Library algorithms are implemented in GSQL as GSQL queries.
 Therefore, the process to run an algorithm query is the same as the process to run any other query.
 
 The algorithm library is included, ready to install, with the TigerGraph database.
-Version 3.8 offers the library in an additional format, as packaged template queries.
+Database versions 3.8 and higher offer the library in an additional format, as packaged template queries.
 The packaging simplifies the installation and management of the library, and new CALL command performs just-in-time compilation of the template queries to offer even better performance than before.
 TigerGraph is continually improving its library. To get the latest version, users can always go to our GitHub repository: link:https://github.com/tigergraph/gsql-graph-algorithms[GSQL Graph Algorithm Repository].
 
@@ -29,8 +31,13 @@ See xref:gui:admin-portal:gsql-output-file.adoc[] for details.
 
 == Packaged template queries
 
+If your version of TigerGraph Server is 3.8 or higher, you can use packaged queries to run most Graph Data Science Library algorithms.
+
 Packaged template queries are a new, simplified method for working with algorithms that are preinstalled in a TigerGraph instance.
 They use a new keyword, `CALL`, to run with just-in-time compilation for improved performance.
+
+[NOTE]
+Packaged queries cannot be run from GraphStudio.
 
 The syntax is very similar to using a package in Python.
 
@@ -143,15 +150,15 @@ On the `ldbc_snb` graph, the results look like this after the query runs:
 }
 ----
 
-xref:gui:graphstudio:overview.adoc[GraphStudio] version 3.8 does not support using the `CALL` command for packaged template queries.
-To install queries on GraphStudio, use the non-packaged method in the next section.
-
 == Non-packaged queries
 
 TigerGraph provides an open-source GitHub repository with the full text of each query algorithm.
 These queries can be installed just like any other GSQL query.
 
-Moreover, the source code for most algorithms is included in the file system of the database. Users can choose to install some or all of these queries with a single GraphStudio operation. This automated installation will automatically take care of any subquery or UDF dependencies.
+Any version of TigerGraph can use non-packaged queries.
+
+Moreover, the source code for most algorithms is included in the file system of the database. Users can choose to install some or all of these queries with a single GraphStudio operation.
+This automated installation will automatically take care of any subquery or UDF dependencies.
 
 link:https://staging--docs-tigergraph.netlify.app/gui/current/graphstudio/write-queries#_graph_data_science_library_queries[Graph Data Science Library Queries]
 
@@ -186,7 +193,6 @@ Follow these instructions to first create, then install the query:
 * xref:gsql-ref:querying:query-operations.adoc#_create_query[Create a query]
 * xref:gsql-ref:querying:query-operations.adoc#_install_query[Install a query]
 
-
 You can create the query in the following ways:
 
 [tabs]
@@ -201,9 +207,19 @@ It is a `.gsql` file named after the query.
 . Run `@<file path>` from the GSQL shell, and replace `<file path>` with the absolute path to the file where you copied the query.
 For example, if your filepath is `/home/tigergraph/query/pagerank.gsql`, run `@/home/tigergraph/query/pagerank.gsql` from the GSQL shell.
 --
-GraphStudio::
+GraphStudio Library Import::
 +
 --
+This method is easier than copying and pasting the source code, but not all queries, subqueries, and query variants are available using this method.
+
+In the xref:gui:graphstudio:write-queries.adoc#query-editing-panel[Query Editing Panel] in GraphStudio, click the New GSQL Query button (a circular green button with a plus sign btn:[+]) and click btn:[Choose from library] in the next window that pops up.
+Select any queries from the list that you would like to install.
+--
+GraphStudio Source Code::
++
+--
+This method is more complex than the library import, but is suitable for all queries, subqueries, and query variants, including any library algorithms that may not yet be available via the library import method.
+
 WARNING: Saving a query in GraphStudio does not create the query in GSQL.
 
 . Locate the query in the GDS Library GitHub repository.
@@ -214,7 +230,7 @@ This is the command to create the query.
 . Click btn:[Global View] in the top-left corner and choose the graph to use.
 . Click btn:[Write Queries] on the left side navigation.
 Click btn:[+] to add a new query and enter the query name.
-This name must be the same as the name in the `CREATE QUERY` command
+This name must be the same as the name in the `CREATE QUERY` command.
 . Paste the `CREATE QUERY` command into the query and save the query.
 --
 ====
