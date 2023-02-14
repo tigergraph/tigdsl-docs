@@ -15,7 +15,7 @@ GDS Library algorithms are implemented in GSQL as GSQL queries.
 Therefore, the process to run an algorithm query is the same as the process to run any other query.
 
 The algorithm library is included, ready to install, with the TigerGraph database.
-Database versions 3.8 and newer offer the library in an additional format, as packaged template queries.
+Database versions 3.8 and higher offer the library in an additional format, as packaged template queries.
 The packaging simplifies the installation and management of the library, and new CALL command performs just-in-time compilation of the template queries to offer even better performance than before.
 TigerGraph is continually improving its library. To get the latest version, users can always go to our GitHub repository: link:https://github.com/tigergraph/gsql-graph-algorithms[GSQL Graph Algorithm Repository].
 
