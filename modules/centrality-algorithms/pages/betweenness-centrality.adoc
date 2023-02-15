@@ -60,8 +60,10 @@ Then starting from the vertex on the most outside layer in a non-incremental ord
 
 == Notes
 
-This query algorithm employs a subquery called *bc_subquery*.
+1. This query algorithm employs a subquery called *bc_subquery*.
 Both queries are needed to run the algorithm.
+
+2. The `reverse_edge_type` parameter is mandatory. If you are using undirected edges, then enter the same value for `reserve_edge_type` that you use for `edge_type_set`.
 
 == Specifications
 
@@ -87,7 +89,7 @@ STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 |(empty set of strings)
 
 |`STRING reverse_e_type`
-|The reverse edge type to use
+|The reverse edge type to use. For undirected edges, use the same value for `e_type_set`
 |(empty string)
 
 |`INT max_hops`
