@@ -71,6 +71,14 @@ Packages GDBMS_ALGO:
     - topological_link_prediction
 ----
 
+By specifying a sub-package in the `IMPORT PACKAGE` command and adding the asterisk `*`, you can choose to import only a subset of the package.
+The following command imports only the `community` sub-package.
+
+[source, gsql]
+----
+GSQL > IMPORT PACKAGE GDBMS_ALGO.community.*
+----
+
 Use dot notation to explore each sub-package.
 
 [source, gsql]
