@@ -1,7 +1,7 @@
 name: graph-ml
 title: TigerGraph Graph Data Science Library
-version: 3.8
-display_version: "3.8"
+version: 3.9
+display_version: "3.9"
 start_page: intro:index.adoc
 
 nav:
