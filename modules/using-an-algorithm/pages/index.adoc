@@ -47,7 +47,7 @@ In TigerGraph version 3.8.0 and later, run the following command to import the q
 
 [source, gsql]
 ----
-GSQL > IMPORT PACKAGE GDBMS_ALGO.*
+GSQL > IMPORT PACKAGE GDBMS_ALGO
 ----
 
 Wait a few moments for the queries to load. Run `SHOW PACKAGE` to check that installation was successful.
@@ -91,6 +91,16 @@ Packages GDBMS_ALGO.centrality:
         - betweenness_cent(set<string> v_type_set, set<string> e_type_set, string reverse_e_type, int max_hops, int top_k, bool print_results, string result_attribute, string file_path, bool display_edges)
 ...
 ----
+
+Import all queries in a package with `IMPORT PACKAGE`.
+
+[source, gsql]
+----
+GSQL > IMPORT PACKAGE GDBMS_ALGO.community
+----
+
+The `SHOW` command (and the pattern matching found in xref:3.9@gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
+`SHOW TEMPLATE QUERY -r "GDBMS_ALGO.community.tri.*"` matches all Community template queries starting with the string `tri`.
 
 === Run a packaged query
 
