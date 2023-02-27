@@ -78,6 +78,14 @@ Packages GDBMS_ALGO:
     - topological_link_prediction
 ----
 
+By specifying a sub-package in the `IMPORT PACKAGE` command, you can choose to import only a subset of the package.
+The following command imports only the `community` sub-package.
+
+[source, gsql]
+----
+GSQL > IMPORT PACKAGE GDBMS_ALGO.community
+----
+
 Use dot notation to explore each sub-package.
 
 [source, gsql]
@@ -90,13 +98,6 @@ Packages GDBMS_ALGO.centrality:
         - article_rank(string v_type, string e_type, float max_change, int maximum_iteration, float damping, int top_k, bool print_results, string result_attribute, string file_path)
         - betweenness_cent(set<string> v_type_set, set<string> e_type_set, string reverse_e_type, int max_hops, int top_k, bool print_results, string result_attribute, string file_path, bool display_edges)
 ...
-----
-
-Import all queries in a package with `IMPORT PACKAGE`.
-
-[source, gsql]
-----
-GSQL > IMPORT PACKAGE GDBMS_ALGO.community
 ----
 
 The `SHOW` command (and the pattern matching found in xref:3.9@gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
