@@ -177,15 +177,6 @@ For example, xref:classification-algorithms:k-nearest-neighbors.adoc[] runs on g
 
 Another example is the xref:node-embeddings:fast-random-projection.adoc[Fast Random Projection algorithm], which expects the vertex type to have an attribute of type `LIST<DOUBLE>` if you want to store the embedding results to your graph data.
 
-=== Install necessary UDFs
-
-Some algorithms require the use of user-defined functions (UDF).
-The UDF files are included in the same folder as the algorithm itself.
-
-If your query requires a UDF, ensure that the xref:gsql-ref:querying:func/query-user-defined-functions.adoc[UDF has been installed into your TigerGraph system] before creating or installing the query.
-
-If your query does not require a UDF, you can proceed to the next step.
-
 === Create query
 If the algorithm you want is not yet installed in your TigerGraph instance, and if you do not use the GraphStudio simplified installation process, then you can install the algorithm as you would add any query to the database.
 
