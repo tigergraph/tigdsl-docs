@@ -84,7 +84,7 @@ a|
 Node embeddings are vector representations of vertex properties in a graph.
 
 
-* xref:node-embeddings:node2vec.adoc[]
+//* xref:node-embeddings:node2vec.adoc[]
 * xref:node-embeddings:fast-random-projection.adoc[]
 * xref:node-embeddings:weisfeiler-lehman.adoc[]
 
