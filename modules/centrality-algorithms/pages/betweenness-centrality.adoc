@@ -88,9 +88,9 @@ STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 |The edge types to use
 |(empty set of strings)
 
-|`STRING reverse_e_type`
-|The reverse edge type to use. For undirected edges, use the same value for `e_type_set`
-|(empty string)
+|`SET<STRING> reverse_e_type_set`
+|The reverse edge types to use. For undirected edges, use the same value for `e_type_set`
+|(empty set of strings)
 
 |`INT max_hops`
 |If >=0, look only this far from each vertex
