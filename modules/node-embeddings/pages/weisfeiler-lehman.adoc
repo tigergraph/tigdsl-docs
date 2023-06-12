@@ -1,4 +1,4 @@
-= Weisfeiler-Lehman
+= Weisfeiler-Lehman Isomorphism
 :description: Overview of the Weisfeiler-Lehman for detecting isomorphic graphs.
 :fn-iso-article: footnote:[David Bieber, The Weisfeiler-Lehman Isomorphism Test, https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/]
 

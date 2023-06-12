@@ -4,7 +4,7 @@
 
 .Supported Graph Characteristics
 ****
-[cols='1']
+[cols='2']
 |===
 ^|Unweighted edges
 ^|Directed edges

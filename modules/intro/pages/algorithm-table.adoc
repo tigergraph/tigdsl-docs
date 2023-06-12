@@ -1,0 +1,138 @@
+= Algorithm Availability and Dependencies
+
+The following table lists several key characteristics of each algorithm,
+
+Besides these requirements, each algorithm is designed to work with certain types of graph data, such as directed edges vs. undirected edges. Those data-driven requirements are listed with each algorithm.
+
+*Maturity* - The maturity of an algorithm is one of three classifications:
+
+* *Alpha* = basic functionality and testing
+* *Beta* = full-featured, well-tested
+* *Production* = full-featured, stable, rigorously tested, optimized for speed and resource efficiency, suitable for production use
+
+*GraphStudio* - Availability for easy installation as one of
+xref:gui:graphstudio:write-queries.adoc#_create_a_query_or_add_a_query_from_the_algorithm_library[GraphStudio's preloaded algorithms].
+
+*Packaged Template* - Availability in TigerGraph's built-in package of templated algorithms with just-in-time compilation.
+
+*UDF Required* - This algorithm requires the installation of a custom user-defined function (UDF).
+If installed by GraphStudio or as a packaged template query, the UDF will be taken care of automatically.
+
+[NOTE]
+====
+For security reasons, the ability to install a UDF is disabled by default.
+Your system administrator can enable this capability if appropriate.
+====
+
+*Subquery Required* - This algorithm requires the installation of a custom subquery.
+
+[options="header"]
+|===============================================================================================================================
+| Category       | Algorithm                              | Maturity | Graph Studio | Packaged Template | UDF Req | Subquery Req
+| Centrality     | xref:centrality-algorithms:article-rank.adoc[]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:betweenness-centrality.adoc[]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:closeness-centrality.adoc[]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:approximate-closeness-centrality.adoc[Closeness Centrality, approximate]
+| Prod     | Y            |                   |         |
+| Centrality     | xref:centrality-algorithms:degree-centrality.adoc[]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:weighted-degree-centrality.adoc[Degree Centrality, weighted]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:eigenvector-centrality.adoc[]
+| Prod     | Y            |                   |         |
+| Centrality     | xref:centrality-algorithms:harmonic-centrality.adoc[]
+| Prod     | Y            |                   |         |
+| Centrality     | xref:centrality-algorithms:influence-maximization.adoc[], CELF
+| Prod     | Y            |                   |         |
+| Centrality     | xref:centrality-algorithms:influence-maximization.adoc[], greedy
+| Prod     | Y            |                   |         |
+| Centrality     | xref:centrality-algorithms:pagerank.adoc[]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:weighted-pagerank.adoc[PageRank, weighted]
+| Prod     | Y            | Y                 |         |
+| Centrality     | xref:centrality-algorithms:personalized-pagerank.adoc[]
+| Prod     |              |                   |         |
+| Classification | xref:classification-algorithms:greedy-graph-coloring.adoc[]
+| Prod     | Y            | Y                 |         |
+| Classification | xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
+| Prod     | Y            |                   |         |
+| Classification | xref:classification-algorithms:k-nearest-neighbors-batch.adoc[]
+| Prod     | Y            |                   |         |
+| Classification | xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
+| Prod     | Y            |                   |         | Y
+| Classification | xref:classification-algorithms:maximal-independent-set.adoc[], deterministic
+| Prod     | Y            |                   | Y       |
+| Community      | xref:community-algorithms:k-core-decomposition.adoc[]
+| Beta     | Y            |                   |         |
+| Community | xref:community-algorithms:label-propagation.adoc[]
+| Beta  | Y | Y |   |
+| Community | xref:community-algorithms:slpa.adoc[Label Propogation, speaker-listener]
+| Beta  |   | Y | Y |
+| Community | xref:community-algorithms:local-clustering-coefficient.adoc[]
+| Beta  | Y | Y |   |
+| Community | xref:community-algorithms:louvain.adoc[]
+| Beta  | Y | Y |   |
+| Community | xref:community-algorithms:strongly-connected-components.adoc[]
+| Prod  | Y |   |   |
+| Community | xref:community-algorithms:scc-small-world.adoc[]
+| Prod  | Y | Y |   |
+| Community | xref:community-algorithms:triangle-counting.adoc[]
+| Prod  |   | Y |   |
+| Community | xref:community-algorithms:triangle-counting.adoc[], fast
+| Prod  | Y | Y |   |
+| Community | xref:community-algorithms:connected-components.adoc[]
+| Prod  | Y | Y |   |
+| Community | xref:community-algorithms:wcc-small-world.adoc[]
+| Prod  | Y |   |   |
+| Graph ML  | xref:node-embeddings:fast-random-projection.adoc[]
+| Alpha | Y |   | Y |
+| Graph ML  |xref:node-embeddings:weisfeiler-lehman.adoc[Weisfeiler-Lehman Isomorphism]
+| Prod  | Y | Y | Y |
+| Path      | xref:pathfinding-algorithms:a-star.adoc[]
+| Beta  |   |   | Y |
+| Path      |  xref:pathfinding-algorithms:bfs.adoc[]
+| Beta  | Y | Y |   |
+| Path      | xref:pathfinding-algorithms:cycle-detection.adoc[]
+| Beta  | Y | Y |   |
+| Path      | xref:pathfinding-algorithms:estimated-diameter.adoc[]
+| Beta  |   |   |   | Y
+| Path      | xref:pathfinding-algorithms:max-flow.adoc[]
+| Beta  | Y |   |   |
+| Path      | xref:pathfinding-algorithms:minimum-spanning-forest.adoc[]
+| Beta  | Y |   |   |
+| Path      | xref:pathfinding-algorithms:minimum-spanning-tree.adoc[]
+| Beta  |   |   |   |
+| Path      | xref:pathfinding-algorithms:single-source-shortest-path-unweighted.adoc[]
+| Prod  | Y |   |   |
+| Path      | xref:pathfinding-algorithms:single-source-shortest-path-weighted.adoc[]| Prod |   |   |   |
+| Similarity| xref:similarity-algorithms:cosine-similarity-of-neighborhoods-batch.adoc[]
+| Prod | Y | Y |   |
+| Similarity| xref:similarity-algorithms:cosine-similarity-of-neighborhoods-single-source.adoc[]
+| Prod | Y |   |   |
+| Similarity| xref:similarity-algorithms:euclidean.adoc[]
+| Beta |   |   | Y |
+| Similarity| xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-batch.adoc[]| Prod | Y |   |   |
+| Similarity| xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-single-source.adoc[]
+| Prod | Y |   |   |
+| Similarity| xref:similarity-algorithms:overlap-similarity.adoc[]
+| Beta |   |   | Y |
+| Similarity| xref:similarity-algorithms:pearson-similarity.adoc[]
+| Beta |   |   | Y |
+| Topological Link Prediction | xref:link-prediction:adamic-adar.adoc[]
+| Prod | Y |   |   |
+| Topological Link Prediction | xref:link-prediction:common-neighbors.adoc[]
+| Prod | Y |   |   |
+| Topological Link Prediction | xref:link-prediction:preferential-attachment.adoc[]
+| Prod | Y |   |   |
+| Topological Link Prediction | xref:link-prediction:resource-allocation.adoc[]
+| Prod | Y | Y |   |
+| Topological Link Prediction | xref:link-prediction:same-community.adoc[]
+| Prod | Y |   |   |
+| Topological Link Prediction | xref:link-prediction:total-neighbors.adoc[]
+| Prod | Y |   |   |
+|===============================================================================================================================
+
+

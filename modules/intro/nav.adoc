@@ -1,1 +1,3 @@
 * xref:index.adoc[Overview]
+** xref:library-structure.adoc[]
+** xref:algorithm-table.adoc[Table: Algorithm Availability and Dependencies]

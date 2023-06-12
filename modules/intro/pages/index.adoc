@@ -12,6 +12,10 @@ GSQL running on the TigerGraph platform is particularly well-suited for graph al
 
 == Quick Links
 
+* xref:library-structure.adoc[]
+* xref:using-an-algorithm:index.adoc[]
+* xref:algorithm-table.adoc[]
+
 [cols="3,3,3",grid=none,frame=none]
 
 |===

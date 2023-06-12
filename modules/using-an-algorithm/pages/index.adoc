@@ -2,23 +2,34 @@
 :description: Instructions on how to use a GDS algorithm.
 :experimental:
 
-
 This page provides information on how to use a TigerGraph Graph Data Science (GDS) Library algorithm.
 
-All GDS algorithms can be found at https://github.com/tigergraph/gsql-graph-algorithms[`tigergraph/gsql-graph-algorithms`] on GitHub in the `algorithms` folder.
-The algorithms are divided into several categories.
-Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
-
-Some query algorithms rely on subqueries, which need to be created as separate queries and must be installed together.
-
-GDS Library algorithms are implemented in GSQL as GSQL queries.
-Therefore, the process to run an algorithm query is the same as the process to run any other query.
-
 The algorithm library is included, ready to install, with the TigerGraph database.
-Database versions 3.8 and higher offer the library in an additional format, as packaged template queries.
+
+== Install/Run on GraphStudio
+
+Nearly all algorithms are available in xref:gui:graphstudio:write-queries.adoc#_create_a_query_or_add_a_query_from_the_algorithm_library[GraphStudio's built-in menu of graph algorithms] that lets you click-to-choose and then install any or all graph algorithms.
+For new users on TigerGraph Cloud, this is the simplest way.
+
+== Install/Run as Standard GSQL Queries
+Because TigerGraph's graph algorithms are written as GSQL queries, you can install and run them the same way that you install and run other GSQL queries:
+
+* As GSQL commands: `INSTALL QUERY` and `RUN QUERY`
+* Using REST endpoints: `POST /gsl/queries/install` and `GET /query/{graph_name}/{query_name}`
+* pyTigerGraph functions: `Featurizer.installAlgorithm()` and `Featurizer.runAlgorithm()`
+* Using GraphStudio's graphical user interface commands for Add Query, Install Query, and Run Query.
+
+See xref:algorithms-as-gsql-queries.adoc[].
+
+== Install/Run as Packaged Template Queries
+
+Database versions 3.8 and higher offer selected algorithms in an additional format, as packaged template queries.
 The packaging simplifies the installation and management of the library, and new CALL command performs just-in-time compilation of the template queries to offer even better performance than before.
 TigerGraph is continually improving its library. To get the latest version, users can always go to our GitHub repository: link:https://github.com/tigergraph/gsql-graph-algorithms[GSQL Graph Algorithm Repository].
 
+See xref:packaged-template-algorithms.adoc[].
+
+== Output
 Most of the algorithm queries provide multiple output formats.
 You usually have the option to output one or more of the following:
 
@@ -28,239 +39,3 @@ You usually have the option to output one or more of the following:
 
 If you are running an algorithm on a TigerGraph Cloud cluster, you need to use AdminPortal to download the algorithm's output files to your local machine.
 See xref:gui:admin-portal:gsql-output-file.adoc[] for details.
-
-== Packaged template queries
-
-If your version of TigerGraph Server is 3.8 or higher, you can use packaged queries to run most Graph Data Science Library algorithms.
-
-Packaged template queries are a new, simplified method for working with algorithms that are preinstalled in a TigerGraph instance.
-They use a new keyword, `CALL`, to run with just-in-time compilation for improved performance.
-
-[NOTE]
-Packaged queries cannot be run from GraphStudio.
-
-The syntax is very similar to using a package in Python.
-
-=== Import and explore template queries
-
-In TigerGraph version 3.8.0 and later, run the following command to import the query package.
-
-[source, gsql]
-----
-GSQL > IMPORT PACKAGE GDBMS_ALGO
-----
-
-Wait a few moments for the queries to load. Run `SHOW PACKAGE` to check that installation was successful.
-
-[source, gsql]
-----
-GSQL > SHOW PACKAGE
-
-Packages on global:
-  - GDBMS_ALGO
-----
-
-Run `SHOW PACKAGE` again, this time specifying `GDBMS_ALGO`, to see the list of sub-packages.
-Each sub-package corresponds to a category of GDS algorithms.
-
-[source, gsql]
-----
-GSQL > SHOW PACKAGE GDBMS_ALGO
-
-Packages GDBMS_ALGO:
-  - Sub-Packages:
-    - centrality
-    - classification
-    - community
-    - graphML
-    - path
-    - similarity
-    - topological_link_prediction
-----
-
-By specifying a sub-package in the `IMPORT PACKAGE` command, you can choose to import only a subset of the package.
-The following command imports only the `community` sub-package.
-
-[source, gsql]
-----
-GSQL > IMPORT PACKAGE GDBMS_ALGO.community
-----
-
-Use dot notation to explore each sub-package.
-
-[source, gsql]
-----
-GSQL > SHOW PACKAGE GDBMS_ALGO.centrality
-
-Packages GDBMS_ALGO.centrality:
-  - Object:
-      - Packaged Queries:
-        - article_rank(string v_type, string e_type, float max_change, int maximum_iteration, float damping, int top_k, bool print_results, string result_attribute, string file_path)
-        - betweenness_cent(set<string> v_type_set, set<string> e_type_set, string reverse_e_type, int max_hops, int top_k, bool print_results, string result_attribute, string file_path, bool display_edges)
-...
-----
-
-The `SHOW` command (and the pattern matching found in xref:3.9@gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
-`SHOW TEMPLATE QUERY -r "GDBMS_ALGO.community.tri.*"` matches all Community template queries starting with the string `tri`.
-
-=== Run a packaged query
-
-To run (or 'call') a packaged query, you must first be using a graph.
-Run the GSQL command `USE GRAPH <graph name>` first.
-
-Use the `CALL` command with a specific query name from a package and include the parameters.
-
-[source.wrap, gsql]
-----
-GSQL > USE GRAPH ldbc_snb
-Using graph `ldbc_snb`
-
-GSQL > CALL GDBMS_ALGO.community.louvain(["Person"],["KNOWS"],"weight",10,"","",true)
-----
-
-In this example, we call the xref:community-algorithms:louvain.adoc[] algorithm, specifying:
-
-* A set of strings `["Person"]` as the vertex types to use
-* A set of strings `["KNOWS"]` as the edge types to traverse
-* A string `"weight"` as the edge weight attribute
-* An integer `10` as the maximum limit of iterations
-* An empty string `""` for the result attribute, ensuring nothing will be written to any vertices
-* An empty string `""` for the file path, ensuring the results will not be written as a file
-* A boolean `true` to print the results to the console in JSON format.
-
-The *first* time you call an algorithm on a particular graph and with a particular set of graph schema elements (vertex types, edge types, and/or vertex or edge attributes),
-it goes through a short just-in-time-compilation process to optimize the execution plan for the query.
-
-If you run the same algorithm with the same graph schema elements (regardless of modification to other non-schema parameters such as number of iterations), it does not require compilation and immediately runs the algorithm query.
-
-Therefore, in the previous example, changing any of the first three parameters requires recompilation, but changing any of the other parameters runs the query without needing compilation.
-
-On the `ldbc_snb` graph, the results look like this after the query runs:
-
-[source.wrap, gsql]
-----
-
-------Running query------
-
-{
-  "error": false,
-  "message": "",
-  "version": {
-    "schema": 0,
-    "edition": "enterprise",
-    "api": "v2"
-  },
-  "results": [
-    {"AllVertexCount": 9163},
-    {"InitChangeCount": 0},
-    {"VertexFollowedToCommunity": 355},
-    {"VertexFollowedToVertex": 0},
-    {"VertexAssignedToItself": 729},
-    {"FinalCommunityCount": 9537}
-  ]
-}
-----
-
-== Non-packaged queries
-
-TigerGraph provides an open-source GitHub repository with the full text of each query algorithm.
-These queries can be installed just like any other GSQL query.
-
-Any version of TigerGraph can use non-packaged queries.
-
-Moreover, the source code for most algorithms is included in the file system of the database. Users can choose to install some or all of these queries with a single GraphStudio operation.
-This automated installation will automatically take care of any subquery or UDF dependencies.
-
-link:https://staging--docs-tigergraph.netlify.app/gui/current/graphstudio/write-queries#_graph_data_science_library_queries[Graph Data Science Library Queries]
-
-=== Check for data or schema constraints
-Most algorithm queries in the GDS Library are schema-free, meaning that you are able to run the query on any schema.
-However, some algorithms have certain schema or data constraints by nature.
-Make sure to read the documentation for the algorithm to determine the following:
-
-* Does the algorithm require edges to be directed/undirected?
-* Does the algorithm require edges to be weighted/unweighted?
-* Does the algorithm require any vertex type to have an attribute of a certain data type?
-* Does the algorithm require your data to have been processed in a certain way before it runs?
-
-For example, xref:classification-algorithms:k-nearest-neighbors.adoc[] runs on graphs with either directed or undirected edges, but the edges must have a weight attribute.
-
-Another example is the xref:node-embeddings:fast-random-projection.adoc[Fast Random Projection algorithm], which expects the vertex type to have an attribute of type `LIST<DOUBLE>` if you want to store the embedding results to your graph data.
-
-=== Create query
-If the algorithm you want is not yet installed in your TigerGraph instance, and if you do not use the GraphStudio simplified installation process, then you can install the algorithm as you would add any query to the database.
-
-Follow these instructions to first create, then install the query:
-
-* xref:gsql-ref:querying:query-operations.adoc#_create_query[Create a query]
-* xref:gsql-ref:querying:query-operations.adoc#_install_query[Install a query]
-
-You can create the query in the following ways:
-
-[tabs]
-====
-GSQL Shell::
-+
---
-. Locate the query in the GDS Library GitHub repository.
-It is a `.gsql` file named after the query.
-. Copy the entire contents of the query file, which is the command to create the query, and paste it into a file on the machine running TigerGraph.
-. Log in to the GSQL shell as a user with query writing privileges for the graph on which you want to create the query.
-. Run `@<file path>` from the GSQL shell, and replace `<file path>` with the absolute path to the file where you copied the query.
-For example, if your filepath is `/home/tigergraph/query/pagerank.gsql`, run `@/home/tigergraph/query/pagerank.gsql` from the GSQL shell.
---
-GraphStudio Library Import::
-+
---
-This method is easier than copying and pasting the source code, but not all queries, subqueries, and query variants are available using this method.
-
-In the xref:gui:graphstudio:write-queries.adoc#query-editing-panel[Query Editing Panel] in GraphStudio, click the New GSQL Query button (a circular green button with a plus sign btn:[+]) and click btn:[Choose from library] in the next window that pops up.
-Select any queries from the list that you would like to install.
---
-GraphStudio Source Code::
-+
---
-This method is more complex than the library import, but is suitable for all queries, subqueries, and query variants, including any library algorithms that may not yet be available via the library import method.
-
-WARNING: Saving a query in GraphStudio does not create the query in GSQL.
-
-. Locate the query in the GDS Library GitHub repository.
-It is a `.gsql` file named after the query.
-. Copy the entire content of the query file.
-This is the command to create the query.
-. Log in to GraphStudio as a user with query writing privileges for the graph on which you want to create the query.
-. Click btn:[Global View] in the top-left corner and choose the graph to use.
-. Click btn:[Write Queries] on the left side navigation.
-Click btn:[+] to add a new query and enter the query name.
-This name must be the same as the name in the `CREATE QUERY` command.
-. Paste the `CREATE QUERY` command into the query and save the query.
---
-====
-
-
-=== Install query
-
-Installing a query allows the algorithm query to access all features offered by the GSQL Query language.
-It also increases the performance of the query.
-
-To install a query, run `INSTALL QUERY <query name>` in the GSQL shell.
-Alternatively, you can click btn:[Install] on the btn:[Write Query] page of GraphStudio.
-
-=== Install query in distributed mode
-If you are running the query on a TigerGraph cluster, you may consider installing the query in distributed mode.
-
-In general, distributed mode is likely to improve the performance of a query if the query meets the following conditions:
-
-* The query starts at a very large set of starting point vertices.
-* The query performs many hops.
-
-For example, algorithms that compute a value for every vertex or one value for the entire graph should use distributed mode.
-This includes PageRank, Centrality, and Connected Component algorithms.
-
-To install a query in distributed mode in the GSQL shell, run command `INSTALL QUERY <query_name> -DISTRIBUTED`.
-To install a query in distributed mode from GraphStudio, change the `CREATE QUERY` at the beginning of the command to `CREATE DISTRIBUTED QUERY`, and then click btn:[Install].
-
-=== Run query
-Once the query has been installed, you can xref:gsql-ref:querying:query-operations.adoc#_run_query[run the query] on your graph data.
-Installing a query also xref:tigergraph-server:API:built-in-endpoints.adoc#_run_an_installed_query_post[creates a REST endpoint] you can use to call the query.
-
