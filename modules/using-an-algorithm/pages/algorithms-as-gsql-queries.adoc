@@ -137,10 +137,12 @@ If you are using an algorithm that is already built into your TigerGraph databas
 
 . Option the query code and save it to a file.
 . Assuming you have already created a database connection object called `conn`, instantiate a xref:pytigergraph:gds:featurizer.adoc[] object and then involve its `installAlgorithm()` method.
+
 [souce.warp,python]
 ----
 f = conn.gds.featurizer()
 f.installAlgorithm("tg_pagerank", query_path="<path_to_query_file>")
+----
 --
 ====
 
@@ -178,7 +180,7 @@ Create a file containing the input parameters in JSON format:
 ----
   curl <user_credentials> POST --data-binary @./pagerank_param.txt "http://localhost:9000/query/MyGraph/tg_pagerank"
 ----
-See xref:tigergraph-server:api:built-in-endpoints.adoc#_install_a_query[] for more details.
+See xref:tigergraph-server:API:built-in-endpoints.adoc#_install_a_query[] for more details.
 --
 pyTigerGraph python::
 +
@@ -187,5 +189,6 @@ pyTigerGraph python::
 ----
 f = conn.gds.featurizer()
 f.runAlgorithm("tg_pagerank", {"v_type":"Person", "e_type":"Likes"})
+----
 --
 ====
