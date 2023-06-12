@@ -102,6 +102,12 @@ Suppose we have the following graph:
 image::weisfeiler-lehman-ex.png[]
 
 We can see that there are two distinct subgraphs that are isomorphic.
+In particular, the following are their groups of isomorphically equivalent vertices:
+
+* Dolores, Wyatt
+* Thomas, Ming
+* Jack, Jose, Amy, Emily
+
 Running the algorithm on the graph produces the following results：
 
 [tabs]
@@ -117,7 +123,8 @@ RUN QUERY tg_weisfeiler_lehman ("Person", "Friendship", 3, 8, true, _, _)
 Results::
 +
 --
-We can see in the results that corresponding vertex pairs such as Emily and Jose share the same label.
+We can see in the results that vertices that are isomorphically equivalent have the same label.
+For example, Wyatt and Dolores have the same label.
 [,json]
 ----
 [
