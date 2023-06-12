@@ -1,0 +1,56 @@
+= Library Structure
+
+You can download the library from GitHub: +
+https://github.com/tigergraph/gsql-graph-algorithms[https://github.com/tigergraph/gsql-graph-algorithm]
+
+The library contains three important folders:
+
+* `GDBMS_ALGO`: algorithms in packaged template format
+* `UDF`: user-defined functions (UDFs) required by a few of the algorithms
+* `algorithms`: algorithms written as standard parameterized GSQL queries
+* `graphs`
+
+== GDBMS_ALGO and algorithms
+
+These two folders each contain one version of the graph data science library.
+Within these folders are subfolders for seven categories of algorithms:
+
+* *Centrality*
+* *Classification*
+* *Community*
+* *GraphML*
+* *Node Embeddings*
+* *Path*
+* *Similarity*
+
+The `algorithms` folder has a more complex structure.
+Each algorithm has its own subfolder under the category folder.
+Inside the algorithm folder, there might be further subfolders depending on whether the GDS Library provides different versions of the algorithm.
+There are also YAML files with algorithm and library metadata, README files, and CHANGELOG files.
+
+== UDF
+The TigerGraph database manages two sets of C{pp} files to support UDF capability: `tg_ExprFunctions.hpp` and `tg_ExprUtil.hpp` are used for TigerGraph-supplied UDFs.
+
+For more on UDFs, see xref:gsql-ref:querying:func/query-user-defined-functions.adoc[].
+
+
+[#_graphs]
+== `graphs`
+
+The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms.In this document, we use the test graphs to show you the expected result for each algorithm.The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
+
+== Release Branches
+
+Starting with TigerGraph product version 2.6, the GSQL Graph Algorithm Library has release branches:
+
+* *Product version branches* (2.6, 3.0, etc.) are snapshots created shortly after a product version is released.
+They contain the best version of the graph algorithm library at the time of that product version's initial release.
+They will not be updated, except to fix bugs.
+* *Main branch*: the newest released version.
+This should be at least as new as the newest.
+It may contain new or improved algorithms.
+* Other branches are development branches.
+
+It is possible to run newer algorithms on an older product version, as long as the algorithm does not rely on features available only in newer product versions.
+
+

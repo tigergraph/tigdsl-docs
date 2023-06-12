@@ -1,1 +1,3 @@
 * xref:index.adoc[]
+** xref:packaged-template-algorithms.adoc[]
+** xref:algorithms-as-gsql-queries.adoc[]

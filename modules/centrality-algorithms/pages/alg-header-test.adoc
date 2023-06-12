@@ -1,0 +1,176 @@
+= Harmonic Centrality
+:stem: latexmath
+:page-stem:
+
+[sidebar]
+====
+
+* *Supported graph types*
+[frame=ends,stripes=odd]
+|===
+| *Edge direction* | *Edge weight* | *Vertex types*
+| Undirected, Directed
+|  Unweighted
+|  Homogeneous, Heterogeneous
+|===
+====
+
+[foo]
+====
+* *Maturity level*: Production (P)
+====
+
+[foo]
+====
+* *Format and Deployment Options*
+
+** GraphStudio: one-click install
+** Packaged template
+** GSQL source code: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/harmonic[Harmonic Centrality]
+====
+
+Harmonic Centrality is a variant of Closeness Centrality. In a (not necessarily connected) graph, the *harmonic centrality* reverses the sum and reciprocal operations in the definition of closeness centrality:
+
+[stem]
+++++
+H(x)=\sum _{y\neq x}{\frac {1}{d(x,y)}}
+++++
+
+The Harmonic Centrality algorithm calculates a harmonic centrality score for each vertex in the graph.
+
+
+== Notes
+
+For more information, see the paper on Harmonic Centrality: https://arxiv.org/pdf/cond-mat/0008357.pdf[Marchiori and Latora 2000, _Harmony in the Small-World_].
+
+== Specifications
+
+[source,gsql]
+----
+CREATE QUERY harmonic_cent(SET<STRING> v_type_set, SET<STRING> e_type_set,
+    SET<STRING> reverse_e_type_set,INT max_hops=10, INT top_k=100,
+    BOOL wf = TRUE,BOOL print_results = True, STRING result_attribute = "",
+    STRING file_path = "", BOOL display_edges = FALSE)
+----
+
+
+=== Parameters
+
+|===
+| Name | Description | Default value
+
+| `SET<STRING> v_type_set`
+| Vertex types to calculate harmonic centrality for
+| (empty set of strings)
+
+| `SET<STRING> e_type_set`
+| Edge types to traverse
+| (empty set of strings)
+
+| `SET<STRING> reverse_e_type_set`
+| Reverse edge types to traverse
+| (empty set of strings)
+
+| `INT max_hops`
+| The maximum number of hops the algorithm considers for each vertex.
+If set to a non-positive value, the limit is ignored.
+| 10
+
+| `INT top_k`
+| Output the highest `k`  scores
+| 100
+
+| `BOOL wf`
+| Whether to use the Wasserman-Faust normalization for multi-component graphs
+| True
+
+| `BOOL print_results`
+| Whether to output JSON to standard output
+| True
+
+| `STRING result_attribute`
+| If not empty, store centrality values in FLOAT format to this attribute
+| (empty string)
+
+| `STRING file_path`
+| If not empty, write output to this file in CSV.
+| (empty string)
+
+| `BOOL display_edges`
+| Whether to include the graph's edges in the JSON output so that the full graph can be displayed.
+| False
+
+|===
+
+=== Output
+
+Returns a centrality score for all vertices of the specified type in the graph.
+The results are ordered from most central to least central.
+
+=== Result size
+
+There is an optional parameter, `top_k`, that limits the results to an arbitrary number of vertices with the highest centrality scores in the graph.
+This can be useful for larger graphs, since in large graphs there are likely to be many vertices with very low centrality.
+
+The maximum result size is equal to stem:[V], the number of vertices, because one centrality score is calculated for each vertex.
+
+=== Time complexity
+The algorithm has a time complexity of stem:[O(E)], where stem:[E] is the number of edges.
+
+Parallel processing reduces the time needed for computation.
+
+== Example
+If we have the following graph, we can see that Ivy is the most central of the five vertices. Running the algorithm on the graph shows that Ivy has the highest centrality score:
+
+image::https://gblobscdn.gitbook.com/assets%2F-LHvjxIN4__6bA0T-QmU%2F-MjV3bZEHcUwHHMYo7gT%2F-MjVDzTrVXazrel4EdU7%2Fimage.png?alt=media&token=1611630a-1bf9-4097-b432-0a0c1c388f22[]
+
+[tabs]
+====
+GSQL command::
++
+--
+[,gsql]
+----
+RUN QUERY harmonic_cent(["Person"], ["Coworker"], ["Coworker"], 4, 5,
+true, true, _, _, _)
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 0,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [{"top_scores": [
+    {
+      "score": 0.04167,
+      "Vertex_ID": "Ivy"
+    },
+    {
+      "score": 0.03571,
+      "Vertex_ID": "Damon"
+    },
+    {
+      "score": 0.03571,
+      "Vertex_ID": "George"
+    },
+    {
+      "score": 0.025,
+      "Vertex_ID": "Steven"
+    },
+    {
+      "score": 0.025,
+      "Vertex_ID": "Glinda"
+    }
+  ]}]
+}
+----
+--
+====

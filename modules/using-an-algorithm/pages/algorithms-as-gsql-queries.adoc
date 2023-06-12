@@ -1,0 +1,191 @@
+= Algorithms as GSQL Queries
+:description: Instructions on how to use a GDS algorithm as a standard GSQL query.
+:experimental:
+:toc:
+
+TigerGraph provides an open-source GitHub repository
+https://github.com/tigergraph/gsql-graph-algorithms[]
+with the full text of each query algorithm written in GSQL.
+Therefore, the process to install and run an algorithm query is the same as the process to run any other query.
+
+The algorithms are divided into several categories.
+Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
+
+Some query algorithms rely on subqueries, which need to be created as separate queries and must be installed together.
+
+Any version of TigerGraph can use non-packaged queries.
+
+== Check for data or schema constraints
+Most algorithm queries in the GDS Library are schema-free, meaning that you are able to run the query on any schema.
+However, some algorithms have certain schema or data constraints by nature.
+Make sure to read the documentation for the algorithm to determine the following:
+
+* Does the algorithm require edges to be directed/undirected?
+* Does the algorithm require edges to be weighted/unweighted?
+* Does the algorithm require any vertex type to have an attribute of a certain data type?
+* Does the algorithm require your data to have been processed in a certain way before it runs?
+
+For example, xref:classification-algorithms:k-nearest-neighbors.adoc[] runs on graphs with either directed or undirected edges, but the edges must have a weight attribute.
+
+Another example is the xref:node-embeddings:fast-random-projection.adoc[Fast Random Projection algorithm], which expects the vertex type to have an attribute of type `LIST<DOUBLE>` if you want to store the embedding results to your graph data.
+
+== Create query
+If the algorithm you want is not yet installed in your TigerGraph instance, and if you do not use the GraphStudio simplified installation process, then you can install the algorithm as you would add any query to the database.
+
+////
+Follow these instructions to first create, then install the query:
+
+* xref:gsql-ref:querying:query-operations.adoc#_create_query[Create a query]
+* xref:gsql-ref:querying:query-operations.adoc#_install_query[Install a query]
+////
+
+You can create the query in the following ways:
+
+[tabs]
+====
+GSQL Shell::
++
+--
+. Locate the query in the GDS Library GitHub repository.
+It is a `.gsql` file named after the query.
+. Copy the entire contents of the query file, which is the command to create the query, and paste it into a file on the machine running TigerGraph.
+. Log in to the GSQL shell as a user with query writing privileges for the graph on which you want to create the query.
+. Run `@<file path>` from the GSQL shell, and replace `<file path>` with the absolute path to the file where you copied the query.
+For example, if your filepath is `/home/tigergraph/query/pagerank.gsql`, run `@/home/tigergraph/query/pagerank.gsql` from the GSQL shell.
+--
+GraphStudio Library Import::
++
+--
+This method is easier than copying and pasting the source code, but not all queries, subqueries, and query variants are available using this method.
+
+In the xref:gui:graphstudio:write-queries.adoc#_query_editing_panel[Query Editing Panel] in GraphStudio, click the New GSQL Query button (a circular green button with a plus sign btn:[+]) and click btn:[Choose from library] in the next window that pops up.
+Select any queries from the list that you would like to install.
+--
+GraphStudio Source Code::
++
+--
+This method is more complex than the library import, but is suitable for all queries, subqueries, and query variants, including any library algorithms that may not yet be available via the library import method.
+
+WARNING: Saving a query in GraphStudio does not create the query in GSQL.
+
+. Locate the query in the GDS Library GitHub repository.
+It is a `.gsql` file named after the query.
+. Copy the entire content of the query file.
+This is the command to create the query.
+. Log in to GraphStudio as a user with query writing privileges for the graph on which you want to create the query.
+. Click btn:[Global View] in the top-left corner and choose the graph to use.
+. Click btn:[Write Queries] on the left side navigation.
+Click btn:[+] to add a new query and enter the query name.
+This name must be the same as the name in the `CREATE QUERY` command.
+. Paste the `CREATE QUERY` command into the query and save the query.
+--
+====
+
+=== Create a distribute mode algorithm
+If you are running the query on a multi-node cluster, you should consider modifying the query to be in distributed mode, before you execute `CREATE QUERY`.
+In general, distributed mode is likely to improve the performance of a query if the query meets the following conditions:
+
+* The query starts at a very large set of starting point vertices.
+* The query performs many hops.
+
+For example, algorithms that compute a value for every vertex or one value for the entire graph should use distributed mode.
+This includes PageRank, Centrality, and Connected Component algorithms.
+
+To change a query definition from single-server (default) to distribution, edit the first line of the query.
+Change the `CREATE QUERY` at the beginning to `CREATE DISTRIBUTED QUERY`.
+
+== Install query
+
+Installing a query allows the algorithm query to access all features offered by the GSQL Query language.
+It also increases the performance of the query.
+
+While CREATE QUERY can only be run as a GSQL command or with the GraphStudio visual interface, you have four options for installing query.
+
+Suppose we want to install `tg_pagerank`.
+
+[tabs]
+====
+GSQL Shell::
++
+--
+  INSTALL QUERY tg_pagerank
+--
+GraphStudio Library Import::
++
+--
+If you used this method to select algorithms, then they shold already be install.
+Check the list of queries in GraphStudio to see if they indeed got added and installed.
+--
+GraphStudio Source Code::
++
+--
+If you created the query by copying and pasting the code into the query editing panel, then use GraphStudio's btn:[Save Query] and btn:[Install Query] buttons.
+--
+REST endpoint::
++
+--
+[source.wrap,shell]
+----
+  curl <user_credentials> GET 'http://locahost:8123/gsql/queries/install?graph=MyGraph&queries=tgPageRank
+----
+See xref:tigergraph-server:api:built-in-endpoints.adoc#_install_a_query[] for more details.
+--
+pyTigerGraph python::
++
+--
+If you are using an algorithm that is already built into your TigerGraph database, then you should not need to run the install step in Python. However, if you did need to install tgPageRank using pyTigerGraph, here are the steps.
+
+. Option the query code and save it to a file.
+. Assuming you have already created a database connection object called `conn`, instantiate a xref:pytigergraph:gds:featurizer.adoc[] object and then involve its `installAlgorithm()` method.
+[souce.warp,python]
+----
+f = conn.gds.featurizer()
+f.installAlgorithm("tg_pagerank", query_path="<path_to_query_file>")
+--
+====
+
+
+== Run query
+Once the query has been installed, you can xref:gsql-ref:querying:query-operations.adoc#_run_query[run the query] on your graph data.
+Installing a query also xref:tigergraph-server:API:built-in-endpoints.adoc#_run_an_installed_query_post[creates a REST endpoint] you can use to call the query.
+
+[tabs]
+====
+GSQL Shell::
++
+--
+
+[source.wrap,gsql]
+----
+RUN QUERY tg_pagerank({"v_type":"Person", "e_type":"Likes"})
+----
+--
+GraphStudio ::
++
+--
+Run the algorithm as you would run any query in GraphStudio.
+--
+REST endpoint::
++
+--
+Create a file containing the input parameters in JSON format:
+[source,text]
+.pagerank_param.txt
+----
+{"v_type":"Person", "e_type":"Likes"}
+----
+[source.wrap,shell]
+----
+  curl <user_credentials> POST --data-binary @./pagerank_param.txt "http://localhost:9000/query/MyGraph/tg_pagerank"
+----
+See xref:tigergraph-server:api:built-in-endpoints.adoc#_install_a_query[] for more details.
+--
+pyTigerGraph python::
++
+--
+[souce.wrap,python]
+----
+f = conn.gds.featurizer()
+f.runAlgorithm("tg_pagerank", {"v_type":"Person", "e_type":"Likes"})
+--
+====

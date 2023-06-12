@@ -1,0 +1,136 @@
+= Packaged Template Algorithms
+:description: Instructions on how to use packaged template algorithms.
+:experimental:
+
+Beginning with TigerGraph Server 3.8, you can use packaged queries to run most Graph Data Science Library algorithms.
+
+Packaged template queries are a simplified method for working with algorithms (or other GSQL queries) that are preinstalled in a TigerGraph instance.
+They use the keyword `CALL` to run with just-in-time compilation for improved performance.
+
+[NOTE]
+Packaged queries cannot be run from GraphStudio.
+
+The syntax is very similar to using a package in Python.
+
+== Import and explore template queries
+
+In TigerGraph version 3.8.0 and later, run the following command to import the query package.
+
+[source, gsql]
+----
+GSQL > IMPORT PACKAGE GDBMS_ALGO
+----
+
+Wait a few moments for the queries to load. Run `SHOW PACKAGE` to check that installation was successful.
+
+[source, gsql]
+----
+GSQL > SHOW PACKAGE
+
+Packages on global:
+  - GDBMS_ALGO
+----
+
+Run `SHOW PACKAGE` again, this time specifying `GDBMS_ALGO`, to see the list of sub-packages.
+Each sub-package corresponds to a category of GDS algorithms.
+
+[source, gsql]
+----
+GSQL > SHOW PACKAGE GDBMS_ALGO
+
+Packages GDBMS_ALGO:
+  - Sub-Packages:
+    - centrality
+    - classification
+    - community
+    - graphML
+    - path
+    - similarity
+    - topological_link_prediction
+----
+
+By specifying a sub-package in the `IMPORT PACKAGE` command, you can choose to import only a subset of the package.
+The following command imports only the `community` sub-package.
+
+[source, gsql]
+----
+GSQL > IMPORT PACKAGE GDBMS_ALGO.community
+----
+
+Use dot notation to explore each sub-package.
+
+[source, gsql]
+----
+GSQL > SHOW PACKAGE GDBMS_ALGO.centrality
+
+Packages GDBMS_ALGO.centrality:
+  - Object:
+      - Packaged Queries:
+        - article_rank(string v_type, string e_type, float max_change, int maximum_iteration, float damping, int top_k, bool print_results, string result_attribute, string file_path)
+        - betweenness_cent(set<string> v_type_set, set<string> e_type_set, string reverse_e_type, int max_hops, int top_k, bool print_results, string result_attribute, string file_path, bool display_edges)
+...
+----
+
+The `SHOW` command (and the pattern matching found in xref:3.9@gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
+
+  SHOW TEMPLATE QUERY -r "GDBMS_ALGO.community.tri.*"
+
+matches all Community template queries starting with the string `tri`.
+
+== Run a packaged query
+
+To run (or `call`) a packaged query, you must first be using a graph.
+Run the GSQL command `USE GRAPH <graph name>` first.
+
+Use the `CALL` command with a specific query name from a package and include the parameters.
+
+[source.wrap, gsql]
+----
+GSQL > USE GRAPH ldbc_snb
+Using graph `ldbc_snb`
+
+GSQL > CALL GDBMS_ALGO.community.louvain(["Person"],["KNOWS"],"weight",10,"","",true)
+----
+
+In this example, we call the xref:community-algorithms:louvain.adoc[] algorithm, specifying:
+
+* A set of strings `["Person"]` as the vertex types to use
+* A set of strings `["KNOWS"]` as the edge types to traverse
+* A string `"weight"` as the edge weight attribute
+* An integer `10` as the maximum limit of iterations
+* An empty string `""` for the result attribute, ensuring nothing will be written to any vertices
+* An empty string `""` for the file path, ensuring the results will not be written as a file
+* A boolean `true` to print the results to the console in JSON format.
+
+The *first* time you call an algorithm on a particular graph and with a particular set of graph schema elements (vertex types, edge types, and/or vertex or edge attributes),
+it goes through a short just-in-time-compilation process to optimize the execution plan for the query.
+
+If you run the same algorithm with the same graph schema elements (regardless of modification to other non-schema parameters such as number of iterations), it does not require compilation and immediately runs the algorithm query.
+
+Therefore, in the previous example, changing any of the first three parameters requires recompilation, but changing any of the other parameters runs the query without needing compilation.
+
+On the `ldbc_snb` graph, the results look like this after the query runs:
+
+[source.wrap, gsql]
+----
+
+------Running query------
+
+{
+  "error": false,
+  "message": "",
+  "version": {
+    "schema": 0,
+    "edition": "enterprise",
+    "api": "v2"
+  },
+  "results": [
+    {"AllVertexCount": 9163},
+    {"InitChangeCount": 0},
+    {"VertexFollowedToCommunity": 355},
+    {"VertexFollowedToVertex": 0},
+    {"VertexAssignedToItself": 729},
+    {"FinalCommunityCount": 9537}
+  ]
+}
+----

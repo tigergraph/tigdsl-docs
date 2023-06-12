@@ -38,10 +38,7 @@ This is repeated across all vertices in the graph.
 
 == Notes
 
-This algorithm query employs a subquery called `cc_subquery`.
-Both queries are needed to run the algorithm.
-
-The `reverse_e_type` (reverse edge type) parameter is always required.
+. The `reverse_e_type` (reverse edge type) parameter is always required.
 For undirected edges, use the same value for both `e_type` and `reverse_e_type`.
 
 === References

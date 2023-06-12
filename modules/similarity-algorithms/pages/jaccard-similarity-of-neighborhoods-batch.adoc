@@ -1,4 +1,4 @@
-= Jaccard Similarity of Neighborhoods (Batch)
+= Jaccard Similarity of Neighborhoods (All Pairs, Batch)
 
 ".Supported Graph Characteristics
 ****

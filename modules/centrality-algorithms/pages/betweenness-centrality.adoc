@@ -60,10 +60,7 @@ Then starting from the vertex on the most outside layer in a non-incremental ord
 
 == Notes
 
-1. This query algorithm employs a subquery called *bc_subquery*.
-Both queries are needed to run the algorithm.
-
-2. The `reverse_edge_type` parameter is mandatory. If you are using undirected edges, then enter the same value for `reserve_edge_type` that you use for `edge_type_set`.
+. The `reverse_edge_type` parameter is mandatory. If you are using undirected edges, then enter the same value for `reserve_edge_type` that you use for `edge_type_set`.
 
 == Specifications
 
