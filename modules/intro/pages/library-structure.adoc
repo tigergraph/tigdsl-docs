@@ -8,7 +8,6 @@ The library contains three important folders:
 * `GDBMS_ALGO`: algorithms in packaged template format
 * `UDF`: user-defined functions (UDFs) required by a few of the algorithms
 * `algorithms`: algorithms written as standard parameterized GSQL queries
-* `graphs`
 
 == GDBMS_ALGO and algorithms
 
@@ -35,9 +34,11 @@ For more on UDFs, see xref:gsql-ref:querying:func/query-user-defined-functions.a
 
 
 [#_graphs]
-== `graphs`
+== `graphs` folder
 
-The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms.In this document, we use the test graphs to show you the expected result for each algorithm.The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
+The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms.
+In this document, we use the test graphs to show you the expected result for each algorithm.
+The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
 
 == Release Branches
 
