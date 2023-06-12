@@ -28,7 +28,7 @@ Your system administrator can enable this capability if appropriate.
 
 [options="header"]
 |===============================================================================================================================
-| Category       | Algorithm                              | Maturity | Graph Studio | Packaged Template | UDF Req | Subquery Req
+| Category       | Algorithm                              | Maturity | Graph Studio | Packaged Template | UDF Required | Subquery Required
 | Centrality     | xref:centrality-algorithms:article-rank.adoc[]
 | Prod     | Y            | Y                 |         |
 | Centrality     | xref:centrality-algorithms:betweenness-centrality.adoc[]
