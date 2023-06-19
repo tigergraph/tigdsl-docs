@@ -196,9 +196,10 @@ See xref:tigergraph-server:API:built-in-endpoints.adoc#_run_an_installed_query_p
 --
 pyTigerGraph python::
 +
+--
 `runAlgorithm()` not only runs an algorithm.
 It will first fetch an algorithm from TigerGraph's public GitHub repository, if needed, and install an algorithm, if needed.
-----
+
 [souce.wrap,python]
 ----
 f = conn.gds.featurizer()
