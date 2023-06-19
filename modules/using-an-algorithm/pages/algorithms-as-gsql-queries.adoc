@@ -6,7 +6,11 @@
 TigerGraph provides an open-source GitHub repository
 https://github.com/tigergraph/gsql-graph-algorithms[]
 with the full text of each query algorithm written in GSQL.
-Therefore, the process to install and run an algorithm query is the same as the process to run any other query.
+Therefore, the three-step process (`CREATE`,`INSTALL`,`RUN`) to run any query will also work for GDS algorithms.
+
+* *GraphStudio* lets you select the algorithms you're interested in from a menu and then combines the CREATE and INSTALL steps.
+* The *pyTigerGraph Python library* offers even more automated: when you RUN, if will CREATE and INSTALL as needed.
+See https://github.com/tigergraph/graph-ml-notebooks/tree/main/algos for example scripts.
 
 The algorithms are divided into several categories.
 Each algorithm has its own folder, where you can find the implementation of the algorithm, any user-defined functions required to install the algorithm, or different versions of the algorithm if they exist.
@@ -46,7 +50,8 @@ You can create the query in the following ways:
 GSQL Shell::
 +
 --
-. Locate the query in the GDS Library GitHub repository.
+. Locate the query in the
+https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms[GDS Library GitHub repository].
 It is a `.gsql` file named after the query.
 . Copy the entire contents of the query file, which is the command to create the query, and paste it into a file on the machine running TigerGraph.
 . Log in to the GSQL shell as a user with query writing privileges for the graph on which you want to create the query.
@@ -68,7 +73,8 @@ This method is more complex than the library import, but is suitable for all que
 
 WARNING: Saving a query in GraphStudio does not create the query in GSQL.
 
-. Locate the query in the GDS Library GitHub repository.
+. Locate the query in the
+https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms[GDS Library GitHub repository].
 It is a `.gsql` file named after the query.
 . Copy the entire content of the query file.
 This is the command to create the query.
@@ -81,7 +87,7 @@ This name must be the same as the name in the `CREATE QUERY` command.
 --
 ====
 
-=== Create a distribute mode algorithm
+=== Create a distributed mode algorithm
 If you are running the query on a multi-node cluster, you should consider modifying the query to be in distributed mode, before you execute `CREATE QUERY`.
 In general, distributed mode is likely to improve the performance of a query if the query meets the following conditions:
 
@@ -128,21 +134,27 @@ REST endpoint::
 ----
   curl <user_credentials> GET 'http://locahost:8123/gsql/queries/install?graph=MyGraph&queries=tgPageRank
 ----
-See xref:tigergraph-server:api:built-in-endpoints.adoc#_install_a_query[] for more details.
+See xref:tigergraph-server:API:built-in-endpoints.adoc#_install_a_query[Built-in Endpoints: Install a query] for more details.
 --
 pyTigerGraph python::
 +
 --
-If you are using an algorithm that is already built into your TigerGraph database, then you should not need to run the install step in Python. However, if you did need to install tgPageRank using pyTigerGraph, here are the steps.
+The install step is usually not needed as a separate step when  using pyTigerGraph, because when you run `runAlgorithm()`, the Featurizer will automatically install the algorithm if needed.
+Moreover, if the algorithm has not been added to TigerGraph yet, the `runAlgorithm()` will first fetch the latest version of the algorithm from TigerGraph's public GitHub repository that is compatible with your database.
 
-. Option the query code and save it to a file.
-. Assuming you have already created a database connection object called `conn`, instantiate a xref:pytigergraph:gds:featurizer.adoc[] object and then involve its `installAlgorithm()` method.
+You only need to use `installAlgorithm()` if you have a customized algorithm or what to use a different version of the algorithm.
+
+. Locate the algorithm's `.gsql` in the
+https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms[GDS Library GitHub repository].
+. Copy the file to a location assessible to your Python code.
+. Assuming you have already created a database connection object called `conn`, instantiate a xref:pytigergraph:gds:featurizer.adoc[] object and then invoke its `installAlgorithm()` method.
 
 [souce.warp,python]
 ----
 f = conn.gds.featurizer()
 f.installAlgorithm("tg_pagerank", query_path="<path_to_query_file>")
 ----
+See xref:pytigergraph:gds:featurizer.adoc#_featurizer[] for more details.
 --
 ====
 
@@ -180,15 +192,18 @@ Create a file containing the input parameters in JSON format:
 ----
   curl <user_credentials> POST --data-binary @./pagerank_param.txt "http://localhost:9000/query/MyGraph/tg_pagerank"
 ----
-See xref:tigergraph-server:API:built-in-endpoints.adoc#_install_a_query[] for more details.
+See xref:tigergraph-server:API:built-in-endpoints.adoc#_run_an_installed_query_post[Built-in Endpoints: Run an installed query] for more details.
 --
 pyTigerGraph python::
 +
+`runAlgorithm()` not only runs an algorithm.
+It will first fetch an algorithm from TigerGraph's public GitHub repository, if needed, and install an algorithm, if needed.
 --
 [souce.wrap,python]
 ----
 f = conn.gds.featurizer()
 f.runAlgorithm("tg_pagerank", {"v_type":"Person", "e_type":"Likes"})
 ----
+See xref:pytigergraph:gds:featurizer.adoc#_featurizer[] for more details.
 --
 ====
