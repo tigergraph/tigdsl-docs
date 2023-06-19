@@ -122,17 +122,17 @@ Your system administrator can enable this capability if appropriate.
 | Similarity| xref:similarity-algorithms:pearson-similarity.adoc[]
 | Beta |   |   | Y |
 | Topological Link Prediction | xref:link-prediction:adamic-adar.adoc[]
-| Prod | Y |   |   |
+| Prod | Y | Y |   |
 | Topological Link Prediction | xref:link-prediction:common-neighbors.adoc[]
-| Prod | Y |   |   |
+| Prod | Y | Y |   |
 | Topological Link Prediction | xref:link-prediction:preferential-attachment.adoc[]
-| Prod | Y |   |   |
+| Prod | Y | Y |   |
 | Topological Link Prediction | xref:link-prediction:resource-allocation.adoc[]
 | Prod | Y | Y |   |
 | Topological Link Prediction | xref:link-prediction:same-community.adoc[]
-| Prod | Y |   |   |
+| Prod | Y | Y |   |
 | Topological Link Prediction | xref:link-prediction:total-neighbors.adoc[]
-| Prod | Y |   |   |
+| Prod | Y | Y |   |
 |===============================================================================================================================
 
 
