@@ -154,7 +154,7 @@ https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms[GDS L
 f = conn.gds.featurizer()
 f.installAlgorithm("tg_pagerank", query_path="<path_to_query_file>")
 ----
-See xref:pytigergraph:gds:featurizer.adoc#_featurizer[] for more details.
+See xref:pytigergraph:gds:featurizer.adoc#_featurizer[Featurizer] for more details.
 --
 ====
 
@@ -198,12 +198,12 @@ pyTigerGraph python::
 +
 `runAlgorithm()` not only runs an algorithm.
 It will first fetch an algorithm from TigerGraph's public GitHub repository, if needed, and install an algorithm, if needed.
---
+----
 [souce.wrap,python]
 ----
 f = conn.gds.featurizer()
 f.runAlgorithm("tg_pagerank", {"v_type":"Person", "e_type":"Likes"})
 ----
-See xref:pytigergraph:gds:featurizer.adoc#_featurizer[] for more details.
+See xref:pytigergraph:gds:featurizer.adoc#_featurizer[Featurizer] for more details.
 --
 ====
