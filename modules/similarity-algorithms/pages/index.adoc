@@ -20,5 +20,3 @@ The TigerGraph Graph Data Science Library provides the following similarity algo
 
 
 
-
-
