@@ -4,3 +4,4 @@
 ** xref:k-nearest-neighbors-batch.adoc[]
 ** xref:k-nearest-neighbors-cross-validation.adoc[]
 ** xref:maximal-independent-set.adoc[]
+** xref:weisfeiler-lehman.adoc[]

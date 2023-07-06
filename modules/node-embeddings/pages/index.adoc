@@ -1,5 +1,6 @@
 = Node Embedding Algorithms
 :description: Overview of node embedding algorithms.
+:page-aliases: node2vec.adoc
 
 Node embeddings are vector representations of properties of vertices in a graph. These vectors can be used for machine learning.
 
@@ -7,9 +8,14 @@ The TigerGraph Graph Data Science Library provides the following node embedding 
 
 //* xref:node2vec.adoc[]
 * xref:fast-random-projection.adoc[]
-* xref:weisfeiler-lehman.adoc[]
+* xref:1.5@pytigergraph:gds:nodepiece.adoc[NodePiece] is a highly scalable node embedding technique.
+It is implemented in the pyTigerGraph library.
+Using it requires a few additional steps, but it is our most scalable offering.
 
+* *Weisfeiler-Lehman isomorphism* has been moved to the
+xref:classification-algorithms:index.adoc[Classification] category.
 
+* *Node2Vec* has been retired (as of v3.9.2) because it did not meet our standards for efficiency and scalability of memory usage. xref:fast-random-projection.adoc[] is a better alternative.
 
 
 
