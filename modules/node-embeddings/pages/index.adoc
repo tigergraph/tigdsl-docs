@@ -8,7 +8,7 @@ The TigerGraph Graph Data Science Library provides the following node embedding 
 
 //* xref:node2vec.adoc[]
 * xref:fast-random-projection.adoc[]
-* xref:1.5@pytigergraph:gds:nodepiece.adoc[NodePiece] is a highly scalable node embedding technique.
+* xref:1.4@pytigergraph:gds:nodepiece.adoc[NodePiece] is a highly scalable node embedding technique.
 It is implemented in the pyTigerGraph library.
 Using it requires a few additional steps, but it is our most scalable offering.
 

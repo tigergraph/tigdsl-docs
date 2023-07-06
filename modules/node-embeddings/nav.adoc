@@ -1,5 +1,5 @@
 * xref:index.adoc[]
 ** xref:fast-random-projection.adoc[]
-** xref:1.5@pytigergraph:gds:nodepiece.adoc[]
+** xref:1.4@pytigergraph:gds:nodepiece.adoc[]
 //** xref:node2vec.adoc[]
 //** xref:weisfeiler-lehman.adoc[]
