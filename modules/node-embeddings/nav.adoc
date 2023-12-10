@@ -1,4 +1,3 @@
 * xref:index.adoc[]
 ** xref:fast-random-projection.adoc[]
 ** xref:node2vec.adoc[]
-** xref:weisfeiler-lehman.adoc[]
