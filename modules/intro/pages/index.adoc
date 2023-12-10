@@ -44,6 +44,7 @@ Classification algorithms label vertices to sort them into various defined class
 * xref:classification-algorithms:k-nearest-neighbors-batch.adoc[]
 * xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
 * xref:classification-algorithms:maximal-independent-set.adoc[]
+* xref:classification-algorithms:weisfeiler-lehman.adoc[]
 
 a|
 === xref:community-algorithms:index.adoc[Community]
@@ -86,7 +87,6 @@ Node embeddings are vector representations of vertex properties in a graph.
 
 * xref:node-embeddings:node2vec.adoc[]
 * xref:node-embeddings:fast-random-projection.adoc[]
-* xref:node-embeddings:weisfeiler-lehman.adoc[]
 
 a|
 === xref:pathfinding-algorithms:index.adoc[Pathfinding]
