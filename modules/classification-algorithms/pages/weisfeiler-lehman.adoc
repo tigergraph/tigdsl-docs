@@ -1,4 +1,5 @@
 = Weisfeiler-Lehman
+:page-aliases: node-embeddings:weisfeiler-lehman.adoc
 :description: Overview of the Weisfeiler-Lehman for detecting isomorphic graphs.
 :fn-iso-article: footnote:[David Bieber, The Weisfeiler-Lehman Isomorphism Test, https://davidbieber.com/post/2019-05-10-weisfeiler-lehman-isomorphism-test/]
 
@@ -33,14 +34,14 @@ It finds the isomorphic subgraphs, and gives every vertex in the isomorphic subg
 [,gsql]
 ----
 CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
-    INT depth, INT out_put_limit, BOOL print_results = TRUE,
+    INT depth, INT output_limit, BOOL print_results = TRUE,
     STRING result_attribute = "",STRING file_path = "")
 ----
 === Parameters
 
 
 |===
-|Parameter |Descriptiono
+|Parameter |Description
 
 |`STRING v_type`
 |Vertex type to consider.
@@ -51,8 +52,8 @@ CREATE QUERY tg_weisfeiler_lehman(STRING v_type,STRING e_type,
 |`INT depth`
 |Number of hops to consider
 
-|`INT out_put_limit`
-|If `print_results` is set to true, print a maximum of this number of vertices..
+|`INT output_limit`
+|If `print_results` is set to true, print a maximum of this number of vertices.
 
 |`BOOL print_results`
 |If true, print JSON to standard output.
