@@ -4,67 +4,68 @@
 TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 expertly written, ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
 
 == Get to know the Graph Data Science (GDS) Library
-[.home-card,cols="2,2",grid=none,frame=none]
+[.home-card,cols="2,2",grid=none,frame=none, separator=¦]
 |===
-a|
+¦
 image:lang2.png[alt=admin,width=74,height=74]
 *Using a Algorithm*
 
 Information on how to use a TigerGraph Graph Data Science (GDS) Library algorithm.
 
-xref:graph-ml:using-an-algorithm:index.adoc[Using an Algorithm ↗]
-xref:graph-ml:intro:library-structure.adoc[Library Structure ↗]
-xref:graph-ml:intro:algorithm-table.adoc[Algorithm Table ↗]
+xref:graph-ml:using-an-algorithm:index.adoc[Using an Algorithm |]
+xref:graph-ml:intro:library-structure.adoc[Library Structure |]
+xref:graph-ml:intro:algorithm-table.adoc[Algorithm Table]
 
-a|
+¦
 image:TG_Icon_Library-51.png[alt=admin,width=74,height=74]
 *Centrality Algorithms*
 
-xref:graph-ml:centrality-algorithms:index.adoc[Centrality Algorithms ↗]
+xref:graph-ml:centrality-algorithms:index.adoc[Centrality Algorithms]
 find the important vertices in a graph based on their connections with other vertices.
 
-a|
+¦
 image:querying-homecard.png[alt=admin,width=74,height=74]
 *Classification Algorithms*
 
-xref:graph-ml:classification-algorithms:index.adoc[Classification Algorithms ↗]
+xref:graph-ml:classification-algorithms:index.adoc[Classification Algorithms]
 label vertices to sort them into various defined classes.
 
-a|
+¦
 image:Copy of TG_Icon_Library-218.png[alt=admin,width=74,height=74]
 *Community Algorithms*
 
-xref:graph-ml:community-algorithms:index.adoc[Community Algorithms  ↗]
+xref:graph-ml:community-algorithms:index.adoc[Community Algorithms]
 group together vertices or edges that satisfy some rule for being connected to one another.
-a|
+
+¦
 image:TG_Icon_Library-166.png[alt=admin,width=74,height=74]
 *Node Embedding Algorithms*
 
-xref:graph-ml:node-embeddings:index.adoc[Node Embeddings ↗]
+xref:graph-ml:node-embeddings:index.adoc[Node Embeddings]
 are vector representations of vertex properties in a graph.
 
-a|
+¦
 image:TG_Icon_Library-146.png[alt=admin,width=74,height=74]
 *Pathfinding Algorithms*
 
-xref:graph-ml:pathfinding-algorithms:index.adoc[Pathfinding Algorithms ↗]
+xref:graph-ml:pathfinding-algorithms:index.adoc[Pathfinding Algorithms]
 find the best path(s) among a set of vertices according to length or cost.
 
-a|
+¦
 image:TG_Icon_Library-92.png[alt=admin,width=74,height=74]
 *Similarity Algorithms*
 
-xref:graph-ml:similarity-algorithms:index.adoc[Similarity Algorithms ↗]
+xref:graph-ml:similarity-algorithms:index.adoc[Similarity Algorithms]
 assign a score to a pair of vertices based on how similar they are, usually by referring to their neighborhoods.
 
-a|
+¦
 image:TG_Icon_Library-48.png[alt=admin,width=74,height=74]
 *Topological Link Prediction Algorithms*
 
-xref:graph-ml:link-prediction:index.adoc[Link Prediction ↗]
+xref:graph-ml:link-prediction:index.adoc[Link Prediction]
 determine the closeness of a pair of vertices to make predictions about their relationships.
 
-a|
+¦
 |===
 
 GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:
