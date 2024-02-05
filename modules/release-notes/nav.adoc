@@ -1,2 +1,2 @@
 * xref:index.adoc[Release Notes]
-* xref:graph-ml:release-notes:legacy-tg-versions.adoc[]
+** xref:legacy-tg-versions.adoc[]
