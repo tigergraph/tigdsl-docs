@@ -5,3 +5,4 @@
 ** xref:resource-allocation.adoc[]
 ** xref:same-community.adoc[]
 ** xref:total-neighbors.adoc[]
+* xref:graph-ml:release-notes:legacy-tg-versions.adoc[]

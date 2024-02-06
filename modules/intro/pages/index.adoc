@@ -1,7 +1,72 @@
 = TigerGraph Graph Data Science Library
 :page-aliases: intro:overview.adoc
 
-TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 expertly written, ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
+TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
+
+== Get to know the Graph Data Science (GDS) Library
+[.home-card,cols="2,2",grid=none,frame=none, separator=¦]
+|===
+¦
+image:lang2.png[alt=admin,width=74,height=74]
+*Using a Algorithm*
+
+Information on how to use a TigerGraph Graph Data Science (GDS) Library algorithm.
+
+xref:graph-ml:using-an-algorithm:index.adoc[Using an Algorithm |]
+xref:graph-ml:intro:library-structure.adoc[Library Structure |]
+xref:graph-ml:intro:algorithm-table.adoc[Algorithm Table]
+
+¦
+image:TG_Icon_Library-51.png[alt=admin,width=74,height=74]
+*Centrality Algorithms*
+
+xref:graph-ml:centrality-algorithms:index.adoc[Centrality Algorithms]
+find the important vertices in a graph based on their connections with other vertices.
+
+¦
+image:querying-homecard.png[alt=admin,width=74,height=74]
+*Classification Algorithms*
+
+xref:graph-ml:classification-algorithms:index.adoc[Classification Algorithms]
+label vertices to sort them into various defined classes.
+
+¦
+image:Copy of TG_Icon_Library-218.png[alt=admin,width=74,height=74]
+*Community Algorithms*
+
+xref:graph-ml:community-algorithms:index.adoc[Community Algorithms]
+group together vertices or edges that satisfy some rule for being connected to one another.
+
+¦
+image:TG_Icon_Library-166.png[alt=admin,width=74,height=74]
+*Node Embedding Algorithms*
+
+xref:graph-ml:node-embeddings:index.adoc[Node Embeddings]
+are vector representations of vertex properties in a graph.
+
+¦
+image:TG_Icon_Library-146.png[alt=admin,width=74,height=74]
+*Pathfinding Algorithms*
+
+xref:graph-ml:pathfinding-algorithms:index.adoc[Pathfinding Algorithms]
+find the best path(s) among a set of vertices according to length or cost.
+
+¦
+image:TG_Icon_Library-92.png[alt=admin,width=74,height=74]
+*Similarity Algorithms*
+
+xref:graph-ml:similarity-algorithms:index.adoc[Similarity Algorithms]
+assign a score to a pair of vertices based on how similar they are, usually by referring to their neighborhoods.
+
+¦
+image:TG_Icon_Library-48.png[alt=admin,width=74,height=74]
+*Topological Link Prediction Algorithms*
+
+xref:graph-ml:link-prediction:index.adoc[Link Prediction]
+determine the closeness of a pair of vertices to make predictions about their relationships.
+
+¦
+|===
 
 GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:
 
@@ -9,157 +74,6 @@ GSQL running on the TigerGraph platform is particularly well-suited for graph al
 * *Parallel and Distributed Processing,* enabling computations on larger graphs.
 * *User-Extensible*. Because the algorithms are written in standard GSQL and compiled by the user,  they are easy to modify and customize.
 * *Open-Source*. Users can study the GSQL implementations to learn by example, and they can develop and submit additions to the library.
-
-== Quick Links
-
-* xref:library-structure.adoc[]
-* xref:using-an-algorithm:index.adoc[]
-* xref:algorithm-table.adoc[]
-
-[cols="3,3,3",grid=none,frame=none]
-
-|===
-
-a|
-=== xref:centrality-algorithms:index.adoc[Centrality]
-
-Centrality algorithms find the important vertices in a graph based on their connections with other vertices.
-
-* xref:centrality-algorithms:approximate-closeness-centrality.adoc[]
-* xref:centrality-algorithms:article-rank.adoc[]
-* xref:centrality-algorithms:betweenness-centrality.adoc[]
-* xref:centrality-algorithms:closeness-centrality.adoc[]
-* xref:centrality-algorithms:degree-centrality.adoc[]
-* xref:centrality-algorithms:eigenvector-centrality.adoc[]
-* xref:centrality-algorithms:harmonic-centrality.adoc[]
-* xref:centrality-algorithms:influence-maximization.adoc[]
-* xref:centrality-algorithms:pagerank.adoc[]
-* xref:centrality-algorithms:personalized-pagerank.adoc[]
-* xref:centrality-algorithms:weighted-degree-centrality.adoc[]
-* xref:centrality-algorithms:weighted-pagerank.adoc[]
-
-a|
-=== xref:classification-algorithms:index.adoc[Classification]
-
-Classification algorithms label vertices to sort them into various defined classes.
-
-* xref:classification-algorithms:greedy-graph-coloring.adoc[]
-* xref:classification-algorithms:k-nearest-neighbors.adoc[]
-* xref:classification-algorithms:k-nearest-neighbors-batch.adoc[]
-* xref:classification-algorithms:k-nearest-neighbors-cross-validation.adoc[]
-* xref:classification-algorithms:maximal-independent-set.adoc[]
-* xref:classification-algorithms:weisfeiler-lehman.adoc[]
-
-a|
-=== xref:community-algorithms:index.adoc[Community]
-
-Community algorithms group together vertices or edges that satisfy some rule for being connected to one another.
-
-** xref:community-algorithms:connected-components.adoc[]
-*** xref:community-algorithms:wcc-small-world.adoc[]
-** xref:community-algorithms:k-core-decomposition.adoc[]
-** xref:community-algorithms:label-propagation.adoc[]
-** xref:community-algorithms:slpa.adoc[]
-** xref:community-algorithms:local-clustering-coefficient.adoc[]
-** xref:community-algorithms:louvain.adoc[]
-** xref:community-algorithms:strongly-connected-components.adoc[]
-*** xref:community-algorithms:scc-small-world.adoc[]
-** xref:community-algorithms:triangle-counting.adoc[]
-
-|===
-
-[cols="3,3,3",grid=none,frame=none]
-|===
-a|
-=== xref:link-prediction:index.adoc[Link Prediction]
-
-Topological link prediction algorithms determine the closeness of a pair of vertices to make predictions about their relationships.
-
-* xref:link-prediction:adamic-adar.adoc[]
-* xref:link-prediction:common-neighbors.adoc[]
-* xref:link-prediction:preferential-attachment.adoc[]
-* xref:link-prediction:resource-allocation.adoc[]
-* xref:link-prediction:same-community.adoc[]
-* xref:link-prediction:total-neighbors.adoc[]
-
-
-a|
-=== xref:node-embeddings:index.adoc[Node Embedding]
-
-Node embeddings are vector representations of vertex properties in a graph.
-
-
-//* xref:node-embeddings:node2vec.adoc[]
-* xref:node-embeddings:fast-random-projection.adoc[]
-* xref:1.4@pytigergraph:gds:nodepiece.adoc[NodePiece]
-
-a|
-=== xref:pathfinding-algorithms:index.adoc[Pathfinding]
-
-Pathfinding algorithms find the best path(s) among a set of vertices according to length or cost.
-
-* xref:pathfinding-algorithms:a-star.adoc[]
-* xref:pathfinding-algorithms:all-pairs-shortest-path.adoc[]
-* xref:pathfinding-algorithms:bfs.adoc[]
-* xref:pathfinding-algorithms:cycle-detection.adoc[]
-* xref:pathfinding-algorithms:estimated-diameter.adoc[]
-* xref:pathfinding-algorithms:max-flow.adoc[]
-* xref:pathfinding-algorithms:minimum-spanning-forest.adoc[]
-* xref:pathfinding-algorithms:minimum-spanning-tree.adoc[]
-* xref:pathfinding-algorithms:single-source-shortest-path-unweighted.adoc[]
-* xref:pathfinding-algorithms:single-source-shortest-path-weighted.adoc[]
-
-|===
-
-[cols="",grid=none,frame=none]
-|===
-
-a|
-=== xref:similarity-algorithms:index.adoc[Similarity and Distance]
-
-Similarity algorithms assign a score to a pair of vertices based on how similar they are, usually by referring to their neighborhoods.
-
-* xref:similarity-algorithms:euclidean.adoc[]
-* xref:similarity-algorithms:overlap-similarity.adoc[]
-* xref:similarity-algorithms:pearson-similarity.adoc[]
-* *Cosine Similarity of Neighborhoods*
-** xref:similarity-algorithms:cosine-similarity-of-neighborhoods-batch.adoc[]
-** xref:similarity-algorithms:cosine-similarity-of-neighborhoods-single-source.adoc[]
-* *Jaccard Similarity of Neighborhoods*
-** xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-batch.adoc[]
-** xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-single-source.adoc[]
-a|
-
-|===
-
-
-
-== Library Structure
-
-You can download the library from GitHub: +
-https://github.com/tigergraph/gsql-graph-algorithms[https://github.com/tigergraph/gsql-graph-algorithm]
-
-The library contains two folders: `algorithms` and `graphs`.
-
-=== `algorithms`
-
-The `algorithms` folder contains the GSQL implementation of all the graph algorithms offered by the library.
-Within the `algorithms` folder are six sub-folders that group the algorithms into six classes:
-
-* *Centrality*
-* *Classification*
-* *Community*
-* *Node Embeddings*
-* *Path*
-* *Similarity*
-
-Each algorithm has its own subfolder under the category folder.
-Inside the algorithm folder, there might be further subfolders depending on whether the GDS Library provides different versions of the algorithm.
-
-[#_graphs]
-=== `graphs`
-
-The `graphs` folder contains small sample graphs that you can use to experiment with the algorithms.In this document, we use the test graphs to show you the expected result for each algorithm.The graphs are small enough that you can manually calculate and sometimes intuitively see what the answers should be.
 
 === Release Branches
 
