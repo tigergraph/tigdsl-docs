@@ -1,7 +1,7 @@
 = TigerGraph Graph Data Science Library
 :page-aliases: intro:overview.adoc
 
-TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 expertly written, ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
+TigerGraph In-Database Graph Data Science (GDS) Library is a collection of more than 50 ready-to-use GSQL queries, each of which implements a standard graph or machine learning algorithm.
 
 == Get to know the Graph Data Science (GDS) Library
 [.home-card,cols="2,2",grid=none,frame=none, separator=¦]
