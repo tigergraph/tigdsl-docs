@@ -13,7 +13,7 @@
 ^|Heterogeneous vertex types
 |===
 
-Algorithm links: link:https://github.com/tigergraph/algos/tree/four_algos/algorithms/Path/path_between_two_vertices[All Paths (Single-Pair)]
+Algorithm links: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/path_between_two_vertices/bidirection[All Paths (Single-Pair)]
 
 ****
 
