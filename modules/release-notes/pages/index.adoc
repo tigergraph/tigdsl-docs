@@ -1,4 +1,4 @@
-= Release Notes
+= Graph Data Science Library Release Notes
 
 This page tracks release changes for the Graph Data Science Algorithm Library since November 15, 2022, when version 3.8.0 of TigerGraph Server and the Algorithm Library were released.
 
