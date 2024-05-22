@@ -1,0 +1,95 @@
+= Jaccard Similarity
+:stem: latex
+:experimental:
+
+Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/277349ce0414ba797edcad1488b6caf1904d5beb/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
+
+Jaccard similarity, also known as the Jaccard index, measures the similarity between finite sample sets.
+It is defined as the size of the intersection divided by the size of the union of the sample sets.
+
+[stem]
+++++
+\[
+\text{Jaccard Similarity} = \frac{|A \cap B|}{|A \cup B|} = \frac{\text{cardinality of intersection}}{\text{cardinality of union}}
+\]
+++++
+
+The algorithm can accept input as either vectors represented by standard `vector` or `ListAccum`.
+
+== Notes
+
+This algorithm is implemented as a user-defined function.
+You need to follow the steps in xref:3.10.1@gsql-ref:querying:func/query-user-defined-functions.adoc[Add a User-Defined Function] to add the function to GSQL.
+After adding the function, you can call it in any GSQL query in the same way as a built-in GSQL function.
+
+== Specifications
+
+....
+tg_jaccard_similarity_accum(A, B)
+tg_jaccard_similarity(A, B)
+....
+
+=== Parameters
+
+[options="header",]
+|===
+|Name |Description |Data type
+
+|`+A+`
+|A vector or `+ListAccum+` representing a set
+|`+vector<T>+` or `+ListAccum<T>+`
+
+|`+B+`
+|A vector or `+ListAccum+` representing a set
+|`+vector<T>+` or `+ListAccum<T>+`
+|===
+
+=== Output
+
+The Jaccard similarity between the two sets, calculated as the size of the intersection divided by the size of the union of the sets.
+
+=== Time complexity
+
+The algorithm has a complexity of stem:[O(n log n)], where stem:[n] is the number of dimensions of the vectors, due to the sorting steps involved.
+
+
+== Example
+[tabs]
+====
+Accum Query::
++
+--
+[,gsql]
+----
+CREATE QUERY jaccard_similarity_example() FOR GRAPH social {
+  ListAccum<INT> @@a = [1, 2, 3];
+  ListAccum<INT> @@b = [2, 3, 4];
+  double similarity = tg_jaccard_similarity_accum(@@a, @@b);
+  PRINT similarity;
+}
+----
+--
+Vector Query::
++
+--
+[,gsql]
+----
+CREATE QUERY jaccard_similarity_std_example() FOR GRAPH social {
+  std::vector<int> a = {1, 2, 3};
+  std::vector<int> b = {2, 3, 4};
+  double similarity = tg_jaccard_similarity(a, b);
+  PRINT similarity;
+}
+----
+--
+Result::
++
+--
+[,json]
+----
+{
+    "jaccard_similarity": 0.5
+}
+----
+--
+====
