@@ -2,7 +2,7 @@
 :stem: latex
 :experimental:
 
-Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/277349ce0414ba797edcad1488b6caf1904d5beb/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
+UDF function: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/277349ce0414ba797edcad1488b6caf1904d5beb/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
 
 Jaccard similarity, also known as the Jaccard index, measures the similarity between finite sample sets.
 It is defined as the size of the intersection divided by the size of the union of the sample sets.
@@ -14,19 +14,19 @@ It is defined as the size of the intersection divided by the size of the union o
 \]
 ++++
 
-The algorithm can accept input as either vectors represented by standard `vector` or `ListAccum`.
+//The function can accept input as either vectors represented by standard `vector` or `ListAccum`.
+
+The function operates on vectors formatted as `ListAccum` accumulators.
+
 
 == Notes
 
-This algorithm is implemented as a user-defined function.
-You need to follow the steps in xref:3.10.1@gsql-ref:querying:func/query-user-defined-functions.adoc[Add a User-Defined Function] to add the function to GSQL.
-After adding the function, you can call it in any GSQL query in the same way as a built-in GSQL function.
+The Jaccard Similarity function is implemented as one option of a multifunction user-defined function (UDF) that is preinstalled in GSQL.
 
 == Specifications
 
 ....
-tg_jaccard_similarity_accum(A, B)
-tg_jaccard_similarity(A, B)
+tg_similarity_accum(A, B, "JACCARD")
 ....
 
 === Parameters
@@ -36,12 +36,16 @@ tg_jaccard_similarity(A, B)
 |Name |Description |Data type
 
 |`+A+`
-|A vector or `+ListAccum+` representing a set
-|`+vector<T>+` or `+ListAccum<T>+`
+|A `+ListAccum+` representing a set.
+|`+ListAccum<T>+`
 
 |`+B+`
-|A vector or `+ListAccum+` representing a set
-|`+vector<T>+` or `+ListAccum<T>+`
+|A `+ListAccum+` representing a set.
+| `+ListAccum<T>+`
+
+| "JACCARD"
+| A string that identifies the similarity function type.
+| `const string`
 |===
 
 === Output
@@ -50,8 +54,7 @@ The Jaccard similarity between the two sets, calculated as the size of the inter
 
 === Time complexity
 
-The algorithm has a complexity of stem:[O(n log n)], where stem:[n] is the number of dimensions of the vectors, due to the sorting steps involved.
-
+The function has a complexity of stem:[O(n log n)], where stem:[n] is the number of dimensions of the vectors, due to the sorting steps involved.
 
 == Example
 [tabs]
@@ -64,20 +67,7 @@ Accum Query::
 CREATE QUERY jaccard_similarity_example() FOR GRAPH social {
   ListAccum<INT> @@a = [1, 2, 3];
   ListAccum<INT> @@b = [2, 3, 4];
-  double similarity = tg_jaccard_similarity_accum(@@a, @@b);
-  PRINT similarity;
-}
-----
---
-Vector Query::
-+
---
-[,gsql]
-----
-CREATE QUERY jaccard_similarity_std_example() FOR GRAPH social {
-  std::vector<int> a = {1, 2, 3};
-  std::vector<int> b = {2, 3, 4};
-  double similarity = tg_jaccard_similarity(a, b);
+  double similarity = tg_similarity_accum(@@a, @@b, "JACCARD");
   PRINT similarity;
 }
 ----

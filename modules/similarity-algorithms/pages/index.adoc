@@ -5,14 +5,11 @@ Similarity algorithms assign a score to a pair of vertices based on how similar 
 This usually involves seeing if they have the same or similar neighborhoods.
 This section also includes distance algorithms, as distance is the inverse of similarity.
 
-The TigerGraph Graph Data Science Library provides the following similarity algorithms:
+The TigerGraph Graph Data Science Library provides the following:
 
-== Vector
+== Vector Similarity Functions
 
-* xref:euclidean.adoc[]
-
-== Vector Similarity
-
+* xref:euclidean.adoc[]  (distance, the inverse of similarity)
 * xref:overlap-similarity.adoc[]
 * xref:pearson-similarity.adoc[]
 * xref:cosine-similarity.adoc[]

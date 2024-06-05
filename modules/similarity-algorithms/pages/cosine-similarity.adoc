@@ -2,8 +2,7 @@
 :stem: latex
 :experimental:
 
-Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/277349ce0414ba797edcad1488b6caf1904d5beb/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
-
+UDF function: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/277349ce0414ba797edcad1488b6caf1904d5beb/algorithms/Similarity/approximate_nearest_neighbors[Approximate Nearest Neighbors]
 
 Cosine similarity measures the cosine of the angle between two non-zero vectors of an inner product space.
 
@@ -14,21 +13,18 @@ Cosine similarity measures the cosine of the angle between two non-zero vectors 
 \]
 ++++
 
-This is commonly used to determine the similarity between two vectors, often used in text analysis and other vector space models.
+If each entity is being modeled as a set of numerically scored characteristics, than cosine similarity is a commonly used method of measuring the similarity between two entities.
 
-The algorithm can take vectors denoted by `ListAccum` or standard `vector`.
+The function operates on vectors formatted as `ListAccum` accumulators.
 
 == Notes
 
-This algorithm is implemented as a user-defined function.
-You need to follow the steps in xref:3.10.1@gsql-ref:querying:func/query-user-defined-functions.adoc[Add a User-Defined Function] to add the function to GSQL.
-After adding the function, you can call it in any GSQL query in the same way as a built-in GSQL function.
+The cosine similarity function is implemented as one option of a multifunction user-defined function (UDF) that is preinstalled in GSQL.
 
 == Specifications
 
 ....
-tg_cosine_similarity_accum(A, B)
-tg_cosine_similarity(A, B)
+tg_similarity_accum(A, B, "COSINE")
 ....
 
 === Parameters
@@ -37,12 +33,17 @@ tg_cosine_similarity(A, B)
 |===
 |Name |Description |Data type
 |`+A+`
-|An n-dimensional vector denoted by a `+ListAccum+` or `+vector+` of length `+n+`
-|`+ListAccum<INT/UINT/FLOAT/DOUBLE>+` or `+vector<INT/UINT/FLOAT/DOUBLE>+`
+|An n-dimensional vector denoted by a `+ListAccum+` of length `+n+`.
+|`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
 
 |`+B+`
-|An n-dimensional vector denoted by a `+ListAccum+` or `+vector+` of length `+n+`
-|`+ListAccum<INT/UINT/FLOAT/DOUBLE>+` or `+vector<INT/UINT/FLOAT/DOUBLE>+`
+|An n-dimensional vector denoted by a `+ListAccum+` of length `+n+`.
+|`+ListAccum<INT/UINT/FLOAT/DOUBLE>+`
+
+| "COSINE"
+| A string that identifies the similarity function type.
+| `const string`
+
 |===
 
 === Output
@@ -51,7 +52,7 @@ The cosine similarity between the two vectors, which ranges from -1 (exactly opp
 
 === Time complexity
 
-The algorithm has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
+The function has a complexity of stem:[O(n)], where stem:[n] is the number of dimensions of the vectors.
 
 == Example
 [tabs]
@@ -64,20 +65,7 @@ Accum Query::
 CREATE QUERY cosine_similarity_example() FOR GRAPH social {
   ListAccum<INT> @@a = [1, 0, 3];
   ListAccum<INT> @@b = [0, 2, 6];
-  double similarity = tg_cosine_similarity_accum(@@a, @@b);
-  PRINT similarity;
-}
-----
---
-Vector Query::
-+
---
-[,gsql]
-----
-CREATE QUERY cosine_similarity_std_example() FOR GRAPH social {
-  std::vector<int> a = {1, 0, 3};
-  std::vector<int> b = {0, 2, 6};
-  double similarity = tg_cosine_similarity(a, b);
+  double similarity = tg_similarity_accum(@@a, @@b, "COSINE");
   PRINT similarity;
 }
 ----
