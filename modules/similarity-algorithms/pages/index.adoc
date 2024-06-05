@@ -9,6 +9,39 @@ The TigerGraph Graph Data Science Library provides the following:
 
 == Vector Similarity Functions
 
+[CAUTION]
+====
+Vector Similarity Functions are subcomponents for the Appropriate Nearest Nearest (ANN) algorithm which is still in beta.
+====
+
+[IMPORTANT]
+====
+Beta features are for personal or R&D use and not for production use.
+====
+
+=== Prerequisites
+
+
+.To use Vector Similarity Functions please install via one of the two methods below:
+* Via TigerGraph CLI run:
++
+[source, gsql]
+----
+tg box algos install <Approximate Nearest Neighbors Algorithm>
+----
+* Via GSQL terminal run:
++
+[source, gsql]
+----
+GSQL > BEGIN
+# Paste <Approximate Nearest Neighbors Algorithm> code after BEGIN command
+GSQL > END
+GSQL > INSTALL QUERY <Approximate Nearest Neighbors Algorithm>
+----
+
+For more information see our public GitHub repo https://github.com/tigergraph/gsql-graph-algorithms/blob/master/algorithms/Similarity/approximate_nearest_neighbors/README.md[Approximate Nearest Neighbors].
+
+=== Function Types
 * xref:euclidean.adoc[]  (distance, the inverse of similarity)
 * xref:overlap-similarity.adoc[]
 * xref:pearson-similarity.adoc[]
