@@ -9,14 +9,11 @@ The TigerGraph Graph Data Science Library provides the following:
 
 == Vector Similarity Functions
 
-[CAUTION]
-====
-Vector Similarity Functions are subcomponents for the Appropriate Nearest Nearest (ANN) algorithm which is still in beta.
-====
-
 [IMPORTANT]
 ====
-Beta features are for personal or R&D use and not for production use.
+The current vector functions are implemented as UDF (User-Defined Functions) and preloaded as part of the Graph Data Science Library.
+Unlike other members of the library, they are not GSQL queries.
+They are functions which can be used within a query.
 ====
 
 === Prerequisites
