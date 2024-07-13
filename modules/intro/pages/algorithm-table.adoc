@@ -115,7 +115,7 @@ Your system administrator can enable this capability if appropriate.
 | Similarity| xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-batch.adoc[]| Prod | Y |   |   |
 | Similarity| xref:similarity-algorithms:jaccard-similarity-of-neighborhoods-single-source.adoc[]
 | Prod | Y |   |   |
-| Similarity| xref:gsql-ref:querying:func/vector-functions.adoc [Vector Similarity]
+| Similarity| xref:gsql-ref:querying:func/vector-functions.adoc[Vector Similarity]
 | Beta |   | N/A | is a UDF |
 | Topological Link Prediction | xref:link-prediction:adamic-adar.adoc[]
 | Prod | 3.9.2 | Y |   |
