@@ -1,15 +1,17 @@
 = Similarity Algorithms
 :description: Overview of similarity algorithms.
 
-Similarity algorithms assign a score to a pair of vertices based on how similar they are.
-This usually involves seeing if they have the same or similar neighborhoods.
-This section also includes distance algorithms, as distance is the inverse of similarity.
+The Graph Data Science Library provides two types of similarity algorithms or functions:
 
-The TigerGraph Graph Data Science Library provides the following similarity algorithms:
+== Neighborhood Similarity Algorithms
 
-* xref:euclidean.adoc[]
-* xref:overlap-similarity.adoc[]
-* xref:pearson-similarity.adoc[]
+Two vertices are _neighbors_ of one another if they are directly connected by an edge. The _neighborhood_ of a vertex is its set of neighbors.
+
+Neighborhood similarity algorithms measure the degree to which the neighborhoods of vertices contain the same or similar members.
+If two vertices have exactly the same neighbors, then they have perfect neighborhood similarity.
+
+The TigerGraph Graph Data Science Library provides the following neighborhood similarity algorithms:
+
 * *Cosine Similarity of Neighborhoods*
 ** xref:cosine-similarity-of-neighborhoods-batch.adoc[]
 ** xref:cosine-similarity-of-neighborhoods-single-source.adoc[]
@@ -17,6 +19,17 @@ The TigerGraph Graph Data Science Library provides the following similarity algo
 ** xref:jaccard-similarity-of-neighborhoods-batch.adoc[]
 ** xref:jaccard-similarity-of-neighborhoods-single-source.adoc[]
 
+== Vector Similarity Functions
 
+The TigerGraph Graph Data Science Library also provides vector similarity functions. The vectors can be either `LIST`-type attributes or in-query `ListAccum` accumulators.
 
+The functions are implemented as options of one master function, `tg_similarity_accum(VectorA, VectorB, function_specifier_string)`.
 
+Because they are functions, they are documented in the GSQL Reference Manual section on xref:gsql-ref:querying:func/vector-functions.adoc[Vector Functions].
+
+[NOTE]
+====
+. Technically, these are functions, not algorithms. Whereas a GSQL algorithm IS a query, a function can be used someplace _within_ a query, to compute a value.
+. These vector functions look only at lists or sets of values. They do not look at vertices or edges.
+. These vector functions are currently implemented as pre-installed user-defined functions (UDFs) within the Graph Data Science Library. It is not necessary to install any particular algorithm in order to use these functions.
+====
