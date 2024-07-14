@@ -11,6 +11,7 @@
 ^|Undirected edges
 ^|Homogeneous vertex types
 ^|Heterogeneous vertex types
+^|
 |===
 
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Centrality/closeness/approximate[Approximate Closeness Centrality]

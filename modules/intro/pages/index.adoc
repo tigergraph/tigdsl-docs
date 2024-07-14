@@ -65,7 +65,6 @@ image:TG_Icon_Library-48.png[alt=admin,width=74,height=74]
 xref:graph-ml:link-prediction:index.adoc[Link Prediction]
 determine the closeness of a pair of vertices to make predictions about their relationships.
 
-¦
 |===
 
 GSQL running on the TigerGraph platform is particularly well-suited for graph algorithms for several reasons:

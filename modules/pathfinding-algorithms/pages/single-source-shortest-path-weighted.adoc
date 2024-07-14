@@ -110,7 +110,6 @@ Can be `INT`, `FLOAT`, or `DOUBLE`.
 |`BOOL display_edges`
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed in the query view window on GraphStudio.
 |False
-|No
 
 |===
 
