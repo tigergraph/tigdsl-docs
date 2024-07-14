@@ -92,7 +92,6 @@ CREATE QUERY tg_shortest_ss_no_wt (VERTEX source, SET<STRING> v_type,
 |`BOOL display_edges`
 |If true, include the graph's edges in the JSON output, so that the full graph can be displayed in the query view window on GraphStudio.
 |False
-|No
 
 |===
 
