@@ -39,7 +39,7 @@ If you do not have a preferred vertex, and the graph might have more than one co
 [source.wrap,gsql]
 ----
 tg_mst (VERTEX opt_source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
-  STRIN wt_attr, STRING wt_type, INT maximum_iteration = -1,
+  STRIN weight_attribute, STRING weight_type, INT maximum_iteration = -1,
   BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
 
@@ -61,11 +61,11 @@ tg_mst (VERTEX opt_source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
 |Names of edge types to use
 |(empty set of strings)
 
-|`+STRING wt_attr+`
+|`+STRING weight_attribute+`
 |Name of edge weight attribute
 |(empty string)
 
-|`+STRING wt_type+`
+|`+STRING weight_type+`
 |Data type of edge weight attribute (must be `INT`, `FLOAT`, or `DOUBLE`)
 |(empty string)
 

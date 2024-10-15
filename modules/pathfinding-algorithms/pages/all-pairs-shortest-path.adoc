@@ -30,12 +30,12 @@ The Unweighted variant does not support weighted edges.
 [source,gsql]
 ----
 CREATE QUERY tg_all_pairs_shortest( SET<STRING> v_type_set,  SET<STRING> e_type_set,
- STRING wt_attr, STRING wt_type, STRING result_attribute = "", STRING file_path = "")
+ STRING weight_attribute, STRING weight_type, STRING result_attribute = "", STRING file_path = "")
 {
   Start = {v_type};
   Result = SELECT s FROM Start:s
         POST-ACCUM
-          shortest_ss_any_wt(s, v_type, e_type, wt_attr, wt_type,
+          shortest_ss_any_wt(s, v_type, e_type, weight_attribute, weight_type,
           result_attribute, file_path+s);
 }
 ----

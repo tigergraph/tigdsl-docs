@@ -39,8 +39,8 @@ The A* algorithm is relatively inefficient in terms of worst-case time and space
 
 [source.wrap, gsql]
 ----
-CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex,  SET<STRING> e_type_set, STRING wt_type,
-STRING wt_attr, BOOL display = False)
+CREATE QUERY tg_astar(VERTEX source_vertex, VERTEX target_vertex,  SET<STRING> e_type_set, STRING weight_type,
+STRING weight_attribute, BOOL display = False)
 ----
 
 === Parameters
@@ -61,7 +61,7 @@ STRING wt_attr, BOOL display = False)
 |Edge types to traverse
 |(empty set of strings)
 
-|`STRING wt_type`
+|`STRING weight_type`
 |The data type of the edge weights, if applicable. (Must be one of `INT`, `FLOAT`, `DOUBLE` )
 |(empty string)
 
@@ -73,7 +73,7 @@ STRING wt_attr, BOOL display = False)
 |One of a pair of attributes used to calculate distance.
 |(empty string)
 
-|`STRING wt_attr`
+|`STRING weight_attribute`
 |The attribute used as edge weight, if applicable
 |(empty string)
 

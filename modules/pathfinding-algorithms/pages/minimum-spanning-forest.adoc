@@ -25,7 +25,7 @@ This is an implementation of the algorithm in section 6.2 of Qin et al. 2014: li
 
 [source.wrap,gsql]
 ----
-tg_msf ( SET<STRING> v_type_set,  SET<STRING> e_type_set, STRING wt_attr, STRING wt_type,
+tg_msf ( SET<STRING> v_type_set,  SET<STRING> e_type_set, STRING weight_attribute, STRING weight_type,
 BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 ----
 
@@ -44,11 +44,11 @@ BOOL print_results = TRUE, STRING result_attribute = "", STRING file_path = "")
 |Names of edge types to use
 |(empty set of strings)
 
-|`+STRING wt_attr+`
+|`+STRING weight_attribute+`
 |Name of edge weight attribute
 |(empty string)
 
-|`+STRING wt_type+`
+|`+STRING weight_type+`
 |Data type of edge weight attribute (must be `INT`, `FLOAT`, or `DOUBLE`)
 |(empty string)
 

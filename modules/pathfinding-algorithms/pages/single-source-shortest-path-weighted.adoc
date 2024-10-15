@@ -14,6 +14,7 @@
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/weighted[Single-source Shortest Path (Weighted)]
 
 ****
+NOTE: Updated 15 Oct 2024 to document the overlooked `epsilon` parameter.
 
 Finding shortest paths in a graph with weighted edges is algorithmically harder than in an unweighted graph because even after you find one path to a vertex T, you cannot be certain that it is a shortest path.
 
@@ -26,6 +27,8 @@ In general, any application where you are looking for the cheapest route is a po
 == Notes
 
 If you have edges with positive weights, use `shortest_path_pos_wt`, which is based on the delta-stepping approach, to take advantage of TigerGraph's parallel processing.
+Each round, the algorithm tries to find a shorter path to each destination.
+`epsilon` (aka `delta`) is the minimum path reduction the algorithm must find in a round in order to justify searching for another round.
 The well-known Dijsktra's algorithm is not well-suited for parallel computation.
 
 If you have edges with both positive and negative weights, use `shortest_path_any_wt`, which implements the Bellman-Ford algorithm.
@@ -40,14 +43,15 @@ The shortest path algorithm can be optimized if we know all the weights are non-
 [source,gsql]
 ----
 tg_shortest_ss_pos_wt (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
- STRING wt_attr, STRING wt_type, INT print_limit = -1, BOOL print_results = TRUE,
+ STRING weight_attribute, STRING weight_type, FLOAT epsilon = 0.001,
+INT print_limit = -1, BOOL print_results = TRUE,
  STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
 [source,gsql]
 ----
 tg_shortest_ss_any_wt (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_type_set,
- STRING wt_attr, STRING wt_type, INT print_limit = -1, BOOL print_results = TRUE,
+ STRING weight_attribute, STRING weight_type, INT print_limit = -1, BOOL print_results = TRUE,
  STRING result_attribute = "", STRING file_path = "", BOOL display_edges = FALSE)
 ----
 
@@ -75,20 +79,22 @@ tg_shortest_ss_any_wt (VERTEX source,  SET<STRING> v_type_set,  SET<STRING> e_ty
 |Names of edge types to use
 |N/A
 
-|`STRING wt_attr`
+|`STRING weight_attribute`
 |Name of the edge weight attribute
 |(empty string)
 
-|`STRING wt_type`
+|`STRING weight_type`
 |The data type of the edge weight attribute.
 Can be `INT`, `FLOAT`, or `DOUBLE`.
 |(empty string)
 
+|`FLOAT epsilon`
+|Minimum delta weight.
+|0.001
 
 |`INT print_limit`
 |If >=0, max number of vertices to output to JSON
 |-1
-
 
 
 |`BOOL print_results`
