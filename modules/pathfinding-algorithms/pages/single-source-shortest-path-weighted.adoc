@@ -14,6 +14,7 @@
 Algorithm link: link:https://github.com/tigergraph/gsql-graph-algorithms/tree/master/algorithms/Path/shortest_path/weighted[Single-source Shortest Path (Weighted)]
 
 ****
+NOTE: Updated 15 Oct 2024 to document the overlooked `epsilon` parameter.
 
 Finding shortest paths in a graph with weighted edges is algorithmically harder than in an unweighted graph because even after you find one path to a vertex T, you cannot be certain that it is a shortest path.
 
