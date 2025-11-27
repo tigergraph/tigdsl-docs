@@ -71,7 +71,7 @@ Packages GDBMS_ALGO.centrality:
 ...
 ----
 
-The `SHOW` command (and the pattern matching found in xref:3.9@gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
+The `SHOW` command (and the pattern matching found in xref:gsql-ref:ddl-and-loading:defining-a-graph-schema.adoc#show--view-parts-of-the-catalog[the SHOW command documentation]) works with template queries as well.
 
   SHOW TEMPLATE QUERY -r "GDBMS_ALGO.community.tri.*"
 
